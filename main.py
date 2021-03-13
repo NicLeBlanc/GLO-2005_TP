@@ -8,8 +8,8 @@ connection = pymysql.connect(
     autocommit=True
 )
 
-def insert_into(text):
-    request = """INSERT INTO clients(nom) VALUES ("{}")""".format(text)
-    cursor.execute(request)
+cursor = connection.cursor()
 
-insert_into("test")
+def insert_into_clients(colone, text):
+     request = """INSERT INTO Clients({}) VALUES ("{}")""".format(colone, text)
+     cursor.execute(request)

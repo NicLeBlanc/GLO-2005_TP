@@ -940,107 +940,102 @@ SELECT|sys.sys_config
     <table id="294" parent="2" name="profs"/>
     <table id="295" parent="2" name="suivre"/>
     <table id="296" parent="6" name="clients"/>
-    <table id="297" parent="6" name="test"/>
-    <column id="298" parent="291" name="sigle">
+    <column id="297" parent="291" name="sigle">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="299" parent="291" name="nom">
+    <column id="298" parent="291" name="nom">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="300" parent="291" name="local">
+    <column id="299" parent="291" name="local">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="301" parent="291" name="prof">
+    <column id="300" parent="291" name="prof">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="302" parent="292" name="idul">
+    <column id="301" parent="292" name="idul">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="303" parent="292" name="nom">
+    <column id="302" parent="292" name="nom">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="304" parent="292" name="age">
+    <column id="303" parent="292" name="age">
       <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="305" parent="292" name="programme">
+    <column id="304" parent="292" name="programme">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="306" parent="293" name="idul">
+    <column id="305" parent="293" name="idul">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="307" parent="293" name="nom">
+    <column id="306" parent="293" name="nom">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="308" parent="293" name="age">
+    <column id="307" parent="293" name="age">
       <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="309" parent="293" name="moyenne">
+    <column id="308" parent="293" name="moyenne">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="310" parent="293" name="adresse">
+    <column id="309" parent="293" name="adresse">
       <Position>5</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="311" parent="294" name="id">
+    <column id="310" parent="294" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="312" parent="294" name="nom">
+    <column id="311" parent="294" name="nom">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="313" parent="294" name="département">
+    <column id="312" parent="294" name="département">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="314" parent="295" name="idul">
+    <column id="313" parent="295" name="idul">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="315" parent="295" name="sigle">
+    <column id="314" parent="295" name="sigle">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="316" parent="296" name="courriel">
+    <column id="315" parent="296" name="courriel">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="317" parent="296" name="password">
+    <column id="316" parent="296" name="password">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="318" parent="296" name="prenom">
+    <column id="317" parent="296" name="prenom">
       <Position>3</Position>
       <DataType>char(20)|0s</DataType>
     </column>
-    <column id="319" parent="296" name="nom">
+    <column id="318" parent="296" name="nom">
       <Position>4</Position>
       <DataType>char(20)|0s</DataType>
     </column>
-    <column id="320" parent="296" name="adresse">
+    <column id="319" parent="296" name="adresse">
       <Position>5</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="321" parent="296" name="date_de_naissance">
+    <column id="320" parent="296" name="date_de_naissance">
       <Position>6</Position>
       <DataType>varchar(50)|0s</DataType>
       <Collation>utf8_general_ci</Collation>
-    </column>
-    <column id="322" parent="297" name="nom">
-      <Position>1</Position>
-      <DataType>varchar(50)|0s</DataType>
     </column>
   </database-model>
 </dataSource>

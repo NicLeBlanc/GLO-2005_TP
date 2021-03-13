@@ -1,4 +1,5 @@
 from faker import Faker
+from main import insert_into_clients
 
 fake_data = Faker()
 
@@ -36,3 +37,4 @@ for i in range(1000):
 fake_adress = []
 for i in range(1000):
     fake_adress.append((fake_data.address()).replace('\n', ', '))
+
