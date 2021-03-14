@@ -31,7 +31,7 @@ for i in range(1000):
 # List of fake date of birth, between 18 yo and 120 yo
 fake_birthdate = []
 for i in range(1000):
-    fake_dob = (fake_data.date_of_birth(None, 18, 120))
+    fake_dob = (fake_data.date_of_birth(None, 18, 100))
     fake_birthdate.append(fake_dob.strftime('%Y-%m-%d'))
 
 # List of fake adress
