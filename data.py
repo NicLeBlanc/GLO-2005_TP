@@ -31,10 +31,17 @@ for i in range(1000):
 # List of fake date of birth, between 18 yo and 120 yo
 fake_birthdate = []
 for i in range(1000):
-    fake_birthdate.append(fake_data.date_of_birth(None, 18, 120))
+    fake_dob = (fake_data.date_of_birth(None, 18, 120))
+    fake_birthdate.append(fake_dob.strftime('%Y-%m-%d'))
 
 # List of fake adress
 fake_adress = []
 for i in range(1000):
     fake_adress.append((fake_data.address()).replace('\n', ', '))
 
+# List of fake profiles
+fake_profiles = []
+fake_list = [fake_email, fake_password, fake_first_name, fake_last_name, fake_adress, fake_birthdate]
+for x in range(len(fake_email)):
+    fake_profiles.append([item[x] for item in fake_list])
+print(fake_profiles)
