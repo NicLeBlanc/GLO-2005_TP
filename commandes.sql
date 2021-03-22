@@ -6,7 +6,7 @@ USE livres_en_vrac;
 CREATE TABLE Clients(courriel varchar(50), password varchar(20), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50));
 SELECT * FROM Clients;
 
-CREATE TABLE Livres(isbn varchar(20), titre varchar(50), auteur char(50), annee_publication int(4), preface varchar(500));
+CREATE TABLE Livres(isbn varchar(20), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500));
 
 -- CREATE DATABASE testdb;
 -- USE testdb;

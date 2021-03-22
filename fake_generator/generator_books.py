@@ -12,7 +12,8 @@ for item in books_raw:
 # List of ISBN
 isbn = []
 for item in books_raw:
-    isbn.append(item.get('isbn'))
+        random_key = random.randint(1, 10000)
+        isbn.append(item.get('isbn', random_key))
 
 # List of Authors
 authors = []
