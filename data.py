@@ -1,47 +1,4471 @@
-from faker import Faker
-from main import insert_into_clients
+fake_profiles = [['asanchez@cook.info', '@#$O9Ednb2', 'Stephanie', 'Jackson', '7222 Andrea Center Suite 414, New Tracyside, AR 83842', '1997-05-23'], ['brian63@yahoo.com', 'Ode$1ViFzF', 'David', 'Martinez', '5998 Ross Hill, South Heather, NE 29147', '1955-05-29'], ['hillangela@johnson.info', 'IupS9t82+6', 'Angela', 'Duncan', '76021 Cobb Cove, Ryanstad, TX 50769', '1999-09-04'], ['tbean@clay.net', 'rK5Ig@n2&f', 'Robert', 'Holder', '7156 Kevin Vista Apt. 386, New Williamshire, IA 35571', '1998-12-12'], ['hdean@hotmail.com', 'K0L^J@AR)v', 'Haley', 'Morgan', '333 Carey Spurs, North Justin, HI 61615', '1948-06-02'], ['awelch@frye.biz', '!H3qdZbew^', 'John', 'Schwartz', '0663 Michael Way Apt. 577, West Tracy, NY 09819', '1974-03-16'], ['telliott@hotmail.com', 'DL0OOwM4$z', 'Toni', 'Leon', '6371 Wallace Fall, East Andrewmouth, SC 45827', '1992-06-27'], ['martinezmichael@martin-wood.info', '*5R$N!qz$1', 'Matthew', 'Banks', '5583 Lewis Brook Apt. 908, Howeport, WA 01255', '1954-12-14'], ['brandigriffin@johnson.biz', '1cP5%3QpH)', 'Renee', 'Jones', '97260 Wu Corner, Stricklandfurt, DE 44687', '2000-10-15'], ['parkcharles@yahoo.com', '!4L9&gV*5I', 'Linda', 'Mcclure', '60679 Price Estate, Port Dalefort, HI 59123', '1977-02-26'], ['lindawalker@gmail.com', 'aBM*sXUm$6', 'Rachel', 'Hughes', '349 Mcdonald Course, Camposland, KY 23563', '1984-04-19'], ['bethanychavez@gmail.com', '3w5Bu&KZV$', 'David', 'Davis', '3484 Isabel Cove Suite 307, Ronaldmouth, KS 83617', '1932-01-24'], ['wvega@yahoo.com', '$(x9@CdgzR', 'William', 'Melton', '08504 Chandler Parks, Elizabethbury, NY 32066', '1934-09-13'], ['samantha82@gutierrez-allen.com', '^e4EOIdEo0', 'Matthew', 'Hopkins', '802 Brandon Squares Suite 493, West Hannah, VT 55953', '1981-08-27'], ['vhayes@yahoo.com', 'n1JZVB(o(M', 'Amanda', 'Douglas', '6347 Nicole Shoal Apt. 686, Martinezfurt, RI 32248', '1999-10-26'], ['achapman@frye-pugh.net', '#&16MwBg)f', 'Michelle', 'Santos', '785 Anthony Union Suite 089, Lake Craig, VT 31955', '1985-03-09'], ['sheilathompson@turner.org', '#2JtTHk$la', 'Tammy', 'Wade', '90109 Hernandez Ford, Claytonhaven, NE 33168', '1977-08-26'], ['robertnguyen@yahoo.com', '@$%CguG546', 'John', 'Beltran', '6898 Brown Fields, West Jodi, VA 62168', '1989-09-04'], ['jrhodes@gmail.com', 'gSX$2Djy%&', 'Gina', 'Mcdonald', '26688 Erickson Vista Apt. 228, East Louisburgh, CO 55108', '2001-06-26'], ['xmoss@gmail.com', ')3C2cKnrOM', 'Kylie', 'Steele', '5795 Welch Ferry Suite 750, New Matthew, WI 12455', '1942-10-06'], ['anna99@gmail.com', '8_1O^Xrs9%', 'Rachel', 'Alexander', '6992 Harrison Courts, West Jennifer, WY 40861', '1960-01-06'], ['jacob32@jones.com', '+%2#OA(niz', 'Jordan', 'Soto', '962 Ruben Shoal, Gordonberg, DE 69513', '1932-02-15'], ['michele05@garza.com', ')t(7nYTl#!', 'Sherry', 'Hogan', '1092 Hamilton Viaduct Suite 182, South Veronicafurt, NV 92818', '2000-02-13'], ['woodsophia@potter.com', '4aw5QMo*$b', 'Justin', 'Long', '97027 Karen Shores Apt. 708, Matthewland, MN 17008', '1956-01-23'], ['kelleyamy@serrano.com', '^47*n6Crv6', 'Thomas', 'Cruz', '191 Nicole Crescent Suite 227, Davidberg, CT 15961', '1989-01-17'], ['combstravis@gmail.com', 'aN0q0@Wl$P', 'Julie', 'Moreno', '0989 Cooley Falls, Port Matthewside, HI 27706', '1985-12-27'], ['anthony52@olson-pugh.com', '_qr!eGj*S8', 'Jacob', 'Jackson', '934 Stevenson Mountain Suite 550, Faulknerberg, UT 42781', '1937-04-30'], ['hsanders@hotmail.com', '@jPhFZt7@3', 'James', 'Thompson', '129 James Forest Suite 051, Port Andre, SC 51691', '1929-05-05'], ['christopherbryant@ellis.com', '*X4HmBnPFZ', 'Shawn', 'Ellis', '810 Stewart Summit, Port Raymond, NE 88885', '1940-06-01'], ['garyjohnson@nash.net', 'i#FS9JWwXM', 'Wesley', 'Oliver', '756 Bonnie Canyon Apt. 103, Christopherport, VT 10090', '1999-04-15'], ['schroederamy@gmail.com', 'dU%@8PsGLa', 'Oscar', 'Benson', '72662 Weiss Manors Suite 319, Aaronshire, AK 02697', '1990-08-08'], ['brianalvarado@hotmail.com', 'p!2ZpD$uGP', 'Kimberly', 'Hawkins', '361 David Prairie Apt. 009, Lake Wesley, NE 82433', '1931-08-15'], ['andrew27@jones.com', '#4GDr$Ag)l', 'Mr.', 'Justin', '9863 Allen Square Apt. 356, Leview, NJ 84873', '1930-07-24'], ['lcastaneda@yahoo.com', '#wQ3CXveOg', 'Craig', 'Sims', '102 Patterson Extension, Triciabury, OK 79983', '1954-01-15'], ['rrice@contreras-fernandez.com', 'G$1Duymwi@', 'Gary', 'Brown', '0879 Frazier Crossing Suite 121, Goldenberg, AK 90411', '1991-04-07'], ['james60@bowers.com', '6j3qYzfE(N', 'Ashley', 'Fisher', 'USNS Downs, FPO AE 18473', '1963-10-17'], ['matthewharris@gonzalez.com', 'vxMBut4i&2', 'Jeremiah', 'Mata', '392 Peterson Extension Apt. 517, South Laurahaven, OK 32710', '1944-07-14'], ['turnernathan@farrell.com', 'ii7JVevu$_', 'Mr.', 'Jason', '8307 Benjamin Parks, North Deborahshire, LA 46053', '1962-05-26'], ['jwhitaker@dunn-joseph.com', 'Kb5oUni5&B', 'Christopher', 'Estrada', '9957 Wright Fort, Rayland, NV 41747', '1975-04-09'], ['klopez@henry-clark.org', '(7N$bEoaT0', 'Tracy', 'Cook', '07559 Hannah Mall, Port Sheilatown, IA 73157', '1955-07-01'], ['breannamccoy@yahoo.com', 'br1SFC+ZJ!', 'Connor', 'Knight', '5195 Neal Via Apt. 558, New Perrybury, WA 14991', '1946-12-29'], ['uwilliams@valencia.com', '#PP6MxkS*8', 'Kim', 'Lowe', '1324 Harold Crossing, Jacksonland, IL 35780', '1971-10-08'], ['swilson@mason.biz', '2B2J6G1l^&', 'Kathy', 'Nunez', '622 Padilla Fork Suite 324, West Cynthiamouth, FL 32618', '1965-10-29'], ['gmurillo@moreno.com', 'b1JOzC50$$', 'April', 'Orr', '1135 Jeremiah Junction, Port Steven, FL 04086', '1956-10-31'], ['brittanykoch@smith.com', '7m_8fCxxqP', 'James', 'Becker', '1063 Shields Gateway Apt. 896, South Christina, ME 52403', '1941-12-11'], ['tbrown@martinez.com', '!t6t3EQxr_', 'Melissa', 'Lewis', '2260 Peterson Tunnel, Port Rachel, LA 53428', '1923-08-22'], ['barry20@gmail.com', '(k^2EZrzq9', 'Veronica', 'Vance', '4562 Mary Islands, Port Andre, WY 51720', '1982-06-10'], ['terryadam@gardner-davidson.net', 'PvX&89vb+5', 'Richard', 'Jacobson', '9839 Morgan Estate Suite 382, Julieside, PA 65462', '1962-09-03'], ['ilewis@yahoo.com', 'FyBKq!f2%5', 'Tammy', 'Morales', '330 Christopher Meadows Suite 037, Lucashaven, ID 45199', '1975-08-18'], ['fwalker@hotmail.com', '0FTWT9vXR&', 'Ashlee', 'Wright', '701 Mcgrath Rapids Apt. 587, Quinntown, KY 00906', '1982-12-19'], ['juliewalls@mcknight.com', '8P*RyY8p@(', 'Donald', 'Hart', '9301 Diaz Forge, East Tarashire, UT 90568', '1995-02-07'], ['breanna87@yahoo.com', 'cP3ZL3lsE@', 'Arthur', 'Farrell', '23498 Dakota Lodge Apt. 161, Leechester, AR 53505', '1994-06-03'], ['gabrieldelacruz@gmail.com', '!2ERd&Xa+k', 'Jessica', 'Smith', '1169 Anna Vista, North Patricia, NC 95873', '1945-01-11'], ['hollydavis@rivera.com', 'E8JJLQL0!t', 'Gary', 'Richardson', '776 Owens Lodge Apt. 460, Johnhaven, TX 66128', '1928-04-15'], ['mark64@yahoo.com', '*9VIQc)kA%', 'Jared', 'Zavala', '1278 Lucas Plains, Gailville, SC 33287', '1938-04-29'], ['frivera@hotmail.com', 'mJ$3K0Cng3', 'Angel', 'Frazier', '0884 Gabriel Turnpike, Schaeferland, VA 24674', '1948-08-14'], ['heather05@white-ryan.org', 'qUF%blm$_1', 'Nicholas', 'Stephens', '1737 Velazquez Groves Apt. 390, Lake Caitlinville, NH 71992', '1930-06-03'], ['russelldon@hotmail.com', '3oTdFG^8+6', 'Aaron', 'Bautista', '3948 White Cliff, Williamsberg, OK 12970', '1964-09-30'], ['lisa75@garcia-williams.com', '4A62JhAmb_', 'Mary', 'Weaver', '7041 Schwartz Mills Apt. 697, Morganshire, MS 73662', '1983-10-22'], ['amandathompson@gmail.com', '23x3Y8EqV!', 'Rebecca', 'Weiss', '706 Webb Burg, Danielshire, AK 59043', '1950-05-17'], ['pmarquez@johnson-ruiz.net', '@%1d$FKw^Y', 'Sarah', 'Carlson', '4399 Stone Loaf Suite 878, Barrettmouth, CT 21865', '1931-11-03'], ['gracebyrd@pierce.com', 'Rv)!wSew&2', 'Danielle', 'Moore', '7147 Ryan Corners, Theresaview, FL 51391', '1985-01-03'], ['martinezrobin@gmail.com', 'h8UYEJY*$M', 'Jason', 'Hayes', '624 Hill Landing, Stacystad, MO 41936', '1930-04-30'], ['dominiquegarcia@ross.com', '(Jp2PzN#%G', 'Amanda', 'Carter', '09956 Carroll Union, East Tammy, AZ 88174', '1994-03-04'], ['martinezrichard@carr.info', 'B52Vtq@w!a', 'Andrew', 'Ford', 'Unit 7912 Box 4187, DPO AA 43812', '1960-10-31'], ['ortegasarah@yahoo.com', '^HvwE9q+5f', 'Nathan', 'Schwartz', '33878 Morrison Keys, West Tracyburgh, IL 57622', '1992-01-20'], ['suttonsteven@santiago.com', 'jl2DR5ZtH&', 'Candice', 'Bruce', '5131 Jacqueline Mountains Suite 009, Jefferyhaven, PA 79770', '1950-04-25'], ['rollinsdaniel@gmail.com', 'q_!4OaNhsk', 'Melanie', 'Thompson', '7239 Dunn Point, Lovemouth, AK 66959', '1975-11-08'], ['shannon85@yahoo.com', ')Iy&VUJi42', 'Vincent', 'Olson', '70065 Mclaughlin Corners, Port Jennifer, NC 59836', '1983-03-17'], ['terri61@fernandez.com', 'T^d($7jiOM', 'Theodore', 'Esparza', '73870 Jonathan Greens, North Carolyn, TX 15198', '1925-08-28'], ['woodrobert@parker.org', 'DqKCcGsY(8', 'Joseph', 'Estrada', '07205 Perry Camp, Derrickview, NC 97945', '1956-06-26'], ['frederickmoore@snyder.com', '6ecB_F$1$(', 'Robert', 'Odonnell', '7718 Patricia Forks, Tamarafort, MT 42305', '1979-10-05'], ['michele69@yahoo.com', '(51EuFfAm%', 'Steven', 'Brown', '34295 Tran Land, Port Raymond, TX 39036', '1979-03-09'], ['wturner@gmail.com', 'I2zPb7Io!I', 'Dr.', 'Erik', '53413 Lynn Circles Suite 408, West Emilymouth, TN 74246', '1960-07-12'], ['lisa52@lopez-crosby.com', 'S2VeSjXn+b', 'Michael', 'Sanders', '933 Atkinson Pines, North Karifort, IN 38725', '1989-04-08'], ['james65@yahoo.com', '#^#9XFRd1q', 'James', 'Singleton', '6468 Elliott Trafficway, West Jonathanfurt, TN 50003', '1954-10-15'], ['evancole@johnson-nguyen.org', '%zMr0#g7c2', 'Daniel', 'Everett', '959 Hartman Glens Suite 083, Edwardsmouth, MO 76521', '1920-04-05'], ['udavis@kelly-leblanc.com', 'As(Mzglw_3', 'Kristi', 'Hampton', '476 Miller Shoal, Lake Tanyatown, NV 30511', '1944-11-11'], ['howardderrick@hotmail.com', 'N&M8YedJb%', 'Nathan', 'Vance', '8280 Campos Crossroad, Kaitlynberg, KY 31825', '1920-08-04'], ['christopheryoung@gibson.biz', 'I&T7ZZuz2C', 'Megan', 'Olson', '542 Vargas Green Suite 263, Grayfurt, DC 31329', '1982-03-23'], ['riversjoanne@hotmail.com', 'N1)#@Ror*l', 'Caleb', 'Woods', '997 Paige Village Suite 947, New Mallory, LA 01443', '1944-10-18'], ['richardnewton@gmail.com', '(7TZ4O(zA#', 'Vicki', 'Davis', '3895 Christian Loop, West Alisonfort, IL 61672', '1934-05-13'], ['thomasthornton@hotmail.com', '*695XfEZ_Z', 'Wendy', 'Simmons', '02125 Shelley Springs Suite 441, West Shannon, MD 68547', '2000-11-02'], ['burketara@cox.com', 'n^7YouLm&U', 'Katie', 'Cline', '0729 Duncan Shores Suite 704, Hayesstad, ME 21966', '1994-11-13'], ['piercealbert@yahoo.com', 'a9OqkcOk(Q', 'Justin', 'Rush', '0755 Hill Crossing Suite 229, Ruthville, AL 34651', '1983-06-14'], ['yhernandez@davis.org', '&yJg+o+8k5', 'Melissa', 'Burton', 'PSC 5170, Box 0713, APO AP 18578', '1929-12-14'], ['tatefrederick@hotmail.com', '%NBlUCxuP2', 'Elizabeth', 'Ho', '603 Johnson Forges, Port Maryshire, OK 95845', '1926-01-26'], ['jayduncan@gmail.com', '*3P(wEqD1E', 'Jeremy', 'Howard', '242 Dunn Port Suite 617, Port Lorimouth, MT 47569', '1946-07-17'], ['melissamorton@gmail.com', 'ulZfyuNO$8', 'Angela', 'Decker', '1320 Ross Extension, South Joanna, DC 08959', '1924-08-31'], ['jamesallen@yahoo.com', '(8Fx#7SUb0', 'Maria', 'Tran', '082 Kerri Underpass Apt. 559, Robertville, FL 26029', '1938-09-14'], ['jillianross@reid.com', 'bjQv3e&l)4', 'Kelsey', 'Myers', '2963 Friedman Club, Kelseyfurt, NH 20137', '1936-08-29'], ['keithjones@jordan-gibson.com', '4T+8ue2u!7', 'Adrian', 'Robinson', '7426 Rangel Well, Jasonchester, LA 18259', '1978-11-05'], ['allensabrina@hotmail.com', '$eVZWt#q7f', 'William', 'Barnett', 'Unit 5896 Box 6280, DPO AA 70771', '1946-09-11'], ['projas@yahoo.com', '!_x88B0sMS', 'Jesse', 'Arnold', '995 Castro Mill, Port Latasha, NY 77957', '1985-12-03'], ['woodlauren@mendoza.biz', '!80JOFyUMF', 'Katherine', 'Daniels', '2127 Lauren Brook Apt. 605, Griffinshire, OK 37992', '1972-01-21'], ['camachoian@james.biz', 'G4JS$hKa&s', 'Rick', 'Peterson', '023 Henry Haven Apt. 239, Barberhaven, NY 57087', '1948-04-17'], ['qball@gmail.com', 'e!8FOcN#d%', 'Lauren', 'Bowman', '6155 Patrick Canyon, Stephaniemouth, MS 56419', '1998-03-02'], ['randy90@trevino-quinn.com', '(O4NxC9j1v', 'Bruce', 'Turner', '693 Maureen Junction, Port Lesliestad, KS 23872', '1996-05-26'], ['melindasummers@mayo.org', '*1Qb0Rvl1C', 'Alyssa', 'Benson', '6502 Wendy Branch Apt. 521, Emmaport, ID 20179', '1992-01-17'], ['andrew83@galloway-harmon.com', 'Y)9J^Tl5Mp', 'James', 'West', '464 Craig Port, Port David, WY 97621', '1931-04-06'], ['cynthia43@gmail.com', ')ZF5NIofy6', 'Morgan', 'Jones', '34406 Kimberly Passage Apt. 435, Stanleyport, RI 08280', '1959-02-09'], ['gravesdevin@gmail.com', '!C3vRHWr6b', 'James', 'Cole', '87750 Frank Manor, Port Beth, AL 41681', '1986-01-09'], ['pdorsey@hotmail.com', '$7f8rPyaUd', 'Ashley', 'Taylor', '617 Emily Views Apt. 579, Lake Samuelmouth, AK 20344', '1982-01-26'], ['teresaevans@downs-castillo.com', 'bVQg4TWzs+', 'Nicole', 'Greene', '5331 Nelson Prairie Apt. 348, Wilkersonfurt, FL 94513', '1996-12-13'], ['burtonjacob@hotmail.com', 'J2Qs8jMu^o', 'Cassandra', 'Murray', 'Unit 7284 Box 9901, DPO AE 73882', '1977-05-20'], ['angela39@hotmail.com', 'sCmL5VOq)7', 'Maria', 'White', '027 Sharon Isle, Moralesburgh, IL 54977', '1961-06-01'], ['rquinn@peterson-castro.com', '(8HoDNX9s!', 'Elizabeth', 'Blanchard', '7142 Gardner Mountains, Rothville, GA 67854', '1962-07-03'], ['browntheresa@gmail.com', '(u4bAe36mK', 'Jessica', 'Flores', '07290 Wood Haven Suite 269, Tracyshire, TX 20662', '1932-01-24'], ['adamskaitlyn@gmail.com', 'Wb3PUFei*L', 'Angelica', 'Lucero', '1060 Wilson Union Apt. 797, Brianchester, CA 33555', '1993-01-06'], ['kimberlyfranklin@yahoo.com', ')#5tM5eB2^', 'Brandy', 'Rubio', '55971 Hill Way, Hullside, NY 44826', '1955-01-15'], ['meganhorton@thomas.net', '$qGoSnMld8', 'Sherry', 'Valenzuela', '974 Stephanie Shoals, Meyerside, OH 72216', '1969-06-20'], ['tfrench@gmail.com', 'w0yLfZI3&8', 'Jerry', 'Thomas', '6201 Sara Hill Suite 145, South Andrewville, DC 18234', '1994-07-15'], ['dominicrogers@yahoo.com', ')62RyOV&Sz', 'Justin', 'Welch', '893 Dana Isle Suite 824, North Brian, UT 12524', '2002-01-25'], ['klambert@jimenez-miller.org', '@i1nL&tzZ6', 'Courtney', 'Franklin', '40514 James Stream Suite 304, Kirkfort, PA 49218', '1942-12-18'], ['cbenson@hotmail.com', 'o0!&tBLs&u', 'Anna', 'Gross', '6662 Cindy Extensions Apt. 183, Aguilarville, UT 98538', '1976-12-15'], ['francesmoody@hotmail.com', 'C%c56DSlVB', 'Nicole', 'Hooper', '5954 Lane Rapid Suite 028, Kylechester, AL 44180', '1921-01-22'], ['nancyyu@hamilton.biz', '@DUJQ63rb7', 'Jane', 'Miller', '531 Campbell Camp Suite 674, Spencerchester, MD 97165', '1984-07-22'], ['leonard91@patrick.org', 'GT@dE3VajJ', 'Michael', 'Wagner', '1811 Odom Harbor, Fernandezland, IL 37329', '1986-08-31'], ['wgreen@gmail.com', '@R3A#IwoX#', 'Paul', 'Reed', '8784 Le Cliff, Michaelshire, VT 17433', '1963-10-10'], ['zachary33@yahoo.com', 'Kk3EkUs*i@', 'Shelley', 'Griffin', '4753 Day Mills Suite 244, Davidburgh, KY 79103', '1944-11-12'], ['wagnerjonathan@morris-david.org', '*3GR%NrVr_', 'Angela', 'White', '6612 Stephanie Track Apt. 789, West Jessica, CT 87522', '1975-08-01'], ['jenniferwells@gmail.com', '0nU*7Bs#$3', 'Jesse', 'Lindsey', '103 Patricia Alley, Johnstonmouth, NC 54302', '1997-10-21'], ['jamiereed@hotmail.com', 'Zw6XKSFu@(', 'Jason', 'Day', '36973 Flores Burg Apt. 055, New Laurenborough, AL 21345', '1953-10-03'], ['stephenavila@yahoo.com', '4^8&V7Bw*Z', 'Karen', 'Contreras', '845 Sabrina Grove Suite 831, North Angelaville, SC 07651', '1934-04-12'], ['trodriguez@hotmail.com', 'MWYWaqAW_5', 'Donald', 'Williams', '57143 Sandoval Corner, Karenborough, VA 34373', '1936-04-03'], ['sbarber@yahoo.com', 'f#^5UPW+hb', 'Christopher', 'Morton', '44847 Tracy Freeway, Hicksstad, RI 92931', '2001-03-22'], ['jodysimpson@hotmail.com', '6&Sxs%eH(8', 'Samantha', 'Gonzalez', '490 Amber Plaza, Gonzalesberg, CT 33306', '1940-12-12'], ['gregoryamanda@glenn.com', '+jXL*VtrI8', 'David', 'Bryant', '745 Mckinney Haven, South Leslieberg, HI 11146', '1999-12-23'], ['eileen50@mack-parker.com', 'X(%l6HheE^', 'Amy', 'Anthony', '04456 Buck Inlet Suite 518, South Loretta, ID 69103', '1940-01-28'], ['jennifer75@henry.org', '5n0iHjtI^7', 'Nicholas', 'Zamora', '527 West Road, West Tom, NE 99834', '1976-12-27'], ['brownkaren@hotmail.com', 'O9tGTKNu_D', 'Elijah', 'Chung', '0558 Medina Land, Port Anthony, WY 86047', '1961-12-15'], ['xwoodard@miller-trujillo.com', '*3cu0Iics1', 'Matthew', 'Carter', '199 Gray Port Suite 302, Amyton, MD 29649', '1922-03-17'], ['ricejake@hays.com', '#rNnN2IWP0', 'Evan', 'Tucker', '701 Horton Knoll Suite 996, Sharonland, WY 56280', '1920-08-17'], ['anna83@miller.biz', 'LkT+h3Dt#P', 'Jason', 'Arnold', '752 Robertson Shore, East Marcus, VT 89430', '1969-11-16'], ['uwoodard@huynh-david.com', 'RM%C9Bfj1X', 'Tracey', 'Griffin', '09870 Gregory Cove, Port Scottberg, WA 54986', '1970-05-12'], ['hnelson@bailey.biz', 'IL@&2FKpCJ', 'Cheryl', 'Jackson', '74207 Tiffany Bridge, New Nicole, NY 66792', '1949-07-20'], ['justin25@hotmail.com', '#xt5Qay+Lf', 'Evan', 'Wilson', '383 Jacob Stream Apt. 322, West Aaron, ID 04943', '1972-02-18'], ['harveyamber@stevens.com', '@15i#0QmBp', 'Alexander', 'Brown', '85474 Jonathan Vista Suite 708, Grayborough, VT 94230', '1995-05-05'], ['jonesricky@morgan.biz', 'jyA8r2Duq^', 'Wayne', 'Jimenez', '5821 Saunders Roads, Reginaport, VA 51306', '1989-01-07'], ['alancooper@rollins.biz', 'c6DwQ5)b!b', 'Nicholas', 'Nixon', '015 Wells Junction, New Josephchester, AR 71172', '1991-11-16'], ['kellyrachel@yahoo.com', '(r51LZIkKE', 'Cody', 'Owen', '711 Kathryn Place, Jillhaven, LA 46185', '1942-10-29'], ['jessicawillis@gmail.com', '*K!(eRau53', 'Steven', 'Hughes', '021 Tanya Land, West Krystalfort, ID 20252', '1985-11-18'], ['brendalucas@martinez-wong.biz', '@D7Txeah*H', 'Kim', 'Anderson', '24937 Martinez Station Apt. 850, Dyerborough, LA 10197', '1991-06-18'], ['privera@vaughn.com', '_LaQRrNb!1', 'Miguel', 'Mathews', '0937 Ho Junction Suite 986, Port Jonathanborough, TN 44787', '1959-05-17'], ['williamphillips@silva-wilson.biz', '@2G#1Lco7J', 'Lori', 'Schneider', '788 Taylor Green Apt. 440, Lake Jodiville, NC 03481', '2000-08-02'], ['denise46@hotmail.com', '04tSRJfl%2', 'Alec', 'Frye', 'USNS Turner, FPO AE 72380', '1953-04-03'], ['jamesgoodman@gmail.com', '3&#wC4Ew%f', 'Angelica', 'Reed', '21992 Wade Square Apt. 817, North Andrewchester, WV 59397', '1964-07-05'], ['chapmancharles@gmail.com', 'f@0XprQF_3', 'Jeremy', 'Vincent', '55596 Obrien Crossing, Jacobville, WI 90602', '1937-09-17'], ['kmontgomery@gmail.com', '2P%m7!Rs4A', 'Tammy', 'Cole', '52468 Robertson Points Suite 813, South Anne, NJ 65809', '1931-05-07'], ['fsnyder@hood.com', 'dD)2A4Qvf_', 'Catherine', 'Gonzalez', '982 Vang Ways Apt. 227, Woodsville, KS 44674', '1996-01-24'], ['qjohnson@gmail.com', 'o&NEzrgi!6', 'Sharon', 'Day', '898 Ebony Courts, Jerryfurt, NC 40737', '1955-09-30'], ['pamela25@miller.com', '+SCTLxOw66', 'Louis', 'Cross', '3734 Nguyen Trail Apt. 234, Bruceport, SC 72261', '1966-10-01'], ['spaul@hotmail.com', 'E0*1JcF&H+', 'Lisa', 'Mcconnell', '102 James Estates, Port Harold, AK 89509', '1984-03-08'], ['michaelporter@fox.com', '&4OhSlOl_2', 'David', 'Johnson', '2734 Lance Square Apt. 119, Lake Loriview, TN 81875', '1991-06-27'], ['thomasanderson@yahoo.com', 'l*@4Dnh+_G', 'Eric', 'Holmes', 'PSC 3347, Box 9743, APO AP 90506', '1965-10-05'], ['denise45@gray-casey.com', '4zQKpGmI@2', 'Megan', 'Smith', '263 Jason Corner Suite 786, East Jakeland, AR 49132', '1977-01-09'], ['nelsonjaclyn@stuart-crawford.biz', '_GSgBlio6O', 'Lawrence', 'Ortiz', '7989 Moore Street, Lake Emily, WA 46761', '1984-11-11'], ['crystallewis@mitchell.net', '8bJWuCmK&x', 'Susan', 'Marshall', '3135 Jennifer Brooks Apt. 255, Blackland, IN 16529', '1933-09-20'], ['russellwayne@hotmail.com', '9)S74qX$^3', 'Michael', 'Santana', '449 Matthew Mountain Suite 929, East Holly, ND 96313', '1953-08-16'], ['susan86@figueroa.biz', 'qbx58NUFX(', 'Timothy', 'Evans', '547 Hoffman Grove Apt. 709, Williamport, NV 55643', '1940-08-24'], ['vfowler@hotmail.com', 'VZU2Luvh)3', 'Erik', 'Ramos', '10407 Christopher Lock Apt. 197, Christopherburgh, WV 41717', '1969-12-16'], ['ilopez@lee.com', '#6e#TFyNsZ', 'Shawn', 'Mack', '89120 Jennifer Freeway Suite 928, Port Craig, UT 41453', '1992-06-17'], ['ywilliams@gutierrez.com', 'P#_3VZprHd', 'Kenneth', 'Jenkins', '151 Holder Port, Mooremouth, OK 59712', '1940-09-21'], ['rjacobs@lara.org', 'Z0GkEFry_#', 'Phillip', 'Lopez', '9739 James Glen, Suarezmouth, SC 72581', '1997-05-10'], ['dmorris@griffin.info', '^aQIwoolb1', 'Todd', 'Santiago', '95054 Emily Springs, South Madisonberg, SD 61544', '1986-05-25'], ['xturner@gmail.com', '&y_VTlXF^7', 'Jose', 'Smith', '494 Thornton Spur, Letown, ME 29195', '1988-01-26'], ['jonathan30@brown.net', 'A0VbeXu3#1', 'Benjamin', 'Bell', '33976 Kimberly Underpass, Sheltonstad, MT 54943', '1973-02-02'], ['jeremyroberts@rogers.info', 'T3^C6rSt!P', 'Kevin', 'Garcia', '36254 John Lane Apt. 027, West Natalie, MO 30877', '1984-10-14'], ['vmayo@yahoo.com', 'r8NyyCox$@', 'Michael', 'Stewart', '4891 Sheila Forest, Boothborough, ND 53324', '1952-06-16'], ['steven24@brown.com', '^x#(YgPp6e', 'Danielle', 'Anderson', 'PSC 6981, Box 7305, APO AE 10979', '1986-06-03'], ['jennifer38@ryan.com', '!@4)Jkh@ku', 'David', 'Davidson', '993 Zachary Street, West Rachel, CA 07478', '1924-05-27'], ['alex84@yahoo.com', 'lW4F3@*yk!', 'Travis', 'Johnson', '99364 Oconnor View Apt. 233, Barnesstad, NM 26114', '1973-11-20'], ['qdiaz@gmail.com', 'J5C2fgKk*G', 'Alyssa', 'Wells', '400 Stephanie Haven, South Eric, SC 50041', '1978-06-16'], ['blopez@davidson.com', '$7GZ7WAd$y', 'Jennifer', 'Wright', '61467 Lisa Landing Suite 553, Amyport, ID 06840', '1954-07-25'], ['jenniferlyons@moore-anderson.net', '_hG*7yXt74', 'Megan', 'Ritter', '46654 Cochran Canyon Suite 725, North Matthew, GA 21819', '1964-02-20'], ['melissa71@hotmail.com', '4PY%tWPb)7', 'Kevin', 'Lee', 'PSC 1146, Box 0555, APO AP 31007', '1926-09-29'], ['kevinarroyo@yahoo.com', '27g5CY(q*j', 'Craig', 'Willis', '14515 Wilson Stream Suite 058, Lake Lorichester, LA 59127', '1967-11-05'], ['trujilloderrick@hotmail.com', '0WDwH4cq_(', 'Brenda', 'Keller', '72316 Ralph Common Suite 506, Lake Steven, OK 76122', '1950-08-16'], ['travis38@lee.com', '8lAkW32u(V', 'Jessica', 'Padilla', '185 Jared Point Apt. 836, Heatherland, MN 15294', '1952-08-19'], ['michael93@yahoo.com', '!ZDTy+C!x9', 'Timothy', 'Watkins', 'Unit 2101 Box 1166, DPO AP 64136', '1937-07-05'], ['johnnelson@francis.biz', 'H1aQOxc8(C', 'Tyler', 'Anderson', '8642 Lewis Field Apt. 158, Matthewberg, DE 75386', '1948-07-07'], ['howellamanda@gmail.com', ')7W4xF%MH*', 'Robert', 'Bryant', '068 Jillian Pine Suite 449, West Brandon, SC 67219', '1989-06-26'], ['bcox@ramos.biz', '0ItKvwnt%6', 'Jon', 'Gordon', '29567 Tammie Island, Walkershire, AL 88385', '1980-07-04'], ['hughesjessica@chandler.info', '*3M_U(x0hB', 'Courtney', 'Brown', '86869 Davis Pike Apt. 617, Tuckerton, ID 57822', '1996-06-05'], ['bradley75@yahoo.com', '(6VSfjU&vd', 'Michael', 'Gray', '9777 Hunt Park, East Tiffanytown, MS 90192', '1976-11-09'], ['wanda59@howell.com', 'm$5LdRpr)A', 'Arthur', 'Zuniga', '18399 Katelyn Field, Jenniferside, ND 20105', '1943-10-31'], ['kimberlyarellano@yahoo.com', '$%2YdRp*qR', 'Jennifer', 'Williams', '4207 Hunter Locks Suite 823, New Angela, DE 95313', '1999-04-26'], ['psandoval@turner-williams.com', 'KZMg!9zk_1', 'Tracey', 'Sullivan', '5796 Tracy Freeway, New Gina, NE 89371', '1969-05-22'], ['leehayley@schmidt.com', '6ctuYXkW_n', 'Deanna', 'Jones', '2178 Michael Cape Suite 839, Santosstad, OH 23056', '1970-10-20'], ['econway@yahoo.com', 'ze6*)Vf_@#', 'Brett', 'Edwards', '74736 Mejia Points Suite 734, South Laura, MN 41486', '1954-09-23'], ['wgarza@hotmail.com', 'q^+81xffdH', 'Joshua', 'Nguyen', '455 Jacob Manors Suite 811, Wrightshire, DC 61372', '1975-07-18'], ['anthony61@yahoo.com', '7X8Cxx^T(F', 'Jody', 'Oneill', '3993 Dan Terrace Suite 730, Norrisstad, GA 94339', '1946-01-11'], ['troylambert@martinez-vasquez.org', 'k2q2WWrE*w', 'Dylan', 'Johnson', '7577 Ramos Meadow, West Robert, MD 40470', '1942-04-28'], ['nancyperry@gmail.com', '&BuGE1OnU)', 'Jeremy', 'Sanchez', '9443 Kevin Island Suite 571, Hendersonside, NY 35725', '1928-10-24'], ['lsoto@winters-williams.com', 'CXYEq9%!&8', 'Kimberly', 'Boyd', '229 Acosta Locks Suite 163, Saundersborough, AR 50103', '1991-03-23'], ['cwatson@gmail.com', '%!n+B3&ryJ', 'Erica', 'Fox', '67420 Olson Mountain, Tracyville, NV 71110', '1951-09-12'], ['chloesaunders@gmail.com', '@9qG(xen&Y', 'Rebecca', 'Smith', '94443 Hines Terrace, Jamesshire, OK 02370', '1962-08-07'], ['marc89@hotmail.com', '+p8Ou_4TJ2', 'Karen', 'Lopez', '753 Wilson Causeway Suite 326, Arthurton, DE 76150', '1975-05-28'], ['cpadilla@ingram-miller.com', '%7A9JdBl(#', 'Andrew', 'Mora', '218 Andrew Mission, Robinsonberg, NY 47239', '1933-10-21'], ['hornjennifer@yahoo.com', ')8KxjFz$m^', 'Lisa', 'Williams', '425 Drew Mountains, New Tammyberg, OK 59560', '1968-09-20'], ['kennethharris@hotmail.com', 'k&t3hIYc*8', 'Tammie', 'Schwartz', '51870 Dean Crossing Apt. 089, Wilsonside, GA 42982', '1970-04-03'], ['ronniewilson@perry.com', 'F1nYhszP#g', 'Amy', 'Walter', '89767 Bradford Lodge, Lake Alexanderborough, TX 29334', '1981-02-22'], ['sandraferguson@yahoo.com', '$(t&DIbjS2', 'Brent', 'Padilla', '34265 Hill Expressway Suite 727, Alexandrialand, IN 37265', '1951-09-06'], ['sanchezpamela@horne-meyers.org', 'Je4PQJSj^(', 'Jose', 'Fry', 'Unit 8373 Box 2757, DPO AP 04124', '1997-09-23'], ['hernandezzachary@hamilton-gould.info', '%CF6Mfsu**', 'Paul', 'Washington', '5350 Nelson Crest, New Darrenburgh, GA 85452', '1933-08-13'], ['woodscaroline@pacheco-miles.org', '*RLlJ)7c^2', 'Frank', 'Hanson', '382 Kelly Wells Apt. 851, Lake Seanborough, WV 83365', '1988-03-27'], ['dixonseth@andrade.org', 'OdCXXskR+0', 'Willie', 'Buck', '808 Thompson Fort, West Michael, NM 96921', '1995-09-20'], ['qmorris@yahoo.com', 'oRZLs0Wb%5', 'Mrs.', 'Kerri', '668 Regina Path Apt. 459, Port Andreamouth, MA 44705', '1988-01-08'], ['collinsrachel@ashley-small.biz', ')3&Q*%m^uN', 'Andrea', 'White', 'PSC 8074, Box 0412, APO AP 24824', '1989-01-17'], ['oroberts@thornton.com', '(g1wZu^iII', 'Andre', 'Campbell', '4127 Richardson Heights, Osbornemouth, SC 34836', '1964-03-20'], ['shawnfitzpatrick@gmail.com', 'F!339At5dq', 'Tom', 'Robinson', '916 Torres Trafficway, North Alejandro, WV 46604', '1984-07-22'], ['rittermelissa@yahoo.com', '%*I^Tmh*T5', 'Juan', 'Hardy', '47882 Martinez Divide, New Carolynmouth, TN 20998', '1954-05-16'], ['robertwest@rice.biz', '%O1KDsLfLH', 'Lisa', 'Shea', '0835 Danielle Center Suite 196, Meyerview, AR 92242', '1967-08-04'], ['nathaniel08@black.net', '2^6EBgcl3)', 'John', 'Rogers', '1286 Conway Course, Pittmanborough, TN 40434', '1934-04-19'], ['karen19@acosta-smith.com', '_0EVqTz!p4', 'Shane', 'Wilson', '808 Carolyn Highway Suite 935, South Ryan, NJ 12344', '1943-11-05'], ['kkennedy@gmail.com', 'Mq@$3JXgD8', 'Joel', 'Craig', '639 Matthews Mount, Nguyenside, ID 22681', '1930-08-22'], ['nmartinez@yahoo.com', 'nN0SGjHJ5_', 'Alexis', 'Myers', 'PSC 0021, Box 9870, APO AE 23924', '1922-01-28'], ['wellsalison@gmail.com', 'Ha53xWp4)V', 'Jamie', 'Fry', '8684 Gutierrez Bridge, Justinfurt, SD 32450', '1941-04-02'], ['loveamber@mann-booth.com', 'N@5ojEmrEM', 'Ashley', 'Gibson', '8166 Willie Orchard, Amyhaven, ME 16752', '1935-01-27'], ['monicabryant@gmail.com', 'Z91f8cOs!y', 'Jerry', 'Sanders', '082 Adams Plains Apt. 193, Hawkinsberg, OK 92816', '1954-09-11'], ['jamesvaughn@thomas.biz', 'Zz_e4AzlP$', 'Joshua', 'Christian', '536 Taylor Trafficway, East Derrickfurt, DE 54239', '1982-04-02'], ['melissa15@hotmail.com', '@XE0NjvJr#', 'Derek', 'Mcclure', '31051 Zachary Prairie Suite 453, Lake Barbara, CT 24453', '1957-12-29'], ['amandaduncan@gmail.com', '#8Y1Hfz^QF', 'David', 'Aguilar', '2793 Moore Landing, New Anneland, SD 88839', '2002-06-12'], ['louis06@gmail.com', '(05@BTB7bR', 'Katherine', 'Donaldson', '3465 Perez Courts, Gregorychester, WI 40334', '1983-02-12'], ['robertwise@hotmail.com', 'X7eUflzK&9', 'Jillian', 'Shah', '652 Seth Loaf, North Christopher, DE 79876', '1927-04-11'], ['patricia38@yahoo.com', '!dEI@S2d8&', 'Mrs.', 'Renee', '814 Kidd Club, Jillhaven, CA 35935', '1966-08-17'], ['audrey33@barton.com', ')EGM$ismc9', 'Erica', 'Johns', '42468 Jones Harbors Suite 231, Lake Steven, UT 65798', '1948-05-03'], ['bennettryan@hotmail.com', '@d4vstPi1#', 'Joshua', 'Jimenez', '444 Jeanette Center Apt. 337, Lake Lauren, HI 40644', '2001-01-11'], ['danielrobertson@yahoo.com', 'QN0VpL5a^e', 'Kristen', 'Charles', '31897 Holden Ville Apt. 770, Buchananton, AR 83980', '1927-11-21'], ['jason99@yahoo.com', 'V2(%09XcWe', 'Ryan', 'Villa', '42309 Caldwell Summit, South Johnfort, WI 58824', '1988-05-18'], ['joshuaholmes@cross.biz', '+lf%MR+3S5', 'Frank', 'Arnold', '032 Tara Islands Apt. 275, Davidberg, AR 32975', '1961-02-02'], ['michelle71@soto.net', 'b9ZpKdww*e', 'Danielle', 'Kelley', '97493 Leah Shoals Apt. 174, South Howardmouth, MO 50876', '1984-02-20'], ['dustinstewart@humphrey.com', '5s00TGw))m', 'Kara', 'Ramsey', '4133 Stephen Mission, Wandaburgh, TN 70466', '1940-12-15'], ['zmartin@graham.com', '7hUE84za#Q', 'Wesley', 'Jackson', '790 Alex Mountains, Jennifershire, NE 50419', '1999-01-20'], ['carolinewilliams@doyle.com', '0+83lxSy$+', 'Martin', 'Woodward', '89370 Sean Square, Lake Lauraton, IN 11791', '1991-03-08'], ['taylorsamuel@navarro.org', '*uHrlGrRX6', 'James', 'Acosta', 'Unit 2448 Box 0245, DPO AE 37331', '1975-09-07'], ['bakercharles@kennedy.info', '+abM2Tl1WU', 'Benjamin', 'Brown', '23181 Patterson Keys Suite 791, North Jessicabury, NJ 25789', '2001-11-01'], ['whitevincent@hotmail.com', 'mq4#Ob&5y*', 'James', 'Taylor', 'PSC 9379, Box 2723, APO AP 11613', '1973-11-10'], ['stricklandchristine@gmail.com', 'Q59PXHa1b^', 'Misty', 'Villegas', '30297 Trevor Ville, New Debra, AL 98663', '1938-01-09'], ['cochranrichard@hotmail.com', 'f*4RQ*Iu4s', 'Julie', 'Baker', '55834 Kyle Lock, Patriciamouth, TN 81335', '1947-01-13'], ['kennethsimmons@hotmail.com', '+(9SXSIl4o', 'Henry', 'Vargas', '494 David Walk Apt. 338, Amandaville, DC 31178', '1998-09-24'], ['kennethbrown@mcdonald-duncan.com', 'b%Hf@8*c1J', 'Jeremy', 'Harrell', '80666 Mendoza Island, Brownmouth, DE 89822', '1963-12-24'], ['johnmartinez@gmail.com', '%4C#TF#Fwl', 'Martha', 'Jackson', '64329 Kimberly Valleys Apt. 267, South James, AL 68024', '1960-12-17'], ['michaelsmith@james-johnson.info', '%4nFIdA55j', 'David', 'Armstrong', '192 Jones Avenue, Port Connieport, IN 79420', '1944-10-14'], ['kaitlyn06@gmail.com', '+667RXj)2I', 'Brian', 'Evans', 'Unit 4541 Box 9184, DPO AP 35310', '1920-11-15'], ['donna60@hotmail.com', '*S7a1Dms@b', 'Amy', 'Richards', '82203 John Loop Suite 183, Clairefurt, VT 29855', '1985-02-15'], ['brownmichael@hotmail.com', 'nuWDTvd2%1', 'Bonnie', 'Graves', '00643 Beltran Glens, Suzanneburgh, MS 48231', '1922-05-16'], ['leeamber@gmail.com', '(1NXL^fqOv', 'Lisa', 'Gomez', '884 Thomas Meadow, Christopherhaven, KS 58465', '1973-01-13'], ['crystalhodges@hotmail.com', '(CFLkrbw02', 'David', 'Carr', '834 Rebecca Bypass, Lake Edward, WI 74757', '1935-10-19'], ['zwallace@yahoo.com', 'XI$5Dei3RQ', 'Jasmine', 'Spears', '6764 West Route Apt. 069, North Emily, WY 73765', '1930-09-26'], ['colemary@davies.com', '(^3!kEZu1N', 'Roger', 'Roberts', 'Unit 1638 Box 4119, DPO AA 77837', '1969-03-02'], ['peterfrench@chambers.info', '8S2SQdIvu$', 'Bradley', 'Mccall', '4923 Stephanie Villages Suite 860, South Beth, MS 72251', '1943-08-02'], ['vvargas@cook.com', '_bbOjYink4', 'Cynthia', 'Berger', '5096 Jenkins Square Suite 307, Thompsonland, NC 17902', '1974-05-30'], ['martinezjoseph@mcgrath.com', '#50QZeW)OC', 'Tammy', 'Li', '834 Arthur Walks, Greenchester, CA 40237', '1930-11-13'], ['albert36@yahoo.com', '*@SDr3C@l8', 'Jennifer', 'White', '065 Hill Harbors Suite 539, New Sabrina, DE 58831', '1960-08-05'], ['michelle45@hotmail.com', '5^Z3mYfD3(', 'Brian', 'Johnson', '36596 Brown Fields Apt. 698, Brooksstad, AZ 84731', '2000-04-25'], ['rhunt@banks.biz', '@t1@HjL5o*', 'Sabrina', 'Ellis', '4850 Michael Club, East Jeffrey, MN 60558', '1920-05-08'], ['fosterwalter@ramirez.biz', '#94QtVk9)v', 'Brandon', 'Warren', '86612 Mcdaniel Isle, Port Jamesview, KY 85674', '1937-01-13'], ['jamiefrost@stein.net', '#0ZSf+n%+p', 'Jason', 'Ward', 'USCGC Marsh, FPO AA 78195', '1954-02-26'], ['douglas80@yahoo.com', 'g2BKc@jk+i', 'Jay', 'Campbell', '2736 Anthony Fields Apt. 058, Annetteborough, PA 67370', '1930-11-21'], ['ellenanderson@schneider.org', '(eeDdAly26', 'Luke', 'Fernandez', '3226 Matthew Throughway Suite 580, North John, NH 02287', '1935-05-06'], ['ppowell@peck-king.info', '#cz3Zue57t', 'Aaron', 'Weber', '61116 Steven Ports, Port Kelly, IN 98820', '1922-06-01'], ['eking@yahoo.com', '#kG0hSjUU6', 'Dr.', 'Mary', '34461 Davis Loop Apt. 273, New Matthewfort, IL 50670', '1948-02-05'], ['annehorton@kelley.com', 'Tc$o8TBp(2', 'Dr.', 'Gary', '629 Bailey Island, South Richardfort, CO 60782', '1965-11-01'], ['silvalindsay@campos.org', '@(y^1iYmWr', 'Sara', 'Chavez', '43617 Gina Ferry, Bettystad, WY 92567', '1926-04-07'], ['jgonzalez@gmail.com', '_8+4zMEa7R', 'Amanda', 'Quinn', '151 Webb Street Suite 494, Stacyburgh, WV 28352', '2000-07-03'], ['gabriel92@wheeler-montoya.biz', 'Q&Z8LCCaJI', 'Barry', 'Chaney', '2692 Robinson Freeway, West Jonathan, RI 35451', '1925-01-12'], ['dgonzalez@gmail.com', 'U(Ct8PYf!B', 'Dr.', 'Ellen', '5152 Ferguson Knolls Apt. 525, East Josebury, DE 17972', '1983-04-20'], ['hendersonryan@yahoo.com', 'T3r8Wo3lm#', 'Richard', 'Robinson', '5887 Maria Neck Apt. 676, North Cynthia, TN 91772', '1941-09-30'], ['cindy91@edwards.com', '%oGnbM%nl9', 'Daniel', 'Smith', '0386 Amber Knolls, Lake Robertoside, MA 66848', '1927-11-20'], ['turnerlawrence@hotmail.com', '^C6YrHJchF', 'Zachary', 'Harper', '6411 Michael Spring Apt. 864, Jamesside, VT 17577', '1952-06-06'], ['melissa86@yahoo.com', 'RUjS8qXvB+', 'Tyrone', 'Kim', '5482 Gill Turnpike Apt. 921, West Jessicashire, NJ 36065', '1942-03-05'], ['amy06@hoffman-martin.com', '(*!RCgnly3', 'Angela', 'Peterson', '158 Caitlin Summit Suite 981, Lake Michael, WI 61264', '1928-03-19'], ['vhughes@yahoo.com', '@9ADpfrUIa', 'Robert', 'Roberts', '67469 Stephanie Drive, North Frankview, AK 25898', '1977-07-23'], ['joseph62@garcia-white.com', '$$n!pSFy2$', 'Kimberly', 'Gibson', '596 Alexa Plaza, Shannonchester, CO 33953', '1974-06-18'], ['wallerlaura@rogers.org', '8AYEQE0z(d', 'Mark', 'Oliver', 'USNS Lee, FPO AP 84349', '1966-04-26'], ['qwright@bailey.info', 'y9w3GxmM+W', 'Grace', 'Shelton', '02538 Alicia Port, Vegahaven, ID 15312', '1921-05-01'], ['julie40@yahoo.com', ')*mK1!NvKp', 'Michelle', 'Carlson', '67001 Amanda Expressway Suite 210, Lake Tracystad, IA 94029', '1997-04-13'], ['hannahburch@yahoo.com', '#27BwFqz9v', 'Tammy', 'Ramirez', '467 Michelle Flats, Lake Mark, TN 23522', '1924-08-22'], ['onunez@alexander.com', 'c95*M0AtQX', 'Zachary', 'Fields', '54885 Charles Pine Apt. 803, Coreymouth, HI 80364', '1986-02-18'], ['cobbdeborah@hotmail.com', 'lV3QW1Uv_I', 'Brendan', 'Stewart', '8612 Jones Squares Suite 192, Nicoleview, AL 60383', '1963-01-16'], ['william25@hotmail.com', 'qx9Wg5X0R)', 'Lisa', 'Greer', '194 Hanna Garden Suite 248, Port Corey, TN 24412', '1940-12-05'], ['belljoseph@gmail.com', '&l0UhFC^K0', 'Craig', 'Berry', '4949 Michael Valleys, Jasonfort, MS 89735', '1995-03-16'], ['elizabethmcpherson@price.com', 'jE4bASw2A^', 'Anna', 'Anderson', '966 Collins Drives Apt. 351, Port Tracy, DC 73819', '1937-01-29'], ['powersjodi@hotmail.com', 'i_3Y$oP5&q', 'Jason', 'Sanchez', '44000 Jay Motorway, South Todd, OH 79196', '1952-08-19'], ['pjones@hotmail.com', 'jj63WF(e!p', 'Nina', 'Rojas', '961 Timothy Springs, Kimberlyton, TX 68592', '1998-11-05'], ['ronaldwilson@hotmail.com', '9)6W(eSgCp', 'Amber', 'Vasquez', '481 Tyrone River, Davisberg, PA 81443', '1950-06-21'], ['vaustin@harris-bullock.org', ')lEKat7f_3', 'Dr.', 'Francis', '16520 Crystal Lodge Apt. 691, Drewshire, MN 09453', '1961-04-16'], ['stevenclark@myers-shaw.com', '1M3uH7t8F$', 'Dr.', 'Samantha', 'PSC 1219, Box 0550, APO AA 23164', '1972-08-03'], ['nallison@dawson-armstrong.com', '*O!N4ZPlXD', 'Tiffany', 'Watson', '1116 Rhonda Plains, Lake Kathrynfurt, WI 35891', '1951-09-16'], ['david73@gmail.com', '(b1zDpiB!j', 'Marie', 'Cohen', '0799 Kristen Tunnel, Lake Christopherland, OR 23176', '1957-06-22'], ['josephortiz@cohen.com', '!9l(1%OeQ+', 'Lori', 'Lopez', '158 Robin Hill, Gordonchester, GA 53456', '1938-08-24'], ['ashleyjohnson@mccoy-johnson.info', 'l)yc1H0a_0', 'Jaime', 'Vargas', '3082 Evans Unions, Johnberg, NH 21340', '1994-01-09'], ['charles29@hotmail.com', 'Q&W_D0Po!b', 'Jeffrey', 'Sanford', '44082 Morgan Wells Suite 539, South Brianberg, WI 64312', '1949-02-13'], ['sharon65@gmail.com', 'R9YGM!bk)d', 'Michael', 'Preston', '07093 Willis Lodge Suite 093, North Christopher, IN 40537', '1973-07-23'], ['vbeasley@davis.com', '7C9JfQJa&e', 'James', 'Snyder', '99394 Becker Fork Suite 244, Port Richard, UT 39345', '1970-07-09'], ['ypark@watson.info', 'Rd^95Tu9$I', 'Ashley', 'Wilson', 'Unit 9896 Box 2694, DPO AE 56488', '1993-07-31'], ['beckcurtis@yahoo.com', 'gEs71QqX!t', 'Karen', 'Williams', '74929 Johnny Square Suite 360, North Eric, WI 45014', '2001-06-01'], ['kevin84@davis-harris.com', 'vJ)Ek2pc%4', 'Jason', 'Buck', '27576 Obrien Stravenue Suite 860, Christophermouth, DC 68043', '1947-02-11'], ['charlespittman@parker.biz', 'ds63EP%9A&', 'Bradley', 'Thomas', 'PSC 5380, Box 7360, APO AP 65486', '1926-02-04'], ['ann09@yahoo.com', '5(JZJl+Z^g', 'Brian', 'Bradley', '23756 Michele Forges, Lake Tom, KY 00690', '1989-06-09'], ['mccartyraymond@yahoo.com', 'rwaL_PrW%2', 'Allison', 'Bartlett', '756 Lisa Shoal Suite 386, Port Sheilaside, PA 37854', '1942-07-12'], ['emanning@pham.biz', 'r2xw9)Le+V', 'Nina', 'Moore', '696 Melissa Plains Suite 672, New Jacob, NV 41744', '1963-11-27'], ['reyesjon@hotmail.com', 't31ZsqGG(8', 'Christine', 'Solis', 'PSC 4697, Box 5993, APO AA 66659', '1967-02-15'], ['nancyarias@ellis.com', '3kC1xMht&(', 'Jeffery', 'Wilson', '26254 Katherine Islands, Davisside, GA 79169', '1962-05-15'], ['qortiz@yahoo.com', '*0UHYHEojD', 'Corey', 'Lawson', '124 Laura Cliff Apt. 534, Port Dale, NM 54672', '1985-10-12'], ['morristiffany@medina-gray.org', '#kTUQgrw2e', 'Raymond', 'Esparza', '4862 Wilson Row, Martinfort, SD 61412', '1978-03-28'], ['zcooper@holt-herman.com', 'RH2CHijQ*U', 'Destiny', 'Jones', '99891 Jonathan Meadow Apt. 797, Perryberg, IL 03171', '1990-12-03'], ['dhall@hotmail.com', 'Kq*MD7vr)6', 'Morgan', 'Thomas', '6650 Jones Lake Suite 731, Wardport, AK 75161', '1985-03-05'], ['sullivankayla@hamilton.com', 'E50F)tV)+#', 'Caleb', 'Rice', '07631 Ashley Haven, Port Caitlinside, NE 15169', '1987-10-13'], ['chungmaria@ross-duran.com', '!6O9z7Wf@G', 'Brenda', 'Smith', '0911 Brown Centers Suite 904, Ortizberg, OK 29192', '1960-10-19'], ['melissa35@arroyo.com', 'L)X1^EEfKf', 'Mary', 'Hendricks', '1712 Johnston Lodge, Heatherside, MT 50978', '1944-07-01'], ['maryrussell@yahoo.com', 'BV5YrcLu*x', 'George', 'Harris', '06125 Henry Plain Suite 250, Raymondborough, UT 90245', '1983-06-18'], ['wgreen@yahoo.com', 'hYZ2fOuxa@', 'Angela', 'Anderson', '21554 Catherine Landing, Cartermouth, IN 16621', '1931-01-29'], ['rose96@gmail.com', 'Ff2x%&Pw)J', 'Jeffrey', 'Griffin', '081 Middleton Pike, Leeberg, VA 82677', '1998-03-22'], ['jenniferlambert@yahoo.com', '(l2VsnrO7y', 'William', 'Cox', 'PSC 7876, Box 8857, APO AP 45446', '1943-05-07'], ['jacquelinepowers@lee-walker.com', 'F01YQ&Up8!', 'Shannon', 'Grimes', '4256 April Court Suite 719, Gonzalezbury, AL 63737', '1928-12-29'], ['pattersondanielle@anderson.info', '^n0Yv+V8$W', 'Alexis', 'Wilson', '116 Julie Ferry, Kristineside, OK 98055', '1935-12-06'], ['justin75@phillips-ellis.com', 'vidNGlMo@7', 'Joseph', 'Shaw', '29272 Lauren Squares Apt. 806, Salasview, NM 92961', '1934-05-03'], ['andreabryant@villanueva.info', '(eR4GChLP_', 'Matthew', 'Suarez', '495 Scott Islands, Dawnside, GA 87308', '1963-05-18'], ['imiller@hotmail.com', 'l8C)K)PR@!', 'Alicia', 'Patel', '8648 Ashley Valleys, North Heathershire, NC 19630', '1967-10-08'], ['jasonfigueroa@yahoo.com', 'POoAjmvl)8', 'Ann', 'Lopez', '954 Antonio Causeway Apt. 729, East Taylor, OR 37910', '1955-10-12'], ['scottanderson@smith.biz', ')kFIVicxI5', 'Michele', 'Escobar', '54627 Elizabeth Parkway Suite 497, Samanthamouth, TX 77964', '1971-12-19'], ['jasonromero@hotmail.com', '$txGYE_wj3', 'Megan', 'Contreras', '0320 Thomas Track, New Lee, WI 74015', '1939-11-23'], ['changlaura@yahoo.com', '#34a+V6z)&', 'Kimberly', 'Stein', '14299 Kimberly Cliffs Apt. 432, Port Christopher, MI 24197', '1981-08-21'], ['angelawallace@hotmail.com', ')a#6&GjX0Y', 'Lisa', 'Douglas', '0036 Rachel Flat Apt. 459, Lake Ricardoland, MD 26523', '1925-08-25'], ['albertbenjamin@anderson.com', 'Xy9pOAQq*j', 'Mrs.', 'Nicole', '136 Schmidt Fork Apt. 530, East Timothyport, NY 23952', '1953-05-08'], ['jenniferwolfe@yahoo.com', '(A3Q#Ke&Uc', 'Cameron', 'Moreno', '73915 Monica Manors, Port Cynthia, MS 39314', '1974-02-17'], ['jamie73@mendez.com', '1GCmUZNx%Y', 'Melissa', 'Johnson', '2077 George Ports Suite 779, New Benjamin, NY 50430', '1933-11-28'], ['sknight@hotmail.com', '_0&X@sa(B%', 'Eric', 'Hancock', 'USCGC Adams, FPO AP 93478', '1970-04-18'], ['stanley23@yahoo.com', 'v68QRLxJz%', 'Jessica', 'Cherry', '5630 Todd Manors Apt. 406, Matthewland, IL 96819', '1986-10-21'], ['ijones@gmail.com', '#*XB5XRty6', 'Christine', 'Barber', '489 Green Summit, Pachecoville, NJ 64421', '1977-08-14'], ['sandra36@hotmail.com', '&nN44AdsT%', 'Ariana', 'Garcia', '34248 Courtney Extension, Mistystad, AK 26351', '1956-01-11'], ['ryankelley@brown.info', 'W8j*GkKj+Z', 'Mark', 'Robinson', '216 Bowman Falls Apt. 054, North Neil, TN 22535', '1997-09-30'], ['robinsonmaria@freeman.com', '*LLwOEr)B3', 'Beth', 'Gonzalez', '47525 Christine Manor, Jacobsshire, IN 74319', '1979-07-14'], ['markbaker@williamson.info', 'g9yD$OhC^3', 'Jared', 'Davis', '72938 Lucas Rapids, Port Christopher, MN 46238', '1923-06-20'], ['hancockkevin@hotmail.com', '(s$O^N^b98', 'Regina', 'Brown', '97669 Hardin Dam, Port Melissastad, ID 32673', '1986-10-17'], ['molly11@watson.net', '5H@8QIDc%H', 'Tyler', 'Bailey', '7940 Danielle Divide, Luceromouth, VT 01357', '1940-03-23'], ['nicholas53@hotmail.com', '#8xQ)VjC98', 'Beverly', 'Ramirez', '6079 Garcia Springs Suite 771, Gardnerton, IA 44922', '1988-02-09'], ['rodriguezchristine@munoz-gomez.biz', '_oWU@@*hM5', 'Lauren', 'Martin', '425 Deanna Wall Apt. 233, Port Linda, GA 62779', '1988-09-03'], ['cynthiaburns@jensen.com', '^e!e&MFoa0', 'Kevin', 'Krueger', '6902 Matthew River, Scottmouth, WA 37428', '1965-10-10'], ['territhomas@gonzalez.com', 'WwOJiekZ%3', 'Michele', 'Donaldson', '99603 John Street, Kathleenbury, WV 74736', '1960-08-28'], ['kennedyjennifer@hotmail.com', '^8Fuq%k$^U', 'Brian', 'Smith', 'Unit 2774 Box 2221, DPO AA 36672', '1995-10-13'], ['hsimmons@moore-walters.com', '!RP36nflD3', 'Adam', 'Myers', '937 Eddie Neck, Morrisberg, MI 78514', '1946-09-30'], ['barberrhonda@hotmail.com', 'M&w20AbDe$', 'Christopher', 'Patel', '08570 Brown Ferry, Lake Lauren, KY 95017', '1996-05-19'], ['ashleyjuarez@gmail.com', '7Mx2IYhTe_', 'Reginald', 'Hughes', '9395 Reese Avenue, Pamelaton, SD 89030', '1951-01-12'], ['ewright@morris.net', '%4sSJok(tf', 'Justin', 'Matthews', '7127 Emily Shoals, Hensonville, OH 90029', '1940-11-23'], ['uclark@hotmail.com', '$aT1Kd!T)g', 'Jillian', 'Rivera', '91570 Buckley Brooks, South Charlesborough, NH 31351', '1974-08-12'], ['gonzalezdavid@hernandez.info', '#5XjeTux1R', 'Charles', 'Fernandez', '16875 Beverly Islands, West Timothyfurt, SD 72170', '1986-03-28'], ['gibsonscott@paul.com', '*QWHCEttC6', 'Debra', 'Knight', '82482 Joseph Meadow Suite 544, Smithtown, MA 34033', '1997-02-13'], ['leah88@yahoo.com', 'm6Jt&4Fe+q', 'Jill', 'Phillips', '210 Sarah Mountains, East Nathanchester, MN 15597', '1932-10-15'], ['meghan15@gallegos-schneider.com', '^9El+4%p4L', 'Jason', 'Smith', '4402 Joshua Fork Apt. 038, East Jennifertown, ID 65963', '1936-05-09'], ['amandagarcia@yahoo.com', 'I0XI^d@K*r', 'Mike', 'Gomez', '7994 Lewis Meadows, South Dominicmouth, NE 51589', '1980-01-02'], ['williamsjo@larson-harris.com', '!f_4!SCj5T', 'Paul', 'Davis', '29777 Marcus Pike, Lake Adriana, MN 57083', '1990-05-28'], ['vbennett@gmail.com', '%E&NUY!oD5', 'Gina', 'Meadows', '5341 Michael Walks Apt. 949, North Christopher, WA 73280', '1947-10-07'], ['nicoleharris@gmail.com', '$!GDh5Ebi0', 'William', 'Jones', '13218 Simpson Bypass, North Wesley, UT 14373', '1941-02-18'], ['davidjimenez@gmail.com', '&N1SYv1*+D', 'Jennifer', 'Dixon', '4563 Tammy Stravenue, Danielborough, IL 38551', '1999-04-19'], ['charleshensley@gmail.com', ')*71#Fh$q9', 'Jessica', 'Nichols', '4497 Phillips Walk, Courtneystad, IA 91982', '1927-09-22'], ['wilsonsteven@yahoo.com', '_C5HQFdw9N', 'Diane', 'Schmitt', '749 Meagan Junction, North Brianfort, CO 16236', '1927-10-08'], ['casey32@mckinney-martin.com', '&8BHiKH)$d', 'Melanie', 'Richardson', '648 Marcus Pass Suite 788, Port Stacy, DC 94697', '1949-07-20'], ['kleinspencer@lee.info', 'aj1HG*lF@s', 'Christopher', 'Espinoza', '103 Kristin View, Jesusbury, RI 16559', '1977-10-17'], ['ncollins@evans-simon.biz', 'dY0VBSh5Y@', 'Thomas', 'Cole', '5429 Bennett Springs Suite 761, West Katherineland, IA 83981', '1958-01-04'], ['julie49@gmail.com', 'AE6IZyqqs^', 'Troy', 'Mccall', '51240 Chandler Fall, Sarahfort, NE 19091', '1933-06-16'], ['kristen47@yahoo.com', '4E8uP4fP1#', 'Stacey', 'Brown', '627 Jonathan Key, North Michael, FL 25430', '1970-08-14'], ['rosaleslee@hotmail.com', '4n(1@bBd!w', 'Clifford', 'Richardson', '098 Smith Corners, Samanthamouth, WV 91355', '1948-02-14'], ['washingtonrichard@ford-rangel.com', '5nyr#Q*s_1', 'Jamie', 'Glenn', '71348 Tanya Port Suite 218, Heatherville, NY 23552', '1932-05-24'], ['smithtara@brooks.biz', 'XnV3X9CwX*', 'James', 'Ramirez', '3215 Casey Trace Suite 609, Danielsberg, IL 91020', '1974-11-07'], ['johngibson@pham.com', '@1T9O*gp#I', 'Derek', 'Munoz', '174 Baxter Parks, East Angelicachester, MT 98548', '1927-12-20'], ['umorris@meyers-rich.info', 'Kr03^ROw^V', 'Jose', 'Schwartz', '8333 Alexandra Meadow, Allisonchester, HI 55782', '1997-05-15'], ['aramsey@thomas.info', '%IAOM9y*Z_', 'Monica', 'Dudley', '99745 Allison Fields Suite 621, West James, CT 60352', '1969-05-26'], ['ybullock@yahoo.com', 'N7Z5GuKv(5', 'Billy', 'Evans', '97730 Blair Coves, Huntview, OR 07253', '1927-01-26'], ['dana30@hotmail.com', 'R31#dIOl+9', 'Stephanie', 'Ross', '70217 Mitchell Isle Apt. 268, Lake Christinatown, WI 21356', '1946-04-18'], ['victoriarobertson@lopez-kennedy.biz', '!f66WRZdmD', 'Mark', 'Khan', '04582 Lopez Way Apt. 284, Fosterville, OK 97705', '1939-07-24'], ['lutzamy@yahoo.com', '0)O2%TXi)^', 'Ronald', 'Taylor', '422 Chang Isle Suite 616, Port Darlenestad, RI 65896', '1947-05-30'], ['paul20@atkinson-hart.com', '4mrhXA!g+Q', 'Joseph', 'Maldonado', '43302 Smith Parks Suite 382, South Jonathanmouth, TX 64604', '2002-12-02'], ['kristinjones@moore.org', '#mqhNq$fb2', 'Scott', 'Hicks', '24317 Lori Land Apt. 630, East Aprilview, MO 88749', '1980-06-05'], ['shannon33@hill.biz', '^&UVKm^pn5', 'Matthew', 'Harper', 'USS Poole, FPO AP 14578', '1977-12-13'], ['tonya16@hall.com', '_w7#U6a7@)', 'Alexander', 'Cochran', '271 Glover Ridge Suite 155, Crystalfort, TX 38172', '1988-04-27'], ['fmatthews@gmail.com', 'kkMzki@D$7', 'Ashley', 'Campbell', '6010 Shannon Forest Suite 457, New Malik, TN 26100', '1931-01-12'], ['rromero@jensen.com', ')D1CXc_I##', 'Sheila', 'Valentine', '23724 Devon Drive, Darrenland, ND 36560', '1951-01-17'], ['alexandermaria@hotmail.com', 'H&(P6Du2!6', 'Kimberly', 'Lee', 'USNS Ortiz, FPO AP 07981', '1955-10-17'], ['icampbell@gmail.com', '4!U8HboetA', 'Kyle', 'Martinez', '0178 Jason Crossing, Port Traci, AR 25562', '1932-01-28'], ['cdavis@perez.com', '%n+5KTb*o*', 'Heidi', 'Ford', '518 Davis Inlet Apt. 188, North Kimberly, AZ 58040', '1938-10-01'], ['denisesantiago@yahoo.com', 'VuWq2$S(x+', 'Andrew', 'Bradley', '83080 Miranda Villages, Thompsonfurt, GA 87456', '1971-09-24'], ['sonia21@hotmail.com', ')z4O&pgZV_', 'Ana', 'Morales', '6759 Courtney Track, Lake Laura, CT 18946', '1970-09-06'], ['ramirezwayne@hotmail.com', 'jsoteNN6)8', 'Gregory', 'Cochran', '1693 Carmen Trail, South Billyville, KS 16589', '1935-06-02'], ['richdesiree@hotmail.com', '(K_nEvcmV9', 'Brian', 'Avila', '5774 Erica Village Suite 249, South Wayneborough, OR 38235', '1977-06-16'], ['lproctor@cooper.net', '#39niqF)rq', 'Joseph', 'Cowan', '24780 Ryan Island Apt. 328, North Ryanberg, IL 49186', '1947-12-20'], ['paulwilliams@pratt.com', '*CS071Zz($', 'Crystal', 'Garcia', '59693 Todd Gardens Apt. 044, Millerview, MA 36136', '1920-09-21'], ['julia22@gmail.com', '_0hUja!%$C', 'Frank', 'Sanchez', '586 Brian Ridge Suite 080, East James, CT 13449', '1946-11-21'], ['patrick41@gmail.com', 'I%2^8Hsb37', 'Nicole', 'Petersen', '08702 Andrew Rest Apt. 283, Perezshire, DE 51284', '1980-06-08'], ['lauraroberts@pollard.org', 'W3s02sRr#Q', 'Ronald', 'Mejia', '7481 Mary Mill Apt. 624, South Susan, CA 95407', '1985-08-31'], ['nancylarson@gonzalez.com', '+1p^F9du$j', 'Gregory', 'Coleman', '3695 Kimberly Fords, Christopherport, IL 42309', '1993-08-23'], ['urodriguez@yahoo.com', 'j&Q#&tS%+4', 'Michelle', 'Martinez', '458 David Mountain Apt. 216, West Mary, PA 36120', '2003-01-02'], ['michelle17@yahoo.com', 'c*Uk7v*u&6', 'Kimberly', 'Anderson', '7647 Michael Forges, Johnsonbury, MO 20437', '1988-05-02'], ['amy64@yahoo.com', 'WU!M3VfdBr', 'Claudia', 'Myers', '96539 Buchanan Flats, Lewisbury, VT 88438', '1975-03-31'], ['tyler30@porter-scott.com', '%xHsVNrcJ4', 'Rose', 'Andrews', '293 Carrie Spurs Apt. 652, West Christian, LA 71102', '1985-12-07'], ['nicolebarber@castillo.com', '@P3j+2Oib$', 'Bruce', 'Wallace', '406 Derrick Heights, Nathanmouth, HI 37677', '1969-11-11'], ['kimberlymurphy@gmail.com', 'R%r9BGstPW', 'Lauren', 'Vazquez', '6165 Cruz Stravenue, Juarezville, SD 85737', '1998-04-07'], ['whitesara@hotmail.com', 'P#^o1RcB($', 'Dana', 'Campos', '57439 Pearson Circle Apt. 646, North Jessica, TX 32649', '2001-03-30'], ['butlersamantha@yahoo.com', '6@0Nukm%1N', 'Jaclyn', 'Nolan', '17095 Anthony Valleys, New Kelly, NC 36429', '1963-03-17'], ['loricarter@jones.com', 'e6Dat#Te+D', 'Cathy', 'Lucas', '65722 Morris Loop Apt. 702, Bobbytown, MD 67609', '1935-05-15'], ['josanders@gmail.com', 't1G1Ok2N!6', 'Molly', 'Dickerson', '07478 Moore Port, West Katie, IL 07741', '1924-08-15'], ['robert35@gmail.com', '2Ar2*9Uo6P', 'Ruth', 'Martin', '04244 Katrina Corners Apt. 486, Matthewville, AK 45985', '1986-11-29'], ['mikepeters@miller.com', '$j31$)Qws%', 'John', 'Castillo', '080 Jonathan Common Suite 835, Guerrafort, NC 17593', '1967-03-24'], ['sreeves@yahoo.com', 'k!ls4FsoS_', 'Tamara', 'Hawkins', '76280 Kiara Forge, Bauertown, TX 17423', '1970-09-11'], ['caseylopez@hotmail.com', '^^3T_(Ijxw', 'Jeffrey', 'King', '8151 Tyler Grove Apt. 687, Melissaside, NC 92534', '1934-06-26'], ['epeck@smith-richardson.com', '*P)6SUzzGz', 'Trevor', 'Weiss', '7149 Vincent Track, Dylanbury, ME 21662', '1976-12-16'], ['vdelgado@yahoo.com', '_CBn)x5E35', 'Tracy', 'Cook', '6489 Duke Islands, Port Patriciaberg, MA 70068', '1994-01-23'], ['michellestewart@gmail.com', '^4Ha1TPM&)', 'Sharon', 'Cook', '267 Dorothy Burg, North Brianna, DE 37002', '1941-12-24'], ['robin03@barnes.com', 'c6$4Ip4b#s', 'Matthew', 'Gray', '223 Lori Heights Suite 548, Donnamouth, MA 36108', '1955-11-28'], ['ecole@gmail.com', '9(Hbo^Gs(0', 'John', 'Garcia', '2718 Virginia Way, East Lindafort, MD 65684', '1932-01-24'], ['eblack@gmail.com', '62qv1RgNh)', 'Jacqueline', 'Anthony', '79868 Cooley Rapids, Lake Brian, UT 84398', '1947-04-01'], ['ngreene@yahoo.com', '&Y4BBKBnqe', 'Whitney', 'Gibbs', '11551 Alex Village, East Dustin, LA 52981', '1940-10-10'], ['keith02@yahoo.com', 'N!L6(Hs5C6', 'Michael', 'Phillips', '439 Timothy View Apt. 406, Perrybury, MD 53792', '1968-05-01'], ['vmyers@yahoo.com', 't9OTlRJ#)F', 'Don', 'Brooks', 'USNS Weber, FPO AE 63213', '1973-08-16'], ['karmstrong@yahoo.com', '_)e^Np9E3p', 'Denise', 'Morris', 'USCGC Sanders, FPO AP 90310', '1923-05-22'], ['danielwalker@everett.net', '@*CNPDqN6c', 'Carol', 'Ruiz', '423 Maria Keys Suite 890, South Henry, CO 80086', '1925-12-27'], ['sanchezroberto@king.com', '(Gv6VrD4%)', 'Ryan', 'Simmons', '49667 Stewart Union Suite 327, Port Markfurt, OK 87345', '1921-12-30'], ['gsmith@green.com', 'qPeW*8OnX&', 'Joseph', 'Harris', '4557 Buchanan Roads Apt. 485, Perrybury, MT 22417', '1958-12-28'], ['aschroeder@barrett.com', 'X79UIC*yR+', 'Marissa', 'Pratt', '3228 Campbell Roads, Lake Katiebury, MA 60104', '1950-12-30'], ['kelly55@wright-anderson.com', 'U*Y8s8BqqS', 'Gina', 'Patterson', '582 Duncan Trafficway Suite 839, New Alexandramouth, ND 32870', '1951-04-13'], ['cassandranorris@bryant.biz', 'JM83jQtuO+', 'Craig', 'Sutton', '305 Wilson Inlet, South Maryborough, HI 20466', '1997-01-18'], ['kelseyyork@jones.com', '4&$1YRzR#$', 'Michael', 'Alvarado', '6553 Roberson Stream Apt. 967, Chrismouth, IA 99844', '1985-05-31'], ['ahart@yahoo.com', '2%f9ESe8LC', 'Philip', 'Bailey', '1813 Andrews Meadow Suite 088, Port Jenniferchester, ND 01476', '1939-08-24'], ['stephenskathleen@johnson.com', 'Gg4(CKl+N$', 'Maxwell', 'Fletcher', '3594 Wood Forge Suite 787, Owentown, AR 30472', '2000-10-17'], ['sandraclark@hotmail.com', ')ShTMQwpQ8', 'Elizabeth', 'Hernandez', '545 Jenna Extension, Vanessaside, PA 77093', '1923-06-06'], ['clarkescott@yahoo.com', 'AIWy4U$c4#', 'Kathryn', 'Wheeler', '7013 Edwards Valley, New Robynburgh, ND 82859', '1998-07-14'], ['michelleelliott@cobb-jones.info', 'a@l0U3ag%@', 'Lydia', 'Howard', '9721 Stephanie Mills, Port Cynthia, HI 39529', '1938-12-13'], ['xramsey@pierce.org', 'a88nDvtl!M', 'William', 'Crawford', '531 Adrian Canyon, Paulfurt, TX 32557', '1926-02-07'], ['lhendrix@elliott.com', '_9nPOpmm4V', 'Robert', 'Guerrero', 'USNS Hill, FPO AA 65392', '1930-12-04'], ['vwright@rodriguez.com', '^Sd5SAPa@O', 'Andrew', 'Carr', '8567 Curtis Plain, North Justin, ND 46952', '1979-05-16'], ['moralesapril@hotmail.com', 'XEE7kCkii@', 'Miss', 'Catherine', '12825 Rogers Centers, Fordberg, FL 89649', '1968-12-13'], ['cglenn@ford.info', '5)Q^aTex)X', 'Curtis', 'Ramirez', '308 Lowe Road Suite 553, Port Dillonport, HI 48976', '1929-01-27'], ['jtorres@salazar.org', '8$9I6Qik8#', 'William', 'Holt', '970 Saunders Lakes, South Gregorytown, TN 48747', '1936-01-14'], ['pvazquez@white.com', '&9Bhm8DaWE', 'Kelli', 'Flores', 'Unit 4059 Box 1811, DPO AP 90470', '2001-03-05'], ['laura07@nguyen.org', '0fIMA*p!@1', 'Dr.', 'Veronica', '3836 Michael Inlet, North Sean, VA 53882', '1945-07-12'], ['sean88@gmail.com', 'zb6Q7Axsf&', 'Noah', 'Riley', '8405 Robert Forge Suite 534, Francoshire, GA 16703', '1987-09-29'], ['joneshaley@gmail.com', '_3CSl)o^1d', 'Christine', 'Walls', '863 Andrew Extensions Apt. 851, North Tracyfurt, KY 75692', '1927-11-01'], ['williamsandoval@harris-estrada.com', 'FZjF3)Za_1', 'Caleb', 'Baxter', '136 Singleton Lane Suite 186, Lake Paul, SD 44935', '1930-02-12'], ['joshua04@shaw-garza.com', 'f$8wEIB6td', 'Kyle', 'Morris', '97794 Williams Pines Apt. 546, Lorifort, SC 73598', '1961-05-27'], ['wilsonjason@davis.com', '(nTPtBa+6G', 'Erica', 'Mitchell', '60127 Riley Stream, East Larry, MD 49636', '1964-01-10'], ['richardponce@hotmail.com', 'tN#3Dekn9@', 'Michael', 'Delgado', '191 Samantha Fort Apt. 323, New Elizabethshire, VT 10059', '1969-04-17'], ['qcarrillo@yahoo.com', '^8VCsxkd8F', 'Justin', 'Johnson', '65933 Davis Vista, Tannerbury, DE 03666', '1972-06-10'], ['hrichardson@gmail.com', 'fs22PlSWq#', 'Hector', 'Nguyen', '378 Smith Orchard, Jillton, MT 66019', '1943-07-12'], ['benjamin24@ball.net', '*UD7fUEuO)', 'Mary', 'Duran', 'USS Hamilton, FPO AE 87937', '2001-01-29'], ['woodselizabeth@stevenson.com', '_bYK5ndWG1', 'Tiffany', 'Choi', '594 Jeanette Ranch Apt. 943, Robertside, ID 78582', '1936-05-11'], ['livingstoncristian@grant.net', '6f4VOoOoM@', 'Cindy', 'Robinson', '5815 Sheila Vista, North Alexbury, NE 76169', '1939-07-13'], ['patrick88@blanchard.net', 'TO&26KnA!B', 'Robert', 'Parsons', '1379 Charles Crest Apt. 429, Port Christopher, PA 90445', '1961-10-08'], ['melaniesmith@yahoo.com', '$m8oE%^fBo', 'Julie', 'Davis', '3917 Washington Knoll, Matthewland, MA 91471', '1985-06-07'], ['crichardson@gmail.com', '+R@2L!a_Mu', 'Jessica', 'Mcclure', '1226 John Dam, Andrewport, KS 10269', '1949-06-04'], ['sking@yahoo.com', '@4NDsRkp+a', 'Kelly', 'Parker', '30884 Sandra Dale Apt. 668, Huntland, AR 90791', '1961-08-10'], ['patricia89@romero-schneider.com', 'YlQ)RXDq(7', 'Sheila', 'Hicks', '0925 Taylor Shoal Suite 949, Courtneychester, DC 08267', '1974-12-18'], ['anthonyroberts@hotmail.com', '#8BP720q)f', 'Danny', 'Barber', '256 Matthew Track Suite 659, Sanchezport, TX 85968', '1990-05-10'], ['michael35@cox-adams.com', '6y_j5ZnR!z', 'Jennifer', 'Brock', '4844 Cunningham Wells Suite 036, Shaunhaven, CA 91909', '1971-12-03'], ['patricia50@cervantes.com', '#pxmO*B^^2', 'Walter', 'Christian', '760 Davis Terrace, Brownside, IN 18026', '1950-07-27'], ['sarafarmer@middleton-elliott.info', 'qU)6W^uD(i', 'Gary', 'Jenkins', 'USCGC Moreno, FPO AP 25465', '1967-09-08'], ['smartinez@hotmail.com', 'HRg)Mv*k%7', 'Tammy', 'Harding', '5001 Elliott Stravenue, Jeremychester, NY 44461', '1933-04-20'], ['bbaker@casey-powell.biz', '+4zQNbwy&#', 'Candace', 'Santiago', '68460 Frye Meadow, Floydfort, NE 29115', '1990-12-31'], ['donaldwest@yahoo.com', 'i@x3@Ek+)Z', 'Melissa', 'Richardson', '31370 Scott Manor Apt. 082, Whitakerside, OR 49886', '1966-11-07'], ['david36@rivera.biz', 'c#Z2Ffd9pJ', 'Wendy', 'Garcia', '89461 Allen Corner, New Wayne, ID 63045', '2002-06-23'], ['scottbyrd@bean.com', 'jq&NDdMf#6', 'Donna', 'Miller', '32751 Bass Trace Suite 399, Karenville, MS 54303', '1983-12-26'], ['xjones@miller-jones.net', 'k79hGeBB&X', 'Luis', 'Hernandez', '0074 Kevin Mountain, East John, NM 38309', '1949-10-12'], ['myerselizabeth@johnston.org', 'wg$+7OkpkT', 'Javier', 'Decker', '33358 Cooley Bridge Apt. 824, Holthaven, WA 21701', '1920-05-10'], ['melissabird@black.com', '4)Jw0GPkgS', 'Joshua', 'Bishop', '1511 Elizabeth Divide Suite 315, West Jamesport, RI 71388', '1927-02-17'], ['staylor@frazier.biz', '@&K8rG&a^7', 'Andrew', 'Bailey', 'USNV Alvarez, FPO AA 01186', '1929-10-31'], ['rbraun@yahoo.com', '^Z_ecjGzD9', 'Linda', 'Schmidt', '15584 Jennifer Squares, Rachelfurt, MI 10986', '1991-04-25'], ['milescheryl@hale.com', 'UN0DtP%_%(', 'Kelly', 'Cross', 'Unit 0998 Box 9622, DPO AA 76619', '1964-07-01'], ['edwardroman@burns-ferguson.biz', 'V83mO&po%G', 'Charles', 'Oliver', '618 Arnold Place Suite 055, Lake Andrew, KY 34804', '1936-01-19'], ['gwilson@douglas.info', '7yHQtyKw&%', 'Andrew', 'Torres', '08996 Lucas Prairie Apt. 310, East Jon, ME 92780', '1926-10-12'], ['jeremy04@harris.com', '3FG5Jddx_9', 'Edward', 'Macias', '62230 Michael Plain, Hillshire, ND 67216', '1990-05-11'], ['millsdouglas@gmail.com', '%5M_zJ!xg*', 'George', 'Douglas', '8743 Burke Hill Apt. 480, South Valeriefurt, HI 69508', '1960-03-18'], ['sharontrevino@burgess.com', 'rL6ET6bO*4', 'David', 'Cohen', '50297 Kenneth Cliff, Cochranmouth, UT 23936', '1991-11-08'], ['webbjared@gmail.com', '$^c4tMGbb7', 'Alyssa', 'James', '13434 Jackson Islands Apt. 516, Martinezfurt, MT 58063', '2001-10-30'], ['shannon93@randolph-hodges.com', '5@65NH8wQ+', 'Meghan', 'Duncan', '500 Rachel Route, Hobbshaven, OK 35448', '1970-08-08'], ['christianjackson@phillips.com', 'O^jitR&m$5', 'Martin', 'Martin', '86242 Aaron Land, Lake Anna, LA 72389', '1979-06-16'], ['racosta@hotmail.com', ')iaGhwt(9g', 'Christina', 'Mckee', '2208 Christopher Spurs Apt. 237, Port Nathanhaven, GA 09713', '1936-11-30'], ['ymahoney@rodriguez.biz', '@4&BGh^iDD', 'Jennifer', 'Moreno', '091 Watkins Cove, Lake Carlaton, ME 26631', '1930-05-25'], ['meghancollins@gmail.com', 'fG45KQtj!$', 'Stacy', 'Munoz', '076 Mark Shores Suite 600, Mossborough, RI 61241', '1933-12-15'], ['crosschristopher@hotmail.com', 'x^2+&ZkE)7', 'Jennifer', 'Ball', '018 Michelle Club Suite 643, South Meagan, NC 35830', '1951-03-11'], ['johnchandler@pena.com', '09a_xZnn!a', 'Ralph', 'Baker', '468 Joseph Pine, East Alison, CT 50300', '1958-06-14'], ['greenzachary@hotmail.com', '#l#6*(To^U', 'Sharon', 'Wong', '821 Flores Views, Sweeneychester, AR 02839', '1948-05-16'], ['shawntorres@michael.com', '^6J!wcFGs_', 'Micheal', 'Brooks', 'PSC 8873, Box 9574, APO AP 96634', '1936-08-09'], ['vthompson@yahoo.com', '(0K5gGkF%_', 'Amber', 'Mitchell', '409 Megan Spur Apt. 542, Lake Lukemouth, NC 51858', '2001-01-05'], ['vtran@hotmail.com', 'z)r1I_txGb', 'Amy', 'White', '04778 Snow Cove, Barberborough, TN 85418', '1937-04-17'], ['thomasjackson@gmail.com', '0WZV3hXz*0', 'Rebecca', 'Castro', '755 Sullivan Estate, West Amy, VT 66124', '1926-04-09'], ['figueroaashley@ortiz.biz', 'R626RKdyx)', 'Michael', 'Hall', '5625 Jesus Fort, South Alan, LA 95245', '1958-04-26'], ['jeanette17@hardin.com', 'g^3LJXBfLU', 'Eric', 'Patrick', '8357 Johnson Road, North Margaretchester, CT 67820', '1957-03-20'], ['carrie69@yahoo.com', 'swZI)ncQ%2', 'Robert', 'Hampton', '2983 William Shore, Nguyenburgh, RI 05794', '1982-10-10'], ['lopezerik@gmail.com', '%ZI97GFk$*', 'Edward', 'Anderson', '78465 Richardson Curve, Kristinaside, DC 29494', '1921-04-07'], ['paul86@yahoo.com', 'LA^3Lk_XXx', 'Lisa', 'Smith', '03731 Devon Manor, North Arthur, HI 63416', '1989-12-15'], ['smurphy@stone.com', ')6Iba$IbKU', 'Renee', 'Pena', '0395 Watts Roads, New Alexandraville, CO 17681', '1941-09-21'], ['bethbryan@gmail.com', 'Jl9#D+xI%0', 'Keith', 'Ruiz', '75830 Melinda Square, Port Kevin, IN 23697', '1982-08-17'], ['brandon44@hotmail.com', 'uZ)DW7NhfR', 'Sandra', 'Davis', '97862 Ferguson Island, Lake Brenda, WI 44019', '1983-04-24'], ['jessica67@hotmail.com', 'ks7HBM8e_!', 'Amanda', 'Rivera', '464 Casey Rapid, Christopherburgh, ID 52735', '1926-06-18'], ['xgreen@gmail.com', '!K7H(W(swu', 'Marvin', 'Moore', '10906 Holland Mills, Codyburgh, HI 59299', '1931-01-07'], ['nmartinez@gmail.com', 'Kgbrc2Nt+7', 'Ashley', 'Wilson', '97608 Hawkins Throughway, Port Erica, VT 63065', '1990-01-10'], ['escott@yahoo.com', '^x4HHum3ip', 'Kimberly', 'Thompson', '675 White Manor, Whiteberg, CT 24451', '1978-10-13'], ['riverabarbara@spencer.biz', '7L3rj1Rph&', 'Emily', 'Benton', '7086 King Hill, Sotoberg, NY 76787', '1989-10-16'], ['angela26@jackson.com', 'JGnR^7LzM^', 'Jasmine', 'Adams', '17957 Brenda Hill Apt. 333, Torresmouth, WI 85892', '1966-06-19'], ['lgarcia@hall.com', '!^IUp1eLl9', 'Shane', 'Burke', '519 Scott Shores, Port Kennethborough, UT 70364', '1946-12-23'], ['stephenfreeman@ali-thompson.com', '1@DGT_Ho++', 'Ian', 'Smith', '4289 Natalie Crescent, Paulborough, AZ 93330', '1969-03-26'], ['anthony30@scott.info', 'n!9PTIuwqq', 'Ashlee', 'Mccoy', '8629 Loretta Vista, Robertmouth, KY 10838', '1944-07-15'], ['wpena@johnson.com', '_akfIw3l1p', 'Carol', 'Riley', '354 Williams Lodge Apt. 466, Curtischester, TN 49225', '1986-12-18'], ['robertcurtis@navarro-schultz.com', '8uRgE8cO^3', 'John', 'Cross', '61667 Gary Garden Suite 718, North Matthew, CA 19113', '2002-08-24'], ['osnyder@banks.biz', '7#j1Sb*_1(', 'Samuel', 'Hanson', '495 Ball Estate, Garciafort, IA 70846', '1946-04-25'], ['francisco47@hernandez.info', '&8QHA8lDTw', 'James', 'Gonzalez', '94980 Dorothy Fields Apt. 874, East Amandabury, AZ 08154', '1949-04-08'], ['michael22@hotmail.com', 'u2EUuEHl)7', 'John', 'Estrada', '558 Danielle Field Suite 032, Port Richard, TN 53762', '1964-10-30'], ['fzuniga@rodriguez-moore.com', 'f4!d5ObX&@', 'Rhonda', 'Bell', '124 Natalie Lodge Apt. 163, Millermouth, WA 33295', '1961-08-02'], ['denise59@dean.com', '#b5Tv1t)LJ', 'Michael', 'Hernandez', '211 Cook Lodge Apt. 429, Petersenport, WA 06200', '1931-11-08'], ['olivia68@hotmail.com', 'V*3Hqycg*+', 'Mariah', 'Burton', '266 Elizabeth Extensions Apt. 324, Rosefurt, AZ 22615', '1979-02-25'], ['littlevincent@acosta-clark.biz', '_0YzQ&2kxF', 'Caleb', 'Marquez', '173 Hogan Lock Suite 294, Elizabethside, IL 40381', '1929-12-24'], ['sarah04@yahoo.com', '&Ti5pTgh*j', 'Jonathan', 'Pearson', '1865 Wong Overpass, East Mary, NY 52349', '1973-11-05'], ['shawncampbell@gross-martinez.com', 'IpM7IJh6*h', 'Christine', 'Sutton', '23080 Henderson Extensions, East Deborahside, LA 46321', '1936-12-19'], ['michaeltanner@carroll.com', 'h3&nQw^E#E', 'Jason', 'Burke', '3397 Nicholas Bypass, Williamstown, LA 24648', '1923-09-17'], ['glennperkins@gmail.com', '$x6W&JxgS&', 'Billy', 'Haley', '911 Joseph Lake, Lake Kristin, AZ 48109', '1933-03-04'], ['fcarter@lopez.org', '1WCdnru&!0', 'Richard', 'Morris', '4590 Robinson Point Apt. 732, East Laura, NE 61315', '1984-07-19'], ['taylor16@hotmail.com', ')4LjWwI0ja', 'Mary', 'Boyer', '634 Joshua Stream, Kevinport, PA 94229', '1971-11-22'], ['christopherlarson@yahoo.com', 'Shdl7TUqU_', 'Douglas', 'Manning', 'Unit 2149 Box 0532, DPO AA 05353', '1996-03-20'], ['eric57@gmail.com', '(@m!qOsAY4', 'Nicole', 'Wyatt', '61553 Tyler Mountains Suite 080, North Stephen, NM 79352', '1924-12-17'], ['carlsonpatricia@yahoo.com', '0ELv6Mar%4', 'Juan', 'Mendez', '23286 Barrera Crescent, South Jamesfort, OH 10541', '1993-10-31'], ['laurieromero@williams.com', 'T^9eqRtAeh', 'Andrew', 'Thomas', '72253 Sarah Curve, Kellyville, NE 44716', '1953-09-21'], ['hdean@gmail.com', '&A71EZnxi(', 'Daniel', 'Thompson', '421 James Land Suite 253, Theresaland, AL 76320', '1941-01-01'], ['fhall@yahoo.com', '$(H7sYfp7g', 'Randall', 'Soto', '7067 Buck Forks Apt. 350, South Thomas, DE 90540', '1990-03-12'], ['gonzalezanthony@miller.com', ')@X0QiU@24', 'Carolyn', 'Fox', '161 Andrea Rapid Suite 334, Wattsborough, VA 86844', '1935-08-07'], ['devon41@hotmail.com', 'OE7GDbyY)5', 'Robert', 'Reynolds', '04483 Robert Avenue, Lake Angela, GA 81453', '1978-01-15'], ['lawrencejeffrey@hotmail.com', '2^7iL+ke^y', 'Jessica', 'Trujillo', '426 Solis Lodge Suite 142, Figueroamouth, TX 60475', '1958-05-14'], ['brandon46@gmail.com', '*k5NKK2q*T', 'Sara', 'Lee', 'USNV Valdez, FPO AA 06878', '1939-09-02'], ['nicholsteresa@hammond-gray.com', '^NS$b3d&5(', 'Christina', 'Fields', '5768 Brown Neck, Yvonnemouth, AR 47989', '1963-04-14'], ['desiree70@harvey-watson.net', '+5jBeUps#U', 'Stephen', 'Henderson', '707 Ross Extension, Jessicaside, IL 28347', '1941-08-01'], ['mariawatson@hotmail.com', '4Goq0DLa+1', 'John', 'Thomas', '792 Fleming Vista, Lake Brianna, ID 13570', '1962-09-09'], ['nicole39@gmail.com', 'V@)^a6ClA)', 'Christopher', 'King', '837 Brennan Inlet, Hoffmanville, CA 19994', '1976-06-11'], ['bryce88@dennis.com', 'F$9LSPKh!6', 'Judy', 'Meadows', '084 Roger Shore Suite 913, South Travismouth, HI 37223', '1947-07-25'], ['aprilblevins@gmail.com', 'zQ)+#Xuz&7', 'Brandon', 'Weiss', '31079 Thomas Views Apt. 890, Joshuafort, AK 30448', '1997-04-09'], ['adam83@barnett.com', '8(VFTbm2_r', 'Angela', 'Miles', '15268 Joshua Haven, Johnsontown, MN 62982', '1992-09-11'], ['hsanchez@yahoo.com', 'HNXqYj9$@2', 'Sean', 'Woods', '1795 Brown Vista Apt. 422, South Jonathanview, AK 57630', '1956-02-14'], ['lcallahan@wilson.com', '_Hl5V8Tu4n', 'Bobby', 'Flynn', '0037 Crystal Junction, Port Patrickmouth, NE 51964', '1953-03-09'], ['dwhite@manning.com', 'y0Z4!wxL@9', 'Jessica', 'Irwin', '286 Steven Path, North Thomas, GA 59916', '1991-04-23'], ['pjohnson@hotmail.com', '*_1VGzocul', 'Amanda', 'Stewart', '734 Fletcher Causeway, West Eric, AZ 31639', '1986-01-09'], ['debbie50@franklin.com', 'MO%02eqbE@', 'Alan', 'Long', '734 Christopher Cape, Phillipsside, NC 84202', '1986-05-04'], ['richardsonjoshua@yahoo.com', '^*6Lcp^Ge9', 'Glenda', 'Gardner', '8913 Dawn Pines Apt. 611, Heatherstad, RI 78596', '1993-12-11'], ['terri69@gmail.com', '6wGJXwHe@y', 'Jeffrey', 'Weaver', '30323 Roberson Well, East Jenniferside, OH 46146', '1936-08-23'], ['ellisonanthony@baldwin-perez.biz', 'Z1S+vMvp&s', 'Jennifer', 'Marshall', '83457 Miller Fall Apt. 353, East Leeshire, NC 91885', '1982-11-29'], ['wooddaniel@alvarado.com', 'em9Y27lW^J', 'Robert', 'Moon', '62679 Alexander Ferry Apt. 535, West Cherylport, CO 09003', '1971-02-23'], ['samuelperez@austin.com', '(V2!7Rm&Lu', 'Amy', 'Garrett', '2021 Perry Cove, Matthewville, WA 66980', '1964-07-20'], ['stevecollins@yahoo.com', '!3h7N(owCW', 'Robert', 'Stein', 'Unit 9719 Box 9936, DPO AA 95106', '1962-11-13'], ['michaelwilcox@yahoo.com', '$*ewOBWh5#', 'Tara', 'Avila', '42624 Romero Passage Apt. 013, East Miguelbury, ND 41679', '1931-08-26'], ['marypitts@griffin.com', 'u%93Z4!(Of', 'Mr.', 'David', 'Unit 1182 Box 5100, DPO AE 98886', '1995-12-17'], ['vnguyen@hotmail.com', ')MHvm1Q&@2', 'April', 'Duncan', 'Unit 5545 Box 9013, DPO AA 18619', '1956-02-01'], ['jay22@gmail.com', '%0F#ta!%KT', 'Michael', 'Herrera', '843 Angela Centers, Luisport, IN 62016', '1967-07-08'], ['mitchellcaitlyn@garcia-lewis.com', 'b_DChPUm@3', 'Curtis', 'Short', '40723 Solomon Plaza, Diaztown, MD 67153', '1958-08-08'], ['erinyoder@pacheco-greene.com', '&i0AkbW3c+', 'Perry', 'Navarro', '0123 Lisa Radial Apt. 525, South Mark, UT 49462', '1936-03-30'], ['diazthomas@floyd-pham.com', '2FngNyj3@9', 'Carolyn', 'Mcmahon', '93308 Dennis Plaza Suite 182, Turnerton, LA 36115', '1990-07-14'], ['jennifer60@ali-allen.info', 'IP48FbBd8+', 'Jennifer', 'Garcia', '52272 Robinson Fall Apt. 779, Dylanburgh, VT 46699', '1970-05-19'], ['robertsonshannon@martinez.org', 'Yj$IPCsD(2', 'Ann', 'Mathis', '4220 Amy Vista Apt. 742, North Bryan, ME 80399', '1966-03-25'], ['csullivan@rose.org', '3ZRxKICy@&', 'Steven', 'Smith', '2645 Bullock Stream Apt. 535, Youngview, NE 38223', '1952-12-15'], ['ashleybaker@boyd.com', '*dBR3VkqM0', 'Taylor', 'Wallace', '9723 Taylor Extensions, South Angelamouth, NH 34914', '1932-11-27'], ['charleshector@yahoo.com', '!92Y%kfr)@', 'Connie', 'Adams', '023 Timothy Freeway Suite 509, South Craig, CO 58519', '1999-06-11'], ['shane64@horn-ford.com', 'VHN6X#mNA&', 'Kathryn', 'Clark', '436 Price Keys Apt. 264, South Tamarafort, NJ 06095', '1967-03-07'], ['brooksmichael@stone.com', 'jP)Lm4YxbJ', 'Dakota', 'Floyd', '43906 Matthew Plaza Suite 344, Lake Malloryfort, AR 84235', '1957-02-03'], ['nrichards@yahoo.com', '#Zg7UkjW!H', 'David', 'Myers', '908 Zachary Alley, Port Nicole, DE 75585', '1967-02-08'], ['joseph51@hernandez.org', 'G!c(g6NgMo', 'William', 'Haynes', '5174 Bradford Ferry, West Kimberlystad, MA 25102', '1940-02-07'], ['jwall@hotmail.com', '(92CKdvmrl', 'Christy', 'Miller', '841 Arthur Ridge, North Melindamouth, WA 74152', '1964-07-07'], ['jeannehill@ware-jordan.org', '@94FVIsaX_', 'Samuel', 'Chen', '772 Jennifer Trail, Perezland, NJ 86380', '1986-06-21'], ['fisherpatricia@mann.com', '9^4aQ10e2F', 'James', 'White', '84273 Ramirez Green Suite 029, West Crystalberg, NC 10579', '1988-06-26'], ['robertchavez@smith.org', 'Hy0Ff2dA_9', 'Joel', 'Waters', '0659 Benitez Grove Suite 437, East Shaneview, OR 90357', '1986-09-01'], ['gking@schneider.com', '$b5VBWxsEb', 'Keith', 'Yoder', '812 Yoder Port, Brewerstad, WV 13307', '1956-08-10'], ['walshmeredith@ruiz.com', 'H53aH_l$+@', 'Deborah', 'Vega', '76136 Hamilton Path, Lake Carlosberg, CA 76359', '1993-10-03'], ['antonio67@yahoo.com', '+43Ig5d!ld', 'Pamela', 'Boyle', '902 Amanda Underpass Apt. 499, South Annette, IL 96984', '1991-06-02'], ['waltontyrone@yahoo.com', 'JD6Yy#EtG)', 'Steve', 'Mccann', '549 Hernandez Common, East Ryan, ND 97382', '1989-02-05'], ['nellis@peterson-castro.com', 'N@M0F#_o(_', 'Amanda', 'Barnes', '856 Alexander Wall Suite 538, West Crystal, DC 18398', '1994-05-26'], ['grichardson@house.com', 'qK#N7Gjjlt', 'Juan', 'Walters', '2918 William Coves Apt. 318, East Paula, MI 53331', '1978-03-26'], ['joshuaterry@harris.com', '_e5BrMh^+s', 'Alexis', 'Knight', '7580 Kenneth Trail Apt. 058, Port John, MA 23571', '1929-07-29'], ['heather54@hotmail.com', 'azH7T#0wn*', 'Patrick', 'Tapia', '439 James Locks, South James, NH 33606', '1990-03-08'], ['bpowers@garcia-wood.com', '_CkNRr36(7', 'Jared', 'Bailey', '97635 Gilmore Crest Suite 230, Clarkburgh, RI 17363', '1968-03-14'], ['wwilliams@faulkner.com', 'l7RS1Yg)*#', 'Brittany', 'Bailey', 'Unit 1352 Box 1016, DPO AP 66500', '1927-02-13'], ['hughesdaniel@barnett-brown.com', 'r+HJ3&OnKQ', 'Rachel', 'Gutierrez', '666 Suzanne Forges, Davisview, AK 17768', '1944-03-23'], ['jilllove@yahoo.com', '5UPbpUMz_g', 'Cheryl', 'Hensley', '4266 Cassandra Manor, Jonathonport, WA 62438', '2003-01-13'], ['simmonsjudy@david.com', '*NKABuB9f6', 'Alexis', 'Rogers', '166 Justin Stravenue, Andreaview, NJ 39187', '1943-09-06'], ['xbarnes@yahoo.com', 'wtYC0T7T(8', 'Jennifer', 'Hill', '2288 Diane Square Apt. 414, Parsonsberg, UT 91239', '1937-05-29'], ['steven26@hernandez-cohen.com', 'KnJIfl3y^8', 'Andrew', 'Sandoval', '876 Austin Inlet Suite 825, North Gabrielafort, DE 07699', '1979-04-25'], ['ureed@yahoo.com', '471H#02d&f', 'Ashley', 'Maldonado', '74046 Robert Gardens, New Amandamouth, NJ 89491', '1959-03-01'], ['whitakerisaac@hotmail.com', 'z8*Bn4Ld&7', 'Nicole', 'Vincent', '49529 Page Tunnel Suite 707, Mckayborough, MS 58907', '1960-06-25'], ['olsenangela@armstrong.com', 'tlD7PP*Q_7', 'Kayla', 'Forbes', '25952 Haynes Land, Deborahburgh, UT 89108', '1945-10-25'], ['allentamara@yahoo.com', '!T45V6b32#', 'David', 'Michael', '52635 Morris Overpass, Port Danielle, MD 53075', '1944-02-05'], ['olynch@hotmail.com', 't7$VHwLu&7', 'Sarah', 'Newman', '82891 Grace Landing, Port Nicholasfurt, DC 64017', '1981-11-20'], ['johnsonvictoria@yahoo.com', 'd#T%a5Xhg(', 'Courtney', 'Watson', '49449 Christina Groves Suite 206, Stevenfort, NM 77311', '1988-03-29'], ['stevenalvarado@greene.com', '!9oWlKgyvq', 'Nathan', 'Wright', '6405 Benjamin Falls Suite 100, New Austinmouth, ID 37705', '1946-03-10'], ['pmiller@yahoo.com', '0g0CaLJb1%', 'Kenneth', 'Mcdaniel', '6471 Brian Path, Williamstad, MO 52852', '1933-06-27'], ['vmeyer@miller.com', 'gtJ3i5Pj+c', 'Michael', 'Ryan', '75497 Tara Hollow Suite 674, Fernandezland, DE 62076', '1973-01-11'], ['phodges@clements.com', '$AMh%3df49', 'Andrew', 'Bolton', '57907 Bryant Extensions, West Patricia, NV 35184', '1928-03-09'], ['cunninghamtina@mason.net', 'R)C9DkHz_@', 'Victoria', 'Wall', '84575 Adams Locks, West Krista, NC 38669', '1921-08-20'], ['rebeccagriffin@cochran.net', '$8cfN^vH20', 'Christopher', 'Hicks', '3096 Reese Ville Suite 810, Port Stevenstad, WA 30488', '1961-04-03'], ['bjohnson@brown.info', '@Ee1aM4dDK', 'Troy', 'Mcmahon', '28368 Miller Estates, Lawsonchester, VT 39811', '1992-03-28'], ['gday@olsen.org', '0a8VO7k(&&', 'Samantha', 'Swanson', 'PSC 9800, Box 4667, APO AP 70831', '1978-08-21'], ['oespinoza@jackson.biz', '(5Wu#xjmW*', 'Brandy', 'Vargas', '30541 Stone Creek Suite 032, Cookport, MA 38382', '1980-02-22'], ['ashleykelly@sherman-miller.com', 'C^)0ZVwZ97', 'Chelsea', 'Weber', '9532 Robert Island Suite 487, Michaelland, LA 88080', '1977-10-22'], ['patricia89@moore.biz', 'Q!Il4GoI^y', 'Adrian', 'Todd', '2755 Thomas Stream, North Matthewland, NM 37480', '1955-11-23'], ['wmullen@scott.biz', '%r33Ptvwb*', 'Jonathan', 'Mejia', '749 Marks Forge Apt. 888, Blankenshipland, AR 95054', '1999-03-19'], ['micheledaniels@yahoo.com', '5+7U5NGkRG', 'Clinton', 'Li', '465 Patricia Wall Suite 574, Port Scottborough, MI 47888', '1988-01-24'], ['diane10@hotmail.com', 'E(2RX2Va(h', 'Melissa', 'White', '2858 Jack Crest Apt. 690, East Christineberg, NC 90445', '1971-02-26'], ['robert15@gmail.com', '!IIUFqo7)7', 'Paula', 'Alvarez', '0384 Carol Mount, Lowechester, NE 42901', '1984-02-05'], ['lorimills@taylor-wilcox.biz', 'fY0Do2&S%_', 'Lauren', 'Coffey', '5797 Nicole Knoll, South Richardland, SC 42907', '1937-01-24'], ['vobrien@sampson.org', '64R4Xvsg(O', 'Dakota', 'Johnson', '1909 Frazier Prairie, West Loribury, NC 07403', '2001-04-01'], ['rickyvazquez@yahoo.com', '0_4Dr4Ov1C', 'Nicholas', 'Vaughn', '26489 Green Estate Apt. 352, Dunnport, IN 21965', '1934-11-14'], ['rodgerspatrick@yahoo.com', 'h+Ll$0d1BA', 'Curtis', 'Simpson', '98738 Adams Forges, Port Michaelmouth, OK 93873', '1920-12-12'], ['wbarnett@wilkinson.com', 'u8U1ft4k(!', 'Carlos', 'Phillips', '575 Ruiz Passage, Port James, MO 54418', '1937-03-17'], ['sherrynixon@sandoval.com', 'O12YIM7k+n', 'Anthony', 'Gamble', '4042 Stephanie Parkway Suite 714, East Angela, ME 41430', '1986-04-23'], ['craig55@hotmail.com', '@a4KApb312', 'Lauren', 'Lopez', '89427 Bell Gateway, Lake Benjamin, MA 67599', '1983-06-03'], ['daviskevin@hotmail.com', 'r60Mc3)qk(', 'Lindsay', 'Young', '28666 Jeffrey Haven Suite 898, Lake Kathyburgh, MA 41179', '1957-07-26'], ['whall@fowler-wright.org', '&(x9yEkm6o', 'Jo', 'Smith', '630 Laura Port, Carterhaven, MI 39539', '1983-11-08'], ['patricia06@yahoo.com', 'VFDaj4CK)9', 'Sarah', 'Case', '3964 Jackson Port Suite 345, Jameston, OK 51909', '1964-12-02'], ['holmesbriana@gmail.com', 'w55R7dTg(z', 'Tyler', 'Herman', '918 Hodges Highway Apt. 382, Port Cameron, SD 87147', '1931-12-05'], ['martinwyatt@gmail.com', 'x*KroYmQ@8', 'Christopher', 'Snyder', '1303 Lopez Hollow Suite 636, North Patrick, NV 39155', '1962-01-13'], ['aaron69@yahoo.com', 'k22ETFSi@#', 'Larry', 'Gardner', '17830 Veronica Keys Apt. 037, Juliefort, NJ 24121', '1993-05-27'], ['sara68@yahoo.com', 'LjH8Jkd$#s', 'Amy', 'Roberts', '03708 Hoffman Loop Apt. 223, North Rebeccafurt, NJ 22527', '1945-10-03'], ['denisejohnson@hotmail.com', '#@4T@^Di*S', 'Catherine', 'Lewis', '995 Kenneth Walks Suite 795, South Aprilfurt, AR 20695', '1987-09-04'], ['amandalyons@hotmail.com', 'o1sMM_ni%G', 'Angel', 'Walker', '265 Tiffany Court, Garymouth, OR 80444', '1966-02-01'], ['katie60@yahoo.com', '($4srbSoxn', 'Jeffrey', 'Brown', '62324 Sarah Port, West Randy, MO 73119', '1921-05-30'], ['morganmartinez@yahoo.com', 'LP(4F8Ttn1', 'Daniel', 'Martinez', '6346 Stephanie Branch Apt. 407, North Maryside, UT 87784', '1984-08-01'], ['jennifer61@yahoo.com', 'l6$6xRCT%%', 'Robert', 'Warren', '463 Owens Square, New Melaniehaven, WY 65972', '1982-11-30'], ['roger14@shaw-moreno.com', 'Bg@0hzTnzo', 'Donald', 'Pierce', 'Unit 2728 Box 9375, DPO AE 24758', '1989-05-06'], ['cbeck@burgess-spencer.com', 'f80gZ5)_@d', 'Gregory', 'Jensen', '689 Mitchell Hills Suite 111, East Matthewstad, SC 44697', '1976-05-03'], ['loriwatson@miller.com', '!3Q(p2mVkk', 'Michael', 'Hicks', '2990 Pedro Meadow Apt. 553, Lake Jessicaton, MS 54313', '1933-03-24'], ['jessicacook@goodman.net', 't1DuJMgD@6', 'Sean', 'Nash', '8017 Pamela Orchard Suite 154, Port Danielberg, MN 31634', '1958-10-14'], ['davisteresa@davis.net', 'Q8&)Vi@m*@', 'Steven', 'Chavez', 'Unit 8860 Box 9121, DPO AA 29323', '2000-09-09'], ['mitchell30@lewis.com', '!lFF#t9Mz8', 'Mallory', 'Smith', '1230 Williams Burg, Davisstad, VT 53946', '1983-08-16'], ['aguilardaniel@hotmail.com', '%1B3tcPEvx', 'Carly', 'Hunter', '0735 Angela Forge, West William, WA 15525', '1998-01-26'], ['hmiller@shea.com', '#9jeOe+__q', 'Keith', 'Alvarez', '3302 Suarez Row, Rebeccaborough, NC 78171', '1954-06-04'], ['cynthia61@villarreal-woodward.com', '+ZY&_7Mrva', 'Casey', 'Rodriguez', '4407 Davis Isle, West Kyle, MD 33760', '1941-12-23'], ['zjackson@fowler-terrell.biz', '@aLG6o!a(1', 'Stephanie', 'Hudson', '84027 Joshua Heights, New Paula, NE 51255', '1960-04-07'], ['gellis@yahoo.com', 'k$0KnmC+KK', 'Stacy', 'Romero', '0862 Hernandez Village, South Christina, CT 29148', '1920-04-14'], ['sherrylynch@gmail.com', '$8UdsIu#^n', 'Chad', 'Martinez', '426 Lauren Ford, Lake Charlene, NH 83547', '1962-04-11'], ['hinesnicole@hodge.org', '+d4CkDnI)A', 'Phillip', 'Mcdonald', '856 Murphy Isle, Mckinneyfort, IN 79355', '1990-03-25'], ['gibsonhannah@schultz.biz', '(BU#(3xu6H', 'Amanda', 'Diaz', '368 Alicia Lock Apt. 721, Johnsonport, AK 44945', '1981-02-12'], ['alexdavis@yahoo.com', 'OWH7KBb!d^', 'Miguel', 'Jennings', '5102 David Station, Stevensport, AR 05696', '1941-01-04'], ['markmitchell@hotmail.com', 'VAOmR3Al+6', 'Vanessa', 'Stewart', '37244 Poole Avenue, Hammondborough, MA 80419', '1954-06-08'], ['jasonflores@jefferson.com', '%!+UZOGy^3', 'Christina', 'Winters', '0984 Andrew Fall Apt. 216, Lisahaven, WA 20600', '1964-04-05'], ['amy42@hotmail.com', 'xNCu#tz##5', 'Michael', 'Herrera', '241 Tracy Inlet Apt. 602, Goodtown, CT 11364', '1989-09-02'], ['aaronphillips@yahoo.com', 'K#9l4JZc+h', 'Adam', 'Rodriguez', '31360 Roger Throughway, Kristinachester, KY 09832', '1942-03-27'], ['shawn00@smith.biz', 'sJDq4+zG^6', 'Stephen', 'Howell', '5805 Sanford Mission, Donaldchester, UT 95625', '1980-01-15'], ['dustin70@short.info', '4uQ8PqkC(m', 'Erica', 'Johnson', '69499 Gregory Burg Apt. 823, Bryanstad, CO 86732', '1982-08-02'], ['nleonard@dyer-bentley.org', ')UhN5$lwI7', 'Terry', 'Lucas', '843 French Ways, Charlesberg, NH 82211', '1989-04-15'], ['randy58@yahoo.com', '3$7LV9p*IP', 'Sabrina', 'Conrad', '38720 Michael Dale, Port John, LA 77364', '1949-05-09'], ['stephanie40@gmail.com', '9n+5JZzRkG', 'Mr.', 'Brandon', '5639 Henry Hollow, North Dwayneburgh, AK 10664', '1922-10-11'], ['stephanie68@yahoo.com', '#YODqMaf8@', 'Mr.', 'Ryan', '17907 Robertson Wells Suite 484, Navarromouth, ND 49108', '1946-09-11'], ['reidkyle@martin-brooks.com', 'b36yM6IwW%', 'Christian', 'Martinez', '51656 William Plains Apt. 207, Elliottchester, IN 33860', '1993-10-09'], ['alison01@martin-waters.com', '@v6!Cn2uU^', 'Matthew', 'Ramirez', '1377 Gabriella Dale, New Melissatown, MD 61151', '1931-02-28'], ['jessicaingram@hotmail.com', 'T39A^Cyu(P', 'Jodi', 'Pratt', '70760 Timothy Unions, Pearsonshire, NC 52319', '1935-10-15'], ['debbiegarcia@yahoo.com', 'z$P0dZln+C', 'Stephen', 'Hall', 'Unit 0302 Box 8370, DPO AE 27234', '1983-02-20'], ['uwalker@hotmail.com', '^+mfac_bB6', 'Jonathan', 'Sosa', '587 Kurt Lane, Port Candice, CO 44621', '1936-07-03'], ['wsherman@yahoo.com', 'GJ7j7Fc3I!', 'Christina', 'Cruz', '6840 Douglas Hill, East James, IN 02747', '1928-12-08'], ['asingh@hotmail.com', 'E0lOR9Ma^G', 'Patricia', 'Duncan', '994 Cory Trail Suite 781, Lauraside, VT 83153', '1996-10-06'], ['gerald36@gmail.com', '_!Eb2SifLk', 'Parker', 'Abbott', '217 Rebecca Shores Suite 183, Granttown, NV 81858', '1956-06-25'], ['cynthiahenderson@martinez-rangel.com', '(O7M3EweHx', 'Malik', 'Stokes', '625 Hanson Flat, South Jennifer, NJ 08185', '1966-01-21'], ['xlee@yahoo.com', 'd8+2Fu!l%e', 'Ashley', 'Stone', '44387 Brittany Via Apt. 161, East Joseph, RI 58593', '1951-10-06'], ['zbarrera@espinoza.com', '(TKxqExax3', 'Jonathan', 'Johnson', '896 Lisa Road, Port Gregory, NY 08152', '1983-02-10'], ['samantha53@hotmail.com', 'x8*G6WjqxA', 'George', 'Montoya', 'USCGC Pearson, FPO AE 14354', '1968-08-08'], ['trevor46@hotmail.com', 'Y5ohqYWl#L', 'Nicole', 'Hunter', '8827 Jennifer Neck Suite 955, Grimesville, KY 47981', '1935-09-23'], ['woodsholly@maynard-krueger.com', '^1%k6NBrKB', 'Jaime', 'Gregory', '1596 Young Stream Suite 386, Diazburgh, SC 14954', '1993-12-28'], ['roy02@davis.org', ')8nwM75$y^', 'Susan', 'Mason', '640 Ponce Plains Apt. 216, Millsfort, WA 95996', '1951-08-01'], ['pyu@hotmail.com', 'EINh8fwu#4', 'Amy', 'Stewart', '4290 Cody Harbor, Adambury, AZ 83351', '1996-04-04'], ['johnpayne@hotmail.com', '@aLOl0M4T1', 'Juan', 'Nunez', '721 Michael Route Apt. 356, West Blakemouth, CT 01982', '1955-09-19'], ['ellisonwhitney@gmail.com', 'L0XScpWo&M', 'Spencer', 'Holloway', '8329 Thompson Gateway Suite 281, Wilsonberg, CA 59545', '1921-05-13'], ['johnathan31@hodges-hall.com', 'P2310E^h&$', 'Bobby', 'Lutz', '96057 Emma Cove Apt. 924, Kristinaton, LA 74670', '1926-11-26'], ['gonzalesmadison@hotmail.com', '&3EfZnOvZW', 'Charles', 'Lara', '0626 Megan Glen, West Shannonton, MN 07347', '1953-08-15'], ['alanwhite@gmail.com', '%0BoNi@Dtb', 'Billy', 'Jackson', '8536 Griffin Hollow, Lake Jeffreyview, CT 43367', '1960-08-31'], ['imartinez@hotmail.com', 'G&)8r*$kVI', 'Anne', 'Hopkins', '5179 Lee Neck Apt. 881, Joshuaport, OK 92639', '1982-03-18'], ['destiny87@williams.com', 'I%I1_1Briv', 'Daniel', 'Rios', '356 Connie Field, Rebeccabury, WV 41018', '1984-03-30'], ['walkerjesse@prince-white.biz', 'R3@#HmXc((', 'Darrell', 'Palmer', '59362 Mackenzie Crest Suite 231, East Amandamouth, MN 54776', '1930-08-29'], ['laurie77@hotmail.com', '@8XF59yh+s', 'Anthony', 'Terry', '5844 Nathan Terrace, Snyderburgh, NV 66153', '1996-06-18'], ['maria41@hotmail.com', 'dAQZK#(w!3', 'Bryan', 'Brennan', '017 Hartman Falls Apt. 019, Stewartmouth, GA 98475', '2001-12-08'], ['drichards@black-wilson.com', '3t9TJlbV#k', 'Dr.', 'Darlene', '5361 Solis Lock Suite 970, South Kristinestad, OK 69916', '1934-03-21'], ['samantha37@jimenez-farrell.org', '&00OmW_gSJ', 'Felicia', 'Russell', '81840 Hawkins Turnpike Suite 334, Colemanland, IL 99234', '1928-03-18'], ['jessica59@harrison-alvarez.com', 'p@0qPdhoEW', 'Willie', 'Scott', '576 Gonzalez Mission, Whitechester, WA 98580', '1989-02-21'], ['stephenobrien@robinson.com', '&ssYvZmp87', 'Jon', 'Adams', '8769 Barry Bridge Suite 547, Port Taylortown, MN 72041', '1926-08-07'], ['brownkatherine@schmitt.com', 'O*As6R1fGg', 'Daniel', 'Nelson', '904 Pham Wells Suite 583, Sarahfort, OR 65568', '1921-07-02'], ['qcordova@watson-davis.org', '*(B08K%sg7', 'Mark', 'Adkins', '109 Hoover Wells, Jessicaton, IN 21811', '1931-11-10'], ['kaneashley@yahoo.com', 'i&6ZkveR&s', 'Victoria', 'Henry', '3481 Graham Light, Angelachester, NH 42066', '1931-05-10'], ['arellanopatty@norris.com', 'Qx3v1JtVj(', 'Joseph', 'Sanders', '593 Jacqueline Islands Suite 025, Port Rebeccahaven, CA 80962', '1924-02-14'], ['franklinapril@hotmail.com', '%6FPbHy0^n', 'Daniel', 'Walker', '14010 Cunningham Oval Apt. 341, Michaelfort, IL 16491', '1949-12-07'], ['bevans@yahoo.com', '+64KrbG_ci', 'Pamela', 'Hughes', '9868 Matthew Court, New Linda, ID 51436', '1978-03-05'], ['tina48@davis-anderson.biz', '9dTv$Vrv&F', 'Susan', 'Alvarez', '9201 Brock Freeway, Blackport, CO 39957', '2002-07-03'], ['joshuaellis@martin.com', '&KsIeLlq4f', 'Juan', 'Roberts', '7684 Macdonald Hollow Apt. 333, Lake Kennethfurt, WA 64583', '1942-12-23'], ['diazmatthew@kent.com', '%&Pt&iAa4n', 'Jason', 'Garcia', '1741 West Creek, Phillipsshire, AR 67351', '1954-08-06'], ['watsondebra@yahoo.com', '(l5BYN^($%', 'Emily', 'Hill', '52254 Hale Mountains, South Rebeccaburgh, WA 79588', '1999-10-27'], ['todderickson@hotmail.com', '!8n%43Di(*', 'James', 'Peterson', '1445 Arthur Course Apt. 638, Brianville, LA 63673', '1988-03-24'], ['carolynharrison@hotmail.com', ')_p42(Kk()', 'Timothy', 'Webster', '788 Simmons Place, Jesusmouth, MN 04031', '1925-12-09'], ['zsnyder@gmail.com', 'Q1(_31FvHz', 'Kathy', 'West', '3036 Cobb Brooks, New Markborough, CA 61804', '1942-06-07'], ['justin86@nelson.com', 'E*fC2Z7f5P', 'Lisa', 'Mills', 'PSC 0623, Box 6093, APO AA 86502', '1968-10-10'], ['romeroheather@yahoo.com', '(6dK4p#f9&', 'Brittney', 'Ruiz', '50718 Norman Villages Apt. 878, Jamesside, KS 57339', '1993-02-18'], ['xmartinez@hendricks.net', '&$QJ0cB5Kc', 'Mrs.', 'Rachel', '93027 Joshua Canyon, Alexisville, AK 79726', '1982-07-10'], ['millerrick@jefferson-henry.com', 'T!r2Vvsg##', 'Diane', 'Mitchell', '9751 Hernandez Oval, Paulfurt, MS 37056', '1946-12-20'], ['elizabethchandler@gmail.com', '+tYy6iZqKq', 'Candice', 'Jackson', '66384 Porter Isle, New Roy, DC 56685', '1966-12-16'], ['rodgerstamara@hotmail.com', '$_LdBHaG0U', 'James', 'York', '38975 Justin Orchard, Port Brian, NH 26474', '1943-02-28'], ['nancyschmidt@hill.com', 'y#98QSsYse', 'Ruben', 'Mcdaniel', '628 Richardson Parks Suite 845, Jenniferbury, DE 97082', '1978-01-02'], ['ashley40@king.com', '^9kzrNGh(0', 'Laura', 'Savage', '77729 Stephen Mission Apt. 579, Jonesburgh, SD 84381', '1940-11-13'], ['juanweaver@douglas-bell.com', '^JcYQkb4s5', 'Eduardo', 'Smith', '4418 Matthew Passage, Arthurbury, ID 96605', '1975-02-23'], ['zmontgomery@hotmail.com', '$5fT)&RoYx', 'Hector', 'Cortez', '734 Wagner Estate, East Kirk, TX 14147', '1924-03-16'], ['megan10@martinez-johnson.com', '66#FnzPD$l', 'Daniel', 'Case', '55110 Whitney Hills Apt. 294, Hansenville, SD 47697', '1951-12-30'], ['andrewslawrence@montgomery.info', '$&a6N%iqxM', 'Joy', 'Burch', '550 Stephanie Turnpike Suite 361, Lake Nathan, NH 63975', '1961-02-24'], ['kylenelson@yahoo.com', '!yU!ghXiI2', 'Lisa', 'Thompson', '65654 Jessica Hills Suite 402, Gonzalesside, WV 06521', '1996-06-01'], ['pachecoricardo@hotmail.com', 'bb4p68Ha_8', 'Amy', 'Jones', 'PSC 7703, Box 7717, APO AA 21903', '1948-10-02'], ['sandra08@williams.com', 'f_4YVJ9rYj', 'Christian', 'Mccullough', '8874 Samantha Springs Suite 171, Davidchester, UT 82709', '1973-06-11'], ['jacqueline49@smith-reid.org', 'VlSr7QzGJ!', 'Kyle', 'Suarez', '420 Joseph Crescent Suite 093, Lisaville, MD 21352', '1960-12-25'], ['courtney37@gmail.com', '^4jZpMEv#6', 'Nicole', 'Kelly', '9879 Daniels Burg, North Phillip, SC 46684', '1932-12-09'], ['lindsey26@hotmail.com', 'hY76$3Vl*j', 'Tom', 'James', '8545 Taylor Drives, Warrenburgh, AR 16748', '1985-09-21'], ['jillterrell@ferguson.com', '+U3#a(Vwl3', 'Gavin', 'Miller', '27292 Carroll Course, South Amanda, MI 87500', '1929-03-17'], ['williamsrichard@hotmail.com', '0bN0zsC5&x', 'Brandi', 'Sanders', '678 Reilly Curve Suite 942, Haasfort, NV 26202', '1957-05-22'], ['savannah15@rice-fuller.net', '+m8GruToce', 'Kelly', 'Bryan', '4604 Woodward Rapids Suite 394, Lake Michael, VA 61284', '1939-11-04'], ['eric18@gmail.com', 'N7E@YaGO++', 'Timothy', 'Medina', '07355 Gina Lane, Lake Teresa, MO 86235', '1957-09-22'], ['ryan99@spencer.com', '2(q*EkmU#7', 'Aaron', 'Walker', '72052 Mark Shore, Lake Brian, CA 52337', '1991-08-11'], ['wmcconnell@martin.biz', '9PKzbMub%$', 'Michael', 'Johnson', '449 Thomas Field, Dianeport, OR 17317', '1946-07-29'], ['ymartin@boyd-mendez.net', 'D%V(Yego_2', 'Julie', 'Hernandez', '97755 William Trail, Riversburgh, MI 46648', '1968-02-05'], ['rodney43@hotmail.com', 'q_15bpLZkn', 'John', 'Johnson', '2168 Kelly Ways, South Elizabethtown, NC 84276', '1954-05-28'], ['carla43@yahoo.com', '(O69nMe7eK', 'Felicia', 'Washington', '97867 Benjamin Mission, Michelleberg, SD 91098', '1986-10-14'], ['loricortez@david.biz', '#4pSygUvG9', 'Eric', 'Anderson', '3673 Hill Well Apt. 951, North William, IA 41014', '1968-10-07'], ['reginaldsolomon@hotmail.com', 'v*1UV@bMv$', 'Scott', 'Mcneil', '63845 Daniel Isle, Millerfort, IN 06765', '1961-09-05'], ['christopher29@bennett.net', 'i@6u0(Io8C', 'Wesley', 'White', '716 Watkins Forks, Terrybury, LA 01198', '1966-11-30'], ['nramsey@roman.com', 'E^5B)yl@p+', 'Jessica', 'Flores', '03178 Nicole Gateway, Louistown, WV 49000', '2001-07-04'], ['dreed@hotmail.com', 'E5*pvId_!5', 'Joshua', 'Mcpherson', '877 Gary Heights, Bennettchester, IA 77167', '1984-09-26'], ['rachael48@hull.com', '7d6#@0EcK(', 'Shannon', 'Baird', '8629 Garrett Turnpike Suite 750, Port Jonathanfurt, IN 82576', '1986-06-25'], ['pmeyer@francis.info', '_94G5coqQ+', 'Stacy', 'Ortiz', '2381 Alexander Lane, South Shawnton, AK 73043', '1955-07-27'], ['carlos56@carr.biz', '(9H2T0fx#0', 'Richard', 'Cameron', '30761 West Estate, Ritterchester, AK 05665', '1965-09-16'], ['norman26@johnson.com', '##grSPsi%3', 'Ronald', 'Bentley', '75510 John Manors, Chamberstown, IA 60460', '1941-06-14'], ['lyang@hotmail.com', '$m5aI!UnX4', 'Michael', 'Buckley', 'Unit 2923 Box 1988, DPO AA 49206', '1957-11-14'], ['dana79@hotmail.com', 'd#7LkiWy+M', 'Pamela', 'Hickman', '86394 Aaron Locks Apt. 935, West Amber, VT 31061', '1978-08-27'], ['jamiemiller@johnson.com', 'pKJ9tRYp!%', 'Christopher', 'Mcdaniel', '8307 Chelsea Brook, Jamietown, MD 43858', '1987-01-10'], ['kennethhoward@lamb.com', '*qH55bji+7', 'Wendy', 'Colon', '314 Hill Center Apt. 958, Lake Michael, DE 26533', '1984-03-17'], ['gabrielle31@gmail.com', 'Q(4Y+8RsZ_', 'Lindsey', 'Cantu', '04414 John Radial Apt. 695, Andrewbury, MT 34513', '1973-03-24'], ['katherinewilliams@gmail.com', '(Au2IbkhJ6', 'Jennifer', 'Morris', '520 Eric Causeway, Angelshire, VA 03982', '1967-12-24'], ['gainesstephanie@hotmail.com', ')!3LqC!3^6', 'Miranda', 'Rodriguez', '979 Compton Track, Clarkfort, NV 83395', '1952-01-04'], ['joshua91@hotmail.com', '*SbDuFkfR4', 'Robert', 'Smith', '07514 Johnson Crossroad, Brewerberg, SD 08165', '1955-06-07'], ['tdiaz@powell.com', '$qtJ6l$XM2', 'Mrs.', 'Rachel', '777 Hill Curve, North Michaelhaven, IA 16804', '1998-05-10'], ['antoniomendoza@walters-martinez.com', '@eK8@$CyX%', 'Joseph', 'Hughes', '23863 Wiggins Spring, West Michael, ND 16034', '1959-04-06'], ['gholt@hicks-lopez.net', '(XQST*xqC3', 'James', 'Campbell', '715 Jason Crossroad Suite 999, Bradleyside, DE 07882', '1930-09-23'], ['brandimay@stewart-scott.com', 'W2##3EwctF', 'Julia', 'Martinez', '664 Grant Ridges, Bullockhaven, OH 21894', '1980-04-22'], ['martinjill@kline-avery.com', 'Gzi!7UpjeA', 'Jennifer', 'Owens', '24101 Charles Prairie, Allisonview, CO 89530', '1968-09-01'], ['johnzimmerman@beltran.com', 'e7ECaycy$Z', 'Thomas', 'Alvarado', '9606 Todd View Apt. 774, Danielletown, VA 92172', '1951-12-11'], ['adrianawoodard@gonzalez-anderson.org', '9%9#52Ol3o', 'Daniel', 'Smith', '8398 Henson Vista Suite 391, South Tonya, LA 12039', '1961-05-21'], ['dnelson@phillips.info', '79fTIdIw*9', 'Travis', 'Ramirez', '7878 Gibson Park Suite 461, Lawrenceland, MS 27606', '1986-09-24'], ['john51@castaneda.info', '*HT#)MoJ0s', 'Mrs.', 'Kelly', '6261 Carla Extensions, Cherylstad, AZ 12987', '1975-08-06'], ['yromero@smith-howard.biz', 'gS5fG5h1z$', 'William', 'Park', 'Unit 3911 Box 2722, DPO AE 82531', '1954-06-18'], ['hramirez@hotmail.com', '0p__E*6J*T', 'Joseph', 'Hill', 'Unit 0332 Box 7083, DPO AP 40833', '1920-10-14'], ['joshua59@gmail.com', 'V(Y6Vw_um#', 'Heather', 'Moon', '229 Snyder Crest Suite 525, New Annchester, WY 40037', '1977-04-27'], ['johnsonsandra@moran.com', '%@!zJrNbx3', 'Vanessa', 'Wilson', '2391 Green Brook Apt. 951, South Theodore, MI 83562', '1996-04-19'], ['johnhill@gmail.com', 'QX4Elume9!', 'Bryan', 'Dixon', '016 Preston Islands Apt. 627, Keithtown, AL 26929', '1945-09-26'], ['derekarcher@park.com', '^8gWmaAmK^', 'Eugene', 'Bishop', '9284 Kimberly Square, Thomasview, MO 57636', '1948-01-31'], ['barbara85@yahoo.com', 'BeU$NF5k*8', 'Steven', 'Brown', '024 Morales Vista Suite 657, Karenmouth, MS 61914', '1955-03-02'], ['madelineharper@adams-lopez.org', '2U^#0W*coP', 'Dylan', 'Mitchell', '124 Brett Islands Apt. 450, Lestermouth, ND 57276', '1946-11-03'], ['phillipssandra@yahoo.com', 'b@Q7JrAX6r', 'Lindsey', 'Braun', '978 Kelley Courts, Masonbury, NY 22163', '1934-01-01'], ['butlerstacey@gmail.com', '+9V54iv9$l', 'Andrew', 'Jackson', '7662 Christopher Plain, Williamsonchester, OH 37430', '1977-08-25'], ['fritzsandra@washington-conner.info', '%onor7VhJ#', 'Sharon', 'Simpson', '926 Lori Brook, Mackborough, CO 26068', '1963-09-22'], ['ulopez@hotmail.com', 'U8Iy6_qs#l', 'Logan', 'Watkins', '93472 David Harbors, Port Julieberg, MA 65797', '1997-04-05'], ['glenn33@salinas-merritt.org', 'W_*0EKKsvt', 'Marc', 'Elliott', '965 Brent Extension Apt. 359, Maryton, NJ 52513', '1984-12-06'], ['msanford@hawkins.com', '_X2UEakgZ2', 'Douglas', 'Diaz', '60293 Jeffrey Crossroad, Jordanfort, GA 63557', '1992-04-10'], ['burnettmallory@garcia.com', 't2bSEnjW#6', 'Daniel', 'Jackson', '24377 Benson Way, South Garyburgh, OK 03535', '1986-11-24'], ['kevinaguilar@yahoo.com', 'G054T!(e_k', 'Natalie', 'Phillips', '8071 King Circle, Patelhaven, SC 21133', '1988-11-27'], ['kellercasey@gmail.com', ')9JLGt&Zl2', 'James', 'Jones', '1375 Heather Shore Apt. 901, Mauriceborough, HI 36279', '1976-03-19'], ['baxterjuan@gmail.com', 'R0)Ol4PbkW', 'Angela', 'Roberts', '92362 Barnett Rest Apt. 705, Dawnborough, AK 95062', '1950-07-23'], ['jonathancook@gmail.com', ')8Hrl_4a6T', 'Margaret', 'Wyatt', '3415 Daniel Orchard Apt. 662, Dianashire, OR 80618', '1983-04-04'], ['lovecraig@yahoo.com', 'ha+47K)!9@', 'Mr.', 'Thomas', '46857 Jennifer Mill, Port Frank, CO 24313', '1987-01-18'], ['hjohnson@gmail.com', 'b9#NP2Mt!!', 'Olivia', 'Rush', '9047 Rivera Unions Suite 940, South Ryan, NJ 38504', '1996-05-24'], ['kathleentaylor@hotmail.com', '(lAAEakxy7', 'Kenneth', 'Austin', '1107 Holly Station, Port Geraldshire, ID 14635', '1923-11-15'], ['zsmith@yahoo.com', '!e0ZF!(lkG', 'Misty', 'Bowman', '938 Moran Turnpike, Port Anthony, UT 47240', '1928-10-04'], ['james26@simmons-horton.org', ')L(9PMnI)O', 'Margaret', 'Smith', '7205 Rogers Circles Suite 045, New Jennifer, NC 59227', '1934-07-27'], ['wthompson@graham.biz', '7b@1&SnaL(', 'Charles', 'Reilly', '755 Emily Walks, Richardsonmouth, WY 05512', '1958-05-03'], ['annajackson@gonzales-fischer.biz', '^oSe7T7%3k', 'John', 'Davis', '76323 Graham Shoals Apt. 822, Port Devin, DE 61151', '1996-09-19'], ['david90@gmail.com', '$9TWrT)qgE', 'Daniel', 'Turner', '37902 Sparks Orchard Suite 664, Kristenbury, ID 79322', '1965-12-09'], ['pearsoneric@landry-cole.com', 'MVae6MvU)^', 'Kyle', 'Miller', '751 Dakota Crest Apt. 625, Angelafort, ID 88855', '1963-03-15'], ['youngnicholas@gmail.com', '_wLUgRObq9', 'Tyler', 'Benson', '047 Tran Lane Suite 139, East Melissa, CT 09019', '1960-12-09'], ['robert97@diaz-stevens.com', '$1FOp&xxla', 'Marilyn', 'Baker', '116 Wise Station, South Jeremy, DC 71633', '1933-11-02'], ['lewisjustin@yahoo.com', 'n)0ArD#b+J', 'Randy', 'Sanchez', '4933 Smith Stream Apt. 241, New Benjaminfort, KY 55427', '1967-08-31'], ['patriciabailey@preston.com', 'tIq9MiY4&O', 'Samantha', 'Rojas', '0842 Soto Dam, North Travisville, CA 87263', '1992-09-03'], ['samuel07@yahoo.com', 'V+3SCmMPV3', 'Matthew', 'Rivas', '172 Atkinson Stream, Jamestown, AL 60792', '1946-02-04'], ['juliasanchez@bush-cobb.com', 'J*OF36Os+2', 'Kathleen', 'Scott', 'Unit 3921 Box 0927, DPO AE 70251', '1956-12-15'], ['browntaylor@richardson.biz', '2i+dz6GauZ', 'Thomas', 'Owens', '168 Marissa Knolls, East Nataliestad, AL 68077', '1976-08-04'], ['downsdonna@gmail.com', '+7zjYxz2)s', 'Sarah', 'Norris', '4151 Salinas Harbor Suite 693, East Heather, NJ 15787', '1964-03-15'], ['davidnelson@yahoo.com', '&^oJnh7XY6', 'Melinda', 'Best', '6911 Walker Locks Suite 018, Erikfort, MD 88261', '1995-02-22'], ['cfry@yahoo.com', 'B5QWvQe1%M', 'Scott', 'Ramirez', '60489 Emily Route Suite 804, Jonesmouth, KY 32569', '1933-01-18'], ['ymiller@nguyen-rodriguez.net', 'Ns1SwubpI(', 'Faith', 'Carr', '855 Madden Terrace, North Stephen, MI 59714', '1921-01-11'], ['william77@yahoo.com', 'X)F7QEncDy', 'William', 'Turner', '0891 Dunlap Ports Apt. 751, New Pamelaburgh, ND 23931', '1954-01-26'], ['sydney98@white.com', 'x8TS+LK4&Y', 'Renee', 'Davis', '686 Robert Curve, Sharonside, PA 95416', '1935-02-05'], ['yferrell@hotmail.com', '!l1FCr#xzz', 'Brooke', 'White', '6503 Marks Viaduct Suite 022, Port Robertburgh, WA 56581', '1983-11-19'], ['rossjaclyn@obrien.com', '(mv#n(Bk(0', 'Andrew', 'Hayes', '780 James Orchard Suite 523, Chanmouth, TN 50990', '1926-02-26'], ['huntermegan@yahoo.com', '^at7Bu3A7^', 'Elizabeth', 'Ford', '318 Sloan Curve, Jacobsside, KS 31626', '1958-07-12'], ['sfriedman@lambert.com', '0VK5zPlq4)', 'Brooke', 'Kelly', 'USCGC Cabrera, FPO AE 01912', '1985-03-14'], ['owensmelissa@cannon-rice.com', '%k&5cBBkTt', 'Erin', 'Wade', '770 David Island, Grahammouth, IA 54050', '1998-11-07'], ['wmccarthy@brown.net', '@S0Jcta1ro', 'Ashley', 'Contreras', '7961 Tony Highway Suite 817, Princeport, OR 87301', '1974-10-28'], ['ahowell@gmail.com', 'S4GCQAVv^f', 'Kevin', 'Lawson', '15041 Ramirez Rapid Apt. 886, Kimberlyville, SD 50961', '1924-12-27'], ['ronaldcurry@carey-graham.com', '6N!UV9NmSm', 'Brandon', 'Marquez', '598 Julie Center, West Jamesmouth, WY 52828', '1963-08-29'], ['omarmunoz@warner.com', '#v9pTJ1uvl', 'Lauren', 'Cisneros', '65802 Werner Square, West Brooke, VA 40352', '1979-05-22'], ['ywest@marshall.info', '+4LFldBD#O', 'Natalie', 'Lopez', '656 Kevin Plaza Suite 448, New Edward, FL 08799', '1968-05-09'], ['umcneil@brown.com', '9%5OnccHrk', 'Andre', 'Webb', '0903 Hill Manors, New Larrymouth, CT 42691', '1921-09-22'], ['richard75@taylor-hunter.com', 'Pk9_10Ns5^', 'Barbara', 'Greer', '5984 Moore Radial Suite 919, Lake Sierra, NE 54229', '1949-11-20'], ['erobles@gmail.com', '$!6BPApRNE', 'John', 'Smith', '9542 William Mountain, Brownborough, AR 31705', '1930-04-06'], ['chanmonica@hotmail.com', '$6O%kQd(15', 'Anna', 'Gill', '98742 Meghan Forges Apt. 472, Smithport, NC 73627', '1935-12-31'], ['hparker@hotmail.com', '_yx4NQzvA$', 'Jacob', 'Hall', '169 Weaver Views, North Richard, WI 41512', '1969-10-24'], ['fcampbell@zhang.com', 'm@8z8TNiLj', 'David', 'Stewart', '3191 Anderson Pike, Port Ashley, WV 47829', '1963-02-21'], ['christinahernandez@yahoo.com', 'R1H$iFnO!^', 'Andrea', 'Jensen', '480 Miller Run Apt. 713, Jonesborough, GA 53671', '1965-12-29'], ['matthew09@bishop-curtis.info', '46KredLp!j', 'Charles', 'Hicks', '88540 Bennett Hill Apt. 967, Howardborough, TX 14955', '1942-01-12'], ['michaellang@hotmail.com', '(n3AfCtV@P', 'John', 'Sullivan', '0282 Mitchell Lock, Port Meghan, MI 26159', '1988-08-09'], ['mary98@yahoo.com', 'YfJ1WS6b#B', 'Ashley', 'Barnes', '825 Whitney Loop Suite 302, Port Richardburgh, MA 44919', '1955-11-18'], ['wanda01@valdez.info', '(5DVOHCmp2', 'Susan', 'Foster', '75762 Tyler Stream Suite 289, Port Jameschester, IA 27802', '1920-08-13'], ['marquezmichael@gmail.com', 'xGYe7k5n@8', 'Zachary', 'Garcia', '981 Sheryl Road, Port Ashleyburgh, OH 73580', '1938-07-31'], ['christineadams@butler-thomas.com', ')z3lEhptQe', 'Lorraine', 'Haynes', '90744 Edward Cove, Jenniferbury, KY 90879', '1971-09-12'], ['john76@archer-hudson.biz', 'K!r2EpEl&&', 'Kimberly', 'Garza', '87936 Bauer Bypass Suite 305, Joshuafort, AK 77696', '1955-11-12'], ['gorr@fowler-gross.com', 'C9N+Dixx$K', 'William', 'Haas', '668 Karen Flat, Smithburgh, MD 60455', '1983-11-25'], ['jonescharles@palmer.com', 'H8)JSwoX(u', 'Whitney', 'Good', '821 Arnold Street, Franklinchester, LA 40041', '1987-04-18'], ['christopher06@davis.info', '+vcJjslNE2', 'Ashley', 'Sutton', '15880 Andrew Ridge Apt. 621, West Ashleeborough, NE 35251', '1948-04-12'], ['eleach@gmail.com', '#8ZIp$@y3W', 'Elijah', 'Clark', '229 Bridget Summit, West Deborah, AK 67909', '1977-04-17'], ['bmckenzie@yahoo.com', '()%GxDmNV0', 'Sandra', 'Wagner', '1638 Jennifer Field, Port Shelly, TX 79883', '1947-04-21'], ['danielchristine@hotmail.com', '$z$bKwXuk5', 'Amber', 'Anderson', '398 Gina Groves Apt. 231, Port Joseborough, MD 26183', '1929-11-25'], ['nevans@gmail.com', 'y&J2ekNU(6', 'Jean', 'Hamilton', '79139 Smith Key, Lake Kevin, DE 10870', '1961-09-30'], ['debbie00@gmail.com', '4#a8KogA!t', 'Christina', 'Jones', '95546 Sampson Crossroad Apt. 811, Davidberg, MA 20720', '1988-05-28'], ['conniehunter@gmail.com', '@)0fuTWwdb', 'Joseph', 'Ortiz', '28295 Kelley Mountains Apt. 129, Lopezside, OH 42626', '1923-05-17'], ['cookveronica@gmail.com', '&XF6MWbd$_', 'Chad', 'Booth', '4785 Jordan Freeway Suite 338, New Bradborough, IL 31399', '1975-05-07'], ['nwalker@yahoo.com', 'p@9!0gYkMz', 'Thomas', 'Gates', '88974 Spencer Ville Apt. 665, South Emily, DE 17539', '1988-05-02'], ['perezgary@gmail.com', '_(Wdxc0x85', 'Angela', 'Martin', '8755 Trevor Pike Suite 647, Michelleberg, DE 21868', '1955-07-08'], ['matthew14@hotmail.com', '&V@$g8ra0U', 'Jose', 'Price', '3938 Kara Mall Apt. 350, Barrytown, FL 70794', '1965-11-02'], ['rbaker@yahoo.com', 'c1+NQRnc(C', 'Darren', 'Yang', '33971 Miles Place, Lake Jeffrey, TN 88324', '1942-01-18'], ['brendayoung@mathis-payne.net', 'zy6lJ@O_x@', 'Melissa', 'Smith', '955 Rodriguez Roads, Jeremyside, IA 17677', '1935-11-22'], ['kimberly07@hotmail.com', '$k_B1YcKp7', 'Mrs.', 'Patricia', '956 Linda Prairie Suite 639, Austinton, AR 27020', '1959-04-11'], ['kristieduffy@yahoo.com', '$5T7pOew%o', 'Chad', 'Sullivan', '6704 Elizabeth Station, Lake Tiffanyborough, NM 58568', '2002-11-11'], ['patriciawebb@johnson.info', '+wA&jXTaP7', 'Lori', 'Gallagher', '0113 Alvarado Station Suite 204, Lake Jennifer, RI 80720', '1927-05-23'], ['njohnson@washington.net', '39H(t9g))&', 'Luis', 'Phillips', 'Unit 7279 Box 2249, DPO AE 94229', '1971-03-12'], ['cynthia22@wilson-hill.com', '$hfQc&PK^4', 'Julie', 'Carson', '591 Tanner Court, New Melissa, OH 05498', '1997-05-12'], ['lsmith@cooper.com', '*5ANB8u7I%', 'Cheryl', 'Riley', '883 Dillon Way, Port Markberg, MA 91429', '1994-05-21'], ['obrienbrianna@gmail.com', '(mZ5TATj$P', 'Gary', 'Moses', '1292 Porter Shore Apt. 462, East Debbie, HI 45986', '1984-12-12'], ['mthompson@yahoo.com', '_Klv9Sxx*p', 'Wesley', 'Bernard', '18285 Raymond Port, North Rebecca, RI 87461', '1933-03-19'], ['normanjoshua@sexton.com', 'RRi5W(!u!v', 'Dominic', 'Howard', '108 Charles Curve, Keyburgh, OK 19793', '1987-05-01'], ['connorfoster@travis.info', '_@8A$1m#1&', 'Thomas', 'Graves', '68134 Matthew Cliff, Port Curtis, DC 07920', '1955-12-08'], ['odavis@yahoo.com', 'CsR0Ufgi)2', 'Paul', 'Moreno', '30350 Teresa Route, Susanmouth, IA 27743', '1948-02-18'], ['erobinson@adams.org', 'mT@5RU*n!(', 'Hannah', 'Bell', 'USCGC Johnson, FPO AE 03343', '1984-06-17'], ['hvaldez@cohen.biz', 'pV5D)elf*^', 'Jenna', 'Burke', '65627 Mullins Circles, Lake Margaretbury, WY 41339', '1992-11-26'], ['thomassmith@gmail.com', '(6!tYAIi)e', 'Elizabeth', 'Daniels', '096 Smith Rest Suite 607, Reginaldville, TX 63936', '1999-05-11'], ['wolson@lee-stokes.com', 'dZpJ8Xyt$9', 'Paul', 'Johnson', '33333 Timothy Spring Apt. 578, West Robertville, NY 57220', '1933-12-13'], ['alexandrabell@martin.com', 'a288oHNP(Q', 'Colin', 'Garrett', 'PSC 9456, Box 0021, APO AP 73777', '1938-10-07'], ['wcantrell@ross-alvarado.info', 'LdXMhd3p*3', 'Christine', 'Watts', '2147 Jennifer Mill Suite 652, Walkerberg, KY 28179', '1938-01-02'], ['cassandra91@mays.com', '&NA!M1@or9', 'Rebekah', 'Herrera', '274 Sheri Radial, Gregorychester, WA 24151', '1969-08-09'], ['carpenterryan@davenport.biz', 'ZLd#Q1po$3', 'Andre', 'Johnson', '198 Rachel Corners Suite 153, New Nicolebury, WI 83133', '1990-01-04'], ['ryanperez@gmail.com', 'O)1L^_s$in', 'Joan', 'Brown', '884 Brennan Lodge Suite 982, East Ashley, MI 50515', '1938-03-01'], ['jamesjenkins@valdez.com', '%3GHrbm0w$', 'Amber', 'Harrell', '8242 Rivera Via Suite 065, Peterview, WI 48462', '1950-07-24'], ['jessicayoung@gmail.com', '+9SG+Q_kfR', 'John', 'Scott', 'USNV Tucker, FPO AP 13099', '1955-12-31'], ['mossheather@brown-evans.info', '*eo1tOTw)K', 'Karen', 'Mitchell', '9497 Betty Greens, Tracymouth, AL 58050', '1989-01-29'], ['riosderek@yahoo.com', 'A@8wRDpzqJ', 'Miss', 'Patricia', '9615 White Summit, Josephview, CO 79352', '1962-12-27'], ['morenobrittany@perkins-guzman.com', 'F)^9LBg#oz', 'April', 'Murray', '20620 Paul Walk, Lake Shannonfurt, NM 56039', '1953-05-10'], ['adriana75@hotmail.com', 'z7PZZHon!7', 'Andrew', 'Reynolds', '801 Brandon Shores Apt. 911, Cynthialand, AL 99857', '1988-05-01'], ['zpham@gmail.com', ')hw!8DRi+f', 'Laura', 'Morris', 'PSC 0572, Box 1079, APO AP 93708', '1997-07-31'], ['lindsayrodriguez@yahoo.com', '%4+sD^a!0U', 'Stacy', 'Phillips', '1363 Jones Centers, East Peggy, UT 81756', '1971-10-27'], ['david12@hotmail.com', '@1WecpJZdB', 'Wayne', 'Dunn', '538 Felicia Rue Apt. 319, Kimberlyburgh, NM 92828', '1950-05-21'], ['dwright@deleon.com', 'vwk8QJnOC&', 'Laura', 'Shannon', '7244 Colton Trail Suite 088, Langhaven, MN 44115', '1957-12-16'], ['kevinmckinney@mccarty-richard.info', 'd+5Ur1riiK', 'Patricia', 'Simmons', '02970 Allen Squares Apt. 835, Mileschester, ME 33640', '2002-08-24'], ['stewartamber@andrade.org', '(tMY$#vr8e', 'Nathaniel', 'Moore', '3445 Jaclyn Viaduct Suite 403, South Andrewview, MD 05443', '1954-03-10'], ['smartin@yahoo.com', ')9IHC(dr(6', 'Justin', 'Roy', '467 Vincent Crossing Suite 171, East Emilytown, NY 06365', '2002-12-19'], ['arellanokeith@gmail.com', '+DX@5vPd!J', 'John', 'Green', '1901 Janet Isle Apt. 295, New Katelyn, AZ 17423', '1962-04-18'], ['stephaniebrown@hotmail.com', 'bKiQ6Zn9F(', 'Patrick', 'Lucas', '1322 Lowery Point, Port Linda, TX 18566', '1966-05-07'], ['byoung@holmes.com', '^e6KLlelpq', 'Marissa', 'Caldwell', '850 Williams Valleys, West Rebecca, VA 89004', '1941-12-16'], ['edward16@lewis-cantu.biz', '%90DCe#ucc', 'Patricia', 'Young', '2302 Natasha Rest Apt. 285, East Alexander, NE 71047', '1968-02-08'], ['emckenzie@dunn.com', '1jfNTr1I#3', 'Tracy', 'Shepherd', '0811 Rodriguez Fields Apt. 346, Susanside, TX 24386', '1959-11-30'], ['jensenkristina@johnston-fleming.biz', 'yyY8OGWw*&', 'Ms.', 'Haley', '56742 Harris Lane Suite 709, South Stephaniemouth, KS 03106', '1954-01-05'], ['pearsonjohn@hotmail.com', 'XJ6S*nYP@A', 'Erica', 'Edwards', '61388 Randall Port Suite 367, Staceyberg, UT 55517', '1942-01-20'], ['hendersoncarl@gmail.com', '+nQ2zIFnaR', 'Jennifer', 'Leonard', '422 Brown Run Apt. 376, Lake Josephfort, TX 01492', '1993-08-19'], ['hernandezcarlos@campbell.biz', 'Q4NgjMRi)P', 'Thomas', 'Miller', 'PSC 6511, Box 9092, APO AA 28066', '1973-01-22'], ['millsemily@butler-campbell.com', '@@%2fB&gOc', 'Mrs.', 'Barbara', '80320 Fowler Crossing, North Keith, CO 77586', '1941-11-13'], ['mollyhoward@hotmail.com', '+e4pQ0ey_a', 'Susan', 'Acevedo', '6332 Hammond Burg Suite 305, Samuelburgh, IA 07372', '1935-06-14'], ['jonathanmack@hubbard.com', ')6n(JTbArW', 'Thomas', 'White', 'PSC 1988, Box 1920, APO AP 52835', '1924-10-06'], ['ajames@gmail.com', '#Ys5v$Oj*4', 'Sandra', 'Dawson', '055 Karen Island Apt. 981, Gentryton, WY 49537', '1935-07-13'], ['kbell@yahoo.com', '&6@JUokRgL', 'Gary', 'Pearson', '88997 Mark Ways Apt. 601, South Danielview, IN 81441', '1989-11-15'], ['catherine01@yahoo.com', 'EP3JtO#4(7', 'Robin', 'Hernandez', '06583 Kennedy Summit Suite 311, East James, AR 95366', '1974-06-25'], ['foxkathy@taylor.com', 'ZQV_1YhrU@', 'Jeremy', 'Oneill', '63865 Brown Rapid, New Evelyn, WI 07043', '1962-09-16'], ['lawrence02@adams-conley.com', '3vT_q(o)%4', 'Bradley', 'Perez', 'USS Stewart, FPO AP 93079', '1943-09-11'], ['mario73@jones.biz', 'eC1#FhUn&%', 'Nicholas', 'Price', '989 Vargas Club Apt. 651, West Lisafort, KY 22663', '1940-09-29'], ['halederek@gmail.com', '%3)^IqVb6b', 'Jeffrey', 'Guerra', '951 Stewart Squares, East Jessechester, UT 63932', '1973-05-12'], ['jeffreygonzalez@murray-dunn.com', 'fqCXy90N#4', 'Richard', 'Russell', 'PSC 1416, Box 7250, APO AP 86634', '1970-01-26'], ['xwoodward@smith-ramirez.com', '^0UjwTYqUl', 'Patrick', 'Kerr', '733 Megan Ports, South Gracehaven, NV 61521', '1935-03-15'], ['toddrich@hotmail.com', 'N56Um0u$_v', 'Gabrielle', 'Hensley', '49036 Schultz Square, Williamsonview, MS 15533', '1961-09-20'], ['nkemp@long-gutierrez.net', '%UMJD7rOU6', 'Christopher', 'White', 'Unit 8365 Box 0806, DPO AA 88724', '1991-03-26'], ['ebradley@gmail.com', 'Xp4ZBPac)^', 'Jessica', 'Carr', '7562 Dale Club Suite 848, Larastad, VA 84105', '1991-06-16'], ['osbornejasmine@hotmail.com', 'D1QggJSW@n', 'Ryan', 'Morgan', '61335 Stewart Station Apt. 834, Amandaland, MT 01652', '1923-06-16'], ['mark41@novak-douglas.biz', ')65S2jSb%v', 'Bill', 'Gallegos', '07452 Richard Road, North Mario, SC 71288', '1990-10-12'], ['michael83@stone.info', '!HCMp4K$&0', 'Christopher', 'Velazquez', '78490 Robinson Station Suite 351, Angelton, HI 12836', '1923-07-30'], ['stephensjoseph@hotmail.com', '!084Y3Fl$h', 'Ryan', 'Robbins', '332 Wells Inlet, New Jessica, NC 74135', '1920-03-23'], ['pestrada@vazquez-williams.com', 'mXiJWrmr(3', 'Heather', 'Thompson', 'PSC 3993, Box 8640, APO AA 06213', '1962-08-05'], ['egreene@yahoo.com', 'Po3sX+1a%m', 'Heather', 'Fowler', 'PSC 6511, Box 5588, APO AP 39583', '1987-07-12'], ['michealmills@yahoo.com', 'vJH#28Vx$n', 'Shelby', 'Thompson', '01391 Cody Curve Suite 451, Wrightberg, NJ 64152', '1929-02-10'], ['ulambert@hotmail.com', 'd0MxGDAt@T', 'Sarah', 'Campbell', '81536 Cox Station, Ericbury, GA 93294', '1930-04-25'], ['gabrielle20@yahoo.com', 'u9T$rh8@%1', 'Sean', 'Dickerson', '4456 Fisher Burgs, Sonyatown, CT 67662', '1941-10-25'], ['cohenrichard@bartlett-kim.info', '%2RFXG^Jki', 'Joseph', 'Stokes', 'PSC 4469, Box 3180, APO AE 80195', '1994-08-13'], ['leemark@yahoo.com', '^p1)ESlp+d', 'Gregory', 'Smith', '94050 Jennifer Ridges, West Larryland, AR 63382', '1998-10-15'], ['robin07@kim-kim.com', 'a5rH(Ox0!M', 'Jerome', 'Vasquez', '1425 Lynn Passage, Port Dwayne, MA 02267', '2003-03-07'], ['garzajohn@pitts.com', '5N8OahpUF^', 'Veronica', 'King', '370 Cooper Bridge Suite 722, West Christine, WY 82943', '1962-01-28'], ['ochambers@williams.biz', '!X3+lV+e5n', 'Karen', 'Hudson', 'Unit 1967 Box 8298, DPO AP 57911', '1956-10-21'], ['xklein@hotmail.com', 'HfZMCilt!4', 'Terry', 'Singleton', '71330 Carol Drive Suite 440, East Ronnieburgh, VT 12026', '1946-12-10'], ['pmeyer@dean.biz', '8B(8gDUlPH', 'Derrick', 'Jacobson', '9204 Little Estates Suite 100, Smithton, DC 11275', '1978-12-11'], ['barrybond@hotmail.com', '(sLRDAEy_8', 'Jessica', 'Stephens', '63702 Meadows Avenue, Paulton, SD 57520', '1964-11-01'], ['millertamara@klein-mccarthy.org', '%%6WhTrKhb', 'Matthew', 'Solis', 'Unit 4405 Box 6022, DPO AA 91185', '2000-08-29'], ['williamsamy@hotmail.com', '^S0AwBEheb', 'Joshua', 'Beard', '152 Solis Harbors, New Suzanne, MI 95200', '1977-03-20'], ['zmullen@hotmail.com', '1XGjqzQv(A', 'Lisa', 'Silva', 'USNS Morrison, FPO AE 45659', '1937-02-06'], ['zacharybaker@harmon-king.com', '@p3Wtoo499', 'William', 'Williamson', '52739 Raymond Roads Suite 346, Kennedyton, GA 30245', '2001-03-01'], ['gortega@gmail.com', '#tp_6DeYxe', 'Justin', 'Carter', '291 Baker Estate Apt. 141, Blanchardton, NV 23137', '1922-09-27'], ['teresapennington@gmail.com', '!ye18Euhvi', 'Jessica', 'Jensen', '0000 Gerald Parkways, Robertstad, IA 74877', '1989-04-30'], ['watsonemily@henson.com', '@+rQXV*k3i', 'Justin', 'Peters', '1777 Weiss Center, South Carrie, LA 37546', '1935-04-15'], ['arnoldnicholas@hotmail.com', 'q08WD)XeE$', 'Mary', 'Pierce', '0971 Rodriguez Ridge, West Kristiview, ME 96645', '1922-11-29'], ['michael77@yahoo.com', 'wdtkAgR%)3', 'Bradley', 'Higgins', '13408 Eric Station, South Samanthaport, NH 09297', '1920-08-24'], ['williamstevens@hotmail.com', 'V&YS7R7D#r', 'James', 'James', '20493 Norman Neck, South Hannahburgh, NV 24948', '1985-05-04'], ['johnhardy@mason-french.com', '9V9qICezt)', 'Miss', 'Linda', 'USNS Washington, FPO AA 39532', '1996-08-04'], ['janice51@howe.biz', 'x&68+Ykhsi', 'Mrs.', 'Shannon', '35207 Silva Dale Suite 148, Stevenside, MA 81154', '1982-11-12'], ['tramirez@yahoo.com', '+426V7m1U+', 'Katie', 'Williams', '016 Mark Plaza Suite 684, East Meghan, MO 04830', '1986-01-21'], ['tanyalewis@gmail.com', 's6iEDPyh$Y', 'Brandi', 'Cameron', '667 Gregory Manor Suite 913, Nicolasfurt, FL 01974', '1941-04-23'], ['brianfoster@gmail.com', '6&2fc#La4E', 'Jonathan', 'Hansen', '472 Long Terrace Apt. 482, East Samantha, NM 48653', '1932-03-18'], ['shawn08@hayes.com', '$LI2LBxh4b', 'Thomas', 'Harrison', '5401 Ashley Junctions, Lake Brandon, MD 12654', '1981-01-21'], ['cameron99@lamb.com', '%3AK$e+f$q', 'Debra', 'Bishop', '6558 Heather Stream, Wilsonstad, MO 43858', '1979-06-21'], ['kevinhunt@harrell-savage.com', '4xTF17Yr@l', 'Alejandro', 'Luna', '7065 Sanchez Divide, Herrerastad, MI 04720', '1970-07-28'], ['teresawebb@owens-vargas.info', 'D&0UmFNso4', 'Jamie', 'Williams', '760 Campbell Well Suite 417, Karlmouth, IA 92986', '1975-04-01'], ['andrelane@thomas.com', '%YyBjva^L7', 'Albert', 'Evans', '08857 Juan Road, Andreafurt, VT 07141', '1939-07-07'], ['adamsdarren@hotmail.com', 'hlly7Tzb!V', 'Denise', 'Meyers', 'USS Evans, FPO AP 59899', '1972-01-22'], ['susan67@gordon.com', '_kI(J+n8L3', 'John', 'Smith', '6778 Price Street Apt. 669, Baileyborough, VT 90178', '1941-07-04'], ['zjohnson@valdez.org', 'f0zJmRc6*7', 'Laura', 'Ross', '361 Wright Radial Apt. 303, Myersfort, VT 41768', '1960-04-16'], ['ashley27@yahoo.com', '6m7GI&a@@0', 'Jason', 'Cooper', '612 Meyers Inlet Apt. 766, Davidsonchester, NE 19608', '1938-11-02'], ['sandrawilson@williams.com', 'X4UY3UUw@5', 'Jordan', 'Hunter', '9571 Joseph Estates Apt. 190, North Robert, UT 49452', '1947-01-15'], ['medinarandall@gmail.com', '((q7C3Zbto', 'Brandi', 'Wood', '4189 Sean Unions Apt. 768, Kellystad, NY 42181', '1950-05-29'], ['phillipthomas@lowery.net', '&UhmW(HpQ6', 'Martha', 'Harrison', '04687 Kathleen Heights, North Spencerland, KY 59768', '1935-12-14'], ['hayessteven@rodriguez.com', 'y1$Nqgq!$1', 'Randall', 'Scott', '642 Dalton Ridges, Vanceport, AK 54106', '1953-04-10'], ['redwards@hotmail.com', 'x&T41JqKd7', 'Stephanie', 'Delacruz', '3208 Ferguson Wall Suite 476, Carrollborough, HI 60379', '1955-09-04'], ['charleskline@yahoo.com', '!M5U2lkUmN', 'Matthew', 'Coleman', '666 Devon Street, Lake Kyle, PA 82674', '1968-01-16'], ['rstevens@yahoo.com', 'Hn9_TXg%@F', 'Nicole', 'Anderson', '3162 Heather Loaf Suite 538, Port Anthony, WY 75146', '2002-03-27'], ['johnhernandez@hotmail.com', '62re(8GrF7', 'Vanessa', 'Parrish', '1377 Tina Fords, Underwoodborough, NC 29738', '1999-03-13'], ['james00@gmail.com', '&6@J*FprqL', 'Cheyenne', 'Moore', '83430 Katherine Crossroad, South Samanthaborough, WI 45929', '1948-03-23'], ['nicholas85@smith.net', '**Q73Ecg1v', 'Aaron', 'Booker', '426 Nancy Way, Lake Cory, NV 26506', '2001-09-08'], ['zsmith@hotmail.com', 'c+58_4LyaV', 'Edward', 'Burns', '325 Sullivan Hollow Apt. 132, West Kathleenchester, UT 42193', '1946-05-25'], ['jennifer78@hill.org', '_Z@@YXq0A9', 'Jason', 'Allen', 'USCGC Fletcher, FPO AP 60413', '1969-04-05'], ['jwilson@yahoo.com', 'JA_J^8Hc&6', 'Cheryl', 'Powell', '037 Christopher Summit, North Leslie, KY 86984', '1965-09-29'], ['cjohnson@murphy.org', 'X!4XcvOxJ(', 'Wayne', 'Johnson', '7014 Joseph Plaza Suite 954, North Monicaview, MT 31431', '1936-12-22'], ['ashleymartinez@hotmail.com', 'jDkLOht3^4', 'Eric', 'Ortiz', '313 John Orchard Apt. 997, Nelsonview, NJ 69362', '1973-08-11'], ['williamthomas@hotmail.com', '*%XquFm_2&', 'Carl', 'Brown', '0186 Brandon Forge Apt. 065, Brownshire, PA 41485', '1938-10-04'], ['richardnicole@yahoo.com', 'q$r9+7DiaS', 'Natalie', 'Villarreal', '043 Gordon Ville, Port John, VT 85978', '1947-02-17'], ['lisajames@norris-proctor.info', 'Y(j1v%HxLO', 'Andre', 'Rodriguez', '79510 Collins Groves, South Thomasville, VT 67586', '1999-09-09'], ['tamara96@fields-morgan.info', '211FVDLoM@', 'Leon', 'Clements', '73322 Scott Road, East Patrick, NJ 77314', '1935-09-20'], ['sarcher@molina-cooper.com', '(1IRSYBj4D', 'Dustin', 'Smith', '78125 Dawson Plains, Mooreside, PA 81894', '1947-06-29'], ['xbrown@lopez.org', '(E1%WT(iw2', 'Taylor', 'Medina', '22855 Warren Parks Suite 946, Kimberlyshire, AK 97090', '1981-07-18'], ['mariejohnson@bryant-brown.com', ')2XLv)AWXc', 'Guy', 'Monroe', '218 Kirsten Park Apt. 002, Heatherview, MN 43872', '1987-06-25'], ['ryananderson@hotmail.com', '^1b93FOzKM', 'Jamie', 'Cole', '8225 Chavez Villages Apt. 786, Kathrynburgh, FL 89255', '1998-02-01'], ['johnsonjared@gmail.com', '1eo6IYZIv#', 'Lori', 'Mcdaniel', '92080 Connie Expressway Apt. 506, Lake Shawnchester, AZ 57775', '1973-11-17'], ['garciaricardo@hotmail.com', '&bu8%QfvQk', 'Shannon', 'Key', '16254 Li Ports, Theresaport, MO 88519', '1977-09-06'], ['john02@yahoo.com', '!3OqjI(&*a', 'Gary', 'Horne', '816 James Brooks Suite 415, Port Williamborough, WI 86453', '1944-03-11'], ['cynthiaferguson@palmer.com', '*v8zT1R*J&', 'Robert', 'Todd', '4588 Cody Place Apt. 120, South Jonathanfurt, ND 99105', '1921-09-27'], ['calvinmiller@hotmail.com', '+I7aw$Ccfp', 'Catherine', 'Taylor', '2727 Stacey Fort Apt. 401, West Lori, RI 35298', '2002-04-15'], ['johnsonrobert@yahoo.com', '&20Um$tL%U', 'Michelle', 'Peterson', '7799 Mejia Estates Suite 337, South Scottfurt, FL 50896', '1930-10-15'], ['danielspencer@yahoo.com', '$4%7^jCY8h', 'Kim', 'Smith', '9448 Freeman Center Suite 077, Kurtville, HI 53292', '1927-09-05'], ['bowens@bailey.biz', 'F$6CHxaP6P', 'Melanie', 'Scott', '40334 Jermaine Ridge Apt. 409, Fischerchester, NE 45298', '1950-05-04'], ['kjensen@harris.info', '3dR3Pm8BC#', 'Alexander', 'James', '8035 Taylor Burg, New Angelaberg, KS 01347', '1992-04-05'], ['xsmith@yahoo.com', '+hD^I1YL&6', 'Tiffany', 'Mcgee', 'USCGC Price, FPO AE 79684', '1968-08-25'], ['garzavickie@salas.biz', '!4bBqaJ5Cw', 'Judy', 'Price', '3594 Deborah Loop, East Emily, NM 78322', '1997-11-04'], ['gtate@wells-schaefer.biz', '%aFK9q0Nj9', 'Anita', 'Brown', '64866 Graham Union, Port Melvinton, WV 38434', '1998-09-29'], ['obaker@gmail.com', 'p8v1RtOJ_y', 'Lisa', 'Huerta', '85774 Christina Ridge Apt. 188, East Brian, CA 90347', '1951-03-01'], ['bbrady@gmail.com', '*S3u1T_z)4', 'Bethany', 'Mccoy', '42088 Parker Ramp Suite 279, South Nathanland, DC 98227', '1929-01-07'], ['boyergeorge@murray-olson.com', 'v(T76Deb^R', 'Maria', 'Kerr', '1920 Gabriella Locks, Swansonberg, OR 82379', '1997-01-09'], ['tfuller@webster.biz', '7V5DIdRH&o', 'Martha', 'Lane', '346 Mark Knoll Apt. 026, South Tracyhaven, GA 95168', '1929-01-06'], ['jennifer16@gmail.com', 'W&9GZR_l_8', 'William', 'Gordon', '569 Rachel Shoal Suite 552, Salinashaven, WV 19140', '1939-03-26'], ['amy76@yahoo.com', '!$9EfHXau&', 'April', 'Phillips', '47989 Schneider Row, East Robertstad, NH 34726', '1933-01-17'], ['lisachapman@hotmail.com', '_8Aav)FnDZ', 'Kenneth', 'Miller', '11796 Smith Alley, Lake Nicholas, WI 91617', '1961-07-16'], ['lauren76@hotmail.com', '#_xW)9u7LG', 'Tracy', 'Mendez', '02560 Lucas Expressway Apt. 295, Greenburgh, IL 77923', '1961-10-20'], ['gmorales@hotmail.com', 'y#&0SVBdI*', 'Eric', 'Burke', '978 Amy Knoll, New Timothyfort, MN 51043', '1997-05-28'], ['thompsonvincent@wall.com', 'h6ii1PdL@%', 'Joseph', 'Zimmerman', '994 Buckley Center Apt. 586, Port Jacobhaven, NC 08512', '1924-09-08'], ['jacqueline45@hotmail.com', 'UG3bBxrG!V', 'Keith', 'Smith', '240 Elliott Underpass Apt. 507, South Michaelview, MA 31753', '2000-01-05'], ['pcompton@hotmail.com', 'H@ib6nLyts', 'Andrew', 'Strickland', '3820 Nguyen Curve Suite 020, Lopezburgh, NH 59632', '1968-03-30'], ['edwardgrimes@yahoo.com', 'dw6LaEp80^', 'Kevin', 'Anderson', '620 Rose Path Apt. 069, North Lisaburgh, NM 84774', '1970-05-19'], ['dianaspencer@davis.info', 'ni6QqsfR!P', 'Dakota', 'Stewart', '9559 Meyer Ramp Suite 667, South Kellymouth, RI 95583', '1943-10-09'], ['gtaylor@keller-johnson.info', '5pT4Iw$T+4', 'Christopher', 'Rosales', '953 Kevin Loaf Apt. 148, Rebeccaburgh, NH 65486', '1933-03-22'], ['simpsonmichael@hotmail.com', '^iQEoGaG)0', 'William', 'Lopez', '1554 Eric Mountain Apt. 517, Stevenborough, HI 94866', '1937-03-29'], ['natasha81@bolton.biz', '*0VJeDBzA_', 'Ricky', 'Johnson', '608 Amy Forge, Benjaminhaven, IN 78433', '1931-01-26'], ['huynhjulia@craig.info', '*bi066Yi&+', 'Amy', 'Evans', '0302 Sonya Bypass Apt. 509, Petersonland, SD 65281', '2002-12-04'], ['csmith@gmail.com', '*8A4Rw6fRN', 'Kenneth', 'Wilson', '8683 Buck Drive Apt. 359, Jerryborough, MS 67191', '1981-09-05'], ['garciajason@yahoo.com', '&5531Oju*#', 'Dale', 'Howard', '9009 Andrea Mount, New Christine, HI 70043', '1972-09-08'], ['pamela97@hotmail.com', 'TH53Z$Ck*2', 'Diana', 'Williams', '22812 Patterson Coves Apt. 577, Brianbury, MO 65179', '1948-07-28'], ['lucascrystal@gross.com', '$4SbXftNG7', 'Seth', 'Stephens', '606 Henderson Curve, New Kristenmouth, NJ 37341', '1982-07-10'], ['kayla42@gmail.com', 'xq3J@vZ3j^', 'Tracey', 'Drake', 'USNS Davis, FPO AP 84190', '2001-06-15'], ['josephflores@hotmail.com', 'su8Y8BfC@%', 'Jonathan', 'Garcia', '97413 Mark Village, East Matthew, MO 96016', '1989-04-20'], ['savannah07@gmail.com', 'q7IYQwiz!8', 'Brandon', 'Johnson', '54287 Kathleen Divide Apt. 726, New Nathan, VT 93287', '1986-05-19'], ['stephencox@gmail.com', 'go7J4CFm$F', 'Ronald', 'Mullins', '26658 Foster Coves Apt. 740, East Darrenburgh, NC 96831', '1980-08-02'], ['nwhite@gmail.com', '&Az2ZaKaoB', 'Elaine', 'Thompson', '95579 Nathan Villages, Douglasmouth, MA 53773', '1935-07-10'], ['kathleen44@hanna.biz', 'jfEVb$7r%8', 'Brandi', 'Williams', '10567 Torres Grove, Gailview, NY 50616', '1926-05-27'], ['thomaswalker@smith-miller.info', 'P77@Zoni^w', 'Ms.', 'Brianna', 'USNV Bowman, FPO AP 58920', '1964-01-21'], ['taylorsingh@crawford-neal.com', 'x0dNf4t&#M', 'Jeremy', 'Williams', '46034 Alvarez Greens, Jessicafurt, MI 09082', '1957-07-09'], ['dennisking@hotmail.com', '$1Eo0_g@^I', 'Charlotte', 'Castro', '530 Morrison Mill, Woodsville, SD 74058', '1972-03-08'], ['stanleykristin@ortega.net', '4R^Z7COaUB', 'Caroline', 'Winters', '77186 Ann Coves, South Emma, PA 90812', '1945-03-12'], ['christopher22@vega.net', '%2VQ*@t5m4', 'Lisa', 'Gonzalez', '7906 Kelly Turnpike, Port Roberthaven, NV 19137', '1953-09-01'], ['burgessapril@gomez-reyes.com', 'b(UTapZK$0', 'Sandra', 'Thomas', '55163 Keith Mill, West Randy, OK 56898', '1981-07-03'], ['brownamanda@yahoo.com', '$l2xm9Bcfj', 'Margaret', 'Hart', '236 Harris Corners, Hamptonberg, DE 41331', '1970-03-07'], ['halllarry@key-terry.com', 'd$8xYvQLLc', 'Garrett', 'Garner', '8894 Erin Neck, East Laura, ME 36813', '1995-04-16'], ['michael62@waller-sanchez.com', 'N(0QFyvcWX', 'Zachary', 'Norton', '088 Cooper Flats, Westfort, AK 59004', '1988-10-24'], ['gramirez@gmail.com', '!F4^gwHZc9', 'Gregory', 'Snyder', '40589 Latoya Parkways Suite 512, Port Joshua, FL 01581', '1976-07-03'], ['mason73@gmail.com', '_66+CjHuyZ', 'Tammy', 'Love', '522 Wolfe Corners Apt. 839, North Alisonland, OK 23971', '1979-01-25'], ['garychaney@stanley-french.com', 'A)6cVMkF0p', 'Douglas', 'Davis', '6676 Moreno Roads, North Kevin, UT 45425', '1936-02-29'], ['kimberlyhenry@alvarado.net', '$tZdFcgi)3', 'Melissa', 'Larsen', '276 Williams Greens Apt. 761, Mendozaland, IA 97681', '1965-06-14'], ['wardmarissa@key.com', 'h8KJzPaR_8', 'John', 'Patterson', 'USS Singleton, FPO AP 78831', '1986-03-10'], ['thomas67@gmail.com', '2N&+W7Vy@x', 'Heather', 'Ray', '97883 Kayla Path, East Derek, MA 45984', '1974-05-12'], ['vperry@yahoo.com', '^7wTnUit0&', 'Jennifer', 'Love', '3082 Wagner Tunnel, East Kenneth, WI 63228', '2002-11-06'], ['lindsey17@ray-adkins.com', '(6uMb+PO+8', 'Dawn', 'Hall', '575 Rose Squares Apt. 114, Carlosshire, NY 95727', '1978-01-16']]
 
-fake_data = Faker()
+books_raw = [
+  {
+    "title": "Unlocking Android",
+    "isbn": "1933988673",
+    "pageCount": 416,
+    "publishedDate": { "$date": "2009-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson.jpg",
+    "shortDescription": "Unlocking Android: A Developer's Guide provides concise, hands-on instruction for the Android operating system and development tools. This book teaches important architectural concepts in a straightforward writing style and builds on this with practical and useful examples throughout.",
+    "longDescription": "Android is an open source mobile phone platform based on the Linux operating system and developed by the Open Handset Alliance, a consortium of over 30 hardware, software and telecom companies that focus on open standards for mobile devices. Led by search giant, Google, Android is designed to deliver a better and more open and cost effective mobile experience.    Unlocking Android: A Developer's Guide provides concise, hands-on instruction for the Android operating system and development tools. This book teaches important architectural concepts in a straightforward writing style and builds on this with practical and useful examples throughout. Based on his mobile development experience and his deep knowledge of the arcane Android technical documentation, the author conveys the know-how you need to develop practical applications that build upon or replace any of Androids features, however small.    Unlocking Android: A Developer's Guide prepares the reader to embrace the platform in easy-to-understand language and builds on this foundation with re-usable Java code examples. It is ideal for corporate and hobbyists alike who have an interest, or a mandate, to deliver software functionality for cell phones.    WHAT'S INSIDE:        * Android's place in the market      * Using the Eclipse environment for Android development      * The Intents - how and why they are used      * Application classes:            o Activity            o Service            o IntentReceiver       * User interface design      * Using the ContentProvider to manage data      * Persisting data with the SQLite database      * Networking examples      * Telephony applications      * Notification methods      * OpenGL, animation & multimedia      * Sample Applications  ",
+    "status": "PUBLISH",
+    "authors": ["W. Frank Ableson", "Charlie Collins", "Robi Sen"],
+    "categories": ["Open Source", "Mobile"]
+  },
+  {
+    "title": "Android in Action, Second Edition",
+    "isbn": "1935182722",
+    "pageCount": 592,
+    "publishedDate": { "$date": "2011-01-14T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg",
+    "shortDescription": "Android in Action, Second Edition is a comprehensive tutorial for Android developers. Taking you far beyond \"Hello Android,\" this fast-paced book puts you in the driver's seat as you learn important architectural concepts and implementation strategies. You'll master the SDK, build WebKit apps using HTML 5, and even learn to extend or replace Android's built-in features by building useful and intriguing examples. ",
+    "longDescription": "When it comes to mobile apps, Android can do almost anything   and with this book, so can you! Android runs on mobile devices ranging from smart phones to tablets to countless special-purpose gadgets. It's the broadest mobile platform available.    Android in Action, Second Edition is a comprehensive tutorial for Android developers. Taking you far beyond \"Hello Android,\" this fast-paced book puts you in the driver's seat as you learn important architectural concepts and implementation strategies. You'll master the SDK, build WebKit apps using HTML 5, and even learn to extend or replace Android's built-in features by building useful and intriguing examples. ",
+    "status": "PUBLISH",
+    "authors": ["W. Frank Ableson", "Robi Sen"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Specification by Example",
+    "isbn": "1617290084",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-06-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/adzic.jpg",
+    "status": "PUBLISH",
+    "authors": ["Gojko Adzic"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Flex 3 in Action",
+    "isbn": "1933988746",
+    "pageCount": 576,
+    "publishedDate": { "$date": "2009-02-02T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ahmed.jpg",
+    "longDescription": "New web applications require engaging user-friendly interfaces   and the cooler, the better. With Flex 3, web developers at any skill level can create high-quality, effective, and interactive Rich Internet Applications (RIAs) quickly and easily. Flex removes the complexity barrier from RIA development by offering sophisticated tools and a straightforward programming language so you can focus on what you want to do instead of how to do it. And now that the major components of Flex are free and open-source, the cost barrier is gone, as well!    Flex 3 in Action is an easy-to-follow, hands-on Flex tutorial. Chock-full of examples, this book goes beyond feature coverage and helps you put Flex to work in real day-to-day tasks. You'll quickly master the Flex API and learn to apply the techniques that make your Flex applications stand out from the crowd.    Interesting themes, styles, and skins  It's in there.  Working with databases  You got it.  Interactive forms and validation  You bet.  Charting techniques to help you visualize data  Bam!  The expert authors of Flex 3 in Action have one goal   to help you get down to business with Flex 3. Fast.    Many Flex books are overwhelming to new users   focusing on the complexities of the language and the super-specialized subjects in the Flex eco-system; Flex 3 in Action filters out the noise and dives into the core topics you need every day. Using numerous easy-to-understand examples, Flex 3 in Action gives you a strong foundation that you can build on as the complexity of your projects increases.",
+    "status": "PUBLISH",
+    "authors": ["Tariq Ahmed with Jon Hirschi", "Faisal Abid"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Flex 4 in Action",
+    "isbn": "1935182420",
+    "pageCount": 600,
+    "publishedDate": { "$date": "2010-11-15T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ahmed2.jpg",
+    "longDescription": "Using Flex, you can create high-quality, effective, and interactive Rich Internet Applications (RIAs) quickly and easily. Flex removes the complexity barrier from RIA development by offering sophisticated tools and a straightforward programming language so you can focus on what you want to do instead of how to do it. And the new features added in Flex 4 give you an even wider range of options!    Flex 4 in Action is an easy-to-follow, hands-on Flex tutorial that goes beyond feature coverage and helps you put Flex to work in real day-to-day tasks. You'll quickly master the Flex API and learn to apply the techniques that make your Flex applications stand out from the crowd.    The expert authors of Flex 4 in Action have one goal-to help you get down to business with Flex. Fast. Flex 4 in Action filters out the noise and dives into the core topics you need every day. Using numerous easy-to-understand examples, Flex 4 in Action gives you a strong foundation that you can build on as the complexity of your projects increases.    Interesting themes, styles, and skins  It's in there.  Working with databases  You got it.  Interactive forms and validation  You bet.  Charting techniques to help you visualize data  Bam!  And you'll get full coverage of these great Flex 4 upgrades:  Next generation Spark components-New buttons, form inputs, navigation controls and other visual components replace the Flex 3 \"Halo\" versions. Spark components are easier to customize, which makes skinning and theme design much faster  A new \"network monitor\" allows you to see the data communications between a Flex application and a backend server, which helps when trying to debug applications that are communicating to another system/service  Numerous productivity boosting features that speed up the process of creating applications  A faster compiler to take your human-written source code and convert it into a machine-readable format  Built-in support for unit testing allows you to improve the quality of your software, and reduce the time spent in testing",
+    "status": "PUBLISH",
+    "authors": ["Tariq Ahmed", "Dan Orlando", "John C. Bland II", "Joel Hooks"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Collective Intelligence in Action",
+    "isbn": "1933988312",
+    "pageCount": 425,
+    "publishedDate": { "$date": "2008-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alag.jpg",
+    "longDescription": "There's a great deal of wisdom in a crowd, but how do you listen to a thousand people talking at once  Identifying the wants, needs, and knowledge of internet users can be like listening to a mob.    In the Web 2.0 era, leveraging the collective power of user contributions, interactions, and feedback is the key to market dominance. A new category of powerful programming techniques lets you discover the patterns, inter-relationships, and individual profiles   the collective intelligence   locked in the data people leave behind as they surf websites, post blogs, and interact with other users.    Collective Intelligence in Action is a hands-on guidebook for implementing collective-intelligence concepts using Java. It is the first Java-based book to emphasize the underlying algorithms and technical implementation of vital data gathering and mining techniques like analyzing trends, discovering relationships, and making predictions. It provides a pragmatic approach to personalization by combining content-based analysis with collaborative approaches.    This book is for Java developers implementing collective intelligence in real, high-use applications. Following a running example in which you harvest and use information from blogs, you learn to develop software that you can embed in your own applications. The code examples are immediately reusable and give the Java developer a working collective intelligence toolkit.    Along the way, you work with, a number of APIs and open-source toolkits including text analysis and search using Lucene, web-crawling using Nutch, and applying machine learning algorithms using WEKA and the Java Data Mining (JDM) standard.",
+    "status": "PUBLISH",
+    "authors": ["Satnam Alag"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Zend Framework in Action",
+    "isbn": "1933988320",
+    "pageCount": 432,
+    "publishedDate": { "$date": "2008-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/allen.jpg",
+    "shortDescription": "Zend Framework in Action is a comprehensive tutorial that shows how to use the Zend Framework to create web-based applications and web services. This book takes you on an over-the-shoulder tour of the components of the Zend Framework as you build a high quality, real-world web application.",
+    "longDescription": "From rather humble beginnings as the Personal Home Page scripting language, PHP has found its way into almost every server, corporation, and dev shop in the world. On an average day, somewhere between 500,000 and 2 million coders do something in PHP. Even when you use a well-understood language like PHP, building a modern web application requires tools that decrease development time and cost while improving code quality. Frameworks such as Ruby-on-Rails and Django have been getting a lot of attention as a result.     For PHP coders, the Zend Framework offers that same promise without the need to move away from PHP. This powerful collection of components can be used in part or as a whole to speed up the development process. Zend Framework has the backing of Zend Technologies; the driving force behind the PHP programming language in which it is written. The first production release of the Zend Framework became available in July of 2007.    Zend Framework in Action is a comprehensive tutorial that shows how to use the Zend Framework to create web-based applications and web services. This book takes you on an over-the-shoulder tour of the components of the Zend Framework as you build a high quality, real-world web application. This book is organized around the techniques you'll use every day as a web developer \"data handling, forms, authentication, and so forth. As you follow the running example, you'll learn to build interactive Ajax-driven features into your application without sacrificing nuts-and-bolts considerations like security and performance.  This book is aimed at the competent PHP developer who wants to master framework-driven web development. Zend Framework in Action goes beyond the docs but still provides quick access to the most common topics encountered in the development of web applications.  ",
+    "status": "PUBLISH",
+    "authors": ["Rob Allen", "Nick Lo", "Steven Brown"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Flex on Java",
+    "isbn": "1933988797",
+    "pageCount": 265,
+    "publishedDate": { "$date": "2010-10-15T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/allmon.jpg",
+    "shortDescription": "   A beautifully written book that is a must have for every Java Developer.       Ashish Kulkarni, Technical Director, E-Business Software Solutions Ltd.",
+    "longDescription": "In the demo, a hip designer, a sharply-dressed marketer, and a smiling, relaxed developer sip lattes and calmly discuss how Flex is going to make customers happy and shorten the workday   all while boosting the bottom line. The software systems they're using have been carefully selected and built from the ground up to work together seamlessly. There are no legacy systems, data, or competing business concerns to manage.    Cut to reality.    You're a Java developer. The marketing guy tells you that \"corporate\" wants a Flex-based site and you have to deliver it on top of what you already have. Your budget  Don't even ask. \"Make it look like the Discovery channel or something.\"    Flex on Java assumes you live in the real world   not the demo. This unique book shows you how to refactor an existing web application using the server-side you already know. You'll learn to use Flex 3 in concert with Spring, EJB 3, POJOs, JMS, and other standard technologies. Wherever possible, the examples use free or open source software.    The authors start with a typical Java web app and show you how to add a rich Flex interface. You also learn how to integrate Flex into your server-side Java via the BlazeDS framework, Adobe's open-source remoting and web messaging technology for Flex.    The book shows you how to deploy to not only the web but also to the desktop using the Adobe Integrated Runtime (AIR). You will learn how to integrate Flex into your existing applications in order to build a next generation application that will delight users.    Flex on Java is approachable for anyone beginning Java and Flex development.    ",
+    "status": "PUBLISH",
+    "authors": ["Bernerd Allmon", "Jeremy Anderson"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Griffon in Action",
+    "isbn": "1935182234",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2012-06-04T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/almiray.jpg",
+    "shortDescription": "Griffon in Action is a comprehensive tutorial written for Java developers who want a more productive approach to UI development. In this book, you'll immediately dive into Griffon. After a Griffon orientation and a quick Groovy tutorial, you'll start building examples that explore Griffon's high productivity approach to Swing development. One of the troublesome parts of Swing development is the amount of Java code that is required to get a simple application off the ground.",
+    "longDescription": "Although several options exist for interface development in Java, even popular UI toolkits like Swing have been notoriously complex and difficult to use. Griffon, an agile framework that uses Groovy to simplify Swing, makes UI development dramatically faster and easier. In many respects, Griffon is for desktop development what Grails is for web development. While it's based on Swing, its declarative style and approachable level of abstraction is instantly familiar to developers familiar with other technologies such as Flex or JavaFX.    Griffon in Action is a comprehensive tutorial written for Java developers who want a more productive approach to UI development. In this book, you'll immediately dive into Griffon. After a Griffon orientation and a quick Groovy tutorial, you'll start building examples that explore Griffon's high productivity approach to Swing development. One of the troublesome parts of Swing development is the amount of Java code that is required to get a simple application off the ground.    You'll learn how SwingBuilder (and its cousin builders) present a very palatable alternative in the form of a DSL geared towards building graphical user interfaces. Pair it up with the convention over configuration paradigm, a well tested and tried application source structure (based on Grails) and you have a recipe for quick and effective Swing application development. Griffon in Action covers declarative view development, like the one provided by JavaFX Script, as well as the structure, architecture and life cycle of Java application development",
+    "status": "PUBLISH",
+    "authors": ["Andres Almiray", "Danno Ferrin", "", "James Shingler"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "OSGi in Depth",
+    "isbn": "193518217X",
+    "pageCount": 325,
+    "publishedDate": { "$date": "2011-12-12T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alves.jpg",
+    "shortDescription": "Enterprise OSGi shows a Java developer how to develop to the OSGi Service Platform Enterprise specification, an emerging Java-based technology for developing modular enterprise applications. Enterprise OSGi addresses several shortcomings of existing enterprise platforms, such as allowing the creation of better maintainable and extensible applications, and provide a simpler, easier-to-use, light-weight solution to enterprise software development.",
+    "longDescription": "A good application framework greatly simplifies a developer's task by providing reusable code modules that solve common, tedious, or complex tasks. Writing a great framework requires an extraordinary set of skills-ranging from deep knowledge of a programming language and target platform to a crystal-clear view of the problem space where the applications to be developed using the framework will be used.    OSGi Application Frameworks shows a Java developer how to build frameworks based on the OSGi service platform. OSGi, an emerging Java-based technology for developing modular applications, is a great tool for framework building. A framework itself, OSGi allows the developer to create a more intuitive, modular framework by isolating many of the key challenges the framework developer faces.    This book begins by describing the process, principles, and tools you must master to build a custom application framework. It introduces the fundamental concepts of OSGi, and then shows you how to put OSGi to work building various types of frameworks that solve specific development problems.    OSGi is particularly useful for building frameworks that can be easily extended by developers to create domain-specific applications. This book teaches the developer to break down a problem domain into its abstractions and then use OSGi to create a modular framework solution. Along the way, the developer learns software engineering practices intrinsic to framework building that result in systems with better software qualities, such as flexibility, extensibility, and maintainability.    Author Alexandre Alves guides you through major concepts, such as the definition of programming models and modularization techniques, and complements them with samples that have real applicability using industry-proved technologies, such as Spring-DM and Equinox.",
+    "status": "PUBLISH",
+    "authors": ["Alexandre de Castro Alves"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Flexible Rails",
+    "isbn": "1933988509",
+    "pageCount": 592,
+    "publishedDate": { "$date": "2008-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/armstrong.jpg",
+    "shortDescription": "\"Flexible Rails created a standard to which I hold other technical books. You definitely get your money's worth.\"",
+    "longDescription": "Rails is a fantastic tool for web application development, but its Ajax-driven interfaces stop short of the richness you gain with a tool like Adobe Flex. Simply put, Flex is the most productive way to build the UI of rich Internet applications, and Rails is the most productive way to rapidly build a database-backed CRUD application. Together, they're an amazing combination.    Flexible Rails is a book about how to use Ruby on Rails and Adobe Flex to build next-generation rich Internet applications (RIAs). The book takes you to the leading edge of RIA development, presenting examples in Flex 3 and Rails 2.    This book is not an exhaustive Ruby on Rails tutorial, nor a Flex reference manual. (Adobe ships over 3000 pages of PDF reference documentation with Flex.) Instead, it's an extensive tutorial, developed iteratively, how to build an RIA using Flex and Rails together. You learn both the specific techniques you need to use Flex and Rails together as well as the development practices that make the combination especially powerful.    The example application built in the book is MIT-licensed, so readers can use it as the basis for their own applications. In fact, one reader has already built an agile project management tool based on the book example!    With this book, you learn Flex by osmosis. You can read the book and follow along even if you have never used Flex before. Consider it \"Flex Immersion.\" You absorb the key concepts of Flex as you go through the process of building the application.    You will also learn how Flex and Rails integrate with HTTPService and XML, and see how RESTful Rails controller design gracefully supports using the same controller actions for Flex and HTML clients. The author will show you how Cairngorm can be used to architect larger Flex applications, including tips to use Cairngorm in a less verbose way with HTTPService to talk to Rails.    Flexible Rails is for both Rails developers who are interested in Flex, and Flex developers who are interested in Rails. For a Rails developer, Flex allows for more dynamic and engaging user interfaces than are possible with Ajax. For a Flex developer, Rails provides a way to rapidly build the ORM and services layer of the application.",
+    "status": "PUBLISH",
+    "authors": ["Peter Armstrong"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Hello! Flex 4",
+    "isbn": "1933988762",
+    "pageCount": 258,
+    "publishedDate": { "$date": "2009-11-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/armstrong3.jpg",
+    "shortDescription": "Hello! Flex 4 progresses through 26 self-contained examples selected so you can progressively master Flex. They vary from small one-page apps, to a 3D rotating haiku, to a Connect Four-like game. And in the last chapter you'll learn to build a full Flex application called SocialStalkr   a mashup that lets you follow your friends by showing their tweets on a Yahoo map.",
+    "longDescription": "With Flex 4 you can easily add color and life to your web applications by introducing dynamic user features, slick transitions, and eye-catching animations. Flex also provides powerful data handling capabilities so you can build industrial-strength applications. And it's open source, so you can get started without forking over a lot of your hard-earned cash.    We think it should be just as much fun to learn Flex as it is to use Flex. Hello! Flex 4 shows you everything you need to know to get started with Flex 4 without bogging you down in obscure detail or academic edge cases. In this entertaining, hands-on book, you'll quickly move from Hello World into the techniques you'll need to use Flex effectively.    You'll start by progressing through 26 self-contained workshop items, which include everything from small one-page examples, to a 3D rotating haiku, to building a Connect Four game. Finally, in the last chapter you'll build a full Flex application called 'SocialStalkr': an interesting mashup of Twitter and Yahoo Maps that lets you 'stalk' your friends by showing specially formatted Twitter tweets on a Yahoo map.",
+    "status": "PUBLISH",
+    "authors": ["Peter Armstrong"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Coffeehouse",
+    "isbn": "1884777384",
+    "pageCount": 316,
+    "publishedDate": { "$date": "1997-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/asher.jpg",
+    "shortDescription": "Coffeehouse is an anthology of stories, poems and essays originally published on the World Wide Web.",
+    "longDescription": "Coffeehouse is an anthology of stories, poems and essays originally published on the World Wide Web. The purpose is to capture the zeitgeist of the web's creative community, and to give readers a chance to enjoy some of the best and most notable original works that have appeared in this form. It showcases over forty individual web writers, among them Joseph Squier, Martha Conway, Jason Snell, David Alexander, Carl Steadman and Walter Miller. The intent is to show the variety and vitality of the web's blossoming literary \"scene,\" and to capture the unique and highly iconoclastic \"personality\" of the web community.",
+    "status": "PUBLISH",
+    "authors": ["Levi Asher", "Christian Crumlish"],
+    "categories": ["Miscellaneous"]
+  },
+  {
+    "title": "Team Foundation Server 2008 in Action",
+    "isbn": "1933988592",
+    "pageCount": 344,
+    "publishedDate": { "$date": "2008-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/azher.jpg",
+    "longDescription": "In complex software projects, managing the development process can be as critical to success as writing the code itself. A project may involve dozens of developers, managers, architects, testers, and customers, hundreds of builds, and thousands of opportunities to get off-track. To keep tabs on the people, tasks, and components of a medium- to large-scale project, most teams use a development system that allows for easy monitoring, follow-up, and accountability.    Microsoft Team Foundation Server 2008 (TFS), the server component of Microsoft's Visual Studio Team System (VSTS), provides a powerful collaborative platform for software-development teams. The product offers an integrated toolset for tracking work items, creating test cases, managing source code, generating builds, constructing database schemas, and so on. Because in software development one size does not fit all, TFS provides process customization, project management, and reporting capabilities to build solutions around your requirements.    Team Foundation Server 2008 in Action is a hands-on guide to Team Foundation Server 2008. Written for developers with a good handle on TFS basics, this book shows you how to solve real-life problems. It's not a repetition of Microsoft's product documentation. Team Foundation Server 2008 in Action is a practitioner's handbook for how to work with TFS under common constraints. This book walks you through real-life software engineering problems based on hundreds of hours of TFS experience.    You'll benefit from expert author Jamil Azher's extensive interactions with members of Microsoft's TFS team and MVPs, survey feedback from the author's blog, and interviews with organizations and user groups using TFS. Instead of just offering a high-level overview, the book provides detailed solutions for solving common   and not-so-common   problems using TFS. It discusses the strengths as well as weaknesses of TFS, and suggests appropriate problem resolution steps, workarounds, or custom solutions.",
+    "status": "PUBLISH",
+    "authors": ["Jamil Azher"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Brownfield Application Development in .NET",
+    "isbn": "1933988711",
+    "pageCount": 550,
+    "publishedDate": { "$date": "2010-04-16T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/baley.jpg",
+    "shortDescription": "Brownfield Application Development in .Net shows you how to approach legacy applications with the state-of-the-art concepts, patterns, and tools you've learned to apply to new projects. Using an existing application as an example, this book guides you in applying the techniques and best practices you need to make it more maintainable and receptive to change.",
+    "longDescription": "It's easy to get excited about building a new software project from scratch. So-called \"greenfield\" projects often involve learning new technology and the opportunity for experimentation. Working on established software projects may seem less glamorous.    Most software developers have inherited a monolithic application where the day-to-day tasks involve maintenance, incremental improvements, or even cleaning up the mess another programmer left behind. These legacy or brownfield projects often have tightly coupled components, low cohesion, and poor separation of concerns, making them fragile and resistant to change.    Brownfield Application Development in .Net shows you how to approach legacy applications with the state-of-the-art concepts, patterns, and tools you've learned to apply to new projects. Using an existing application as an example, this book guides you in applying the techniques and best practices you need to make it more maintainable and receptive to change.    Starting with the build process and the introduction of unit tests, the authors show you how to set up the application so that in later chapters, you can make incremental changes aimed at decoupling components from each other. Each practice introduced will increase your confidence and ability to make subsequent changes to your code.    As the book proceeds, the authors introduce frameworks and tools commonly used today while still approaching the subject from a conceptual level so that you can substitute alternate tools as appropriate. This book examines the reasons why a tool is necessary, not the tool itself. Because the book is based on the authors' experiences, Brownfield Application Development in .Net moves beyond the theories and shows you the techniques you need to be successful.",
+    "status": "PUBLISH",
+    "authors": ["Kyle Baley", "Donald Belcham"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "MongoDB in Action",
+    "isbn": "1935182870",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-12-12T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/banker.jpg",
+    "shortDescription": "MongoDB In Action is a comprehensive guide to MongoDB for application developers. The book begins by explaining what makes MongoDB unique and describing its ideal use cases. A series of tutorials designed for MongoDB mastery then leads into detailed examples for leveraging MongoDB in e-commerce, social networking, analytics, and other common applications.",
+    "longDescription": "MongoDB is a document-oriented database that's highly scalable and delivers very high-performance, especially with massive data sets that need to be spread across multiple servers. It blends the things you expect with any database   like indexing, querying, and high availability   with powerful new features like easy horizontal scaling (\"auto-sharding\"), map/reduce aggregation, and a flexible document data model to support dynamic schemas.    MongoDB In Action is a comprehensive guide to MongoDB for application developers. The book begins by explaining what makes MongoDB unique and describing its ideal use cases. A series of tutorials designed for MongoDB mastery then leads into detailed examples for leveraging MongoDB in e-commerce, social networking, analytics, and other common applications.    Along the way, all of MongoDB's major features are covered, including:        * Indexes and explain plans for efficient queries      * Atomic operations for managing simple data structures and manipulating complex, rich documents      * GridFS for storing and managing large binary objects (images, videos, etc.) in MongoDB      * Map-reduce for custom aggregations and reporting      * Master-slave replication and replica sets for automated failover      * Auto-sharding for automated horizontal scaling    The handy reference section on schema design patterns will help ease the transition from the relational data model of SQL to MongoDB's document-based data model. The numerous, detailed examples are implemented in Ruby and include comprehensive explanations.    MongoDB has been gaining traction in the developer community for its speed, flexibility, scalability, and ease of use. With production deployments that include SourceForge, Foursquare, and Shutterfly, MongoDB is proving to be a robust and reliable database system that keeps developers happy. Covering everything from installation to application design to deployment, MongoDB In Action is written for the application developer who wants to take advantage of MongoDB and get up and running quickly.",
+    "status": "PUBLISH",
+    "authors": ["Kyle Banker"],
+    "categories": ["Next Generation Databases"]
+  },
+  {
+    "title": "Distributed Application Development with PowerBuilder 6.0",
+    "isbn": "1884777686",
+    "pageCount": 504,
+    "publishedDate": { "$date": "1998-06-01T00:00:00.000-0700" },
+    "longDescription": "Distributed Application Development with PowerBuilder 6.0 is a vital source for the PowerBuilder programmer; it provides the sort of detailed coverage of Distributed PowerBuilder that you can find nowwhere else.    The book opens with a discussion of distributed computing in general, as well as its design principles and technologies. Then Distributed PowerBuilder is examined in detail. By building a simple application step by step, the author discusses all of the concepts and components needed for building a PowerBuilder application and shows how to make the application available over a network.    Finally, the author explores how PowerBuilder can be used in distributed solutions both with and without using DPB.    Distributed Application Development with PowerBuilder 6.0 is for any PowerBuilder developer looking for information on distributed computing options with the PowerBuilder environment. IS managers, system architects, and developers using many different technologies can learn how PowerBuilder can be used as all or part of the solution for building distributed applications.    The main topic of this book is Distributed PowerBuilder (DPB). It covers the basics of building a DPB application and walks through each new feature with examples including the Shared object, DataWindow synchronization, Server Push and Web.PB. It also explains distributed computing technologies and design principles so that your application can be built to handle the stresses of a distributed environment.  ",
+    "status": "PUBLISH",
+    "authors": ["Michael J. Barlotta"],
+    "categories": ["PowerBuilder"]
+  },
+  {
+    "title": "Jaguar Development with PowerBuilder 7",
+    "isbn": "1884777864",
+    "pageCount": 550,
+    "publishedDate": { "$date": "1999-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/barlotta2.jpg",
+    "shortDescription": "Jaguar Development with PowerBuilder 7 is the definitive guide to distributed application development with PowerBuilder. It is the only book dedicated to preparing PowerBuilder developers for Jaguar applications and has been approved by Sybase engineers and product specialists who build the tools described in the book.",
+    "longDescription": "Jaguar Development with PowerBuilder 7 is the definitive guide to distributed application development with PowerBuilder. It is the only book dedicated to preparing PowerBuilder developers for Jaguar applications and has been approved by Sybase engineers and product specialists who build the tools described in the book.    Jaguar Development with PowerBuilder 7 focuses on getting you up to speed on Jaguar and PowerBuilder, and it is packed with code samples to guide you every step of the way. It covers each step involved in application development, from setting up the development environment to deploying a production application.    Even a PowerBuilder developer with no experience in distributed technologies or Jaguar CTS will learn what it takes to build an application. Jaguar Development with PowerBuilder 7 covers:    Developing Component-centric Applications  Building Jaguar CTS Components/Clients  CORBA  Adaptive SQL Anywhere  Adaptive Server Enterprise  and lots more!",
+    "status": "PUBLISH",
+    "authors": ["Michael Barlotta"],
+    "categories": ["PowerBuilder", "Client-Server"]
+  },
+  {
+    "title": "Taming Jaguar",
+    "isbn": "1884777686",
+    "pageCount": 362,
+    "publishedDate": { "$date": "2000-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/barlotta3.jpg",
+    "longDescription": "Taming Jaguar is part of the PowerBuilder Developer's series, which includes Distributed Application Development with PowerBuilder 6 and Jaguar Development with PowerBuilder 7.    An application server is the heart of your enterprise computing architecture, centralizing your web content, business logic, and access to your data and legacy applications. Sybase's application server, Jaguar CTS, delivers performance, scalability, and flexibility running CORBA , COM, Java/EJB, C++, and PowerBuilder components.    If you are looking to adopt Jaguar in your enterprise, look no further. Taming Jaguar shows you how to solve the real-world problems of installing, trouble-shooting, designing, developing, and maintaining a Jaguar application. Topical chapters are organized in a Q & A format making it easy for you to quickly find the solution to your problem. They also provide foundational and background information as well as detailed technical how-tos.    Although designed so you can find your problems easily, this book is meant to be read cover-to-cover with each chapter discussing its topic exhaustively.    What's inside:    J2EE development  Java Servlets  Jaguar administration & code balancing  EJBs  Web development with PowerDynamo  Advanced component design ",
+    "status": "PUBLISH",
+    "authors": ["Michael J. Barlotta", "Jason R. Weiss"],
+    "categories": ["PowerBuilder"]
+  },
+  {
+    "title": "3D User Interfaces with Java 3D",
+    "isbn": "1884777902",
+    "pageCount": 520,
+    "publishedDate": { "$date": "2000-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/barrilleaux.jpg",
+    "longDescription": "3D User Interfaces with Java 3D is a practical guide for providing next-generation applications with 3D user interfaces for manipulation of in-scene objects. Emphasis is on standalone and web-based business applications, such as for online sales and mass customization, but much of what this book offers has broad applicability to 3D user interfaces in other pursuits such as scientific visualization and gaming.  This book provides an extensive conceptual framework for 3D user interface techniques, and an in-depth introduction to user interface support in the Java 3D API, including such topics as picking, collision, and drag-and-drop. Many of the techniques are demonstrated in a Java 3D software framework included with the book, which also provides developers with many general-purpose building blocks for constructing their own user interfaces.    Applications and their use of 3D are approached realistically. The book is geared towards sophisticated user interfaces for the \"everyday user\" who doesn't have a lot of time to learn another application--much less a complicated one--and an everyday computer system without exotic devices like head mounted displays and data gloves. Perhaps the best description of this book is: \"A roadmap from Java 3D to 'Swing 3D'.\"",
+    "status": "PUBLISH",
+    "authors": ["Jon Barrilleaux"],
+    "categories": ["Java", "Computer Graphics"]
+  },
+  {
+    "title": "Hibernate in Action",
+    "isbn": "193239415X",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2004-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bauer.jpg",
+    "shortDescription": "\"2005 Best Java Book!\" -- Java Developer's Journal",
+    "longDescription": "Hibernate practically exploded on the Java scene. Why is this open-source tool so popular  Because it automates a tedious task: persisting your Java objects to a relational database. The inevitable mismatch between your object-oriented code and the relational database requires you to write code that maps one to the other. This code is often complex, tedious and costly to develop. Hibernate does the mapping for you.    Not only that, Hibernate makes it easy. Positioned as a layer between your application and your database, Hibernate takes care of loading and saving of objects. Hibernate applications are cheaper, more portable, and more resilient to change. And they perform better than anything you are likely to develop yourself.    Hibernate in Action carefully explains the concepts you need, then gets you going. It builds on a single example to show you how to use Hibernate in practice, how to deal with concurrency and transactions, how to efficiently retrieve objects and use caching.    The authors created Hibernate and they field questions from the Hibernate community every day - they know how to make Hibernate sing. Knowledge and insight seep out of every pore of this book.",
+    "status": "PUBLISH",
+    "authors": ["Christian Bauer", "Gavin King"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Hibernate in Action (Chinese Edition)",
+    "pageCount": 400,
+    "publishedDate": { "$date": "1999-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bauer-cn.jpg",
+    "status": "PUBLISH",
+    "authors": ["Christian Bauer", "Gavin King"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Java Persistence with Hibernate",
+    "isbn": "1932394885",
+    "pageCount": 880,
+    "publishedDate": { "$date": "2006-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bauer2.jpg",
+    "shortDescription": "\"...this book is the ultimate solution. If you are going to use Hibernate in your application, you have no other choice, go rush to the store and get this book.\" --JavaLobby",
+    "longDescription": "Persistence -- the ability of data to outlive an instance of a program -- is central to modern applications. Hibernate, the most popular Java persistence tool, provides automatic and transparent object/relational mapping so it's a snap to work with SQL databases in Java applications. Hibernate conforms to the new EJB 3.0 and Java Persistence 1.0 standards.    Java Persistence with Hibernate explores Hibernate by developing an application that ties together hundreds of individual examples. You'll immediately dig into the rich programming model of Hibernate 3.2 and Java Persistence, working through queries, fetching strategies, caching, transactions, conversations, and more. You'll also appreciate the well-illustrated discussion of best practices in database design, object/relational mapping, and optimization techniques.    In this revised edition of Manning's bestselling Hibernate in Action, authors Christian Bauer and Gavin King -- the founder of the Hibernate project -- cover Hibernate 3.2 in detail along with the EJB 3.0 and Java Persistence 1.0 standards.",
+    "status": "PUBLISH",
+    "authors": ["Christian Bauer", "Gavin King"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "JSTL in Action",
+    "isbn": "1930110529",
+    "pageCount": 480,
+    "publishedDate": { "$date": "2002-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bayern.jpg",
+    "longDescription": "JSTL is an important simplification of the Java web platform. With JSTL, page authors can now write dynamic pages using standard HTML-like tags and an easy-to-learn expression language. JSTL is a standard from the Java Community Process, and its expression language will become part of JSP 2.0.    JSTL in Action shows you how to write rich, dynamic web pages without programming. From simple loops to tricky XML processing, every feature of JSTL is covered and exercised in numerous useful examples. Whether you are a novice page author or an experienced Java programmer, this book shows you easy ways to create powerful web sites.    To help readers who don't already have a JSP container run the examples in the book, there's a free companion download here. This bundle contains a ready-to-run JSP container, a JSTL implementation, and all the book's examples.",
+    "status": "PUBLISH",
+    "authors": ["Shawn Bayern"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "iBATIS in Action",
+    "isbn": "1932394826",
+    "pageCount": 384,
+    "publishedDate": { "$date": "2007-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/begin.jpg",
+    "shortDescription": "   Gets new users going and gives experienced users in-depth coverage of advanced features.       Jeff Cunningham, The Weather Channel Interactive",
+    "longDescription": "Unlike some complex and invasive persistence solutions, iBATIS keeps O/RM clean and simple. It is an elegant persistence framework that maps classes to SQL statements and keeps the learning curve flat. The iBATIS approach makes apps easy to code, test, and deploy. You write regular SQL and iBATIS gives you standard objects for persistence and retrieval. There   s no need to change existing database schemas   iBATIS is tolerant of legacy databases (even badly designed ones).    iBATIS in Action is a comprehensive tutorial on the framework and an introduction to the iBATIS philosophy. Clinton Begin and coauthors lead you through the core features, including configuration, statements, and transactions. Because you   ll need more than the basics, it explores sophisticated topics like Dynamic SQL and data layer abstraction. You   ll also learn a useful skill: how to extend iBATIS itself. A complete, detailed example shows you how to put iBATIS to work. Topics are clearly organized and easily accessible for reference.",
+    "status": "PUBLISH",
+    "authors": ["Clinton Begin", "Brandon Goodin", "Larry Meadors"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Designing Hard Software",
+    "isbn": "133046192",
+    "pageCount": 350,
+    "publishedDate": { "$date": "1997-02-01T00:00:00.000-0800" },
+    "shortDescription": "\"This book is well written ... The author does not fear to be controversial. In doing so, he writes a coherent book.\" --Dr. Frank J. van der Linden, Phillips Research Laboratories",
+    "longDescription": "Have you ever heard, \"I can't define a good design but I know one when I see it\"  Designing Hard Software discusses ways to develop software system designs that have the same tangibility and visibility as designs for hard objects like buildings or computer hardware. It emphasizes steps called \"essential tasks\" which result in software specifications that show how each requirement, including robustness and extensibility, will be satisfied. All software developers and managers seeking to develop \"hard\" software will benefit from these ideas.    There are six essential tasks necessary for a good design:    User (run-time) requirements  Development sponsor (build-time) requirements  Domain information  Behavior identification and allocation  Behavior description  Software system architecture  Designing Hard Software goes beyond the standard software development methodologies such as those by Booch, Rumbaugh, Yourdon, and others, by providing techniques for a complete system architecture as well as explicit measures of the goodness of design. So, \"you define a good design.\"",
+    "status": "PUBLISH",
+    "authors": ["Douglas W. Bennett"],
+    "categories": ["Object-Oriented Programming", "S"]
+  },
+  {
+    "title": "Hibernate Search in Action",
+    "isbn": "1933988649",
+    "pageCount": 488,
+    "publishedDate": { "$date": "2008-12-21T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bernard.jpg",
+    "shortDescription": "\"A great resource for true database independent full text search.\" --Aaron Walker, base2Services",
+    "longDescription": "Good search capability is one of the primary demands of a business application. Engines like Lucene provide a great starting point, but with complex applications it can be tricky to implement. It's tough to keep the index up to date, deal with the mismatch between the index structure and the domain model, handle querying conflicts, and so on.    Hibernate Search is an enterprise search tool based on Hibernate Core and Apache Lucene. It provides full text search capabilities for Hibernate-based applications without the infrastructural code required by other search engines. With this free, open-source technology, you can quickly add high-powered search features in an intelligent, maintainable way.    Hibernate Search in Action is a practical, example-oriented guide for Java developers with some background in Hibernate Core. As the first book to cover Hibernate Search, it guides you through every step to set up full text search functionality in your Java applications. The book also introduces core search techniques and reviews the relevant parts of Lucene, in particular the query capabilities.    Hibernate Search in Action also provides a pragmatic, how-to exploration of more advanced topics such as Search clustering. For anyone using Hibernate or JBoss Seam, this book is the definitive guide on how to add or enhance search features in their applications.",
+    "status": "PUBLISH",
+    "authors": ["Emmanuel Bernard", "John Griffin"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "jQuery in Action",
+    "isbn": "1933988355",
+    "pageCount": 376,
+    "publishedDate": { "$date": "2008-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bibeault.jpg",
+    "shortDescription": "\"The best-thought-out and researched piece of literature on the jQuery library.\" --From the forward by John Resig, Creator of jQuery",
+    "longDescription": "A really good web development framework anticipates your needs. jQuery does more   it practically reads your mind. Developers fall in love with this JavaScript library the moment they see 20 lines of code reduced to three. jQuery is concise and readable. Its unique    chaining    model lets you perform multiple operations on a page element in succession, as in  (   div.elements   ).addClass(   myClass   ).load(   ajax_url   ).fadeIn()    jQuery in Action is a fast-paced introduction and guide. It shows you how to traverse HTML documents, handle events, perform animations, and add Ajax to your web pages. The book's unique    lab pages    anchor the explanation of each new concept in a practical example. You'll learn how jQuery interacts with other tools and frameworks and how to build jQuery plugins. This book requires a modest knowledge of JavaScript and Ajax.",
+    "status": "PUBLISH",
+    "authors": ["Bear Bibeault", "Yehuda Katz"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "jQuery in Action, Second Edition",
+    "isbn": "1935182323",
+    "pageCount": 488,
+    "publishedDate": { "$date": "2010-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bibeault2.jpg",
+    "shortDescription": "jQuery in Action, Second Edition is a fast-paced introduction to jQuery that will take your JavaScript programming to the next level. An in-depth rewrite of the bestselling first edition, this edition provides deep and practical coverage of the latest jQuery and jQuery UI releases. The book's unique \"lab pages\" anchor the explanation of each new concept in a practical example. You'll learn how to traverse HTML documents, handle events, perform animations, and add Ajax to your web pages. This comprehensive guide also teaches you how jQuery interacts with other tools and frameworks and how to build jQuery plugins. ",
+    "longDescription": "A really good web development framework anticipates your needs. jQuery does more   it practically reads your mind. Developers fall in love with this JavaScript library the moment they see 20 lines of code reduced to three. jQuery is concise and readable. Its unique \"chaining\" model lets you perform multiple operations on a page element in succession. And with version 1.4, there's even more to love about jQuery, including new effects and events, usability improvements, and more testing options.    jQuery in Action, Second Edition is a fast-paced introduction and guide. Building on the bestselling first edition, it adds new examples, more labs, and deeper explanations of important features. You   ll learn how to traverse HTML documents, handle events, perform animations, and add Ajax to your web pages. The book's unique \"lab pages\" anchor the explanation of each new concept in a practical example. You'll learn how jQuery interacts with other tools and frameworks and how to build jQuery plugins. This book requires a modest knowledge of JavaScript and Ajax.",
+    "status": "PUBLISH",
+    "authors": ["Bear Bibeault", "Yehuda Katz"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Building Secure and Reliable Network Applications",
+    "isbn": "1884777295",
+    "pageCount": 591,
+    "publishedDate": { "$date": "1996-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/birman.jpg",
+    "shortDescription": "\"... tackles the difficult problem of building reliable distributed computing systems in a way that not only presents the principles but also describes proven practical solutions.\" --John Warne, BNR Europe",
+    "longDescription": "As the \"network is the computer\" slogan becomes reality so reliability and security of networked applications become more important. Not only are hospitals, air traffic control systems, and telephone networks becoming more networked, but business applications are increasingly based on the open world of the Internet. Stability in the face of minor accidents, software or hardware failures, or outright attack has become vital. This book provides a structured approach to the technologies currently available for building reliable solutions to these problems.    Building Secure and Reliable Network Applications reviews the most important network technologies from a security and reliability perspective and discusses the most effective solutions with an eye towards their application to real-world systems. Any computing professional who works with networked software will find this book valuable in understanding security and reliability vulnerabilities and how to address them.",
+    "status": "PUBLISH",
+    "authors": ["Kenneth P. Birman"],
+    "categories": ["Networking", "Theory"]
+  },
+  {
+    "title": "Ruby for Rails",
+    "isbn": "1932394699",
+    "pageCount": 532,
+    "publishedDate": { "$date": "2006-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/black.jpg",
+    "shortDescription": "The word is out: with Ruby on Rails you can build powerful Web applications easily and quickly! And just like the Rails framework itself, Rails applications are Ruby programs. That means you can   t tap into the full power of Rails unless you master the Ruby language.",
+    "longDescription": "Ruby for Rails helps Rails developers achieve Ruby mastery. Each chapter deepens your Ruby knowledge and shows you how it connects to Rails. You   ll gain confidence working with objects and classes and learn how to leverage Ruby   s elegant, expressive syntax for Rails application power. And you'll become a better Rails developer through a deep understanding of the design of Rails itself and how to take advantage of it.    Newcomers to Ruby will find a Rails-oriented Ruby introduction that   s easy to read and that includes dynamic programming techniques, an exploration of Ruby objects, classes, and data structures, and many neat examples of Ruby and Rails code in action.    Ruby for Rails: the Ruby guide for Rails developers!",
+    "status": "PUBLISH",
+    "authors": ["David A. Black"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "The Well-Grounded Rubyist",
+    "isbn": "1933988657",
+    "pageCount": 520,
+    "publishedDate": { "$date": "2009-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/black2.jpg",
+    "shortDescription": "What would appear to be the most complex topic of the book is in fact surprisingly easy to assimilate, and one realizes that the efforts of the author to gradually lead us to a sufficient knowledge of Ruby in order to tackle without pain the most difficult subjects, bears its fruit.       Eric Grimois, Developpez.com",
+    "longDescription": "Interest in Ruby has exploded. Developers discovering this elegant, dynamic language quickly learn that Ruby is a powerful alternative to traditional static languages like Java or C++. It runs in most operating environments and can handle virtually any programming task you throw at it. Ruby code is clean and elegant. Best of all, Ruby is dynamic, which means that it's designed to react at runtime to changes in an application's environment or requirements.    The Well-Grounded Rubyist takes you from interested novice to proficient practitioner. It's a beautifully written tutorial that begins with the basic steps to get your first Ruby program up and running and goes on to explore sophisticated topics like callable objects, reflection, and threading The book concentrates on the language, preparing you for any way you may choose to use Ruby. Whether the topic is simple or tough, the book's easy-to-follow examples and explanations give you immediate confidence as you build your Ruby programming skills.    The Well-Grounded Rubyist is a thoroughly revised and updated edition of the best-selling Ruby for Rails. In this new book, expert author David A. Black moves beyond Rails and presents a broader view of Ruby. It covers Ruby 1.9, and keeps the same sharp focus and clear writing that made Ruby for Rails stand out.    It's no wonder one reader commented: \"The technical depth is just right to not distract beginners, yet detailed enough for more advanced readers.\"",
+    "status": "PUBLISH",
+    "authors": ["David A. Black"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Website Owner's Manual",
+    "isbn": "1933988452",
+    "pageCount": 296,
+    "publishedDate": { "$date": "2009-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/boag.jpg",
+    "shortDescription": "Website Owner's Manual helps you form a vision for your site, guides you through the process of selecting a web design agency, and gives you enough background information to make intelligent decisions throughout the development process. This book provides a jargon-free overview of web design, including accessibility, usability, online marketing, and web development techniques. You'll gain a practical understanding of the technologies, processes, and ideas that drive a successful website.",
+    "longDescription": "Just because you're responsible for your organization's web presence doesn't mean you know how to build a website. The job of planning, launching, and managing a site often falls to people who have little or no experience in web design or development. Website Owner's Manual is a book for the thousands of marketers, IT managers, project leaders, and business owners who need to put a website in place and keep it running with a minimum of trouble.    Website Owner's Manual helps you form a vision for your site, guides you through the process of selecting a web design agency, and gives you enough background information to make intelligent decisions throughout the development process. This book provides a jargon-free overview of web design, including accessibility, usability, online marketing, and web development techniques. You'll gain a practical understanding of the technologies, processes, and ideas that drive a successful website.",
+    "status": "PUBLISH",
+    "authors": ["Paul A. Boag"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "ASP.NET 4.0 in Practice",
+    "isbn": "1935182463",
+    "pageCount": 504,
+    "publishedDate": { "$date": "2011-05-15T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bochicchio.jpg",
+    "shortDescription": "ASP.NET 4.0 in Practice contains real world techniques from well-known professionals who have been using ASP.NET since the first previews.",
+    "longDescription": "ASP.NET is an established technology to build web applications using Microsoft products. It drives a number of enterprise-level web sites around the world, but it can be scaled for projects of any size. The new version 4.0 is an evolutionary step: you will find a lot of new features that you will be able to leverage to build better web applications with minimal effort.    ASP.NET 4.0 in Practice contains real world techniques from well-known professionals who have been using ASP.NET since the first previews. Using a practical Problem-Solution-Discussion format, it will guide you through the most common scenarios you will face in a typical ASP.NET application, and provide solutions and suggestions to take your applications to another level.",
+    "status": "PUBLISH",
+    "authors": [
+      "Daniele Bochicchio",
+      "Stefano Mostarda",
+      "",
+      "Marco De Sanctis"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Hello! Python",
+    "isbn": "1935182080",
+    "pageCount": 350,
+    "publishedDate": { "$date": "2012-02-13T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/briggs.jpg",
+    "shortDescription": "Hello! Python fully covers the building blocks of Python programming and gives you a gentle introduction to more advanced topics such as object oriented programming, functional programming, network programming, and program design. New (or nearly new) programmers will learn most of what they need to know to start using Python immediately.",
+    "longDescription": "Learn Python the fast and fun way! Hello! Python is a fully-illustrated, project-driven tutorial designed to get you up and running with Python, no experience required. It's full of projects that help you learn the way most programmers do   one step at a time, starting with the basics, and then applying your new skills in useful programs.    Hello! Python fully covers the building blocks of Python programming and gives you a gentle introduction to more advanced topics such as object oriented programming, functional programming, network programming, and program design. New (or nearly new) programmers will learn most of what they need to know to start using Python immediately.    The book presents several practical projects, including games, business, and graphical applications. Each example provides a solid base for you to develop your own programs. As you dig into Python, you'll see how programs are created, and the reasons behind the technical decisions.    The book covers Python's large standard library gradually and in the context of sample apps, so the reader isn't overwhelmed with a large number of library functions to absorb all at once. Upon completing the book, the reader will have a good grasp of Python, know several technologies and libraries related to Python and be able to identify many resources for future growth as a programmer.",
+    "status": "PUBLISH",
+    "authors": ["Anthony Briggs"],
+    "categories": ["Python"]
+  },
+  {
+    "title": "PFC Programmer's Reference Manual",
+    "isbn": "1884777554",
+    "pageCount": 368,
+    "publishedDate": { "$date": "1998-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/brooks.jpg",
+    "longDescription": "PFC Programmers' Reference Manual provides information that should prove indispensible for the PowerBuilder programmer trying to learn the PowerBuilder Foundation Classes. It lists all of the objects and functions that they might use for a project with notes from the author on each function. Service-based architecture and appropriate object-oriented techniques are stressed throughout.    The more difficult objects and services are given special attention; these are the ones that are sure to enhance your image as an expert in this emerging technology. The text is written with the same easy-to-understand prose that has marked the PowerBuilder Dojo as one of the premier PowerBuilder sites worldwide.    At first, the programmer will find this book a comprehensive guide to the wide scope of these libraries. Later it will serve as a handy memory tool for finding exactly what is needed at implementation time.    The manager will find this book an invaluable source for understanding which tools are available for immediate implementation.    PFC Programmers' Reference Manual covers PowerBuilder version 6 as well as version 5",
+    "status": "PUBLISH",
+    "authors": ["Richard Brooks"],
+    "categories": ["PowerBuilder"]
+  },
+  {
+    "title": "Graphics File Formats",
+    "isbn": "133034054",
+    "pageCount": 484,
+    "publishedDate": { "$date": "1995-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/brown.jpg",
+    "longDescription": "Graphics File Formats is a comprehensive guide to the file formats used in computer graphics and related areas. It discusses implementation and design of file formats in a readable style focusing on the basic issues important for the evaluation or development of file formats, including  data types  design goals  color  data organization  data encoding  data compression  classification  and conversion  The second part of the book provides summaries of over 50 graphics file formats in commercial use, such as CGM, DDES, FITS, MPEG, PICT, PostScript, TIFF, QuickTime, RIB, SunRaster, and X bitmap. Following a uniform organization, these summaries are handy reference sources for those needing basic information on these formats.    Written by two computer experts, this book is intended for graphics professionals, programmers and all those in commercial, engineering and scientific applications areas who need to make decisions related to file formats from graphical data.",
+    "status": "PUBLISH",
+    "authors": ["C. Wayne Brown", "Barry J. Shepherd"],
+    "categories": ["Computer Graphics"]
+  },
+  {
+    "title": "Visual Object Oriented Programming",
+    "isbn": "131723979",
+    "pageCount": 280,
+    "publishedDate": { "$date": "1995-02-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/burnett.jpg",
+    "longDescription": "This first book on the union of two rapidly growing approaches to programming--visual programming and object technology--provides a window on a subject of increasing commercial importance. It is an introduction and reference for cutting-edge developers, and for researchers, students, and enthusiasts interested in the design of visual OOP languages and environments.  Visual Object-Oriented Programming includes chapters on both emerging research and on a few classic systems, that together can help those who design visual object-oriented programming systems avoid some known pitfalls. The book contains an experience report on the use of available visual programming languages in a commercial setting, and chapters, by some of the leaders of this cutting-edge subject, covering systems such as Prograph, VIPR, PURSUIT, ThingLab II, Vampire, Forms/3, Self's environment, Vista, SPE, and Cerno.",
+    "status": "PUBLISH",
+    "authors": ["Margaret M. Burnett", "Adele Goldberg", "", "Ted G. Lewis"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "iOS in Practice",
+    "isbn": "1617291269",
+    "pageCount": 325,
+    "publishedDate": { "$date": "2013-11-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cahill.jpg",
+    "status": "PUBLISH",
+    "authors": ["Bear P. Cahill"],
+    "categories": ["Mobile Technology"]
+  },
+  {
+    "title": "iPhone in Action",
+    "isbn": "193398886X",
+    "pageCount": 472,
+    "publishedDate": { "$date": "2008-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/callen.jpg",
+    "shortDescription": "   There is not another iPhone title that does such a great coverage of both Web and SDK topics under one roof, thus providing a well-rounded developer education.       Vladimir Pasman, Cocoacast.com",
+    "longDescription": "The iPhone explodes old ideas of a cell phone. Its native SDK offers a remarkable range of features including easy-to-build graphical objects, a unique navigation system, and a built-in database, all on a location-knowledgeable device. Websites and web apps can now behave like native iPhone apps, with great network integration.    iPhone in Action is an in-depth introduction to both native and web programming for the iPhone. You'll learn how to turn your web pages into compelling iPhone web apps using WebKit, iUI, and Canvas. The authors also take you step by step into more complex Objective-C programming. They help you master the iPhone SDK including its UI and features like accelerometers, GPS, the Address Book, SQLite, and many more. Using Apple's standard tools like Dashcode, Xcode, and Interface Builder, you'll learn how to best use both approaches: iPhone web and SDK programming.    This book is intended as an introduction to its topics. Proficiency with C, Cocoa, or Objective-C is helpful but not required.",
+    "status": "PUBLISH",
+    "authors": ["Christopher Allen", "Shannon Appelcline"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Silverlight 2 in Action",
+    "isbn": "1933988428",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2008-10-31T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/campbell.jpg",
+    "shortDescription": "   Silverlight 2 in Action gives you a solid, well-thought out and coherent foundation for building RIA web applications, and provides you with lots of technical details without ever becoming cloudy.       Golo Roden, author, trainer and speaker for .NET technologies",
+    "longDescription": "Microsoft describes Silverlight as a \"cross-browser, cross-platform plug-in for delivering the next generation of .NET based media experiences and rich interactive applications for the Web.\" That's a really boring description for a really exciting new technology. Anyone who has looked at the demos and gotten a taste of what Silverlight can do knows that Silverlight represents an entirely new level of rich web interface technology for Microsoft developers. With Silverlight 2, developers can use JavaScript, VB, C#, Python, and Ruby to build user-friendly, interactive, and visually-dazzling web applications that work in most major browsers.    Silverlight 2 in Action is the first book to cover Silverlight 2, a far more robust implementation of Silverlight than the current 1 release that supports only JavaScript. The much-anticipated 2 release adds powerful new features along with the ability to code in multiple languages and integrate your work with Visual Studio and the new Expression suite of tools. This book delivers real-world examples and in-depth walkthroughs to help you confidently enhance your web applications using Silverlight 2.    Silverlight 2 in Action devotes extensive coverage to flexible layout components, the extensible control model, the communication framework, and the data-binding features   all cornerstones of software development. Author and Microsoft MVP Chad Campbell also describes rich media and vivid graphical and animation features. The final chapters include a variety of Silverlight deployment scenarios.    In addition to the fundamentals of Silverlight, you'll be introduced to architectural components such as the Silverlight object model. The book addresses the developer/designer collaboration model Silverlight enables, showing the developer how to include the designer effectively in the project workflow. This model is illustrated throughout the examples.    For ongoing reader support, the author will maintain a dedicated book-support website providing up-to-the-minute working examples, complete with source code, all in Silverlight.",
+    "status": "PUBLISH",
+    "authors": ["Chad A. Campbell", "John Stockton"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "The Quick Python Book, Second Edition",
+    "isbn": "193518220X",
+    "pageCount": 360,
+    "publishedDate": { "$date": "2010-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ceder.jpg",
+    "shortDescription": "This revision of Manning's popular The Quick Python Book offers a clear, crisp introduction to the elegant Python programming language and its famously easy-to-read syntax. Written for programmers new to Python, this updated edition covers features common to other languages concisely, while introducing Python's comprehensive standard functions library and unique features in detail.",
+    "longDescription": "This revision of Manning's popular The Quick Python Book offers a clear, crisp introduction to the elegant Python programming language and its famously easy-to-read syntax. Written for programmers new to Python, this updated edition covers features common to other languages concisely, while introducing Python's comprehensive standard functions library and unique features in detail.    After exploring Python's syntax, control flow, and basic data structures, the book shows how to create, test, and deploy full applications and larger code libraries. It addresses established Python features as well as the advanced object-oriented options available in Python 3. Along the way, you'll survey the current Python development landscape, including GUI programming, testing, database access, and web frameworks.    WHAT'S INSIDE:        * Concepts and Python 3 features      * Regular expressions and testing      * Python tools      * All the Python you need   nothing you don't",
+    "status": "PUBLISH",
+    "authors": ["Naomi R. Ceder"],
+    "categories": ["Python"]
+  },
+  {
+    "title": "Internet and Intranet Applications with PowerBuilder 6",
+    "isbn": "1884777600",
+    "pageCount": 390,
+    "publishedDate": { "$date": "2000-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cervenka.jpg",
+    "longDescription": "If you're a PowerBuilder programmer, Internet and Intranet Applications with PowerBuilder 6 is your ticket to learning Web.PB and related technologies. The book covers everything you need to know to build web browser and server programs with the PowerBuilder 6 Internet Toolkit. Also covered is how to write winsock programs with PB, and Distributed PB is covered to the extent necessary to learn Web.PB.",
+    "status": "PUBLISH",
+    "authors": ["Tom Cervenka"],
+    "categories": ["PowerBuilder"]
+  },
+  {
+    "title": "Practical Methods for Your Year 2000 Problem",
+    "isbn": "188477752X",
+    "pageCount": 236,
+    "publishedDate": { "$date": "1998-01-01T00:00:00.000-0800" },
+    "shortDescription": "Practical Methods for Your Year 2000 Problem gives the Year 2000 project team a step-by-step methodology for addressing the Year 2000 problem.",
+    "longDescription": "Practical Methods for Your Year 2000 Problem gives the Year 2000 project team a step-by-step methodology for addressing the Year 2000 problem. By seeking to minimize the amount of work to be performed, and thus maximize the probability of having a successful Year 2000 project, the book is geared towards (a) helping the inhouse personnel understand, scope and, execute their project while (b) removing the need to spend large amounts of money on professional consulting firms. The VisualAge 2000 toolset by IBM is used for examples.    Practical Methods for Your Year 2000 Problem identifies what you need to look for, how you need to look at it, and what to do with what you see. No other book or company in the market today provides a solution as comprehensive and cost-effective as this. Starting with the clear, concise, and unambiguous definitions of what dates are and how programs and files relate to them, the book goes on to describe how to change them to be useful forever, not just up to the next century.    Finally, Practical Methods for Your Year 2000 Problem gives practical and comprehensive advice on all aspects of the Year 2000 problem, from inventorying software and hardware through to implementing large numbers of interrelated programs, files, and tables.",
+    "status": "PUBLISH",
+    "authors": ["Robert Chapman"],
+    "categories": ["Business"]
+  },
+  {
+    "title": "Mobile Agents",
+    "isbn": "1884777368",
+    "pageCount": 320,
+    "publishedDate": { "$date": "1997-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cockayne.jpg",
+    "shortDescription": "Mobile Agents is the first book to give the reader the ability to create and use powerful mobile agents on the Internet.",
+    "longDescription": "Mobile Agents is the first book to give the reader the ability to create and use powerful mobile agents on the Internet. The book presents the reality of today's agent technologies and the future that this technology promises. It teaches how to create and deploy the major mobile agent systems (Telescript, Agent Tcl, Ara, Aglets Workbench) and how to solve a variety of problems on the Internet. Each of the chapters was written in collaboration with the original developers of the agent systems.",
+    "status": "PUBLISH",
+    "authors": ["William R. Cockayne and Michael Zyda", "editors"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Spring Dynamic Modules in Action",
+    "isbn": "1935182307",
+    "pageCount": 450,
+    "publishedDate": { "$date": "2010-09-04T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cogoluegnes.jpg",
+    "shortDescription": "Spring Dynamic Modules in Action introduces Spring DM and OSGi to Java EE developers and architects. It presents the fundamental concepts of OSGi-based apps and maps them to the familiar ideas of the Spring framework. Then, it engages you with the techniques and concepts you'll need to develop stable, flexible enterprise apps. You'll learn how to embed a Spring container inside an OSGi bundle, and how Spring DM lets you blend Spring strengths like dependency injection with OSGi-based services. Along the way, you'll see how Spring DM handles data access and web-based components, and you'll explore topics like unit testing and configuration in an OSGi-based environment.",
+    "longDescription": "OSGi is increasingly familiar to Java coders working in distributed environments, but the tools required to implement OSGi-based systems have been slow to develop. Spring Dynamic Modules (Spring DM) is a framework designed to make it easy to build Spring apps that take advantage of the OSGi approach to modular Java development. It simplifies the task of creating true component and service oriented architectures in an OSGi environment using all the powerful features of the Spring framework.    Spring Dynamic Modules in Action introduces Spring DM and OSGi to Java EE developers and architects. It presents the fundamental concepts of OSGi-based apps and maps them to the familiar ideas of the Spring framework. Then, it engages you with the techniques and concepts you'll need to develop stable, flexible enterprise apps. You'll learn how to embed a Spring container inside an OSGi bundle, and how Spring DM lets you blend Spring strengths like dependency injection with OSGi-based services. Along the way, you'll see how Spring DM handles data access and web-based components, and you'll explore topics like unit testing and configuration in an OSGi-based environment.",
+    "status": "PUBLISH",
+    "authors": ["Arnaud Cogoluegnes", "Thierry Templier", "", "Andy Piper"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "SQL Server 2008 Administration in Action",
+    "isbn": "193398872X",
+    "pageCount": 468,
+    "publishedDate": { "$date": "2009-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/colledge.jpg",
+    "longDescription": "The integrity and security of your database is crucial to your business. SQL Server 2008 is a massive and mature product with a very large feature set. As a SQL Server administrator, you must be equipped to handle myriad day-to-day tasks to keep your database healthy, and you must also be prepared to act quickly when something unexpected happens.    SQL Server 2008 Administration in Action offers over 100 DBA-tested, high-value, best practices that will help you tame the beast and keep it under control. Unlike the many comprehensive SQL Server reference tomes out there that attempt to cover the whole SQL Server feature set, this book drills down on the techniques, procedures, and practices that help you keep your database running like clockwork.    SQL Server 2008 Administration in Action focuses the production DBA, digging deep into the various tasks specific to that role. Expert author Rod Colledge--check him out at sqlCrunch.com--teaches you best practices that cover the lifecycle of a SQL Server system, including infrastructure design, installation, and operational maintenance. And while many of these techniques will work in any recent version of SQL Server, you'll find full coverage of emerging SQL Server 2008 best practices.    Each technique is presented in a task-driven style, and in the order of the typical life cycle of a SQL Server system. This allows you to easily open the book at the appropriate page and focus on what you need to know for each specific situation.",
+    "status": "PUBLISH",
+    "authors": ["Rod Colledge"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "Android in Practice",
+    "isbn": "1935182927",
+    "pageCount": 500,
+    "publishedDate": { "$date": "2011-09-30T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/collins.jpg",
+    "shortDescription": "Android in Practice is treasure trove of Android goodness, with over 100 tested, ready-to-use techniques including complete end-to-end example applications and practical tips for real world mobile application developers. Written by real world Android developers, this book addresses the trickiest questions raised in forums and mailing lists. Using an easy-to-follow problem/solution/discussion format, it dives into important topics not covered in other Android books, like advanced drawing and graphics, testing and instrumentation, building and deploying applications, using alternative languages, and native development.",
+    "longDescription": "Android, Google's platform for mobile application development, provides powerful features, a robust SDK, and almost limitless possibilities. It's not hard to find the information you need to build your first Android app, but then what  If you want to build real apps for real users, you have real questions and you need real answers.    Android in Practice is treasure trove of Android goodness, with over 100 tested, ready-to-use techniques including complete end-to-end example applications and practical tips for real world mobile application developers. Written by real world Android developers, this book addresses the trickiest questions raised in forums and mailing lists. Using an easy-to-follow problem/solution/discussion format, it dives into important topics not covered in other Android books, like advanced drawing and graphics, testing and instrumentation, building and deploying applications, using alternative languages, and native development.    If you're new to Android, or even if you have a few cycles under your belt, you'll love the quick \"pre-flight check,\" where you'll review key platform details and tools and the building blocks of all Android applications. Then, you'll delve into Android use cases   from visual elements and style, to saving and sharing data, networking, background tasks, concurrency, and more.",
+    "status": "PUBLISH",
+    "authors": [
+      "Charlie Collins",
+      "Michael D. Galpin",
+      "",
+      "Matthias Kaeppler"
+    ],
+    "categories": ["Mobile Technology"]
+  },
+  {
+    "title": "Object Oriented Perl",
+    "isbn": "1884777791",
+    "pageCount": 512,
+    "publishedDate": { "$date": "1999-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/conway.jpg",
+    "longDescription": "Object Oriented Perl is designed to provide anyone who is familiar with the basics of regular Perl programming with a complete introduction to the object-oriented features of Perl. The book moves from the very simplest applications through advanced applications such as generic programming, multiple dispatch, and object-oriented persistence. Thus, it offers a much-needed resource for persons new to Perl, as well as new and valuable insights and techniques for even the most accomplished Perl programmers.    Beyond explaining the syntax and semantics of Perl's inbuilt object-oriented features, Object Oriented Perl explains how to apply those features in a wide range of programming techniques. Each technique is illustrated with complete examples.    Object Oriented Perl also discusses the latest relevant Perl modules, which are freely available and can greatly simplify object-oriented development in Perl. In particular, it examines the new standard \"fields\" module and the associated pseudo-hash construct.    No other book covers the topic of object-oriented software development in Perl in such breadth, to such depth, or in such a readable manner. Complete source code for Object Oriented Perl is available online to owners of the book.",
+    "status": "PUBLISH",
+    "authors": ["Damian Conway"],
+    "categories": ["Object-Oriented Programming", "P"]
+  },
+  {
+    "title": "GWT in Practice",
+    "isbn": "1933988290",
+    "pageCount": 376,
+    "publishedDate": { "$date": "2008-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cooper.jpg",
+    "longDescription": "If you   re a web developer, you already know that you can use Ajax to add rich, user-friendly, dynamic features to your applications. With the Google Web Toolkit (GWT), a new Ajax tool from Google that automatically converts Java to JavaScript, you can build Ajax applications using the Java language. GWT lets you focus on application design and functionality, rather than on browser differences, and allows you to re-use code throughout the layers of your applications.    GWT in Practice is an example-driven, code-rich book designed for web developers who have already learned the basics of GWT. After a quick review of GWT fundamentals, GWT in Practice presents scores of handy, reusable solutions to the problems you face when you need to move beyond    Hello World    and    proof of concept    applications. This book skips the theory and looks at the way things really work when you   re building projects in GWT.    You   ll learn    How to create and customize widgets  The ins and outs of RPC  Packaging and building with Maven and Ant  Using the Java Persistence API with GWT  Effective internationalization  GWT in Practice shows you where GWT fits into the Enterprise Java developer's toolset. Written by expert authors Robert Cooper and Charlie Collins, this book combines sharp insight with hard-won experience. Readers will find thorough coverage of all aspects of GWT development from the basic GWT concepts and essentials to in-depth and complete real world example applications. If you know the basics and are ready to get your hands dirty, then you need this book.",
+    "status": "PUBLISH",
+    "authors": ["Robert Cooper", "Charles Collins"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Ajax in Action",
+    "isbn": "1932394613",
+    "pageCount": 680,
+    "publishedDate": { "$date": "2005-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/crane.jpg",
+    "longDescription": "Web users are getting tired of the traditional web experience. They get frustrated losing their scroll position; they get annoyed waiting for refresh; they struggle to reorient themselves on every new page. And the list goes on. With asynchronous JavaScript and XML, known as \"Ajax,\" you can give them a better experience. Once users have experienced an Ajax interface, they hate to go back. Ajax is new way of thinking that can result in a flowing and intuitive interaction with the user.\n<br>\n<i>Ajax in Action</i> helps you implement that thinking--it explains how to distribute the application between the client and the server (hint: use a \"nested MVC\" design) while retaining the integrity of the system. You will learn how to ensure your app is flexible and maintainable, and how good, structured design can help avoid problems like browser incompatibilities. Along the way it helps you unlearn many old coding habits. Above all, it opens your mind to the many advantages gained by placing much of the processing in the browser. If you are a web developer who has prior experience with web technologies, this book is for you.",
+    "status": "PUBLISH",
+    "authors": ["Dave Crane", "Eric Pascarello with Darren James"],
+    "categories": ["XML", "Internet"]
+  },
+  {
+    "title": "Ajax in Practice",
+    "isbn": "1932394990",
+    "pageCount": 536,
+    "publishedDate": { "$date": "2007-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/crane2.jpg",
+    "longDescription": "Ajax gives web developers the potential to create rich user-centered Internet applications. But Ajax also adds a new level of complexity and sophistication to those applications. Ajax in Practice tackles Ajax head-on, providing countless hands-on techniques and tons of reusable code to address the specific issues developers face when building Ajax-driven solutions.    After a brief overview of Ajax, this book takes the reader through dozens of working examples, presented in an easy-to-use cookbook format. Readers will learn how to implement drag-and-drop interfaces and discover how to create effective navigation strategies for their applications. Unlike a traditional cookbook, Ajax in Practice provides a thorough discussion of each technique presented and shows how the individual components can be connected to create powerful solutions. A fun \"mash-up\" chapter concludes the book. Throughout the book, the examples chosen are interesting, entertaining, and practical.    With this book you will:  Go beyond what Ajax is and learn how to put Ajax to work.  Master numerous techniques for user interface design and site navigation.  Work hands-on with professional-grade reusable Ajax code designed to solve real problems.",
+    "status": "PUBLISH",
+    "authors": [
+      "Dave Crane",
+      "Jord Sonneveld and Bear Bibeault with Ted Goddard",
+      "Chris Gray",
+      "Ram Venkataraman",
+      "Joe Walker"
+    ],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Prototype and Scriptaculous in Action",
+    "isbn": "1933988037",
+    "pageCount": 544,
+    "publishedDate": { "$date": "2007-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/crane3.jpg",
+    "longDescription": "Common Ajax tasks should be easy, and with Prototype and Scriptaculous they are. Prototype and Scriptaculous are libraries of reusable JavaScript code that simplify Ajax development. Prototype provides helpful methods and objects that extend JavaScript in a safe, consistent way. Its clever Ajax request model simplifies cross-browser development. Scriptaculous, which is based on Prototype, offers handy pre-fabricated widgets for rich UI development.    Prototype and Scriptaculous in Action is a comprehensive, practical guide that walks you feature-by-feature through the two libraries. First, you   ll use Scriptaculous to make easy but powerful UI improvements. Then you   ll dig into Prototype   s elegant and sparse syntax. See how a few characters of Prototype code can save a dozen lines of JavaScript. By applying these techniques, you can concentrate on the function and flow of your application instead of the coding details. This book is written for web developers with a working knowledge of JavaScript.",
+    "status": "PUBLISH",
+    "authors": ["Dave Crane", "Bear Bibeault with Tom Locke"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "POJOs in Action",
+    "isbn": "1932394583",
+    "pageCount": 592,
+    "publishedDate": { "$date": "2006-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/crichardson.jpg",
+    "shortDescription": "\"POJOs in Action is required reading for battle-weary EJB developers and for new developers who want to avoid the sins of the fathers by using lightweight frameworks.    -- C# Online.NET",
+    "longDescription": "There is agreement in the Java community that EJBs often introduce more problems than they solve. Now there is a major trend toward lightweight technologies such as Hibernate, Spring, JDO, iBATIS, and others, all of which allow the developer to work directly with the simpler Plain Old Java Objects, or POJOs. Bowing to the new consensus, EJB 3 now also works with POJOs.    POJOs in Action describes these new, simpler, and faster ways to develop enterprise Java applications. It shows you how to go about making key design decisions, including how to organize and encapsulate the domain logic, access the database, manage transactions, and handle database concurrency.    Written for developers and designers, this is a new-generation Java applications guide. It helps you build lightweight applications that are easier to build, test, and maintain. The book is uniquely practical with design alternatives illustrated through numerous code example",
+    "status": "PUBLISH",
+    "authors": ["Chris Richardson"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Data Munging with Perl",
+    "isbn": "1930110006",
+    "pageCount": 304,
+    "publishedDate": { "$date": "2001-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cross.jpg",
+    "longDescription": "Your desktop dictionary may not include it, but 'munging' is a common term in the programmer's world. Many computing tasks require taking data from one computer system, manipulating it in some way, and passing it to another. Munging can mean manipulating raw data to achieve a final form. It can mean parsing or filtering data, or the many steps required for data recognition. Or it can be something as simple as converting hours worked plus pay rates into a salary cheque.    This book shows you how to process data productively with Perl. It discusses general munging techniques and how to think about data munging problems. You will learn how to decouple the various stages of munging programs, how to design data structures, how to emulate the Unix filter model, etc. If you need to work with complex data formats it will teach you how to do that and also how to build your own tools to process these formats. The book includes detailed techniques for processing HTML and XML. And, it shows you how to build your own parsers to process data of arbitrary complexity.    If you are a programmer who munges data, this book will save you time. It will teach you systematic and powerful techniques using Perl. If you are not a Perl programmer, this book may just convince you to add Perl to your repertoire.",
+    "status": "PUBLISH",
+    "authors": ["David Cross"],
+    "categories": ["Perl"]
+  },
+  {
+    "title": "Hello! HTML5 & CSS3",
+    "isbn": "1935182897",
+    "pageCount": 325,
+    "publishedDate": { "$date": "2012-10-17T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/crowther.jpg",
+    "shortDescription": "Quick and Easy HTML5 and CSS3 is written for the web designer or developer who wants a fast, example-oriented introduction to the new HTML and CSS features. After a quick review of the basics, you'll turn to what's new. Start by learning to apply important new elements and attributes by building your first real HTML5 pages. You'll then take a quick tour through the new APIs: Form Validation, Canvas, Drag & Drop, Geolocation and Offline Applications. You'll also discover how to include video and audio on your pages without plug-ins, and how to draw interactive vector graphics with SVG.",
+    "longDescription": "HTML and CSS are the foundation of the web, and HTML5 and CSS3 are the latest standards. If you build web pages, mobile apps, or do any type of development at all, you'll have to learn HTML5 and CSS3, so why not start now  Quick and Easy HTML5 and CSS3 will give you a smart, snappy, and fun introduction to building web sites with these really cool new tools.    Quick and Easy HTML5 and CSS3 is written for the web designer or developer who wants a fast, example-oriented introduction to the new HTML and CSS features. After a quick review of the basics, you'll turn to what's new. Start by learning to apply important new elements and attributes by building your first real HTML5 pages. You'll then take a quick tour through the new APIs: Form Validation, Canvas, Drag & Drop, Geolocation and Offline Applications. You'll also discover how to include video and audio on your pages without plug-ins, and how to draw interactive vector graphics with SVG.    Once you've explored the fundamentals of HTML5, it's time to add some style to your pages with CSS3. New CSS features include drop shadows, borders, colors, gradients and backgrounds. In addition, you'll learn to layout your pages with the new flexible box and layout modules, and add the finishing touches with custom fonts. You'll also see how to target specific devices with media queries, and do all of it with less code thanks to the new selectors and pseudo classes.    Finally you will walk through several large examples where you see all the features of HTML5 and CSS3 working together to produce responsive and lightweight applications which you can interact with just like native desktop apps.",
+    "status": "PUBLISH",
+    "authors": ["Rob Crowther"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Seam in Action",
+    "isbn": "1933988401",
+    "pageCount": 624,
+    "publishedDate": { "$date": "2008-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dallen.jpg",
+    "shortDescription": "Seam in Action goes into great detail on the ways in which Seam helps reduce the burden of integration with different technologies such as Hibernate and JSF, allowing the developer to focus on the core business objective at hand.       Shobana Jayaraman, Digital Infrastructure Analyst, University of Texas Southwestern Medical Center Library, The Tech Static",
+    "longDescription": "Seam is an exciting new application framework based on the Java EE platform that you can use to build rich, web-based business applications. Seam is rapidly capturing the interest of Java enterprise developers because of its focus on simplicity, ease of use, transparent integration, scalability, and developer choice.    Seam in Action offers a practical and in-depth look at Seam from outside the walls of RedHat/JBoss. The book puts Seam head-to-head with the complexities in the Java EE architecture. It discusses the shortcomings of JSF, the challenges of using Java persistence in the web environment, and other common development roadblocks, then shows how Seam makes these problems just melt away. In covering Seam, the author doesn't just ask you to sprinkle annotations on your code and expect that you understand how it works. Instead, the author lays down the facts, shows you the steps, reveals the logic, and diagrams the flow, so that by the end of the book, you will not only have gained a deep understanding of Seam, but will also come away ready to teach the material to others.    All too often, developers spend a majority of their time integrating disparate technologies, manually tracking state, struggling to understand JSF, wrestling with Hibernate exceptions, and constantly redeploying applications, rather than on the logic pertaining to the business at hand. Seam in Action dives deep into thorough explanations of how Seam eliminates these non-core tasks by leveraging configuration by exception, Java 5 annotations, and aspect-oriented programming.    To start off, you will see a working Java EE-compliant application come together by the end of the second chapter. As you progress through the book, you will discover how Seam eliminates unnecessary layers and configurations and uses an inversion of control technical known as bijection supplemented by a liberal use of the Unified Expression Language (EL) to establish the missing link between JSF, EJB 3 and JavaBean components. You also witness how Seam opens doors for you to incorporate technologies you previously have not had time to learn, such as business processes and stateful page flows (jBPM), rule-based security, Ajax remoting, PDF generation, Spring integration, and more.",
+    "status": "PUBLISH",
+    "authors": ["Dan Allen"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Wicket in Action",
+    "isbn": "1932394982",
+    "pageCount": 392,
+    "publishedDate": { "$date": "2008-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dashorst.jpg",
+    "longDescription": "Wicket bridges the mismatch between the web's stateless protocol and Java's OO model. The component-based Wicket framework shields you from the HTTP under a web app so you can concentrate on business problems instead of the plumbing code. In Wicket, you use logic-free HTML templates for layout and standard Java for an application's behavior. The result  Coding a web app with Wicket feels more like regular Java programming.    Wicket in Action is a comprehensive guide for Java developers building Wicket-based web applications. It introduces Wicket's structure and components, and moves quickly into examples of Wicket at work. Written by core committers, this book shows you the \"how-to\" and the \"why\" of Wicket. You'll learn to use and customize Wicket components, to interact with Spring and Hibernate, and to implement rich Ajax-driven features.",
+    "status": "PUBLISH",
+    "authors": ["Martijn Dashorst", "Eelco Hillenius"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Open Source SOA",
+    "isbn": "1933988541",
+    "pageCount": 448,
+    "publishedDate": { "$date": "2009-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/davis.jpg",
+    "longDescription": "Service Oriented Architecture, or SOA, has become embraced by many organizations as a means of improving reusability of software assets; providing better alignment between business and IT; and, increasing agility for responding to demands in the marketplace. This is accomplished by breaking individual units of functionality into services that can then be exposed through open protocols and standards.    Until recently, many of the software technologies used for developing SOA-based solutions were limited to expensive, commercial offerings. However, that has now changed, and a compelling open source SOA platform can be implemented exclusively with open source products. This book identifies a suite of open source products that can be used for a building SOA environment, and describes how they can be integrated by practitioners. It includes a hands-on introduction to the products selected; a multitude of source code examples; and implementation through real-life case studies.",
+    "status": "PUBLISH",
+    "authors": ["Jeff Davis"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Struts 2 in Action",
+    "isbn": "193398807X",
+    "pageCount": 432,
+    "publishedDate": { "$date": "2008-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dbrown.jpg",
+    "longDescription": "The original Struts project revolutionized Java web development and its rapid adoption resulted in the thousands of Struts-based applications deployed worldwide. Keeping pace with new ideas and trends, Apache Struts 2 has emerged as the product of a merger between the Apache Struts and OpenSymphony WebWork projects, united in their goal to develop an easy-to-use yet feature-rich framework. Struts 2 represents a revolution in design and ease of use when compared to classic Struts. It adds exciting and powerful features such as a plugin framework, JavaServer Faces integration, and XML-free configuration.    Struts 2 In Action introduces the Apache Struts 2 web application framework and shows you how to quickly develop professional, production-ready modern web applications. Written by Don Brown, one of the leading developers of Struts 2, Chad Davis, a passionate Struts 2 developer, along with Scott Stanlick, this book gently walks you through the key features of Struts 2 in example-driven, easy-to-digest sections.    Struts 2 in Action delivers accurate, seasoned information that can immediately be put to work. This book is designed for working Java web developers   especially those with some background in Struts 1 or WebWork. The core content, covering key framework components such as Actions, Results, and Interceptors, includes new features like the annotation-based configuration options. You'll find chapters on Struts 2 plugins, FreeMarker, and migration from Struts 1 and WebWork 2. Finally, new topics such as the Ajax tags, Spring Framework integration, and configuration by convention give familiar subjects new depth.",
+    "status": "PUBLISH",
+    "authors": ["Donald Brown", "Chad Michael Davis", "", "Scott Stanlick"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Essential Guide to Peoplesoft Development and Customization",
+    "isbn": "1884777929",
+    "pageCount": 1101,
+    "publishedDate": { "$date": "2000-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/delia.jpg",
+    "longDescription": "The Essential Guide to PeopleSoft Development and Customization is an exhaustive, as well as practical, guide that covers PeopleSoft 7.5 and many new features in release 8.0. Both novice and experienced programmers will benefit from the detailed coverage of topics ranging from the basics of Application Designer to the proper use of PeopleCode within the Application Processor.    The book serves as both a reference and a tutorial and covers advanced topics that other books avoid. The reader can gain valuable expertise by following the exercises and building sample applications and utilities.    Extensive coverage of PeopleCode including scroll and function library examples can be found as well as methodology behind customization and upgrades. Discover how to effectively utilize SQR and Process Scheduler. Master various levels of PeopleSoft security.    Most developers won t touch PeopleSoft COBOL programs with a ten foot pole. Expand your horizons by uncovering the secrets of PeopleSoft COBOL and the PTPSQLRT module and even walk through a sample customization. Application Engine is a powerful PeopleTool - but one of the least understood. Through a series of simple but effective exercises the reader will learn Application Engine concepts such as dynamic SQL, decision logic and dynamic sections. A useful Application Engine utility is produced that will enhance the delivered Process Scheduler panels. This book takes a soup-to-nuts approach leading the reader through the full cycle of application development.    The four authors are truly experts in the field and provide the reader with the skills necessary to compete in the PeopleSoft marketplace for years to come. Special sections are included which provide detailed information on new features in PeopleSoft release 8. The reader will gain valuable insight into the next generation of PeopleTools.    Exciting new features such as the new PeopleCode Debugger and PeopleCode dot notation using a new series of object classes are revealed. Also covered are Application Designer enhancements and improved Process Scheduler design and SQR support.    See firsthand how Application Engine has been turbo-charged with a new line of meta-constructs, PeopleCode actions, file handling capability and a new integrated design. The authors primary goal was not to be the first book on the market... it was to be the best.",
+    "status": "PUBLISH",
+    "authors": [
+      "Tony DeLia",
+      "Galina Landres",
+      "Isidor Rivera",
+      "Prakash Sankaran"
+    ],
+    "categories": ["Client-Server"]
+  },
+  {
+    "title": ".NET Multithreading",
+    "isbn": "1930110545",
+    "pageCount": 360,
+    "publishedDate": { "$date": "2002-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dennis.jpg",
+    "longDescription": "If you need high performance, or a rich user experience, you should consider multithreading. With .NET you can develop stable and robust multithreaded applications with minimal effort. .NET Multithreading teaches the basics in an understandable and practical way. It then focuses on .NET's mechanisms for multithreading and shows how easy it can be to develop applications with them. The book covers several design approaches such as one-thread-one-class, the asynchronous design pattern, and using queues as buffers between threads. It explains best practices and how to avoid common multithreading pitfalls such as deadlock and race conditions.    This book is written for intermediate .NET developers who know C# or VB .NET, but are not assumed to have a background in multithreading. It is rich in examples that will help you understand the subject and produce multithreaded applications that have the power of C++ while keeping the ease and reliability of .NET.",
+    "status": "PUBLISH",
+    "authors": ["Alan Dennis"],
+    "categories": ["Microsoft .NET", "Internet"]
+  },
+  {
+    "title": "SCWCD Exam Study Kit Second Edition",
+    "isbn": "1932394389",
+    "pageCount": 560,
+    "publishedDate": { "$date": "2005-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/deshmukh2.jpg",
+    "longDescription": "With the tremendous penetration of J2EE in the enterprise, passing the Sun Certified Web Component Developer exam has become an important qualification for Java and J2EE developers. To pass the SCWCD exam (Number: 310-081) you need to answer 69 questions in 135 minutes and get 62% of them right. You also need  150 and this (completely updated and newly revised) book.    In its first edition, the SCWCD Exam Study Kit was the most popular book used to pass this most desirable web development certification exam. The new edition will help you learn the concepts    large and small    that you need to know. It covers the newest version of the exam and not a single topic is missed.    The SCWCD exam is for Sun Certified Java Programmers who have a certain amount of experience with Servlets and JSPs, but for those who do not, the book starts with three introductory chapters on these topics. Although the SCWCD Exam Study Kit has one purpose, to help you get certified, you will find yourself returning to it as a reference after passing the exam.",
+    "status": "PUBLISH",
+    "authors": ["Hanumant Deshmukh", "Jignesh Malavia", "", "Matthew Scarpino"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Spring Roo in Action",
+    "isbn": "193518296X",
+    "pageCount": 500,
+    "publishedDate": { "$date": "2012-04-13T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rimple.jpg",
+    "status": "PUBLISH",
+    "authors": ["Ken Rimple", "Srini Penchikala"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "SOA Governance in Action",
+    "isbn": "1617290270",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-07-27T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dirksen.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jos Dirksen"],
+    "categories": ["java"]
+  },
+  {
+    "title": "RSS and Atom in Action",
+    "isbn": "1932394494",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2006-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dmjohnson.jpg",
+    "longDescription": "RSS and Atom in Action is organized into two parts. The first part introduces the blog technologies of newsfeed formats and publishing protocols   the building blocks. The second part shows how to put to those blocks together to assemble interesting and useful blog applications.    In keeping with the principle behind Manning   s    In Action    series, this book shows the reader, through numerous examples in Java and C#, how to parse Atom and RSS format newsfeeds, how to generate valid newsfeeds and serve them efficiently, and howto automate blogging via web services based on the new Atom protocol and the older MetaWeblog API. The book also shows how to develop a complete blog client library that readers can use in their own applications. The second half of the book is devoted to a dozen blog apps   small but immediately useful example applications such as a community aggregator, a file distribution newsfeed, a blog cross-poster, an email-to-blog gateway, Ant tasks for blogging software builds, and more.",
+    "status": "PUBLISH",
+    "authors": ["Dave Johnson"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "LDAP Programming, Management and Integration",
+    "isbn": "1930110405",
+    "pageCount": 352,
+    "publishedDate": { "$date": "2002-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/donley.jpg",
+    "longDescription": "LDAP is the leading Internet protocol for directory-like information: user identities, preferences, security privileges. etc. Because it is popular, most programming languages have handy extensions for searching and updating LDAP directories. But most information today is still locked away in application-specific repositories that lack LDAP access.    LDAP Programming, Management and Integration explains how to link non-LDAP data with LDAP directories. It starts with a concise introduction to the LDAP standard and discusses how to work with it in Java and Perl. It gives you practical code and advice for migrating and integrating data into an LDAP environment. And it explains how to increase your application's security using identity and profile information from LDAP repositories.    Written for programmers and system administrators, this book teaches clearly and honestly the LDAP practiced  in the trenches.  It is concise yet rich in practical examples that make a sometimes complex subject easy to understand.",
+    "status": "PUBLISH",
+    "authors": ["Clayton Donley"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Mule in Action",
+    "isbn": "1933988967",
+    "pageCount": 432,
+    "publishedDate": { "$date": "2009-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dossot.jpg",
+    "longDescription": "Mule is a widely used open source enterprise service bus. It is standards based, provides easy integration with Spring and JBoss, and fully supports the enterprise messaging patterns collected by Hohpe and Woolf. You can readily customize Mule without writing a lot of new code.    Mule in Action covers Mule fundamentals and best practices. It is a comprehensive tutorial that starts with a quick ESB overview and then gets Mule to work. It dives into core concepts like sending, receiving, routing, and transforming data. Next, it gives you a close look at Mule's standard components and how to roll out custom ones. You'll pick up techniques for testing, performance tuning, BPM orchestration, and even a touch of Groovy scripting.    Written for developers, architects, and IT managers, the book requires familiarity with Java but no previous exposure to Mule or other ESBs.",
+    "status": "PUBLISH",
+    "authors": ["David Dossot", "John D'Emic"],
+    "categories": ["Java", "Software Engineering"]
+  },
+  {
+    "title": "Java Foundation Classes",
+    "isbn": "1884777678",
+    "pageCount": 1088,
+    "publishedDate": { "$date": "2001-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/drye.jpg",
+    "longDescription": "Java Foundation Classes: Swing Reference is the comprehensive guide to Swing 1.1 and Java 2's Swing package. Written by the programmers that maintain the Internet's Swing FAQ, this book is based on the much enhanced, most recent release of Swing. All documentation in this book is based on the authors' experience with the Swing source code and their digging under the surface to make sure what they are saying is correct. This book offers solid reference material, extensive examples and an introductory tutorial provide programmers with a quick start and ongoing support as their daily Swing reference. The authors have not trusted a single description of the Swing JavaDoc--this book is verified, correct documentation for the Swing library. For programmers wondering which methods are unimplemented or empty, which are synchronized, which throw runtime exceptions, the JavaDoc won't tell them, but this book will.",
+    "status": "PUBLISH",
+    "authors": ["Stephen C. Drye", "William C. Wake"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Managing Components with Modeler",
+    "isbn": "1932394524k-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal11.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Command-line Processing with CLI",
+    "isbn": "1932394524l-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal12.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Understanding and Using Chain",
+    "isbn": "1932394524m-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal13.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Working with the Logging and Discovery Components",
+    "isbn": "1932394524n-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal14.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Uploading files with FileUpload",
+    "isbn": "1932394524b-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Handling Protocols with the Net Component",
+    "isbn": "1932394524c-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal3.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "XML Parsing with Digester",
+    "isbn": "1932394524d-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal4.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "JXPath and Betwixt: Working with XML",
+    "isbn": "1932394524e-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal5.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Validating Data with Validator",
+    "isbn": "1932394524f-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal6.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Enhancing Java Core Libraries with Collections",
+    "isbn": "1932394524g-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal7.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Enhancing Java Core Libraries with BeanUtils and Lang",
+    "isbn": "1932394524h-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal8.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Pool and DBCP: Creating and Using Object Pools",
+    "isbn": "1932394524i-e",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2005-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal9.jpg",
+    "status": "PUBLISH",
+    "authors": ["Vikram Goyal"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Python and Tkinter Programming",
+    "isbn": "1884777813",
+    "pageCount": 688,
+    "publishedDate": { "$date": "2000-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/grayson.jpg",
+    "longDescription": "If you are interested in Python and Tkinter, you have probably noticed that although there is some good contributed documentation on the Web, there is not enough to get Tkinter applications up and running. Python and Tkinter Programming is the answer. It is designed for readers who are familiar with Python and who need to develop applications with Graphical User Interfaces (GUIs).    Python and Tkinter Programming presents the elements of typical Python and Tkinter applications in a straight-forward fashion. Sample code illustrates each element. Complete applications that go far beyond the fill-the-form class of graphical user interfaces are presented; here you will find examples of complex controls, drawn interfaces and photorealistic panels. The code can readily be used as templates for new applications. Extensions to Python (such as ODBC) are examined as well. Complete source code for all examples, along with the latest releases of required software, will be available from Manning's web site.    Tkinter is fully documented. To date, this level of documentation has not been available to Tkinter programmers, who have been required to read the code or interpret Tcl/Tk man pages to fully understand component usage.    Python and Tkinter Programming will be useful in both Windows and Unix environments, and the example code is portable between the two environments.",
+    "status": "PUBLISH",
+    "authors": ["John E. Grayson"],
+    "categories": ["Python"]
+  },
+  {
+    "title": "Microsoft.NET for Programmers",
+    "isbn": "1930110197",
+    "pageCount": 386,
+    "publishedDate": { "$date": "2002-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/grimes.jpg",
+    "longDescription": "Written for intermediate and advanced programmers, this book builds on your existing knowledge to teach you exactly what you need to know to develop .NET applications.    Packed full of practical examples, the book presents a case study which takes you through the design of an application \"engine\" and its implementation as a .NET assembly. You'll reuse the engine to create different versions of the application using Windows Forms, Remoting, Web Services, Windows Services, COM, MSMQ, ASP.NET, ADO.NET, and the Mobile Internet Toolkit. You'll also learn about fundamental .NET concepts such as types and assemblies and develop a simple language compiler which can emit a .NET executable.    Also included is an appendix containing a comprehensive introduction to the C# programming language.",
+    "status": "PUBLISH",
+    "authors": ["Fergal Grimes"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Grails in Action",
+    "isbn": "1933988932",
+    "pageCount": 520,
+    "publishedDate": { "$date": "2009-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/gsmith.jpg",
+    "shortDescription": "Grails in Action is a comprehensive guide to the Grails framework. First, the basics: the domain model, controllers, views, and services. Then, the fun! Dive into a Twitter-style app with features like AJAX/JSON, animation, search, wizards   even messaging and Jabber integration. Along the way, you'll discover loads of great plugins that'll make your app shine. Learn to integrate with existing Java systems using Spring and Hibernate. You'll need basic familiarity with Java and the web.",
+    "longDescription": "Web apps shouldn't be hard to build, right  The developers of Grails agree. This hyper-productive open-source web framework lets you \"code by convention\", leaving you to focus on what makes your app special. Through its use of Groovy, it gives you a powerful, Java-like language and full access to all Java libraries. And you can adapt your app's behavior at runtime without a server restart.    Grails in Action is a comprehensive guide to the Grails framework. First, the basics: the domain model, controllers, views, and services. Then, the fun! Dive into a Twitter-style app with features like AJAX/JSON, animation, search, wizards   even messaging and Jabber integration. Along the way, you'll discover loads of great plugins that'll make your app shine. Learn to integrate with existing Java systems using Spring and Hibernate. You'll need basic familiarity with Java and the web. Prior experience with Groovy is not necessary.",
+    "status": "PUBLISH",
+    "authors": ["Glen Smith", "Peter Ledbrook"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Up to Speed with Swing, Second Edition",
+    "isbn": "1884777759",
+    "pageCount": 560,
+    "publishedDate": { "$date": "1999-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/gutz2.jpg",
+    "shortDescription": "Now in its Second Edition, Up to Speed with Swing is for you if you want to get on the fast track to Java Swing. The second edition has been extensively updated to cover Java 1.2 with additional code examples and illustrations.",
+    "longDescription": "Now in its Second Edition, Up to Speed with Swing is for you if you want to get on the fast track to Java Swing. The second edition has been extensively updated to cover Java 1.2 with additional code examples and illustrations.    Guided by a master programmer who writes Java for a living, you'll learn Swing from the insider's point of view. Up to Speeed with Swing has one purpose: to save you time mastering Swing. From the basics of Swing to creating a custom look and feel, or from the Model View Controller (MVC) architecture to optimizing your Swing code, this tutorial gives you an understanding of the big picture as well as the experience of working through detailed examples.",
+    "status": "PUBLISH",
+    "authors": ["Steven Gutz"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "OSGi in Action",
+    "isbn": "1933988916",
+    "pageCount": 576,
+    "publishedDate": { "$date": "2011-04-06T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hall.jpg",
+    "shortDescription": "OSGi in Action is a comprehensive guide to OSGi with two primary goals. First, it provides a clear introduction to OSGi concepts with examples that are relevant both for architects and developers. The central idea of OSGi is modularity, so you start by learning about OSGi bundles. You'll then see how OSGi handles module lifecycles and follow up with how it promotes service-oriented interaction among application components.",
+    "longDescription": "If you're a Java developer, you've almost certainly heard of OSGi   and also heard that it's becoming quite a big deal. But you may still be wondering exactly \"What is OSGi \"    Simply put, OSGi is a technology that allows you to create highly modular Java applications. It introduces a logical and physical module format, called a bundle, for explicitly structuring your application as a set of interconnected modules. OSGi lets you install, start, stop, update, or uninstall modules at execution time without taking down your entire system. In addition, OSGi defines a local service-oriented approach for creating applications out of loosely coupled components.    With the prevalence of modern component and service-based architectures, OSGi is becoming increasingly important. It meshes well with such approaches and greatly simplifies their creation and management. It's the backbone of Eclipse's plugin system as well as many recent JavaEE containers, such as GlassFish v3, WebSphere v6.1, and WebLogic Event Server. Even the SpringSource Application Platform is built on top of it.    OSGi in Action is a comprehensive guide to OSGi with two primary goals.    First, it provides a clear introduction to OSGi concepts with examples that are relevant both for architects and developers. The central idea of OSGi is modularity, so you start by learning about OSGi bundles.    You'll then see how OSGi handles module lifecycles and follow up with how it promotes service-oriented interaction among application components.    With the core concepts well in hand, you'll explore numerous application scenarios and techniques. How much of OSGi do you actually need  How do you embed OSGi inside other containers  What are the best practices for migrating legacy systems to OSGi  How can you embrace and make the most of system dynamism     Expert authors Richard S. Hall, Karl Pauls, and Stuart McCulloch have years of experience both in building OSGi-based systems and in contributing to OSGi implementations such as Apache Felix.",
+    "status": "PUBLISH",
+    "authors": [
+      "Richard S. Hall",
+      "Karl Pauls",
+      "Stuart McCulloch",
+      "",
+      "David Savage"
+    ],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "GWT in Action",
+    "isbn": "1933988231",
+    "pageCount": 632,
+    "publishedDate": { "$date": "2007-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hanson.jpg",
+    "longDescription": "The Google Web Toolkit (GWT) is a new technology from Google that automatically translates Java into JavaScript, making Ajax applications easier to code and deploy. GWT in Action is a comprehensive tutorial for Java developers interested in building the next generation of rich, web-based applications. This book was written by Robert Hanson, creator of the popular GWT Widget Library, and Adam Tacy, a major contributor to the GWT Widget Library.    The Web is experiencing a new growth with an emphasis on rich, web-based applications. These applications can be difficult to build because they rely on JavaScript, which lacks the sophisticated object-oriented structures and static typing of Java, they are tricky to debug, and they require you to manage numerous browser inconsistencies.    In May of 2006 Google released the Google Web Toolkit. GWT enables developers to create Ajax applications in Java. With GWT, you can build your applications using a real object-oriented language and take advantage of Java tools like Eclipse that are already available. Instead of trying to bring tool support to Ajax, Google brought Ajax to a place where the tools already existed.    GWT in Action shows you how to take advantage of these exciting new tools. This clearly-written book is packed with hands-on GWT examples. You   ll absorb the GWT philosophy as you build your first working GWT application.    The book begins by exploring the main features of GWT, including    Compiling Java to JavaScript, the magic that really defines GWT  Building client-side components  Convenient JUnit integration and testing  Interacting with JavaScript and existing JavaScript libraries  Internationalization  You   ll also see how GWT compares to other toolkits.    GWT in Action shows you how to set up your development environment, use and create widgets, communicate with the server, and much more. Readers will follow an example running throughout the book and quickly master the basics of GWT: widgets, panels, and event handling. The book covers the full development cycle, from setting up your development environment, to building the application, then deploying it to the web server. The entire core GWT library is discussed, with details and examples on how it can be extended.    You   ll cover:    Testing, debugging, and deploying GWT Applications  Communicating with GWT-RPC  Examining client-side RPC architecture  Alternative RPC tools: HTTPRequest, RequestBuilder, and FormPanel  Achieving interoperability in GWT with JavaScript Object Notation (JSON)  Making your GWT application flexible and supportable  GWT helps you make the most of Ajax in your web applications and GWT in Action helps you get more out of GWT.",
+    "status": "PUBLISH",
+    "authors": ["Robert Hanson", "Adam Tacy"],
+    "categories": ["Internet", "Java"]
+  },
+  {
+    "title": "The Quick Python Book",
+    "isbn": "1884777740",
+    "pageCount": 444,
+    "publishedDate": { "$date": "1999-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/harms.jpg",
+    "longDescription": "The Quick Python Book is a clear, concise introduction to Python, one of the most elegant programming languages in existence. The book is aimed at readers who know programming but for whom the Python language is new.  This book is designed so that you can use it to quickly become proficient in Python. However, it provides more than just a beginners tutorial. Even once you've become more experienced, it should continue to be quite valuable to you as an indexed cache of information on the bulk of the Python concepts and constructs of which you will find yourself wanting to refresh or augment your knowledge.    It first covers the core features of Python (syntax, control flow, basic data structures, etc.) and provides the knowledge to write basic but useful scripts. Features in Python common to other languages are covered very concisely, while features unique to Python are explained in detail.    It next discusses Python features which would be useful to anyone using Python in larger applications, including facilities for managing large collections of code, object-oriented programming, advanced string handling, etc.    The last section of the book discusses advanced topics: Windows/COM programming with Python, integrating Python and Java (Python is one of the few languages other than Java which can be compiled into Java bytecode), extending the Python language with C, and an introduction to some of the advanced web site building tools that are available for Python.",
+    "status": "PUBLISH",
+    "authors": ["Daryl Harms", "Kenneth McDonald"],
+    "categories": ["Python"]
+  },
+  {
+    "title": "SharePoint 2010 Site Owner's Manual",
+    "isbn": "1933988754",
+    "pageCount": 300,
+    "publishedDate": { "$date": "2012-02-13T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/harryman.jpg",
+    "shortDescription": "SharePoint 2010 Site Owner's Manual starts by assuming you already have SharePoint installed on your system and are looking for ways to solve the problems you face every day in your organization. You'll learn to determine what type of SharePoint installation you have   Microsoft Office SharePoint Server (MOSS), Windows SharePoint Services (WSS), the \"Fabulous 40\" templates   and what features are at your disposal. Once you know the lay of the land, you'll discover what you can do yourself, when you need to call in some help, and when you should leave it to the developers.",
+    "longDescription": "For every SharePoint 2010 developer who spends the day buried in Visual Studio cranking out code, there are dozens of other SharePoint site owners who want to share information, create content portals, and add features to existing SharePoint sites. If you're one of these SharePoint administrators, this is the book for you. Chock-full of great ideas and scenarios you'll relate to immediately, this book will teach you the amazing things you can do with SharePoint 2010 without writing any code   or calling in the developers.    SharePoint 2010 Site Owner's Manual starts by assuming you already have SharePoint installed on your system and are looking for ways to solve the problems you face every day in your organization. You'll learn to determine what type of SharePoint installation you have   Microsoft Office SharePoint Server (MOSS), Windows SharePoint Services (WSS), the \"Fabulous 40\" templates   and what features are at your disposal. Once you know the lay of the land, you'll discover what you can do yourself, when you need to call in some help, and when you should leave it to the developers.    This book teaches you by putting your hands on working SharePoint examples. You'll see seven common SharePoint-driven sites that lay out the features and approaches you'll need for most typical applications. The examples range from a simple document-sharing portal, to a SharePoint-hosted blog, to a project management site complete with a calendar, discussion forums, and an interactive task list.",
+    "status": "PUBLISH",
+    "authors": ["Yvonne M. Harryman"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Java Development with Ant",
+    "isbn": "1930110588",
+    "pageCount": 672,
+    "publishedDate": { "$date": "2002-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hatcher.jpg",
+    "shortDescription": "The most widely used build tool for Java projects, Ant is cross-platform, extensible, simple, and fast. It scales from small personal projects to large, multi-team J2EE projects. And, most important, it's easy to learn.",
+    "longDescription": "Java Development with Ant systematically explores what Ant can do, and how to apply it to your project. Whether you are new to Ant, or an experienced user, this book will show you powerful and creative uses for Ant. The book emphasizes basic concepts you need to know to effectively use Ant starting with Ant's XML-driven build process. It leads you step-by-step through everything you need to know to compile, test, package and deploy an application. It then guides you through the maze of more complex situations common in larger projects such as enterprise Java applications and Web Services. With this book you will gain access to a powerful tool to automatically build, test and deploy your Java software, no matter how simple or complex it might be.",
+    "status": "PUBLISH",
+    "authors": ["Erik Hatcher", "Steve Loughran"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "Lucene in Action",
+    "isbn": "1932394281",
+    "pageCount": 456,
+    "publishedDate": { "$date": "2004-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hatcher2.jpg",
+    "longDescription": "Lucene is a gem in the open-source world--a highly scalable, fast search engine. It delivers performance and is disarmingly easy to use. Lucene in Action is the authoritative guide to Lucene. It describes how to index your data, including types you definitely need to know such as MS Word, PDF, HTML, and XML. It introduces you to searching, sorting, filtering, and highlighting search results.    Lucene powers search in surprising places--in discussion groups at Fortune 100 companies, in commercial issue trackers, in email search from Microsoft, in the Nutch web search engine (that scales to billions of pages). It is used by diverse companies including Akamai, Overture, Technorati, HotJobs, Epiphany, FedEx, Mayo Clinic, MIT, New Scientist Magazine, and many others.    Adding search to your application can be easy. With many reusable examples and good advice on best practices, Lucene in Action shows you how. And if you would like to search through Lucene in Action over the Web, you can do so using Lucene itself as the search engine--take a look at the authors' awesome Search Inside solution. Its results page resembles Google's and provides a novel yet familiar interface to the entire book and book blog.",
+    "status": "PUBLISH",
+    "authors": ["Erik Hatcher", "Otis Gospodnetic"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Lucene in Action, Second Edition",
+    "isbn": "1933988177",
+    "pageCount": 532,
+    "publishedDate": { "$date": "2010-07-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hatcher3.jpg",
+    "shortDescription": "With clear writing, reusable examples, and unmatched advice on best practices, Lucene in Action is still the definitive guide to developing with Lucene.",
+    "longDescription": "When Lucene first hit the scene five years ago, it was nothing short of amazing. By using this open-source, highly scalable, super-fast search engine, developers could integrate search into applications quickly and efficiently. A lot has changed since then   search has grown from a \"nice-to-have\" feature into an indispensable part of most enterprise applications. Lucene now powers search in diverse companies including Akamai, Netflix, LinkedIn, Technorati, HotJobs, Epiphany, FedEx, Mayo Clinic, MIT, New Scientist Magazine, and many others.    Some things remain the same, though. Lucene still delivers high-performance search features in a disarmingly easy-to-use API. It's still a single compact JAR file (less than 1 MB!). Due to its vibrant and diverse open-source community of developers and users, Lucene is relentlessly improving, with evolutions to APIs, significant new features such as payloads, and a huge (as much as 8x) increase in indexing speed with Lucene 3.0.    And with clear writing, reusable examples, and unmatched advice on best practices, Lucene in Action is still the definitive guide to developing with Lucene.",
+    "status": "PUBLISH",
+    "authors": ["Erik Hatcher", "Otis Gospodnetic", "", "Michael McCandless"],
+    "categories": ["Java", "Open Source"]
+  },
+  {
+    "title": "PowerBuilder 6.0 Questions & Answers",
+    "isbn": "1884777708",
+    "pageCount": 446,
+    "publishedDate": { "$date": "1998-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hatton.jpg",
+    "shortDescription": "If you'd like to learn PowerBuilder--or enhance your skills-- this book is for you. Its hands-on approach will show you how to write real code. Each section takes a specific \"How do I \" topic and answers commonly asked questions in an easy-to-understand, conversational manner. It then shows you how the same technique can be used over and over again to decrease your overall code-writing time.",
+    "longDescription": "Demand for PowerBuilder programmers, with the potential they offer for rapid application development, continues to soar. If you'd like to learn PowerBuilder--or enhance your skills-- this book is for you. Its hands-on approach will show you how to write real code. Each section takes a specific \"How do I \" topic and answers commonly asked questions in an easy-to-understand, conversational manner. It then shows you how the same technique can be used over and over again to decrease your overall code-writing time.",
+    "status": "PUBLISH",
+    "authors": ["Tim Hatton"],
+    "categories": ["PowerBuilder"]
+  },
+  {
+    "title": "The Awesome Power of PowerJ",
+    "isbn": "1884777538",
+    "pageCount": 378,
+    "publishedDate": { "$date": "1998-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hatton2.jpg",
+    "shortDescription": "The Awesome Power of PowerJ shows you how you can write Java programs the very first day with PowerJ, even if you don't know Java. Through a hands-on approach that makes liberal use of figures and code snippets, you will learn how to use PowerJ to build effective Java applets and applications.",
+    "longDescription": "PowerJ is the bridge between the rapid application development world of PowerBuilder and the multiplatform world of Java. The Awesome Power of PowerJ shows you how you can write Java programs the very first day with PowerJ, even if you don't know Java. Through a hands-on approach that makes liberal use of figures and code snippets, you will learn how to use PowerJ to build effective Java applets and applications.",
+    "status": "PUBLISH",
+    "authors": ["Tim Hatton"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "The Awesome Power of Power++",
+    "isbn": "1884777546",
+    "pageCount": 416,
+    "publishedDate": { "$date": "1998-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hatton3.jpg",
+    "shortDescription": "The Awesome Power of Power++ is for the beginning to intermediate Power++ programmer. It assumes that you have little or no knowledge of the C++ language but that you do know programming constructs. The purpose is to teach you how to use Power++ to build C++ applets and applications even if you are not a C++ expert. To this end it takes a hands-on approach and makes liberal use of figures and code snippets.",
+    "longDescription": "The Awesome Power of Power++ is for the beginning to intermediate Power++ programmer. It assumes that you have little or no knowledge of the C++ language but that you do know programming constructs. The purpose is to teach you how to use Power++ to build C++ applets and applications even if you are not a C++ expert. To this end it takes a hands-on approach and makes liberal use of figures and code snippets.    The Awesome Power of Power++ is for:    * IS Managers who are investigating C++ and C++ environments  * Developers who are wanting to learn C++ and build C++ programs  * Any developer who has a C++ project that must be finished quickly ",
+    "status": "PUBLISH",
+    "authors": ["Tim Hatton"],
+    "categories": ["PowerBuilder"]
+  },
+  {
+    "title": "Azure in Action",
+    "isbn": "193518248X",
+    "pageCount": 425,
+    "publishedDate": { "$date": "2010-10-22T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hay.jpg",
+    "shortDescription": "Azure in Action is a fast-paced tutorial intended for architects and developers looking to develop on Windows Azure and the Windows Azure Platform. It's designed both for readers new to cloud concepts and for those familiar with cloud development but new to Azure. After a quick walk through the basics, it guides you all the way from your first app through more advanced concepts of the Windows Azure Platform.",
+    "longDescription": "Cloud-based applications pose an intriguing value proposition for businesses. With an easily scalable, pay-as-you-go model and very small startup costs, the cloud can be a great alternative to systems hosted in-house. Developers are scrambling to understand the impact a cloud-based approach will have on current and future projects.    Azure is Microsoft's full-fledged entry into the \"Cloud Services Platform\" arena. Unlike other cloud offerings that address only one piece of the puzzle, Azure includes an operating system, a set of developer services, and a data model that can be used individually or together. It's designed to interact seamlessly with other .NET-based components, and leverages your knowledge of Visual Studio, the .NET platform, and SQL Server. It's also fully compatible with multiple internet protocols, including HTTP, REST, SOAP, and XML.    Azure in Action is a fast-paced tutorial intended for architects and developers looking to develop on Windows Azure and the Windows Azure Platform. It's designed both for readers new to cloud concepts and for those familiar with cloud development but new to Azure. After a quick walk through the basics, it guides you all the way from your first app through more advanced concepts of the Windows Azure Platform.    The book starts by looking at the logical and physical architecture of an Azure app, and then moves to the core storage services   binary store, tables and queues. Then, it explores designing and scaling frontend and backend services that run in the cloud. Next, it covers more advanced scenarios in Windows Azure. After covering the core of Azure, it introduces the rest of the Windows Azure Platform with a particular focus on SQL Azure Database.",
+    "status": "PUBLISH",
+    "authors": ["Chris Hay", "Brian H. Prince"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Distributed Agile in Action",
+    "isbn": "1935182412",
+    "pageCount": 325,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hazrati.jpg",
+    "shortDescription": "Distributed Agile in Action is the first book to directly address the unique task of going Agile in a distributed team. Rather than rehashing Agile theories, this book supplies the practical examples and step by step advice you need to help your distributed teams adopt and embrace Agile principles. It's a distilled and carefully organized learning aid for working in a distributed Agile environment, with in-depth focus on how to approach three critical components of development-People, Process and Technology.",
+    "longDescription": "As organizations try to do more with less, development teams are less likely to be centrally located, tightly-managed, and permanent. Distributed organizations face special challenges when implementing Agile processes, which rely on frequent communication and responsive teams. Distributed Agile in Action is a guide to running successful Agile projects within geographically and culturally diverse organizations.    Distributed Agile in Action is the first book to directly address the unique task of going Agile in a distributed team. Rather than rehashing Agile theories, this book supplies the practical examples and step by step advice you need to help your distributed teams adopt and embrace Agile principles. It's a distilled and carefully organized learning aid for working in a distributed Agile environment, with in-depth focus on how to approach three critical components of development-People, Process and Technology.    It's jam-packed with suggestions and stories gained from the authors' distributed Agile journey working with teams spread across cultures, continents, and time zones. The book includes a complete case study presenting an increasingly-common project scenario.    This book is written for developers and project managers in distributed teams. Although the examples and case study are presented in Java / Java EE, best practices from rest of the book are technology agnostic and would work equally well for any environment.",
+    "status": "MEAP",
+    "authors": ["Vikas Hazrati", "Balaji D Loganathan"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Metaprogramming in .NET",
+    "isbn": "1617290262",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-12-31T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hazzard.jpg",
+    "status": "PUBLISH",
+    "authors": ["Kevin Hazzard", "Jason Bock"],
+    "categories": ["Microsoft/.NET"]
+  },
+  {
+    "title": "Portlets and Apache Portals",
+    "pageCount": 500,
+    "publishedDate": { "$date": "2005-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hepper.jpg",
+    "shortDescription": "Portlets and Apache Portals was not published by Manning, but the manuscript is available for download from our website \"as is.\"",
+    "longDescription": "Due to the growing complexity of web sites, portals and portlets are experiencing serious growth. Portals help reduce complexity by allowing the dynamic aggregation and display of diverse content in a single web page. Portal components are pluggable parts called portlets. To be \"pluggable\" portlets and portals must satisfy standards. The authors of this book, all but one employees of IBM, created these standards: Java Portlet Specification JSR 168 and Web Services for Remote Portlets (WSRP).    The book starts gently with the basics of portlet technology and a functionrich portlet example. It then dives more deeply into portlets and J2EE, portlet architecture, best practices, and explores how the popular JSF web framework can ease portlet development. It shows how to set up an open source portal and create portlets that dynamically access backend data of various types. It is rich in something readers want: code examples that show them how to do it.",
+    "status": "PUBLISH",
+    "authors": [
+      "Stefan Hepper",
+      "Peter Fischer",
+      "Stephan Hesmer",
+      "Richard Jacob",
+      "David Sean Taylor"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Code Generation in Action",
+    "isbn": "1930110979",
+    "pageCount": 350,
+    "publishedDate": { "$date": "2003-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/herrington.jpg",
+    "shortDescription": "Code Generation In Action covers building database access, user interface, remote procedure, test cases, and business logic code as well as code for other key system functions.",
+    "longDescription": "Code Generation In Action covers technique and implementation for building high-quality machine-generated code for today's complex applications frameworks. The book includes step-by-step instruction for building dozens of code generators of varying types. These generators build high-quality output that is consistent and maintainable. Code generation abstracts the design of the code so that multiple outputs can be created from a single model of the application functionality, which means development teams can focus on higher-level design work and strategic problems, while still meeting goals for maintaining production applications.. The book covers techniques that range from simple code processors that handle common coding problems to more elaborate and complex generators that maintain entire application tiers.  Code Generation In Action covers building database access, user interface, remote procedure, test cases, and business logic code as well as code for other key system functions.    Although code generation is an engineering technique it also has a large impact on the engineering team and management. The book discusses the non-technical justifications for code generation in depth, and offers practical advice for making code generation succeed in any organization.",
+    "status": "PUBLISH",
+    "authors": ["Jack Herrington"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Illustrated Guide to HTTP",
+    "isbn": "138582262",
+    "pageCount": 400,
+    "publishedDate": { "$date": "1997-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hethmon.jpg",
+    "longDescription": "If you're interested in building a web server -- or if you're developing an application that depends or will depend on current HTTP protocols -- Illustrated Guide to HTTP is for you! It covers the latest HTTP/1.1 protocol standard as found in RFC 2068 and RFC 2069. Any programmer, developer or web manager involved in web-related software needs this book to keep up with this dynamic area.",
+    "status": "PUBLISH",
+    "authors": ["Paul S. Hethmon"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Agile ALM",
+    "isbn": "1935182633",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-08-20T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/huettermann.jpg",
+    "shortDescription": "Many software projects fail unnecessarily because of unclear objectives, redundant and unproductive work, cost overruns, and a host of other avoidable process problems. In response, agile processes and lightweight tooling have begun to replace traditional engineering processes throughout the development lifecycle. An agile approach to application lifecycle management improves product quality, reduces time to market, and makes for happier developers.    Agile ALM is a guide for Java developers who want to integrate flexible agile practices and lightweight tooling along all phases of the software development process. The book introduces a new vision for managing change in requirements and process more efficiently and flexibly. You'll learn powerful practices like task-based Development, where you align activities into tasks resulting in traceable artifacts, Continuous Integration, in which you frequently and systematically integrate, build, and test an application in development and using Scrum as an agile approach to release management. The effect is a more comprehensive and practical approach to build, configuration, deployment, release, test, quality, integration, and requirements management.    This book synthesizes technical and functional elements to provide a comprehensive approach to software development. You'll learn to see the whole scope of the development process as a set of defined tasks, many of which are repeated daily, and then master the tools and practices you need to accomplish each of those tasks efficiently.    Because efficient tool chains can radically improve the speed and fluidity of the development process, this book demonstrates how to integrate state-of-the-art lightweight tools. Many of the tools and examples are Java-based, but the Agile ALM principles apply to all development platforms. As well, the many examples show how you can bridge different languages and systems.",
+    "longDescription": "Many software projects fail unnecessarily because of unclear objectives, redundant and unproductive work, cost overruns, and a host of other avoidable process problems. In response, agile processes and lightweight tooling have begun to replace traditional engineering processes throughout the development lifecycle. An agile approach to application lifecycle management improves product quality, reduces time to market, and makes for happier developers.    Agile ALM is a guide for Java developers who want to integrate flexible agile practices and lightweight tooling along all phases of the software development process. The book introduces a new vision for managing change in requirements and process more efficiently and flexibly. You'll learn powerful practices like task-based Development, where you align activities into tasks resulting in traceable artifacts, Continuous Integration, in which you frequently and systematically integrate, build, and test an application in development and using Scrum as an agile approach to release management. The effect is a more comprehensive and practical approach to build, configuration, deployment, release, test, quality, integration, and requirements management.    This book synthesizes technical and functional elements to provide a comprehensive approach to software development. You'll learn to see the whole scope of the development process as a set of defined tasks, many of which are repeated daily, and then master the tools and practices you need to accomplish each of those tasks efficiently.    Because efficient tool chains can radically improve the speed and fluidity of the development process, this book demonstrates how to integrate state-of-the-art lightweight tools. Many of the tools and examples are Java-based, but the Agile ALM principles apply to all development platforms. As well, the many examples show how you can bridge different languages and systems.",
+    "status": "PUBLISH",
+    "authors": ["Michael Hüttermann"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Java Network Programming, Second Edition",
+    "isbn": "188477749X",
+    "pageCount": 860,
+    "publishedDate": { "$date": "1999-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hughes.jpg",
+    "longDescription": "The first edition of Java Network Programming was acclaimed by readers as an outstanding networking reference. It provided complete details of the Java platform's support for networking and I/O with extensive API coverage and sophisticated examples.    This second edition is strengthened with complete coverage of JDK 1.2 and many more practical examples. Unlike other books in the field, Java Network Programming, 2nd Edition goes well beyond simple examples to show how to develop robust, efficient real-world applications.    What's inside:        * Introduction to networking and Internet protocols      * Complete coverage of the Java networking and I/O APIs      * Details of multithreading and exception handling      * Byte, Character, Object and Message streams      * IP, TCP, UDP, Multicast, HTTP, DNS, RMI, CORBA and Servlets      * Finger, DNS, HTTP, and ping clients and servers      * Multiprotocol chat systems & whiteboards ",
+    "status": "PUBLISH",
+    "authors": ["Merlin Hughes", "Michael Shoffner", "", "Derek Hamner"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Struts in Action",
+    "isbn": "1932394249",
+    "pageCount": 672,
+    "publishedDate": { "$date": "2002-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/husted.jpg",
+    "longDescription": "Struts solves the most common problems of web development. By basing your application on the Struts framework, you can reuse proven solutions and focus on what's unique to your own case. Struts is an open-source product distributed by the Apache Software Foundation. Struts in Action is a comprehensive introduction to the Struts framework. It covers initial design, data validation, database access, dynamic page assembly, localization, product configuration, and other important areas. It shows you how to use both JSP tags and Velocity templates. It carefully explains the Struts architecture and control flow, as well as how to extend framework classes.    Differences between Struts 1.1 and Struts 1.0. are pointed out and a case-study illustrates the 1.0 to 1.1 transition. The book shows you dozens of proven design techniques, patterns, and strategies, many of them not found elsewhere.",
+    "status": "PUBLISH",
+    "authors": [
+      "Ted N. Husted",
+      "Cedric Dumoulin",
+      "George Franciscus",
+      "David Winterfeldt"
+    ],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "Camel in Action",
+    "isbn": "1935182366",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2011-01-04T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ibsen.jpg",
+    "shortDescription": "Camel in Action is for developers working with integration of any kind. This highly practical book introduces Camel and shows examples of how to use it with the 45+ supported enterprise integration patterns. Written by the people who wrote the Camel code, it's up to date and distills details and insights that only people deeply involved with Camel could provide.",
+    "longDescription": "Apache Camel is a Java-based toolkit that makes it easy to implement services based on standard enterprise integration patterns (EIP). Through a concise, but sophisticated domain specific language (DSL), you can build integration logic in lego style. The Camel DSL is implemented in a range of standard programming languages such as Java, XML, Scala, Groovy, Ruby, and Python.    Camel provides components for using these patterns via commonly used transports such as JMS, HTTP, REST, File/FTP, JPA, SMTP, and more than 50 others. No transport  Camel provides a flexible pluggable architecture to build your own components. Or you can let Camel adapt to your existing libraries without the need to change anything.    Camel in Action is for developers working with integration of any kind. This highly practical book introduces Camel and shows examples of how to use it with the 45+ supported enterprise integration patterns. Written by the people who wrote the Camel code, it's up to date and distills details and insights that only people deeply involved with Camel could provide.    Camel is designed to run in any existing environment without imposing restrictions. This allows you to get started with Camel very easily and reuse existing infrastructure and platforms. Camel can run in many forms such as standalone, web or Spring application, JBI, OSGi, Java EE, in the cloud, and so on. The book includes a technical reference explaining how to use Camel with many platforms.",
+    "status": "PUBLISH",
+    "authors": ["Claus Ibsen", "Jonathan Anstey"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Taming Text",
+    "isbn": "193398838X",
+    "pageCount": 350,
+    "publishedDate": { "$date": "2012-12-31T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ingersoll.jpg",
+    "shortDescription": "Taming Text is a hands-on, example-driven guide to working with unstructured text in the context of real-world applications. This book explores how to automatically organize text using approaches such as full-text search, proper name recognition, clustering, tagging, information extraction, and summarization. The book guides you through examples illustrating each of these topics, as well as the foundations upon which they are built.",
+    "longDescription": "It is no secret that the world is drowning in text and data. This causes real problems for everyday users who need to make sense of all the information available, and software engineers who want to make their text-based applications more useful and user-friendly. Whether you're building a search engine for a corporate website, automatically organizing email, or extracting important nuggets of information from the news, dealing with unstructured text can be a daunting task.    Taming Text is a hands-on, example-driven guide to working with unstructured text in the context of real-world applications. This book explores how to automatically organize text using approaches such as full-text search, proper name recognition, clustering, tagging, information extraction, and summarization. The book guides you through examples illustrating each of these topics, as well as the foundations upon which they are bulit.",
+    "status": "PUBLISH",
+    "authors": [
+      "Grant S. Ingersoll",
+      "Thomas S. Morton",
+      "",
+      "Andrew L. Farris"
+    ],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "JBoss in Action",
+    "isbn": "1933988029",
+    "pageCount": 496,
+    "publishedDate": { "$date": "2009-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jamae.jpg",
+    "longDescription": "The JBoss 5 Application Server is a Java Enterprise Edition 5 application server that provides services that most enterprise applications need, such as security, transactionality, persistence, monitoring, resource management, and remote access. JBoss 5 Application Server is compliant with the specification defined by the Java Community Process.    JBoss in Action teaches readers how to use the JBoss application server, digging into the things that separate JBoss from other Java EE servers. This book goes deeply into the advanced features and configuration of the server. In particular, it focuses on enterprise-class topics, such as high availability, security, and performance.    The book walks you through the JBoss 5 Application Server, from installation and configuration to production deployment. It guides you through configuring the server   s component containers, such as the JBoss Web Server, the EJB3 server, and JBoss Messaging. It also gives you detailed insight into configuring the services, such as security, performance, and clustering. Beyond coverage of the core application server, the book also teaches you how to use some of the    hot    technologies that run on top of the application server, such as JBoss Seam and JBoss Portal.    The authors, both seasoned professional experts at developing and administering JBoss, provide meaningful explanations and background on many topics, all tied together with practical, real-world advice from their collective experience. The uniquely comprehensive explanations and the overall wide coverage provided in this book surpass any other content currently available.    This book is perfect for developers writing Java EE applications, as well as administrators responsible for maintaining the JBoss Application Server.",
+    "status": "PUBLISH",
+    "authors": ["Javid Jamae", "Peter Johnson"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Gnuplot in Action",
+    "isbn": "1933988398",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2009-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/janert.jpg",
+    "longDescription": "Statistical data is only as valuable as your ability to analyze, interpret, and present it in a meaningful way. Gnuplot is the most widely used program to plot and visualize data for Unix/Linux systems and it is also popular for Windows and the Mac. It's open-source (as in free!), actively maintained, stable, and mature. It can deal with arbitrarily large data sets and is capable of producing high-quality, publication-ready graphics.    So far, the only comprehensive documentation available about gnuplot is the online reference documentation, which makes it both hard to get started and almost impossible to get a complete overview over all of its features. If you've never tried gnuplot   or have found it tough to get your arms around   read on.    Gnuplot in Action is the first comprehensive introduction to gnuplot   from the basics to the power features and beyond. Besides providing a tutorial on gnuplot itself, it demonstrates how to apply and use gnuplot to extract intelligence from data. Particular attention is paid to tricky or poorly-explained areas. You will learn how to apply gnuplot to actual data analysis problems. This book looks at different types of graphs that can be generated with gnuplot and will discuss when and how to use them to extract actual information from data.    One of gnuplot's main advantages is that it requires no programming skills nor knowledge of advanced mathematical or statistical concepts. Gnuplot in Action assumes you have no previous knowledge of either gnuplot or statistics and data analysis. The books starts out with basic gnuplot concepts, then describes in depth how to get a graph ready for final presentation and to make it look \"just right\" by including arrows, labels, and other decorations.    Next the book looks at advanced concepts, such as multi-dimensional graphs and false-color plots   powerful features for special purposes. The author also describes advanced applications of gnuplot, such as how to script gnuplot so that it can run unattended as a batch job, and how to call gnuplot from within a CGI script to generate graphics for dynamic websites on demand.    Gnuplot in Action makes gnuplot easy for anyone who needs to do data analysis, but doesn't have an education in analytical tools and methods. It's perfect for DBAs, programmers, and performance engineers; business analysts and MBAs; and Six-Sigma Black Belts and process engineers.",
+    "status": "PUBLISH",
+    "authors": ["Philipp K. Janert"],
+    "categories": ["Computer Graphics"]
+  },
+  {
+    "title": "Extending and Embedding Perl",
+    "isbn": "1930110820",
+    "pageCount": 384,
+    "publishedDate": { "$date": "2002-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jenness.jpg",
+    "longDescription": "Extending and Embedding Perl explains how to expand the functionality and usefulness of the Perl programming language and how to use Perl from C programs. It begins simply but also covers complex issues using real code examples from the Perl source. The book discusses how to write interfaces to C libraries (as well as C++ and Fortran libraries). It shows you how to implement Perl callbacks for C libraries, how to pass Perl hashes and arrays between Perl and C, and how to use the Perl Data Language infrastructure to improve the speed of array operations.    Additionally, the book peers under the hood to see how the Perl programming language really works by looking at the interpreter. The make-up of Perl variables is discussed along with details on how a Perl program is parsed and converted to executable code.",
+    "status": "PUBLISH",
+    "authors": ["Tim Jenness", "Simon Cozens"],
+    "categories": ["Perl"]
+  },
+  {
+    "title": "iOS 4 in Action",
+    "isbn": "1617290017",
+    "pageCount": 504,
+    "publishedDate": { "$date": "2011-06-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jharrington.jpg",
+    "shortDescription": "iOS 4 in Action, written for Xcode 4, is a detailed, hands-on guide that goes from setting up your development environment, through your first coding steps, all the way to creating a polished, commercial iOS 4 application. You'll run through examples from a variety of areas including a chat client, a video game, an interactive map, and background audio. You'll also learn how the new iOS 4 features apply to your existing iOS 3 based apps. This book will help you become a confident, well-rounded iOS 4 developer.",
+    "longDescription": "Written for Xcode 4, iOS 4 in Action guides you from setting up your development environment, through coding your first app, all the way to selling in the App Store. Work through sample applications including a chat client, a video game, an interactive map, background audio, and more as you explore the iOS 4 SDK.    Version 4 of the iOS SDK adds powerful new features like multitasking, GCD, blocks, and iAds. With the release of Xcode 4, it's easier than ever to get programming, even if you're new to Objective-C.    iOS 4 in Action, written for Xcode 4, is a detailed, hands-on guide that goes from setting up your development environment, through your first coding steps, all the way to creating a polished, commercial iOS 4 application. You'll run through examples from a variety of areas including a chat client, a video game, an interactive map, and background audio. You'll also learn how the new iOS 4 features apply to your existing iOS 3 based apps. This book will help you become a confident, well-rounded iOS 4 developer.",
+    "status": "PUBLISH",
+    "authors": [
+      "Jocelyn Harrington",
+      "Brandon Trebitowski",
+      "Christopher Allen",
+      "",
+      "Shannon Appelcline"
+    ],
+    "categories": ["Mobile Technology"]
+  },
+  {
+    "title": "Elements of Programming with Perl",
+    "isbn": "1884777805",
+    "pageCount": 368,
+    "publishedDate": { "$date": "1999-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/johnson.jpg",
+    "longDescription": "As the complexity of web sites grows, more and more webmasters need to acquire programming skills. Naturally, such persons are inclined to learn Perl, the \"language of the web.\" However, there has been no book to treat Perl as the first programming language; every Perl book assumes that the reader can program already.    Until now.    Elements of Programming with Perl is a general introduction to programming, using Perl as the implementation language. It starts at the beginning, teaching programming style, structure, and design. It covers all the fundamental elements of Perl (e.g., pattern matching and text processing) and proceeds to advanced concepts, including modular programming, abstract data structures, and object oriented programming.    Elements of Programming with Perl contains numerous examples and diagrams that illustrate concepts, algorithms and techniques. Complete example programs show the new programmer how to tie concepts together to solve real-world problems.    Elements of Programming with Perl is designed for the new programmer who needs to know Perl, and for the regular Perl user who would like to improve his or her programming skills.",
+    "status": "PUBLISH",
+    "authors": ["Andrew L. Johnson"],
+    "categories": ["Perl"]
+  },
+  {
+    "title": "Learn Windows PowerShell in a Month of Lunches",
+    "isbn": "1617290211",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-04-15T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jones.jpg",
+    "shortDescription": "Learn Windows PowerShell in a Month of Lunches is an innovative tutorial designed for busy administrators. Author Don Jones has taught thousands of administrators to use PowerShell, and now he'll teach you, bringing his years of training techniques to a concise, easy-to-follow book. Just set aside one hour a day   lunchtime would be perfect   for an entire month, and you'll be automating administrative tasks faster than you ever thought possible. Don combines his own in-the-trenches experience with years of PowerShell instruction to deliver the most important, effective, and engaging elements of PowerShell to you quickly and painlessly, setting you on the path to a career-boosting future.",
+    "longDescription": "In Windows, there's a control panel, dialog box, administrative console, API, or wizard to manage every component of your system. There are    thousands    of them   so many that it can be nearly impossible to keep track of all the locations and settings you need to administer Windows effectively. For administrators, PowerShell is a godsend because it provides a single, unified command line from which you can control and automate every aspect of Windows. PowerShell finally enables Windows administrators to work in a way that Unix and Linux administrators have leveraged for decades.    Like classic administrative shells, PowerShell accepts and immediately executes typed commands. In addition, it has all the features of a full-fledged programming language built in, so you can create scripts to automate even the most complex tasks. And it's fully aware of all the components of Windows and most Windows servers, so you can use PowerShell to control Exchange, IIS, SharePoint, and other core pieces of your Windows system.    Learn Windows PowerShell in a Month of Lunches is an innovative tutorial designed for busy administrators. Author Don Jones has taught thousands of administrators to use PowerShell, and now he'll teach you, bringing his years of training techniques to a concise, easy-to-follow book. Just set aside one hour a day   lunchtime would be perfect   for an entire month, and you'll be automating administrative tasks faster than you ever thought possible. Don combines his own in-the-trenches experience with years of PowerShell instruction to deliver the most important, effective, and engaging elements of PowerShell to you quickly and painlessly, setting you on the path to a career-boosting future.",
+    "status": "PUBLISH",
+    "authors": ["Don Jones"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "R in Action",
+    "isbn": "1935182390",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2011-08-15T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kabacoff.jpg",
+    "shortDescription": "R in Action is the first book to present both the R system and the use cases that make it such a compelling package for business developers. The book begins by introducing the R language, including the development environment. As you work through various examples illustrating R's features, you'll also get a crash course in practical statistics, including basic and advanced models for normal and non-normal data, longitudinal and survival data, and a wide variety of multivariate methods. Both data mining methodologies and approaches to messy and incomplete data are included.",
+    "longDescription": "The ability to interpret and act on the massive amounts of information locked in web and enterprise systems is critical to success in the modern business economy. R, a free software environment for statistical computing and graphics, is a comprehensive, fully-programmable package that empowers developers and analysts to capture, process, and respond intelligently to statistical information. It consists of the interpreted R language plus a run-time environment with graphics, a debugger, and the ability to run programs stored in script files. It compiles and runs on UNIX, Windows and Mac OS X, and has been extended with hundreds of add-on packages.    R in Action is the first book to present both the R system and the use cases that make it such a compelling package for business developers. The book begins by introducing the R language, including the development environment. As you work through various examples illustrating R's features, you'll also get a crash course in practical statistics, including basic and advanced models for normal and non-normal data, longitudinal and survival data, and a wide variety of multivariate methods. Both data mining methodologies and approaches to messy and incomplete data are included.    And data analysis is only half the story. You'll also master R's extensive graphical environment for presenting data. Along the way, the book presents many of R's most useful add-on modules. You'll also learn how to interface R with other software platforms and data management systems for maximum utility.",
+    "status": "PUBLISH",
+    "authors": ["Robert I. Kabacoff"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Android in Practice",
+    "isbn": "9781935182924",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kaeppler.jpg",
+    "status": "MEAP",
+    "authors": ["Matthias Kaeppler", "Michael D. Galpin", "Charlie Collins"],
+    "categories": ["Mobile Technology"]
+  },
+  {
+    "title": "SOA Security",
+    "isbn": "1932394680",
+    "pageCount": 512,
+    "publishedDate": { "$date": "2007-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kanneganti.jpg",
+    "longDescription": "Anyone seeking to implement SOA Security is forced to dig through a maze of inter-dependent specifications and API docs that assume a lot of prior security knowledge on the part of readers. Getting started on a project is proving to be a huge challenge to practitioners. This book seeks to change that. It provides a bottom-up understanding of security techniques appropriate for use in SOA without assuming any prior familiarity with security topics.    Unlike most other books about SOA that merely describe the standards, this book helps readers learn through action, by walking them through sample code that illustrates how real life problems can be solved using the techniques and best practices described in the standards. It simplifies things: where standards usually discuss many possible variations of each security technique, this book focuses on the 20% of variations that are used 80% of the time. This keeps the material covered useful for all readers except the most advanced.",
+    "status": "PUBLISH",
+    "authors": ["Ramarao Kanneganti", "Prasad A. Chodavarapu"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Rails 3 in Action",
+    "isbn": "1935182277",
+    "pageCount": 425,
+    "publishedDate": { "$date": "2011-09-20T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/katz.jpg",
+    "shortDescription": "Rails 3 in Action will provide a thorough introduction to Ruby-based web development using Rails. Like Rails 3 itself, this book combines Merb and Rails in the form of authors Yehuda Katz, Merb Lead Developer.",
+    "longDescription": "In December 2008, the Merb team announced that they will be collaborating with the Rails core team on the next versions of Merb and Rails. Rather than maintaining parallel tracks, Merb 2 and Rails 3 will merge, preserving the flexible configuration and advanced features that Merb users love along with the rapid productivity and ease-of-use that makes Rails shine. As Engine Yard developer (and Manning author) Yehuda Katz puts it, \"Effectively, Merb 2 is Rails 3.\"    Rails 3 in Action will provide a thorough introduction to Ruby-based web development using Rails. Like Rails 3 itself, this book combines Merb and Rails in the form of authors Yehuda Katz, Merb Lead Developer.    As a developer, you'll benefit from several big advantages to this change:  Rails becomes more modular, by building on rails core with the ability to opt in or out of specific components and making it possible to replace parts of Rails without disturbing other parts.  Merb performance improvements flow into Rails, including benchmarking applications so developers can see which optimizations have real-world impact.  A defined public API with a test suite, so users and plugin developers have a stable API to build against.  A \"core\" version of Rails, like Merb's current core generator, that makes it easy to select just the parts that are important for your app.  DataMapper and Sequel support as first-class ORMs, along with ActiveRecord as the default.  Rack support in Rails 3, to improve the state of modular, sharable logic between applications.  The Rails 3 team is moving full steam ahead building the new version. The Merb team will start working on Rails immediately, and also continue to fix bugs and resolve other major issues in the current release of Merb. Interim versions of Merb will help ease the transition to Rails 3. In particular, Merb releases with deprecation notices and other transitional mechanisms will assist developers in tracking down the changes between Merb 1.x and Rails 3.    If you've already learned Merb, Rails 3 in Action will help you parlay that knowledge into the new Rails code base. If you're a long time Rails developer, it will help you get up to speed with all the new Rails 3 features and changes.",
+    "status": "PUBLISH",
+    "authors": ["Ryan Bigg", "Yehuda Katz"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Continuous Integration in .NET",
+    "isbn": "1935182552",
+    "pageCount": 328,
+    "publishedDate": { "$date": "2011-03-14T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kawalerowicz.jpg",
+    "shortDescription": "Continuous Integration in .NET is a tutorial for developers and team leads that teaches you to reimagine your development strategy by creating a consistent continuous integration process. This book shows you how to build on the tools you already know--.NET Framework and Visual Studio and to use powerful software like MSBuild, Subversion, TFS 2010, Team City, CruiseControl.NET, NUnit, and Selenium.",
+    "longDescription": "There are three copies of a source file and no-one knows which is the right one. Your carefully-crafted unit tests won't run anymore. The three-year-old requirements doc is totally irrelevant. The boss wants to ship, ship, ship. The team in Austin has no idea what the team in Arlington is up to. You are in integration hell. Ready to try something different     Continuous integration is a software engineering process designed to minimize \"integration hell.\" It's a coordinated development approach that blends the best practices in software delivery: frequent integration, constant readiness, short build feedback cycles, persistent testing, and a flexible approach to developing--and modifying--system requirements. For .NET developers, especially, adopting these new approaches and the tools that support can require rethinking your dev process altogether.    Continuous Integration in .NET is a tutorial for developers and team leads that teaches you to reimagine your development strategy by creating a consistent continuous integration process. This book shows you how to build on the tools you already know--.NET Framework and Visual Studio and to use powerful software like MSBuild, Subversion, TFS 2010, Team City, CruiseControl.NET, NUnit, and Selenium.    Because CI is as much about the culture of your shop as the tooling, this book will help you bridge resistance to adoption by providing clear guidelines for starting and maintaining projects-along with defined metrics for measuring project success. Each author brings a unique set of experiences and practices to create a rich and varied picture of this powerful technique.    WHAT'S INSIDE        * Continuous integration-what is it       * Source control with Subversion and TFS Version Control.      * Continuous integration server with TFS 2010, CruiseControl.NET and TeamCity.      * Automating build with MSBuild.      * Testing with NUnit, Fitnesse and Selenium.      * Database Integration.      * Keeping code tidy with FxCop and StyleCop.      * Generating documentation with Sandcastle.      * Deploying with ClickOnce and WiX.      * Scaling continuous integration.",
+    "status": "PUBLISH",
+    "authors": ["Marcin Kawalerowicz", "Craig Berntson"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Technology Paradise Lost",
+    "isbn": "1932394133",
+    "pageCount": 260,
+    "publishedDate": { "$date": "2004-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/keller.jpg",
+    "shortDescription": "In Technology Paradise Lost Keller describes how the new thinking is working inside some of the country's most complex and successful organizations, including Merrill Lynch, JetBlue, Harrah's, and Motorola which have cut IT spending to gain a competitive edge, and experienced marked gains to their bottom lines.",
+    "longDescription": "An engine of the world economy, the computer industry is sputtering. What happened  Will it regain its power and again drive economic growth as in the past     No.    That's the surprising conclusion reached by Erik Keller, a central player in the booming IT world of the 1990s. Driven by fear of being left behind, American corporations let IT grow until it reached one half of all corporate capital spending by the year 2000. Now, chastened by their spending failures, IT managers are converging on a new consensus: to exploit IT competitively they must use their smarts over big money.    This shift in thinking comes just as free, open-source software, low-cost international programming labor, and new technologies combine to make the new approach possible.    A former Research Fellow at Gartner, Keller had an insider's view of the irrational spending at many Fortune 500 companies, personally influencing billions of dollars of technology acquisitions.    In Technology Paradise Lost Keller describes how the new thinking is working inside some of the country's most complex and successful organizations, including Merrill Lynch, JetBlue, Harrah's, and Motorola which have cut IT spending to gain a competitive edge, and experienced marked gains to their bottom lines.    As it advances, the new IT think will cause further massive disruptions in the computer business, with fundamental changes in the ways software is developed, sold, and used. Efficiency of IT investment will grow as excess fat is squeezed out of IT salaries, software system costs, and consultants' fees.    In an unexpected twist, Keller argues that even as IT spending is reduced its importance for competitiveness will grow. Reduced spending does not mean IT has become a commodity. Counterintuitively, companies that spend less in order to get more from information technology will likely be the big winners.",
+    "status": "PUBLISH",
+    "authors": ["Erik Keller"],
+    "categories": ["Business"]
+  },
+  {
+    "title": "Kermit 95+",
+    "isbn": "1930110057",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2003-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kermit.jpg",
+    "longDescription": "Kermit 95+, Version 2.1 is a full-featured, fully native, 32-bit communications software package for Microsoft Windows 95/98/NT/2000/XP and IBM OS/2 3.0 and later from the Kermit Project at Columbia University. It works uniformly over a variety of connection methods. Included in the Kermit 95+, Version 2.1 bundle: Internet and modem communications, 40+ terminal emulations, Telnet, SSH, Kerberos, SSL/TLS, Unicode. Plus FTP, Kermit, and Zmodem file transfer, a built-in cross-platform scripting language to automate any communications or file management task, and companion Kermit software for Unix and VMS.    For those already familiar with the package, Version 2.1 adds in-the-box exportable secure authentication and strong encryption including SSH v1/v2, a secure scriptable FTP client, and runs in a GUI window with regular Windows font and size selections.",
+    "status": "PUBLISH",
+    "authors": ["Kermit Project at Columbia University"],
+    "categories": ["Internet", "Networking", "Miscella"]
+  },
+  {
+    "title": "Laszlo in Action",
+    "isbn": "1932394834",
+    "pageCount": 552,
+    "publishedDate": { "$date": "2008-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/klein.jpg",
+    "longDescription": "Laszlo in Action is the first comprehensive guide to the Laszlo system and its language LZX. OpenLaszlo is an increasingly popular open-source platform for the development and delivery of rich internet applications across multiple platforms: Flash, DHTML, and J2ME. The dramatic emergence of Ajax over the past year was a first step in the transition from page-oriented HTML web applications towards more full-featured rich internet applications. OpenLaszlo provides another important step in this continuing evolutionary process through the increased productivity resulting from LZX's declarative approach. It provides developers with the tools to create web-based applications offering the usability and interactivity associated with desktop applications, and the low costs associated with web-based deployment. The cross-platform nature of Laszlo LZX applications allows source code with only minimum modifications to run natively on all popular web browsers, on all desktop operating systems, on the Flash platform, and other platforms in the future.    Written to address the needs of a wide spectrum of developers, ranging from client-side HTML and JavaScript developers all the way to enterprise-class Java or Rails engineers, this book provides a very hands-on approach towards building applications that solve real-world problems across both the Flash and DHTML platforms. Starting with the fundamentals of Laszlo LZX, the authors quickly move towards applying this knowledge to the design and development of a full-scale application called the Laszlo Market. This provides a working context to assist understanding the underlying concepts of Laszlo LZX and, more importantly, how to apply this knowledge in innovative ways. The construction of the Laszlo Market proceeds over the course of the book illustrating topics starting with an initial wireframe and storyboard design to optimization issues dealing with the application's deployment across the Flash and DHTML platforms.",
+    "status": "PUBLISH",
+    "authors": ["Norman Klein", "Max Carlson with Glenn MacEwen"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Groovy in Action",
+    "isbn": "1932394842",
+    "pageCount": 696,
+    "publishedDate": { "$date": "2007-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/koenig.jpg",
+    "longDescription": "Groovy, the brand-new language for the Java platform, brings to Java many of the features that have made Ruby popular. Groovy in Action is a comprehensive guide to Groovy programming, introducing Java developers to the new dynamic features that Groovy provides. To bring you Groovy in Action, Manning again went to the source by working with a team of expert authors including both members and the manager of the Groovy Project team. The result is the true definitive guide to the new Groovy language.    Groovy in Action introduces Groovy by example, presenting lots of reusable code while explaining the underlying concepts. Java developers new to Groovy find a smooth transition into the dynamic programming world. Groovy experts gain a solid reference that challenges them to explore Groovy deeply and creatively.    Because Groovy is so new, most readers will be learning it from scratch. Groovy in Action quickly moves through the Groovy basics, including:    Simple and collective Groovy data types  Working with closures and Groovy control structures  Dynamic Object Orientation, Groovy style  Readers are presented with rich and detailed examples illustrating Groovy's enhancements to Java, including    How to work with builders and the GDK  Database programming with Groovy  Groovy in Action then demonstrates how to Integrate Groovy with XML, and provides,    Tips and Tricks  Unit testing and build support  Groovy on Windows  An additional bonus is a chapter dedicated to Grails, the Groovy web application framework.",
+    "status": "PUBLISH",
+    "authors": [
+      "Dierk Koenig with Andrew Glover",
+      "Paul King",
+      "Guillaume Laforge",
+      "Jon Skeet"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Groovy in Action, Second Edition",
+    "isbn": "1935182447",
+    "pageCount": 700,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/koenig2.jpg",
+    "shortDescription": "Groovy in Action, Second Edition is a thoroughly-revised, comprehensive guide to Groovy programming. It introduces Java developers to the dynamic features that Groovy provides, and shows you how to apply Groovy to a range of tasks including building new apps, integration with existing code, and DSL development.",
+    "longDescription": "The first edition of Groovy in Action is the undisputed definitive reference on the Groovy language. Written by core members of the Groovy language team, this book presents Groovy like none other can   from the inside out. Since its introduction a few years back, Groovy has grown from an upstart dynamic language for the JVM to become an integral part of any Java developer's toolbox. Projects like Grails and Griffon have extended Groovy's reach into the web and desktop app world.    Groovy in Action, Second Edition is a thoroughly-revised, comprehensive guide to Groovy programming. It introduces Java developers to the dynamic features that Groovy provides, and shows you how to apply Groovy to a range of tasks including building new apps, integration with existing code, and DSL development.    This book introduces Groovy by example, presenting lots of reusable code while explaining the underlying concepts. Java developers new to Groovy find a smooth transition into the dynamic programming world. Groovy experts gain a solid reference that challenges them to explore Groovy deeply and creatively.    For readers learning it from scratch. Groovy in Action thoroughly moves through the Groovy basics, including:    Groovy's unique approach of optional typing  Simple and collective Groovy data types  Working with closures and Groovy control structures  The merits of Metaprogramming  Readers are presented with rich and detailed examples illustrating Groovy's enhancements to Java, including:    How to work with builders and the GDK  Database and XML programming with Groovy  Concurrency for the multicore era: actors, asynchronous collections and dataflow  Building Domain Specific languages   a very hot topic!  Groovy in Action then demonstrates how to integrate Groovy in Java projects and provides:    Tips and Tricks  Unit testing and build support  Groovy frameworks, including Grails, Griffon, and Groovy on Windows",
+    "status": "MEAP",
+    "authors": [
+      "Dierk König",
+      "Guillaume Laforge",
+      "Paul King",
+      "Cédric Champeau",
+      "Hamlet D'Arcy",
+      "Erik Pragt",
+      "",
+      "Jon Skeet"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Object Technology Centers of Excellence",
+    "isbn": "132612313",
+    "pageCount": 200,
+    "publishedDate": { "$date": "1996-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/korson.jpg",
+    "shortDescription": "Object Technology Centers of Excellence provides guidance to those charged with managing the shift to object technology. It is the only book on the market aimed not at the project level but at the corporate level, with a focus on the infrastructures necessary for a successful transition.",
+    "longDescription": "Object Technology Centers (OTC) are technology transfer catalysts for the rapid development and deployment of object-oriented infrastructure. Object Technology Centers of Excellence provides guidance to those charged with managing the shift to object technology. It is the only book on the market aimed not at the project level but at the corporate level, with a focus on the infrastructures necessary for a successful transition.    This book presents case histories of early adopters of OT, which can help you understand the steps your company must take-and paths it should avoid. Object Technology Centers of Excellence is recommended reading in any organization planning or transitioning to OT, not just involved with formal OTCs. The book includes practical advice for managers, members of technical staffs, and consultants.    The case histories involve some heavy hitters:    IBM  Wiltel  The Travelers  Bell Northern Research  Also, summaries are presented for Andersen Consulting, Northern Telecom, Prudential Insurance Company, Ascom Nexion, and several others.",
+    "status": "PUBLISH",
+    "authors": ["Timothy D. Korson", "Vijay K. Vaishnavi"],
+    "categories": ["Object-Technology Programming", ""]
+  },
+  {
+    "title": "Test Driven",
+    "isbn": "1932394850",
+    "pageCount": 544,
+    "publishedDate": { "$date": "2007-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/koskela.jpg",
+    "longDescription": "In test-driven development, you first write an executable test of what your application code must do. Only then do you write the code itself and, with the test spurring you on, improve your design. In acceptance test-driven development (ATDD), you use the same technique to implement product features, benefiting from iterative development, rapid feedback cycles, and better-defined requirements. TDD and its supporting tools and techniques lead to better software faster.    Test Driven brings under one cover practical TDD techniques distilled from several years of community experience. With examples in Java and the Java EE environment, it explores both the techniques and the mindset of TDD and ATDD. It uses carefully chosen examples to illustrate TDD tools and design patterns, not in the abstract but concretely in the context of the technologies you face at work. It is accessible to TDD beginners, and it offers effective and less-well-known techniques to older TDD hands.",
+    "status": "PUBLISH",
+    "authors": ["Lasse Koskela"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Effective Unit Testing",
+    "isbn": "1935182579",
+    "pageCount": 350,
+    "publishedDate": { "$date": "2013-02-04T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/koskela2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Lasse Koskela"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Making Java Groovy",
+    "isbn": "1935182943",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-09-19T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kousen.jpg",
+    "shortDescription": "Making Java Groovy is a practical handbook for developers who want to blend Groovy into their day-to-day work with Java. It starts by introducing the key differences between Java and Groovy   and how you can use them to your advantage. Then, it guides you step-by-step through realistic development challenges, from web applications to web services to desktop applications, and shows how Groovy makes them easier to put into production.",
+    "longDescription": "Java is large and powerful, but that size and power carries with it complexity and accumulated inconsistencies. Groovy is an elegant JVM-based dynamic language that gracefully co-exists with Java. It both extends and simplifies Java   and for most Java developers, Groovy is super easy to learn. If you know where to apply it, adding in a little Groovy will make you a better Java developer.    Making Java Groovy is a practical handbook for developers who want to blend Groovy into their day-to-day work with Java. It starts by introducing the key differences between Java and Groovy   and how you can use them to your advantage. Then, it guides you step-by-step through realistic development challenges, from web applications to web services to desktop applications, and shows how Groovy makes them easier to put into production.    This book stays away from theory and drills down on the typical situations you face every day, like consuming and creating SOAP and RESTful web services, working with databases, and using the Spring framework. You'll also explore the great Groovy tools for build processes, testing, and deployment. Finally, you'll learn how Groovy-based domain specific languages simplify Java development.",
+    "status": "PUBLISH",
+    "authors": ["Kenneth A. Kousen"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "The Awesome Power of Direct3D/DirectX",
+    "isbn": "1884777473",
+    "pageCount": 840,
+    "publishedDate": { "$date": "2002-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kovach.jpg",
+    "shortDescription": "The Awesome Power of Direct3D/DirectX shows you how to build a complete working 3D application, including 3D sound, joystick input, animation, textures, shadows, and even collision detection.",
+    "longDescription": "If you are programming real-time 3D applications for simulations, games, marketing, demonstrations or computer-animated videos using Microsoft's Direct3D Software Development Kit, this book is for you. Unlike other books, The Awesome Power of Direct3D/DirectX shows you how to build a complete working 3D application, including 3D sound, joystick input, animation, textures, shadows, and even collision detection!    It shows you how to write code using both Retained Mode and Immediate Mode. It does not bury the code in \"wrappers\" that hide the nuances of the SDK. Nothing is hidden.",
+    "status": "PUBLISH",
+    "authors": ["Peter J. Kovach"],
+    "categories": ["Computer Graphics"]
+  },
+  {
+    "title": "Practical Software Requirements",
+    "isbn": "1884777597",
+    "pageCount": 448,
+    "publishedDate": { "$date": "1998-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kovitz.jpg",
+    "longDescription": "Practical Software Requirements is a comprehensive guidebook for the programmer or manager writing requirements for the first time, as well as the experienced system analyst.    The author takes a unique approach to the subject: that a useful requirements document derives from the techniques employed by programmers and interface designers. His in-depth treatment includes non-hierarchical ways to break down complex problems, elements of the problem domain, and different information needed for different problem types.    An extensive section on style covers the nuts and bolts of making the information understandable: how to group and sequence topics, how to word a definition, even how to avoid boring the reader.    This unusual, example-filled book covers all aspects of a daunting but critical task: giving development staff all the information they need to do their jobs.",
+    "status": "PUBLISH",
+    "authors": ["Benjamin L. Kovitz"],
+    "categories": ["Software Engineering", "Theory"]
+  },
+  {
+    "title": "NHibernate in Action",
+    "isbn": "1932394923",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2009-02-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kuate.jpg",
+    "longDescription": "In the classic style of Manning's \"In Action\" series, NHibernate in Action introduces .NET developers to the NHibernate Object/Relational Mapping tool. As NHibernate is a port of Hibernate from Java to .NET, the book is based on Manning's bestselling Hibernate in Action.    NHibernate in Action begins by describing how to implement persistence in a layered .NET application. The book then quickly springs into action by introducing NHibernate through a classic \"Hello World\" example. It explains how to configure NHibernate to specify the mapping information between business objects and database tables, and then explores the internal architecture of NHibernate. A complete example application is progressively built with Agile methodologies in mind, which shows readers all kinds of entity and relationship mappings and how to perform CRUD operations. The book also covers advanced techniques like caching, concurrency access, and isolation levels. The Hibernate Query Language (HQL) and criteria query APIs are thoroughly detailed with optimization tips.    The last chapters of this book discuss various development scenarios, how to implement the layers of an NHibernate application (covering Windows and Web development), and which tools are available for these tasks. They also provide some solutions for data-binding objects to .NET GUI controls, integrating services, and interacting with components using DataSets. Finally, they explain how to build a complex application involving advanced session management and distributed transactions.",
+    "status": "PUBLISH",
+    "authors": [
+      "Pierre Henri Kuate",
+      "Tobin Harris",
+      "Christian Bauer",
+      "",
+      "Gavin King"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Microsoft Reporting Services in Action",
+    "isbn": "1932394222",
+    "pageCount": 656,
+    "publishedDate": { "$date": "2004-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lachev.jpg",
+    "longDescription": "Business reporting is a lifeline of business, so a better reporting environment is a big deal. With a sophisticated, modern tool like Microsoft SQL Server 2000 Reporting Services, you can report-enable any type of application, regardless of its targeted platform or development language.    Written for information workers, system administrators, and developers, this book is a detailed and practical guide to the functionality provided by Reporting Services. It systematically shows off many powerful RS features by leading you through a dizzying variety of possible uses. Following a typical report lifecycle, the book shows you how to create, manage, and deliver RS reports.    In the first half, you will master the skills you need to create reports. System administrators will learn the ropes of managing and securing the report environment. The second half of the book teaches developers the techniques they need to integrate RS with their WinForm or web-based applications. It does this with the help of a wide variety of real-world scenarios which will give you ideas on how to use RS in addition to teaching you the ropes.    An experienced software designer and developer, Teo Lachev works as a technology consultant with the Enterprise Application Services practice of Hewlett-Packard. He is a Microsoft Certified Solution Developer and a Microsoft Certified Trainer. Teo lives in Atlanta, GA.",
+    "status": "PUBLISH",
+    "authors": ["Teo Lachev"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "AspectJ in Action",
+    "isbn": "1930110936",
+    "pageCount": 512,
+    "publishedDate": { "$date": "2003-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/laddad.jpg",
+    "longDescription": "A software system is the realization of a set of concerns. One of the central premises of object-oriented programming is that each concern should be implemented as a separate module. However, there are certain system-wide concerns, such as logging, security, performance, and so forth, that often need to be addressed in many, if not all of the modules. Consequently, the code to handle these system-wide concerns may be mixed in with the core logic of a huge number of modules, resulting in lower productivity, poor quality, and systems that are hard to evolve.    Aspect-oriented programming overcomes these problems by modularizing the system-wide concerns.    AspectJ enables AOP programming in Java by adding a few new language constructs. By using Java as the base language and creating a final system that is compatible with Java byte code specification, AspectJ passes on all the benefits of Java. The use of Java as the base language also makes AspectJ a relatively easy language to learn.    AspectJ in Action is a practical guide to AOP and AspectJ. The reusable code examples that are provided will enable quick implementation of functionality in your system.    The book is divided into three parts. The first part introduces AOP and AspectJ and will be helpful to developers wanting to learn or advance their knowledge of AspectJ. The second and third parts present examples of everyday situations in which you can use simple and easy AspectJ solutions to implement common system requirements such as logging, policy enforcement, resource pooling, business rules, thread-safety, authentication and authorization, as well as transaction management.",
+    "status": "PUBLISH",
+    "authors": ["Ramnivas Laddad"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "AspectJ in Action, Second Edition",
+    "isbn": "1933988053",
+    "pageCount": 568,
+    "publishedDate": { "$date": "2009-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/laddad2.jpg",
+    "shortDescription": "AspectJ in Action, Second Edition is a fully updated, major revision of Ramnivas Laddad's best-selling first edition. It's a hands-on guide for Java developers. After introducing the core principles of AOP, it shows you how to create reusable solutions using AspectJ 6 and Spring 3. You'll master key features including annotation-based syntax, load-time weaver, annotation-based crosscutting, and Spring-AspectJ integration. Building on familiar technologies such as JDBC, Hibernate, JPA, Spring Security, Spring MVC, and Swing, you'll apply AOP to common problems encountered in enterprise applications.",
+    "longDescription": "To allow the creation of truly modular software, OOP has evolved into aspect-oriented programming. AspectJ is a mature AOP implementation for Java, now integrated with Spring.    AspectJ in Action, Second Edition is a fully updated, major revision of Ramnivas Laddad's best-selling first edition. It's a hands-on guide for Java developers. After introducing the core principles of AOP, it shows you how to create reusable solutions using AspectJ 6 and Spring 3. You'll master key features including annotation-based syntax, load-time weaver, annotation-based crosscutting, and Spring-AspectJ integration. Building on familiar technologies such as JDBC, Hibernate, JPA, Spring Security, Spring MVC, and Swing, you'll apply AOP to common problems encountered in enterprise applications.    This book requires no previous experience in AOP and AspectJ, but it assumes you're familiar with OOP, Java, and the basics of Spring.    WHAT'S INSIDE:        * Totally revised Second Edition      * When and how to apply AOP      * Master patterns and best practices      * Code you can reuse in real-world applications  ",
+    "status": "PUBLISH",
+    "authors": ["Ramnivas Laddad"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Hadoop in Action",
+    "isbn": "1935182196",
+    "pageCount": 325,
+    "publishedDate": { "$date": "2010-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lam.jpg",
+    "shortDescription": "Hadoop in Action teaches readers how to use Hadoop and write MapReduce programs. The intended readers are programmers, architects, and project managers who have to process large amounts of data offline. Hadoop in Action will lead the reader from obtaining a copy of Hadoop to setting it up in a cluster and writing data analytic programs.",
+    "longDescription": "Hadoop is an open source framework implementing the MapReduce algorithm behind Google's approach to querying the distributed data sets that constitute the internet. This definition naturally leads to an obvious question, \"What are \"maps\" and why do they need to be \"reduced \"    Massive data sets can be extremely difficult to analyze and query using traditional mechanisms, especially when the queries themselves are quite complicated. In effect, the MapReduce algorithm breaks up both the query and the data set into constituent parts   that's the \"mapping.\" The mapped components of the query can be processed simultaneously   or \"reduced\"   to rapidly return results.    Hadoop in Action teaches readers how to use Hadoop and write MapReduce programs. The intended readers are programmers, architects, and project managers who have to process large amounts of data offline. Hadoop in Action will lead the reader from obtaining a copy of Hadoop to setting it up in a cluster and writing data analytic programs.    The book begins by making the basic idea of Hadoop and MapReduce easier to grasp by applying the default Hadoop installation to a few easy-to-follow tasks, such as analyzing changes in word frequency across a body of documents. The book continues through the basic concepts of MapReduce applications developed using Hadoop, including a close look at framework components, use of Hadoop for a variety of data analysis tasks, and numerous examples of Hadoop in action.    Hadoop in Action will explain how to use Hadoop and present design patterns and practices of programming MapReduce. MapReduce is a complex idea both conceptually and in its implementation, and Hadoop users are challenged to learn all the knobs and levers for running Hadoop. This book takes you beyond the mechanics of running Hadoop, teaching you to write meaningful programs in a MapReduce framework.    This book assumes the reader will have a basic familiarity with Java, as most code examples will be written in Java. Familiarity with basic statistical concepts (e.g. histogram, correlation) will help the reader appreciate the more advanced data processing examples.",
+    "status": "PUBLISH",
+    "authors": ["Chuck Lam"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "SQR in PeopleSoft and Other Applications",
+    "isbn": "1884777775",
+    "pageCount": 600,
+    "publishedDate": { "$date": "2003-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/landres.jpg",
+    "longDescription": "A software system is the realization of a set of concerns. One of the central premises of object-oriented programming is that each concern should be implemented as a separate module. However, there are certain system-wide concerns, such as logging, security, performance, and so forth, that often need to be addressed in many, if not all of the modules. Consequently, the code to handle these system-wide concerns may be mixed in with the core logic of a huge number of modules, resulting in lower productivity, poor quality, and systems that are hard to evolve.    Aspect-oriented programming overcomes these problems by modularizing the system-wide concerns.    AspectJ enables AOP programming in Java by adding a few new language constructs. By using Java as the base language and creating a final system that is compatible with Java byte code specification, AspectJ passes on all the benefits of Java. The use of Java as the base language also makes AspectJ a relatively easy language to learn.    AspectJ in Action is a practical guide to AOP and AspectJ. The reusable code examples that are provided will enable quick implementation of functionality in your system.    The book is divided into three parts. The first part introduces AOP and AspectJ and will be helpful to developers wanting to learn or advance their knowledge of AspectJ. The second and third parts present examples of everyday situations in which you can use simple and easy AspectJ solutions to implement common system requirements such as logging, policy enforcement, resource pooling, business rules, thread-safety, authentication and authorization, as well as transaction management.",
+    "status": "PUBLISH",
+    "authors": ["Galina", "Vlad Landres"],
+    "categories": ["Business", "Client-Server"]
+  },
+  {
+    "title": "SQR in PeopleSoft and Other Applications, Second Edition",
+    "isbn": "1932394001",
+    "pageCount": 696,
+    "publishedDate": { "$date": "2003-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/landres2.jpg",
+    "longDescription": "Programmers, database developers, administrators responsible for PeopleSoft support, functional users, and project managers are discovering SQR, or Structured Query Report Writer, which has become increasingly popular since PeopleSoft selected it as its main SQL processing and reporting tool. This new language liberates programmers from the constraints of SQL and allows them to concentrate on the application aspects of their programs. This new edition covers all SQR language elements and features, showing developers the best ways of utilizing the languages capabilities and demonstrating good programming habits. Written in a \"let's do it together\" tutorial style, this book starts with the basics and leads users toward a full understanding of the subject. Part one describes the SQR language with all of its features, while part two covers all aspects of interaction between SQR programs and PeopleSoft. This makes the book a working manual for both SQR programmers and PeopleSoft developers.",
+    "status": "PUBLISH",
+    "authors": ["Galina Landres", "Vlad Landres"],
+    "categories": ["Business", "Client-Server"]
+  },
+  {
+    "title": "F# in Action",
+    "isbn": "1935182250",
+    "pageCount": 425,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/laucher.jpg",
+    "shortDescription": "F# in Action introduces the F# language, but it goes well beyond the standard tutorial and reference approach. F# expert Amanda Laucher draws on her extensive experience deploying F#-based solutions to show you how to use F# in real, day-to-day work.",
+    "longDescription": "Microsoft's F# offers a true functional programming language for the .NET platform. The \"functional programming\" approach creates exceptionally stable, fault-tolerant code that's especially efficient for the concurrent programming requirements of multi-processor and high-availability applications. F# builds on the legacy of Erlang, Haskel, and OCaml, adding full .NET support and easy interoperability with C# and other .NET platform features.    F# in Action introduces the F# language, but it goes well beyond the standard tutorial and reference approach. F# expert Amanda Laucher draws on her extensive experience deploying F#-based solutions to show you how to use F# in real, day-to-day work. You'll see \"Greenfield\" examples, where you build new F# programs from scratch. You'll also dig into \"Brownfield\" scenarios, where you integrate F# code into in-place systems. Along the way, you'll master the functional programming style and learn where and how to apply it most effectively.",
+    "status": "MEAP",
+    "authors": ["Amanda Laucher"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Tuscany SCA in Action",
+    "isbn": "1933988894",
+    "pageCount": 472,
+    "publishedDate": { "$date": "2011-02-12T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/laws.jpg",
+    "shortDescription": "Tuscany in Action is a comprehensive, hands-on guide for developing technology agnostic, extensible applications using Apache Tuscany's lightweight SCA infrastructure. The book uses practical examples based on a travel booking scenario to demonstrate how to develop applications with Tuscany SCA. Apache Tuscany supports a variety of programming environments, data bindings and communication protocols \"out of the box\" and can be easily extended to support other technologies.",
+    "longDescription": "If you are developing IT applications or providing a development platform for others to use, you are aware of the various technology choices available to you. With variety comes the complexity of technology integration as well as the cost associated with developing and sustaining the solution over time. What if the development cost and complexity were reduced without restricting your freedom to exploit a variety of technologies  What if you could use your existing investments and move to an extensible architecture that can be more easily tailored to changing business requirements  You can do all this and more with Apache Tuscany and Service Component Architecture (SCA).    Tuscany in Action is a comprehensive, hands-on guide for developing technology agnostic, extensible applications using Apache Tuscany's lightweight SCA infrastructure. The book uses practical examples based on a travel booking scenario to demonstrate how to develop applications with Tuscany SCA. Apache Tuscany supports a variety of programming environments, data bindings and communication protocols \"out of the box\" and can be easily extended to support other technologies.    By reading Tuscany in Action you'll learn how to model, compose, deploy and manage applications using SCA. This includes using many of the technologies included with Tuscany such as Web services, JMS and JSON-RPC for protocol handling and Java, BPEL, Spring and scripting for developing components. You'll also learn how to extend Apache Tuscany to support new programming environments and communication protocols and how you can embed the runtime into your application environment.",
+    "status": "PUBLISH",
+    "authors": [
+      "Simon Laws",
+      "Mark Combellack",
+      "Raymond Feng",
+      "Haleh Mahbod",
+      "Simon Nash"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Client/Server Yellow Pages",
+    "isbn": "1884777082",
+    "pageCount": 280,
+    "publishedDate": { "$date": "1995-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lewis.jpg",
+    "shortDescription": "This unique guide covers software products and vendors active in the client/server marketplace. Over 200 products and over 250 vendors are included.",
+    "longDescription": "This unique guide covers software products and vendors active in the client/server marketplace. Over 200 products and over 250 vendors are included. To help you search for the item of interest to you, software products are grouped in categories (e.g., frontend tools, groupware, workflow, remote access, application development, middleware, conferencing software, componentware). Products are ordered alphabetically by name within each category. With each, the company name, product description, price and platform(s) are listed. When available, a product \"rating,\" and pros and cons of the product are provided too.  The vendor section describes company backgrounds and provides contact information, including, when possible, a contact person's name. The author provides an Introduction giving the reader a sense of direction of the industry, as well as a glossary of terms and acronyms to help him navigate the Client Server Yellow Pages.    This book is the result of painstaking and systematic research into the available clienUserver products. It is the only complete such reference to what is currently (1995) available to buy. It is an invaluable source of information for MIS programmers, systems analysts, designers of clienUserver applications, clienUserver project managers, designers and managers of designers of clienUserver systems, and technology officers within small, medium, and large companies.",
+    "status": "PUBLISH",
+    "authors": ["Compiled", "introduced by Ted Lewis"],
+    "categories": ["Client-Server"]
+  },
+  {
+    "title": "Object Oriented Application Frameworks",
+    "isbn": "1884777066",
+    "pageCount": 352,
+    "publishedDate": { "$date": "1995-04-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lewis2.jpg",
+    "shortDescription": "Frameworks are object-oriented programming environments for vertical application areas. This book is the first to survey this exciting new technology, its concepts, and practical applications.",
+    "longDescription": "Frameworks are object-oriented programming environments for vertical application areas. This book is the first to survey this exciting new technology, its concepts, and practical applications. Considered the next step in the evolution of OOP, framework technology is at the center stage of the software strategies of Taligent, IBM, HP, Microsoft, and Apple, among others. In spite of that, frameworks remain poorly understood, and are rarely covered in the literature. This book condenses practical experience and research ideas; explains exotic terminology so that a novice computer professional can quickly absorb it; is easy to read and conceptually crisp; and will be useful to many types of readers, from programmers to technical managers.    Object-Oriented Application Frameworks:  Covers real-world commercial and public-domain frameworks:  MacApp, ET++, Taligent's Frameworks, Unidraw, InterViews (precursor of Fresco), and Prograph  Illustrates how the technology is used in applications (e.g., MFC from Microsoft) and languages (e.g., Prograph from Prograph International)  Introduces and explains the ideas in plain English",
+    "status": "PUBLISH",
+    "authors": ["Ted Lewis", "friends"],
+    "categories": ["Object-Oriented Programming"]
+  },
+  {
+    "title": "Tapestry in Action",
+    "isbn": "1932394117",
+    "pageCount": 580,
+    "publishedDate": { "$date": "2004-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lewisship.jpg",
+    "longDescription": "Many web development frustrations can be traced back to the underlying stateless HTTP protocol. Tapestry represents state and behavior as standard Java objects, methods and properties. That means state management and multithreading are handled by the framework, leaving you with just your application's business logic. Tapestry does more, you do less.    Tapestry in Action is the definitive guide to the Tapestry approach: creating full-featured web apps by connecting framework components to economical amounts of application code. Many simple examples show you how to tackle common tasks such as form validation, application localization, client-side scripting, and synchronization between browser and app server. Later chapters discuss more advanced topics including creation of new components and integration with J2EE.    If you want to create great web applications using Tapestry and know Java (plus plain-vanilla HTML and a little XML), this book is for you.",
+    "status": "PUBLISH",
+    "authors": ["Howard M. Lewis Ship"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "WebWork in Action",
+    "isbn": "1932394532",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2005-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lightbody.jpg",
+    "longDescription": "The WebWork framework implements a simple command/ business-logic and MVC design. It provides out-of-the-box functionality developers need to build well-designed applications that are modular and reusable. Written by its two primary developers, WebWork in Action is the first book to focus entirely on WebWork. Like a true \"In Action\" book, it is both a tutorial on WebWork and a sourcebook for its use in demanding, real-world applications.    Starting with \"Hello World\" the Webwork way, the book immerses the reader in practical, how-to material. You will soon know how to configure WebWork and gradually and incrementally master the robust and powerful uses of the framework. WebWork in Action uses the same basic, continuing example used in Manning's Hibernate in Action to show how to integrate WebWork with the popular Hibernate persistence framework.",
+    "status": "PUBLISH",
+    "authors": ["Patrick Lightbody", "Jason Carreira"],
+    "categories": ["internet"]
+  },
+  {
+    "title": "MacRuby in Action",
+    "isbn": "1935182498",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-04-11T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lim.jpg",
+    "status": "PUBLISH",
+    "authors": ["Brendan G. Lim with Jerry Cheung", "Jeremy McAnally"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Erlang and OTP in Action",
+    "isbn": "1933988789",
+    "pageCount": 500,
+    "publishedDate": { "$date": "2010-11-16T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/logan.jpg",
+    "shortDescription": "Erlang and OTP in Action teaches you to apply Erlang's shared-state model for concurrent programming--a completely different way of tackling the problem of parallel programming from the more common multi-threaded approach. This book walks you through the practical considerations and steps of building systems in Erlang and integrating them with real-world C/C++, Java, and .NET applications. Unlike other books on the market, Erlang and OTP in Action offers a comprehensive view of how concurrency relates to SOA and web technologies.",
+    "longDescription": "Concurrent programming has become a required discipline for all programmers. Multi-core processors and the increasing demand for maximum performance and scalability in mission-critical applications have renewed interest in functional languages like Erlang that are designed to handle concurrent programming. Erlang, and the OTP platform, make it possible to deliver more robust applications that satisfy rigorous uptime and performance requirements.    Erlang and OTP in Action teaches you to apply Erlang's shared-state model for concurrent programming--a completely different way of tackling the problem of parallel programming from the more common multi-threaded approach. This book walks you through the practical considerations and steps of building systems in Erlang and integrating them with real-world C/C++, Java, and .NET applications. Unlike other books on the market, Erlang and OTP in Action offers a comprehensive view of how concurrency relates to SOA and web technologies.    This hands-on guide is perfect for readers just learning Erlang or for those who want to apply their theoretical knowledge of this powerful language. You'll delve into the Erlang language and OTP runtime by building several progressively more interesting real-world distributed applications. Once you are competent in the fundamentals of Erlang, the book takes you on a deep dive into the process of designing complex software systems in Erlang.",
+    "status": "PUBLISH",
+    "authors": ["Martin Logan", "Eric Merritt", "", "Richard Carlsson"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "SharePoint 2007 Developer's Guide to Business Data Catalog",
+    "isbn": "1933988819",
+    "pageCount": 304,
+    "publishedDate": { "$date": "2009-09-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lonsdale.jpg",
+    "shortDescription": "SharePoint 2007 Developer's Guide to Business Data Catalog is a practical, example-rich guide to the features of the BDC and the techniques you need to build solutions for end users. The book starts with the basics   what the BDC is, what you can do with it, and how to pull together a BDC solution. With the fundamentals in hand, it explores the techniques and ideas you need to put BDC into use effectively in your organization.",
+    "longDescription": "The data locked in your organization's systems and databases is a precious   and sometimes untapped   resource. The SharePoint Business Data Catalog makes it easy to gather, analyze, and report on data from multiple sources, through SharePoint. Using standard web parts, an efficient management console, and a simple programming model, you can build sites, dashboards, and applications that maximize this business asset.    SharePoint 2007 Developer's Guide to Business Data Catalog is a practical, example-rich guide to the features of the BDC and the techniques you need to build solutions for end users. The book starts with the basics   what the BDC is, what you can do with it, and how to pull together a BDC solution. With the fundamentals in hand, it explores the techniques and ideas you need to put BDC into use effectively in your organization.    Knowledge of SharePoint Server and WSS is required.    WHAT'S INSIDE        * The BDC Object Model      * How to build BDC applications      * BDC-driven search      * Integrating with Office, CRM, and InfoPath",
+    "status": "PUBLISH",
+    "authors": ["Brett Lonsdale", "Nick Swan"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Doing IT Right",
+    "isbn": "133964256",
+    "pageCount": 350,
+    "publishedDate": { "$date": "1995-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lorin.jpg",
+    "shortDescription": "Doing IT Right explores IT in its full complexity. It explains fundamental issues of hardware and software structures; it illuminates central issues of networking and encapsulates the essence of client/server computing; its coverage of costing, risk assessment, and due diligence in making computing decisions is unique.",
+    "longDescription": "Only a handful of Information Technology leaders understand the complete range of IT issues, from basic technology to business strategy. One of them, Harold Lorin, has written a definitive guide for the IT decision maker, the technologist, and the system developer.    The breadth and insight of Doing IT Right is unparalleled. Its usefulness as a guide to deeper understanding of business computing will be appreciated by professionals and managers at all levels. This book covers a rich collection of topics, each explained, interrelated, and placed in a coherent framework so that its importance and likely evolution are clear. The author does not shy away from stating his views; he provides color, insight and humor.    Doing IT Right is a tour de force based on Lorin's prodigious knowledge of the industry derived from years of involvement with development and marketing at IBM and other systems houses and from consulting in a variety of environments. It also has its roots in a great many publications of the author, from trade and journal articles and book chapters to six earlier books.    Doing IT Right explores IT in its full complexity. It explains fundamental issues of hardware and software structures; it illuminates central issues of networking and encapsulates the essence of client/server computing; its coverage of costing, risk assessment, and due diligence in making computing decisions is unique; its presentation of the concepts and issues of object-orientation was considered by the managers at an IBM development laboratory to be Unique and more informative than fifteen other OO presentations put together.",
+    "status": "PUBLISH",
+    "authors": ["Harold Lorin"],
+    "categories": ["Business", "Software Engineering"]
+  },
+  {
+    "title": "Adobe AIR in Action",
+    "isbn": "1933988487",
+    "pageCount": 336,
+    "publishedDate": { "$date": "2008-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lott.jpg",
+    "longDescription": "Many technologies promise to put features of desktop applications on the Web; Adobe AIR, instead, brings the flexibility, convenience, and ease of Web development to the desktop. The AIR is a cross-platform runtime environment that allows Web developers to use their existing skills to start building applications for the desktop.    Adobe AIR in Action introduces AIR to developers familiar with Flash and Flex, showing them how to build solid AIR-driven desktop applications. Using examples, the expert authors walk web developers through the new topics they will need to develop AIR applications for the desktop.    Readers will learn the essential features of the AIR API with examples and code samples that they can use to get up and running in AIR quickly. The book shows how to create and customize native windows, as well as how to read and write files and folders on the local file system.",
+    "status": "PUBLISH",
+    "authors": ["Joey Lott", "Kathryn Rotondo", "Sam Ahn", "Ashley Atkins"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Ant in Action",
+    "isbn": "193239480X",
+    "pageCount": 600,
+    "publishedDate": { "$date": "2007-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/loughran.jpg",
+    "shortDescription": "The most widely used build tool for Java projects, Ant is cross-platform, extensible, simple, and fast. It scales from small personal projects to large, multi-team enterprise projects. And, most important, it   s easy to learn.",
+    "longDescription": "Ant in Action is a complete guide to using Ant to build, test, redistribute and deploy Java applications. A retitled second edition of the bestselling and award-winning Java Development with Ant, this book contains over 50% new content including:    New Ant 1.7 features  Scalable builds for big projects  Continuous integration techniques  Deployment  Library management  Extending Ant  Whether you are dealing with a small library or a complex server-side system, this book will help you master your build process. By presenting a running example that grows in complexity, the book covers nearly the entire gamut of modern Java application development, including test-driven development and even how to set up your database as part of the deployment.",
+    "status": "PUBLISH",
+    "authors": ["Steve Loughran", "Erik Hatcher"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Restlet in Action",
+    "isbn": "193518234X",
+    "pageCount": 450,
+    "publishedDate": { "$date": "2012-09-26T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/louvel.jpg",
+    "shortDescription": "Restlet in Action gets you started with the Restlet Framework and the REST architecture style. You'll create and deploy applications in record time while learning to use popular RESTful Web APIs effectively. This book looks at the many faces of web development, including server- and client-side, along with cloud computing, mobile Android devices, and semantic web applications. It offers a particular focus on Google's innovative Google Web Toolkit, Google App Engine, and Android technologies.",
+    "longDescription": "REpresentational State Transfer, better known as REST, is the architectural style that governs the web's request-and-response resource model. The open source Restlet Framework provides a simple, powerful Java-based API to implement RESTful web applications that supports and integrates with technologies such as Atom, Jetty, JSON, Spring, GWT, Google App Engine, and Android.    Restlet in Action gets you started with the Restlet Framework and the REST architecture style. You'll create and deploy applications in record time while learning to use popular RESTful Web APIs effectively. This book looks at the many faces of web development, including server- and client-side, along with cloud computing, mobile Android devices, and semantic web applications. It offers a particular focus on Google's innovative Google Web Toolkit, Google App Engine, and Android technologies.    The book takes you though a comprehensive presentation of Restlet's main features, including subjects like security, testing and automatic documentation. You'll learn while following the typical Restlet development process, with consistent illustrations based on a sample RESTful email app.    WHAT'S INSIDE        * Learn REST and Restlet from the ground up      * Deploy locally, to the cloud, or on mobile devices      * Numerous illustrations      * Reusable code samples      * Written by the creators of Restlet!    The book requires a basic knowledge of Java and the web, but no prior exposure to REST or Restlet is needed. You'll quickly get the big picture behind REST, the overall design of Restlet and RESTful web development.",
+    "status": "PUBLISH",
+    "authors": ["Jerome Louvel", "Thierry Boileau", "", "Philippe Mougin"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "iText in Action",
+    "isbn": "1932394796",
+    "pageCount": 688,
+    "publishedDate": { "$date": "2006-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lowagie.jpg",
+    "shortDescription": "\"I've been using iText for over a year, but I still learnt an awful lot while reading this book.\" --JavaLobby",
+    "longDescription": "Say you need a tool to add dynamic or interactive features to a PDF file and you decide to search on Google for \"Java PDF.\" What do you think you'd find  Why, at the top of the page you'd find \"iText,\" of course. A leading tool for programmatic creation and manipulation of PDF documents, iText is an open source Java library developed and maintained by Bruno Lowagie, the author of this book, with the help of many contributors.    While at the entry level iText is easy to learn, developers find they soon need its more advanced features. Written by the master himself, iText in Action now offers an introduction and a practical guide to the subject--you will gain a sound understanding of the Portable Document Format and how to do interesting and useful things with PDF using iText.    iText in Action introduces iText and lowers the learning curve to its advanced features. Its numerous, valuable examples unlock many of the secrets hidden in Adobe's PDF Reference. The examples are in Java but they can be easily adapted to .NET using one of iText's .NET ports: iTextSharp (C#) or iText.NET (J#).",
+    "status": "PUBLISH",
+    "authors": ["Bruno Lowagie"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "iText in Action, Second Edition",
+    "isbn": "1935182617",
+    "pageCount": 600,
+    "publishedDate": { "$date": "2010-11-22T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lowagie2.jpg",
+    "shortDescription": "iText in Action, Second Edition offers an introduction and a practical guide to iText and the internals of PDF. While at the entry level iText is easy to learn, there's an astonishing range of things you can do once you dive below the surface. This book lowers the learning curve and, though numerous innovative and practical examples, unlocks the secrets hidden in Adobe's PDF Reference. The examples are in Java but they can be easily adapted to .NET using one of iText's .NET ports: iTextSharp or iText.NET.",
+    "longDescription": "Far from a static document presentation format, PDF supports many dynamic or interactive features. With iText, the leading tool creating and manipulating PDF programmatically, you can transform PDF documents into live, interactive applications quickly and easily. iText, a free, open source library for Java and .NET, was developed and maintained by Bruno Lowagie, the author of this book, with the help of many contributors.    iText in Action, Second Edition offers an introduction and a practical guide to iText and the internals of PDF. While at the entry level iText is easy to learn, there's an astonishing range of things you can do once you dive below the surface. This book lowers the learning curve and, though numerous innovative and practical examples, unlocks the secrets hidden in Adobe's PDF Reference. The examples are in Java but they can be easily adapted to .NET using one of iText's .NET ports: iTextSharp or iText.NET.    This totally revised new edition introduces the new functionality added to iText in recent releases, and it updates all examples from JDK 1.4 to Java 5. You'll learn how to use traditional and new form types in PDF, including full coverage of the AcroForm technology. You'll also explore the XML Forms Architecture (XFA) and learn how to fill static and dynamic XFA forms with iText. Along the way, you'll discover new techniques for linking documents, creating a PDF based on records in a database, and much more.    WHAT'S INSIDE        * Serve PDF to a browser      * Automate both static and dynamic XFA forms      * Generate dynamic PDF documents from XML files or databases      * Use PDF's many interactive features      * Add bookmarks, page numbers, watermarks, etc.      * Split, concatenate, and manipulate PDF pages      * Add digital signatures to a PDF file      * New hands-on, ready to use examples",
+    "status": "PUBLISH",
+    "authors": ["Bruno Lowagie"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Power-3D",
+    "isbn": "138412146",
+    "pageCount": 550,
+    "publishedDate": { "$date": "1997-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lussier.jpg",
+    "longDescription": "In the past, serious computer graphics programmers generally had to use \"industrial strength\" workstation hardware and software. Now, advanced graphics capabilities have become available in the PC arena. Whether you're a programmer, 3D enthusiast, C++ coder, games developer or animation specialist, POWER-3D will help you with fast, practical 3D implementations in the Windows environments.",
+    "status": "PUBLISH",
+    "authors": ["Kyle Lussier"],
+    "categories": ["Computer Graphics"]
+  },
+  {
+    "title": "SNA and TCP/IP Enterprise Networking",
+    "isbn": "131271687",
+    "pageCount": 540,
+    "publishedDate": { "$date": "1997-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lynch.jpg",
+    "shortDescription": "SNA and TCP/IP Enterprise Networking shows the reader how enterprise networking evolved, what approaches and techniques can be used today, and where tomorrow's trends lie, illustrating among others Web-to-SNA connectivity and Java based integration approaches.",
+    "longDescription": "Most textbooks concentrate on presenting the theory, concepts, and products, with examples of implementations in some cases. The distinctive quality of SNA and TCP/IP Enterprise Networking is in its structure. It answers not only \"What \", \"Why \", and \"How \", but also \"What's next \". It shows the reader how enterprise networking evolved, what approaches and techniques can be used today, and where tomorrow's trends lie, illustrating among others Web-to-SNA connectivity and Java based integration approaches.    SNA and TCP/IP Enterprise Networking was written by visionaries, scientists, networking product developers, industry experts, consultants, and end-user representatives, who not only implement the products but also participate in definition of open networking standards. It should be equally appealing to the network practitioners implementing technology as the senior managers making strategic decisions on enterprise networking.",
+    "status": "PUBLISH",
+    "authors": [
+      "Daniel C. Lynch",
+      "James P. Gray",
+      "and Edward Rabinovitch",
+      "editors"
+    ],
+    "categories": ["Software Engineering", "Theory"]
+  },
+  {
+    "title": "Subversion in Action",
+    "isbn": "1932394478",
+    "pageCount": 356,
+    "publishedDate": { "$date": "2004-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/machols.jpg",
+    "shortDescription": "Learn all about this new open source version control application and why it is replacing CVS as the standard. Examples demonstrate how to customize features to deal with day-to-day problems.",
+    "longDescription": "A new-generation version control tool, Subversion is replacing the current open source standard, CVS. With Subversion's control components you can simplify and streamline the management of your code way beyond what's possible with CVS. For example, with just one powerful feature, Subversion's atomic commit, you can easily track and roll back a set of changes.    Subversion in Action introduces you to Subversion and the concepts of version control. Using production-quality examples it teaches you how Subversion features can be customized and combined to effectively deal with your day-to-day source control problems. You'll learn how to do practical things you cannot do with CVS, like seamlessly renaming and moving files.    The book covers branching and repository control, access control, and much more. It is written not just for release engineers, but also for developers, configuration managers, and system administrators.",
+    "status": "PUBLISH",
+    "authors": ["Jeffrey Machols"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Minimal Perl",
+    "isbn": "1932394508",
+    "pageCount": 504,
+    "publishedDate": { "$date": "2006-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/maher.jpg",
+    "longDescription": "Perl is a complex language that can be difficult to master. Perl advocates boast that \"There's More Than One Way To Do It\", but do you really want to learn several ways of saying the same thing to a computer     To make Perl more accessible, Dr. Tim Maher has over the years designed and taught an essential subset of the language that is smaller, yet practical and powerful. With this engaging book you can now benefit from \"Minimal Perl\", even if all you know about Unix is grep.    You will learn how to write simple Perl commands (many just one-liners) that go far beyond the limitations of Unix utilities, and those of Linux, MacOS/X, etc. And you  ll acquire the more advanced Perl skills used in scripts by capitalizing on your knowledge of related Shell resources. Sprinkled throughout are many Unix-specific Perl tips.    This book is especially suitable for system administrators, webmasters, and software developers.",
+    "status": "PUBLISH",
+    "authors": ["Tim Maher"],
+    "categories": ["Perl"]
+  },
+  {
+    "title": "Distributed Programming with Java",
+    "isbn": "1884777651",
+    "pageCount": 320,
+    "publishedDate": { "$date": "1999-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mahmoud.jpg",
+    "longDescription": "Maybe you've seen some books on Java RMI, others on Java and CORBA and still others on mobile agents. Finally, here's one book that covers ALL the popular approaches for developing distributed applications. What's more, the author makes it easy to compare them by using the same set of examples throughout the book.    If you're a developer or systems architect who wants to start building industrial-strength distributed applications in Java, then Distributed Programming with Java is for you!",
+    "status": "PUBLISH",
+    "authors": ["Qusay H. Mahmoud"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Comprehensive Networking Glossary and Acronym Guide",
+    "isbn": "013319955X",
+    "pageCount": 208,
+    "publishedDate": { "$date": "1995-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/malkin.jpg",
+    "shortDescription": "This glossary offers a complete collection of technical terms and acronyms used in the networking industry.",
+    "longDescription": "This glossary offers a complete collection of technical terms and acronyms used in the networking industry. It covers general networking terminology, the specific terminology used in the Internet, and terms and acronyms specific to AppleTalk, IP, IPX, SNA, and OSI. It also covers national and international networking organizations and several major networks.    Organized in case-insensitive, alphabetic order, entries present well written definitions, understandable to novice readers and useful to experts. The glossary and the glossary entries are:    verified  cross-referenced  comprehensive  concise  understandable  For extra guidance, the book ends with three appendices, each listing the entries in one of three subject areas: networks and organizations, security, and applications and protocols.  The Comprehensive Networking Glossary and Acronym Guide is a valuable, single-source reference for the practical terminology of networking as well as a guide to networks and networking organizations.",
+    "status": "PUBLISH",
+    "authors": ["Gary Scott Malkin"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "JavaServer Faces in Action",
+    "isbn": "1932394125",
+    "pageCount": 744,
+    "publishedDate": { "$date": "2004-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mann.jpg",
+    "longDescription": "JavaServer Faces helps streamline your web development through the use of UI components and events (instead of HTTP requests and responses). JSF components (buttons, text boxes, checkboxes, data grids, etc.) live between user requests, which eliminates the hassle of maintaining state. JSF also synchronizes user input with application objects, automating another tedious aspect of web development.    JavaServer Faces in Action is an introduction, a tutorial, and a handy reference. With the help of many examples, the book explains what JSF is, how it works, and how it relates to other frameworks and technologies like Struts, Servlets, Portlets, JSP, and JSTL. It provides detailed coverage of standard components, renderers, converters, and validators, and how to use them to create solid applications. This book will help you start building JSF solutions today.",
+    "status": "PUBLISH",
+    "authors": ["Kito D. Mann"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "LINQ in Action",
+    "isbn": "1933988169",
+    "pageCount": 576,
+    "publishedDate": { "$date": "2008-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/marguerie.jpg",
+    "longDescription": "LINQ, Language INtegrated Query, is a new extension to the Visual Basic and C# programming languages designed to simplify data queries and database interaction. It addreses O/R mapping issues by making query operations like SQL statements part of the programming language. Adding to its power, LINQ is extensible and can be used to query various data sources. It offers built-in support for querying in-memory collections like arrays or lists, XML, DataSets, and relational databases.    LINQ in Action is a fast-paced, comprehensive tutorial for professional developers who want to use LINQ. This book explores what can be done with LINQ, shows you how it works in an application, and addresses the emerging best practices. It presents the general purpose query facilities offered by LINQ in the upcoming C# 3.0 and VB.NET 9.0 languages. A running example introduces basic LINQ concepts. You   ll then learn to query unstructured data using LINQ to XML and relational data with LINQ to SQL. Finally, you   ll see how to extend LINQ for custom applications.    LINQ in Action will guide you along as you navigate this new world of lambda expressions, query operators, and expression trees. You   ll also explore the new features of C# 3.0, VB.NET 9.0. The book is very practical, anchoring each new idea with running code.    You will discover all the basics needed to get a clear understanding of LINQ. Whether you want to use LINQ to query objects, XML documents, or relational databases, you will find all the information you need to get started.    But LINQ in Action does not stop at the basic code. This book also shows you how LINQ can be used for advanced processing of data. This includes coverage of LINQ   s extensibility, which allows querying more data sources than those supported by default.    All code samples are built on a concrete business case. The running example, LinqBooks, is a personal book cataloging system that shows you how to create LINQ applications with Visual Studio 2008.",
+    "status": "PUBLISH",
+    "authors": ["Fabrice Marguerie", "Steve Eichert", "Jim Wooley"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Internet BBSs",
+    "isbn": "132869985",
+    "pageCount": 400,
+    "publishedDate": { "$date": "1996-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mark.jpg",
+    "shortDescription": "Internet BBSs: A Guided Tour provides in-depth coverage of the new world of true BBSs now available world-wide. It is a valuable resource for anyone currently using the Internet.",
+    "longDescription": "OK, so you use the Internet. You've surfed some Web sites and maybe sent e-mail. But, chances are, you've overlooked the rich and really personal dimension of the Internet represented by the explosive growth of Internet BBSs. That's because up till now BBS publications were limited in scope to the old era of dial-up BBSs.    Until recently the world of BBSs was geographically compartmentalized: in practical terms only the BBSs within a local telphone call were accessible. Now, the Internet has made all Internet BBSs accessible to anyone in the world. Internet BBSs: A Guided Tour provides in-depth coverage of this new world of true BBSs now available world-wide. It is a valuable resource for anyone currently using the Internet. Users of the major on-line service forums and chat groups should also read it to find out how they can access a much richer variety of BBSs at less cost.",
+    "status": "PUBLISH",
+    "authors": ["Richard Scott Mark"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Algorithms of the Intelligent Web",
+    "isbn": "1933988665",
+    "pageCount": 368,
+    "publishedDate": { "$date": "2009-05-29T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/marmanis.jpg",
+    "longDescription": "Web 2.0 applications are best known for providing a rich user experience, but the parts you can't see are just as important   and impressive. Many Web 2.0 applications use powerful techniques to process information intelligently and offer features based on patterns and relationships in the data that couldn't be discovered manually. Successful examples of these Algorithms of the Intelligent Web include household names like Google Ad Sense, Netflix, and Amazon. These applications use the internet as a platform that not only gathers data at an ever-increasing pace but also systematically transforms the raw data into actionable information.    Algorithms of the Intelligent Web is an example-driven blueprint for creating applications that collect, analyze, and act on the massive quantities of data users leave in their wake as they use the web. You'll learn how to build Amazon- and Netflix-style recommendation engines, and how the same techniques apply to people matches on social-networking sites. See how click-trace analysis can result in smarter ad rotations. With a plethora of examples and extensive detail, this book shows you how to build Web 2.0 applications that are as smart as your users.",
+    "status": "PUBLISH",
+    "authors": ["Haralambos Marmanis", "Dmitry Babenko"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "JUnit in Action",
+    "isbn": "1930110995",
+    "pageCount": 384,
+    "publishedDate": { "$date": "2003-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/massol.jpg",
+    "longDescription": "Developers in the know are switching to a new testing strategy - unit testing - which interleaves coding and testing in an integrated way. This has proven to be a powerful combination that results in better designed software with fewer defects and faster delivery cycles.    JUnit in Action shows you how to benefit from this strategy using the popular open source testing framework, JUnit. It's a no fluff discussion of unit testing techniques and best practices. It gives examples of tough situations such as how to unit test EJBs, database applications, JSPs and Taglibs. It discusses unit testing of J2EE applications, and shows how to test in automated builds.",
+    "status": "PUBLISH",
+    "authors": ["Vincent Massol with Ted Husted"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Tika in Action",
+    "isbn": "1935182854",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mattmann.jpg",
+    "status": "PUBLISH",
+    "authors": ["Chris A. Mattmann", "Jukka L. Zitting"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Ruby in Practice",
+    "isbn": "1933988479",
+    "pageCount": 360,
+    "publishedDate": { "$date": "2009-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mcanally.jpg",
+    "longDescription": "Like Ruby itself, Ruby in Practice will make you more productive. The book shows you practical techniques and strategies for small projects and large-scale environments. A cookbook-style reference, it gives you concrete examples of systems integration, messaging, web development, and databases, all in a clear problem/ solution format.    Part 1 of the book concentrates on the Ruby way of developing software, especially how to use Ruby as a tool for integration. Part 2 talks about REST, Web services, asynchronous messaging, and deployment. In the last part, you'll discover how to manage all forms of data   from manipulating structured documents to identity management. Along the way you'll learn how to use Ruby to build new applications, solve more problems with less effort, integrate with your existing applications, and give new life to your legacy systems.",
+    "status": "PUBLISH",
+    "authors": ["Jeremy McAnally", "Assaf Arkin"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Inside LotusScript",
+    "isbn": "1884777481",
+    "pageCount": 420,
+    "publishedDate": { "$date": "1997-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mcginn.jpg",
+    "shortDescription": "Develop Notes and Domino Web applications by providing advanced LotusScript code for direct use in your programs. This book emphasizes practical, useable code and solutions to common Notes programming problems.",
+    "longDescription": "At last, here's a book that tells you everything that isn't in the Lotus Notes manuals. It's designed to make it easy for you to develop Notes and Domino Web applications by providing advanced LotusScript code for direct use in your programs. It emphasizes practical, useable code and solutions to common Notes programming problems. If you're interested in Internet or Web programming--or if you want to learn Notes programming, from beginner level to advanced, this book is for you!",
+    "status": "PUBLISH",
+    "authors": ["Joe McGinn"],
+    "categories": ["Business"]
+  },
+  {
+    "title": "Maximum MIDI",
+    "isbn": "1884777449",
+    "pageCount": 450,
+    "publishedDate": { "$date": "1997-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/messick.jpg",
+    "longDescription": "Maximum MIDI shows you how to build world-class MIDI programs that can play music using computer sound cards or external keyboard instruments, teach music theory and technique, add music to games and allow musicians to record, edit, play and print compositions. Maximum MIDI gives programmers two ways to add MIDI to their programs. A flexible toolkit of C and C++ routines makes developing Windows 95 MIDI programs a breeze, and rock-solid algorithms and tons of field-tested source code allow advanced users to quickly \"roll their own\"--on any platform. Over a dozen example programs show how it's done.    NEW! The Maximum MIDI Programmer's ToolKit now supports both Windows 95 and Windows NT. Popular demand, insomnia, and caffeine have finally convinced Paul to port the ToolKit to NT. Your copy of Maximum MIDI: Music Applications in C++ entitles you to download the updated 95/NT DLLs (including source code) from the Maximum MIDI website. The new code--and ToolKit support via the book's Author Online forum--is only available to owners of the book.",
+    "status": "PUBLISH",
+    "authors": ["Paul Messick"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Planning and Managing ATM Networks",
+    "isbn": "132621894",
+    "pageCount": 320,
+    "publishedDate": { "$date": "1997-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/minoli.jpg",
+    "shortDescription": "Planning and Managing ATM Networks covers strategic planning, initial deployment, overall management, and the day-to-day operation of ATM networks.",
+    "longDescription": "Not only is ATM the best available means to greater transmission capacity, it has also the best potential to meet the needs for sophisticated service control, distributed network oversight, efficient operation, and improved flexibility.    Planning and Managing ATM Networks covers strategic planning, initial deployment, overall management, and the day-to-day operation of ATM networks. It defines steps to determine requirements for ATM networks, as ATM implementation becomes widespread in the corporate enterprise network. It describes fundamental management concepts and procedures, including fault and configuration management, performance management, accounting, and security.",
+    "status": "PUBLISH",
+    "authors": ["Daniel Minoli", "Thomas W. Golway", "", "Norris P. Smith"],
+    "categories": ["Client-Server", "Networking"]
+  },
+  {
+    "title": "Client/Server Applications on ATM Networks",
+    "isbn": "137353006",
+    "pageCount": 350,
+    "publishedDate": { "$date": "1997-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/minoli2.jpg",
+    "shortDescription": "Client/Server Appliactions on ATM Networks discusses ATM as the key technology for transforming the enterprise network from data-only to an integrated data, voice, video, image and multimedia corporate infrastructure.",
+    "longDescription": "Today, to meet the surging demands of client/server company-wide processes--distributed cooperative computing, business/scientific imaging, video conferencing, multimedia, distance learning and many more--corporations are finding they must extend high-speed communications beyond just a few key sites. This book discusses ATM as the key technology for transforming the enterprise network from data-only to an integrated data, voice, video, image and multimedia corporate infrastructure.    Previous books have covered ATM and client/server separately. This book, intended for networking professionals, is unique in its focus on the hows and whys of the inevitable marriage of these two technologies.",
+    "status": "PUBLISH",
+    "authors": ["Daniel Minoli", "Andrew Schmidt"],
+    "categories": ["Client-Server", "Networking"]
+  },
+  {
+    "title": "JavaFX in Action",
+    "isbn": "1933988991",
+    "pageCount": 373,
+    "publishedDate": { "$date": "2009-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/morris.jpg",
+    "longDescription": "Whether you're writing a desktop app, spinning up a rich web interface, or pushing code to a mobile phone, graphics programming should be easier, and more fun, than it currently is. New technologies and devices   not to mention higher user expectations   have greatly multiplied the complexity level of interface programming. Enter JavaFX.    JavaFX is a set of Java-based rich user interface technologies that sits atop the existing Java Standard and Micro Editions, making current Java packages readily accessible from the JavaFX environment. At its heart is JavaFX Script, an innovative, compiled, domain specific language. JavaFX Script boasts a declarative syntax where the code structure mirrors the structure of the interface. Related UI pieces are kept in one efficient bundle, not strewn across multiple locations. A simple coding model reduces code complexity while increasing productivity. The JavaFX-specific libraries for presentation and animation take advantage of JavaFX Script's unique language features.    JavaFX in Action is a hands-on tutorial that introduces and explores JavaFX through numerous bite-sized projects. The book provides a solid grounding in the JavaFX syntax and related APIs by showing you how to apply the key features of the JavaFX platform. You'll absorb the fundamentals of the technology while exploring the possibilities JavaFX open up for your designs.    Author Simon Morris helps you transform variables and operators into bouncing raindrops, brilliant colors, and dancing interface components. Below the chrome, you'll master techniques to make your applications more responsive and user friendly. You'll also learn how to interact with your existing Java code so you can give your old apps some new JavaFX sparkle.",
+    "status": "PUBLISH",
+    "authors": ["Simon Morris"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Entity Framework 4 in Action",
+    "isbn": "1935182188",
+    "pageCount": 576,
+    "publishedDate": { "$date": "2011-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mostarda.jpg",
+    "shortDescription": "Microsoft Entity Framework in Action introduces the Entity Framework to developers working in .NET who already have some knowledge of ADO.NET. The book begins with a review of the core ideas behind the ORM model and shows how Entity Framework offers a smooth transition from a traditional ADO.NET approach. By presenting numerous small examples and a couple larger case studies, the book unfolds the Entity Framework story in clear, easy-to-follow detail. The infrastructure and inner workings will be highlighted only when there   s the need to understand a particular feature.",
+    "longDescription": "To be successful, any significant application has to manage the flow of data effectively. Microsoft   s approach to data has taken another major step forward with the new Entity Framework for .NET. The Entity Framework starts with ideas from Object Relational Management (ORM) tools like NHibernate that help bridge the mismatch between relational databases (like SQL Server) and object oriented languages (like C# and VB.NET). But it also blends in the established ADO.NET model and recent language-based innovations of LINQ to create a powerful new data management paradigm.    Microsoft Entity Framework in Action introduces the Entity Framework to developers working in .NET who already have some knowledge of ADO.NET. The book begins with a review of the core ideas behind the ORM model and shows how Entity Framework offers a smooth transition from a traditional ADO.NET approach. By presenting numerous small examples and a couple larger case studies, the book unfolds the Entity Framework story in clear, easy-to-follow detail. The infrastructure and inner workings will be highlighted only when there   s the need to understand a particular feature.",
+    "status": "PUBLISH",
+    "authors": [
+      "Stefano Mostarda",
+      "Marco De Sanctis",
+      "",
+      "Daniele Bochicchio"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "ASP.NET 2.0 Web Parts in Action",
+    "isbn": "193239477X",
+    "pageCount": 344,
+    "publishedDate": { "$date": "2006-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/neimke.jpg",
+    "shortDescription": "\"ASP.NET Web Parts in Action is a must read book for every developer who wants to extend his knowledge of the ASP.NET framework.\" -- Simon Busoli, DotNetSlackers.com",
+    "longDescription": "The static Web is going out of style. Its click-and-wait user experience is giving way to dynamic personalized content and intuitive interactions. With ASP 2.0, a web developer can compose a page out of separate working parts \"Web Parts\" that independently communicate with the server to produce rich interactive portals like Yahoo!, Google/ig, and Live.com. The new Web Parts API makes it easy to centrally manage a portal's parts.    ASP.NET 2.0 Web Parts in Action is packed with annotated code, diagrams, and crystal-clear discussions. You'll develop a sample project from design to deployment, adding content zones, personalization, and a custom look-and-feel. Since any website is invariably a work-in-progress, you'll appreciate learning how to upgrade your portals on the fly. Along the way you'll pick up handy code instrumentation techniques and a few tricks to help your portals manage themselves. As an added bonus, the book introduces the Microsoft Ajax Library (\"Atlas\") and shows how you can add Ajax to a web part. You  ll even create a Live.com gadget.    This book is for web developers familiar with ASP.NET.",
+    "status": "PUBLISH",
+    "authors": ["Darren Neimke"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "Sass and Compass in Action",
+    "isbn": "1617290149",
+    "pageCount": 300,
+    "publishedDate": { "$date": "2013-07-26T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/netherland.jpg",
+    "shortDescription": "Sass and Compass in Action is the definitive guide to stylesheet authoring using these two revolutionary tools. Written for both designers and developers, this book demonstrates the power of both Sass and Compass through a series of examples that address common pain points associated with traditional stylesheet authoring. The book begins with simple topics such as CSS resets and moves on to more involved topics such as grid frameworks and CSS3 vendor implementation differences.",
+    "longDescription": "Cascading Style Sheets paint the web as the user sees it, and for fifteen years, we've been painting the web by hand. Sass and Compass extend standard CSS to give you more flexibility and the option to simplify or automate many tedious tasks. Think of Sass and Compass as power tools that allow stylesheet authors to \"paint\" with remarkable speed and precision.    Sass is an extension of CSS3, adding language features for creating well-formatted, standard CSS using the command line tool or a web-framework plugin. Compass is a framework that sits atop Sass and tackles common stylesheet problems such as grid layouts, handling CSS3 vendor differences, and production environment stylesheet optimization. Together, they do for CSS what jQuery has done for JavaScript: solve real world problems, letting designers and developers create stylesheets more efficiently.    Sass and Compass in Action is the definitive guide to stylesheet authoring using these two revolutionary tools. Written for both designers and developers, this book demonstrates the power of both Sass and Compass through a series of examples that address common pain points associated with traditional stylesheet authoring. The book begins with simple topics such as CSS resets and moves on to more involved topics such as grid frameworks and CSS3 vendor implementation differences.    Authors Wynn Netherland, Nathan Weizenbaum, and Chris Eppstein cover prominent community plugins that allows stylesheet authors to share styles as developers of other programming languages such as Ruby, Python, Java, and, .NET do. The book also presents Sass and Compass case studies using hot technologies like Sencha Touch. The book culminates in a step-by-step look at building a personal stylesheet framework in which readers can bundle their own approaches and opinions and reuse them across projects.",
+    "status": "PUBLISH",
+    "authors": [
+      "Wynn Netherland",
+      "Nathan Weizenbaum",
+      "Chris Eppstein",
+      "",
+      "Brandon Mathis"
+    ],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Core OWL 5.0",
+    "isbn": "1884777503",
+    "pageCount": 500,
+    "publishedDate": { "$date": "1997-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/neward.jpg",
+    "shortDescription": "Core OWL 5.0 dives under the surface and into the OWL source code itself. You'll see what new capabilities OWL 5.0 offers the OWL programmer. You'll gain a deeper understanding of what OWL does on your behalf such as the OWL messaging system and its message maps.",
+    "longDescription": "Are you an OWL programmer frustrated by shallow coverage of OWL topics in current documentation  Core OWL 5.0 takes you well beyond the \"Hello, world\" level. Concentrating on the central features and classes of the OWL framework, this book dives under the surface and into the OWL source code itself. You'll see what new capabilities OWL 5.0 offers the OWL programmer. You'll gain a deeper understanding of what OWL does on your behalf such as the OWL messaging system and its message maps.",
+    "status": "PUBLISH",
+    "authors": ["Ted Neward"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Advanced OWL 5.0",
+    "isbn": "1884777465",
+    "pageCount": 570,
+    "publishedDate": { "$date": "1998-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/neward2.jpg",
+    "shortDescription": "Advanced OWL 5.0 covers advanced ways to make the OWL library do those tricky things you thought weren't possible. You'll get a long, exhaustive look at the new features introduced by the OWL 5.0 code. You'll find detailed explanations of how to extend the OWL objects themselves in new directions.",
+    "longDescription": "Are you an OWL programmer who'd like to know more about the new, largely undocumented features of OWL 5.0  Here's a book that covers advanced ways to make the OWL library do those tricky things you thought weren't possible. You'll get a long, exhaustive look at the new features introduced by the OWL 5.0 code. You'll find detailed explanations of how to extend the OWL objects themselves in new directions. If you're an OWL developer who is beyond the \"OWL for Dummies\" level, this book will show you how to obtain all the potential your OWL applications have for power, elegance and flexibility. ",
+    "status": "PUBLISH",
+    "authors": ["Ted Neward"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Server-Based Java Programming",
+    "isbn": "1884777716",
+    "pageCount": 592,
+    "publishedDate": { "$date": "2000-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/neward3.jpg",
+    "longDescription": "Java on the server is here to stay. Whether you're using J2EE or writing your own, you will need to understand the fundamental concepts of server-based Java. Server-Based Java Programming teaches those concepts of Java that underlie the J2EE APIs and the best ways to use them. An ongoing focus on the full lifecycle, including administration and deployment, makes this book a rare, practical guide. One of its themes is the theoretical \"three-zeroes\" goal for server development--zero development, zero administration, and zero deployment.    Server-Based Java Programming isn't just about implementation--it's also about architecture, and design. You'll learn how to write the code that sustains a cutting-edge enterprise. You will learn nuts-and-bolts topics like ClassLoaders, threads, CORBA, RMI/IIOP, and JNI, as well as how to make each of these contribute to enterprise-wide goals such as fault-tolerance, easier system administration, five-nine availability, deployment without headaches, and lower development costs.",
+    "status": "PUBLISH",
+    "authors": ["Ted Neward"],
+    "categories": ["Java", "Client-Server", "Internet"]
+  },
+  {
+    "title": "SQL Server MVP Deep Dives",
+    "isbn": "1935182048",
+    "pageCount": 848,
+    "publishedDate": { "$date": "2009-11-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsen.jpg",
+    "shortDescription": "SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance.",
+    "longDescription": "This is no ordinary SQL Server book. In SQL Server MVP Deep Dives, the world's leading experts and practitioners offer a masterful collection of techniques and best practices for SQL Server development and administration. 53 MVPs each pick an area of passionate interest to them and then share their insights and practical know-how with you.    SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance.    WHAT'S INSIDE        * Topics important for SQL Server pros      * Accessible to readers of all levels      * New features of SQL Server 2008    Whether you're just getting started with SQL Server or you're an old master looking for new tricks, this book belongs on your bookshelf.    The authors of this book have generously donated 100% of their royalties to support War Child International.",
+    "status": "PUBLISH",
+    "authors": [
+      "Contributions from 53 SQL Server MVPs",
+      "Edited by Paul Nielsen",
+      "Kalen Delaney",
+      "Greg Low",
+      "Adam Machanic",
+      "Paul S. Randal",
+      "",
+      "Kimberly L. Tripp"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "SQL Server MVP Deep Dives",
+    "isbn": "9781935182047",
+    "pageCount": 848,
+    "publishedDate": { "$date": "2009-11-15T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsenaw.jpg",
+    "shortDescription": "SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance.",
+    "longDescription": "This is no ordinary SQL Server book. In SQL Server MVP Deep Dives, the world's leading experts and practitioners offer a masterful collection of techniques and best practices for SQL Server development and administration. 53 MVPs each pick an area of passionate interest to them and then share their insights and practical know-how with you.    SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance.",
+    "status": "PUBLISH",
+    "authors": [
+      "Contributions from 53 SQL Server MVPs; Edited by Paul Nielsen",
+      "Kalen Delaney",
+      "Greg Low",
+      "Adam Machanic",
+      "Paul S. Randal",
+      "",
+      "Kimberly L. Tripp"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "SQL Server MVP Deep Dives",
+    "isbn": "9781935182047",
+    "pageCount": 848,
+    "publishedDate": { "$date": "2009-11-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsonaw.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "Paul Nielsen",
+      "Kalen Delaney",
+      "Greg Low",
+      "Adam Machanic",
+      "Paul S. Randal",
+      "",
+      "Kimberly L. Tripp"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "PostGIS in Action",
+    "isbn": "1935182269",
+    "pageCount": 325,
+    "publishedDate": { "$date": "2011-04-11T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/obe.jpg",
+    "shortDescription": "PostGIS in Action is the first book devoted entirely to PostGIS. It will help both new and experienced users write spatial queries to solve real-world problems. For those with experience in more traditional relational databases, this book provides a background in vector-based GIS so you can quickly move to analyzing, viewing, and mapping data.",
+    "longDescription": "Whether you're canvassing a congressional district, managing a sales region, mapping city bus schedules, or analyzing local cancer rates, thinking spatially opens up limitless possibilities for database users. PostGIS, a freely available open-source spatial database extender, can help you answer questions that you could not answer using a mere relational database. Its feature set equals or surpasses proprietary alternatives, allowing you to create location-aware queries and features with just a few lines of SQL code.    PostGIS in Action is the first book devoted entirely to PostGIS. It will help both new and experienced users write spatial queries to solve real-world problems. For those with experience in more traditional relational databases, this book provides a background in vector-based GIS so you can quickly move to analyzing, viewing, and mapping data. Advanced users will learn how to optimize queries for maximum speed, simplify geometries for greater efficiency, and create custom functions suited specifically to their applications. It also discusses the new features available in PostgreSQL 8.4 and provides tutorials on using additional open source GIS tools in conjunction with PostGIS.",
+    "status": "PUBLISH",
+    "authors": ["Regina O. Obe", "Leo S. Hsu"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Programming Mac OS X",
+    "isbn": "1930110855",
+    "pageCount": 384,
+    "publishedDate": { "$date": "2003-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/omalley.jpg",
+    "shortDescription": "\"...an effective guide for Unix developers who want accurate information specifically on getting up to speed with Mac OS X and its software development environment, without having to sort through the morass of online information overload. ...If you've been a little skittish about Interface Builder, forget your worries now because the tutorial in the book is very good. ...The projects and examples are thorough and should provide even the most jaded intermediate programmer with a real taste of how challenging and satisfying it can be to code for OSX.\" - KickStartNews.com",
+    "longDescription": "A guide for UNIX developers who want accurate information on getting up to speed with Mac OS X and its software development environment, this book provides programmers all the information they need to understand and use the operating system, its development tools, and key technologies such as Darwin, Cocoa and AppleScript.    Users are introduced to the UNIX-based foundations of Mac OS X and shown how they fit into Mac OS X architecture. Also provided is coverage of both GUI and command-line software development tools, realistic programming examples that developers will encounter, and a discussion of Macintosh-style software development.",
+    "status": "PUBLISH",
+    "authors": ["Kevin O'Malley"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "The Art of Unit Testing",
+    "isbn": "1933988274",
+    "pageCount": 320,
+    "publishedDate": { "$date": "2009-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/osherove.jpg",
+    "longDescription": "Unit testing, done right, can mean the diff erence between a failed project and a successful one, between a maintainable code base and a code base that no one dares touch, and between getting home at 2 AM or getting home in time for dinner, even before a release deadline.    The Art of Unit Testing builds on top of what's already been written about this important topic. It guides you step by step from simple tests to tests that are maintainable, readable, and trustworthy. It covers advanced subjects like mocks, stubs, and frameworks such as Typemock Isolator and Rhino Mocks. And you'll learn about advanced test patterns and organization, working with legacy code and even untestable code. The book discusses tools you need when testing databases and other technologies. It's written for .NET developers but others will also benefit from this book.",
+    "status": "PUBLISH",
+    "authors": ["Roy Osherove"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Mahout in Action",
+    "isbn": "1935182684",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2011-10-05T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/owen.jpg",
+    "status": "PUBLISH",
+    "authors": ["Sean Owen", "Robin Anil", "Ted Dunning", "", "Ellen Friedman"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "ASP.NET MVC in Action",
+    "isbn": "1933988622",
+    "pageCount": 392,
+    "publishedDate": { "$date": "2009-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/palermo.jpg",
+    "shortDescription": "ASP.NET MVC in Action is a guide to pragmatic MVC-based web development. After a thorough overview, it dives into issues of architecture and maintainability. The book assumes basic knowledge of ASP.NET (v. 3.5) and expands your expertise.",
+    "longDescription": "ASP.NET MVC implements the Model-View-Controller pattern on the ASP.NET runtime. It works well with open source projects like NHibernate, Castle, StructureMap, AutoMapper, and MvcContrib.    ASP.NET MVC in Action is a guide to pragmatic MVC-based web development. After a thorough overview, it dives into issues of architecture and maintainability. The book assumes basic knowledge of ASP.NET (v. 3.5) and expands your expertise. Some of the topics covered:        * How to effectively perform unit and full-system tests.      * How to implement dependency injection using StructureMap or Windsor.      * How to work with the domain and presentation models.      * How to work with persistence layers like NHibernate.    The book's many examples are in C#.",
+    "status": "PUBLISH",
+    "authors": ["Jeffrey Palermo", "Ben Scheirman", "", "Jimmy Bogard"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "ASP.NET MVC 2 in Action",
+    "isbn": "193518279X",
+    "pageCount": 432,
+    "publishedDate": { "$date": "2010-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/palermo2.jpg",
+    "shortDescription": "ASP.NET MVC 2 in Action is a fast-paced tutorial designed to introduce the MVC model to ASP.NET developers and show how to apply it effectively. After a high-speed ramp up, the book presents over 25 concise chapters exploring key topics like validation, routing, and data access. Each topic is illustrated with its own example so it's easy to dip into the book without reading in sequence. This book covers some high-value, high-end techniques you won't find anywhere else!",
+    "longDescription": "The future of high-end web development on the Microsoft platform, ASP.NET MVC 2 provides clear separation of data, interface, and logic and radically simplifies tedious page and event lifecycle management. And since it's an evolution of ASP.NET, you can mix MVC and Web Forms in the same application, building on your existing work.    ASP.NET MVC 2 in Action is a fast-paced tutorial designed to introduce the MVC model to ASP.NET developers and show how to apply it effectively. After a high-speed ramp up, the book presents over 25 concise chapters exploring key topics like validation, routing, and data access. Each topic is illustrated with its own example so it's easy to dip into the book without reading in sequence. This book covers some high-value, high-end techniques you won't find anywhere else!    Microsoft ASP.NET MVC (model/view/controller) is a relatively new Web application framework that combines ASP.NET's power and ease of use with the stability and testability of a MVC framework. The much-anticipated version 2 release brings new capabilities to the framework along with numerous additions that enhance developer productivity. In ASP.NET MVC 2 in Action, readers learn how to move from web form-based development to designs based on the MVC pattern. It begins with an introduction to the MVC framework and quickly dives into a working MVC 2 project.    Featuring full coverage of new version 2 features, this book helps readers use developer-oriented upgrades like \"Areas\" to break a large project into smaller pieces and explore the new data handling tools. This revised edition adds a completely new tutorial to bring developers with no prior exposure to the MVC pattern up to speed quickly, keeping its focus on providing high-quality, professional grade examples that go deeper than the other ASP.NET MVC books.",
+    "status": "PUBLISH",
+    "authors": [
+      "Jeffrey Palermo",
+      "Ben Scheirman",
+      "Jimmy Bogard",
+      "Eric Hexter",
+      "",
+      "Matthew Hinze"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "ASP.NET MVC 4 in Action",
+    "isbn": "1617290416",
+    "pageCount": 450,
+    "publishedDate": { "$date": "2012-05-25T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/palermo3.jpg",
+    "shortDescription": "SP.NET MVC 3 in Action is a fast-paced tutorial designed to introduce ASP.NET MVC to .NET developers and show how to apply it effectively. After a high-speed ramp up, the book explores key topics like validation, routing, and data access. Each topic is illustrated with its own example so it's easy to dip into the book without reading in sequence. This book also covers some high-value, high-end techniques you won't find anywhere else!",
+    "longDescription": "A successful ASP.NET application needs to accomplish its functional goals, provide a comfortable user experience, and be easy to deploy, maintain, and extend. ASP.NET MVC is a development framework designed around these principles. It provides the structure you need to follow the Model-View-Controller (MVC) design pattern, in which an application is divided into three distinct parts:        * Models, the objects that contain an application's logic      * Views, the components that create the user interface of an application      * Controllers, the components that handle and respond to user input    Applications built with ASP.NET MVC are easier to test, maintain, and extend because the architecture and role of each component is well-defined. And since it's built from the ground up as a core part of the .NET framework, it integrates seamlessly with the ASP.NET features, such as Web Forms or Master Pages, that you already use.    ASP.NET MVC 3 in Action is a fast-paced tutorial designed to introduce ASP.NET MVC to .NET developers and show how to apply it effectively. After a high-speed ramp up, the book explores key topics like validation, routing, and data access. Each topic is illustrated with its own example so it's easy to dip into the book without reading in sequence. This book also covers some high-value, high-end techniques you won't find anywhere else!    The book bases all its examples on ASP.NET MVC 3, so you'll get full coverage of major new features such as the Razor view engine, the new Web Matrix helpers, and improved extensibility. MVC 3 is also the first version built exclusively against .NET 4, so you'll see how your ASP.NET applications can benefit from changes in the .NET Framework.",
+    "status": "PUBLISH",
+    "authors": [
+      "Jeffrey Palermo",
+      "Jimmy Bogard",
+      "Eric Hexter",
+      "Matthew Hinze",
+      "",
+      "Jeremy Skinner"
+    ],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "EJB 3 in Action",
+    "isbn": "1933988347",
+    "pageCount": 712,
+    "publishedDate": { "$date": "2007-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/panda.jpg",
+    "longDescription": "EJB 2 is widely used but it comes at a cost   procedural, redundant code. EJB 3 is a different animal. By adopting a POJO programming model and Java 5 annotations, it dramatically simplifies enterprise development. A cool new feature, its Java Persistence API, creates a standard for object-relational mapping. You can use it for any Java application, whether inside or outside the EJB container. With EJB 3 you will create true object-oriented applications that are easy to write, maintain and extend.    EJB 3 in Action is a fast-paced tutorial for both novice and experienced Java developers. It will help you learn EJB 3 and the JPA quickly and easily. This comprehensive, entirely new EJB 3 book starts with a tour of the EJB 3 landscape. It then moves quickly into core topics like building business logic with session and message-driven beans. You   ll find four full chapters on the JPA along with practical code samples, design patterns, performance tuning tips, and best practices for building and deploying scalable applications.",
+    "status": "PUBLISH",
+    "authors": ["Debu Panda", "Reza Rahman", "Derek Lane"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "EJB 3 in Action, Second Edition",
+    "isbn": "1935182994",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-04-07T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/panda2.jpg",
+    "shortDescription": "Building on the bestselling first edition, EJB 3 in Action, Second Edition tackles EJB 3.1 head-on, through numerous code samples, real-life scenarios, and illustrations. This book is a fast-paced tutorial for Java EE 6 business component development using EJB 3.1, JPA 2 and CDI. Besides covering the basics of EJB 3.1, this book includes in-depth EJB 3.1 internal implementation details, best practices, design patterns, and performance tuning tips. The book also discusses using open source frameworks like Seam and Spring with EJB 3.1.",
+    "longDescription": "The EJB 3 framework was a major advancement for Java EE developers, providing a consistent, easy to use model to create and extend applications. EJB 3 incorporates a POJO programming model and Java 5 annotations, along with the Java Persistence API (JPA), a standard for object-relational mapping. EJB 3.1, the latest version, adds full support for Context and Dependency Injection (CDI), the new standard for type-safe dependency injection for Java EE. With EJB 3.1 you create true object-oriented applications that are easy to write, maintain, and extend.    Building on the bestselling first edition, EJB 3 in Action, Second Edition tackles EJB 3.1 head-on, through numerous code samples, real-life scenarios, and illustrations. This book is a fast-paced tutorial for Java EE 6 business component development using EJB 3.1, JPA 2 and CDI. Besides covering the basics of EJB 3.1, this book includes in-depth EJB 3.1 internal implementation details, best practices, design patterns, and performance tuning tips. The book also discusses using open source frameworks like Seam and Spring with EJB 3.1.",
+    "status": "PUBLISH",
+    "authors": [
+      "Debu Panda",
+      "Reza Rahman",
+      "Ryan Cuprak",
+      "",
+      "Michael Remijan"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Explorer's Guide to the Semantic Web",
+    "isbn": "1932394206",
+    "pageCount": 304,
+    "publishedDate": { "$date": "2004-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/passin.jpg",
+    "shortDescription": "\"A thorough look at one vision of the Web's future ...particularly well written...Highly recommended.\" -- Choice Magazine",
+    "longDescription": "A complex set of extensions to the World Wide Web, the Semantic Web will make data and services more accessible to computers and useful to people. Some of these extensions are being deployed, and many are coming in the next years. This is the only book to explore the territory of the Semantic Web in a broad and conceptual manner.    This Guide acquaints you with the basic ideas and technologies of the Semantic Web, their roles and inter-relationships. The key areas covered include knowledge modeling (RDF, Topic Maps), ontology (OWL), agents (intelligent and otherwise), distributed trust and belief, \"semantically-focused\" search, and much more.    The book's basic, conceptual approach is accessible to readers with a wide range of backgrounds and interests. Important points are illustrated with diagrams and occasional markup fragments. As it explores the landscape it encounters an ever-surprising variety of novel ideas and unexpected links. The book is easy and fun to read - you may find it hard to put down.    The Semantic Web is coming. This is a guide to the basic concepts and technologies that will come with it.",
+    "status": "PUBLISH",
+    "authors": ["Thomas B. Passin"],
+    "categories": ["Internet", "Theory", "XML"]
+  },
+  {
+    "title": "Practical LotusScript",
+    "isbn": "1884777767",
+    "pageCount": 512,
+    "publishedDate": { "$date": "1999-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/patton.jpg",
+    "longDescription": "Practical LotusScript covers the LotusScript programming language like no other book on the market. It starts with the core languge and proceeds to cover the specifics of Lotus Notes in complete detail. Advanced topics include report generation, working with the web, Office 97 integration, and 5.0 enhancements.  Practical LotusScript is designed for:    Lotus Notes developers, both experienced and inexperienced  Visual Basic programmers looking to get up to speed in the Notes environment  any developer wanting more information on the Notes/Domino development environment  ",
+    "status": "PUBLISH",
+    "authors": ["Anthony Patton"],
+    "categories": ["Business"]
+  },
+  {
+    "title": "Domino Development with Java",
+    "isbn": "1930110049",
+    "pageCount": 467,
+    "publishedDate": { "$date": "2000-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/patton2.jpg",
+    "longDescription": "Domino Development with Java takes the mysteries out of using the Java programming language within the Domino development environment. It provides a solid foundation for working utilization of the Java programming language in the Domino Application Server environment. The reader will learn how to build servlets, applets, JDBC, and standalone applications.    The book culminates with the implementation of an on-line shopping store using Domino and Java. Both WebSphere and VisualAge for Java integration are also covered.",
+    "status": "PUBLISH",
+    "authors": ["Anthony Patton"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Windows PowerShell in Action",
+    "isbn": "1932394907",
+    "pageCount": 576,
+    "publishedDate": { "$date": "2007-02-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/payette.jpg",
+    "shortDescription": "   If all it had going for it was the authoratative pedigree of the writer, it might be worth it, but it's also well-written, well-organized, and thorough, which I think makes it invaluable as both a learning tool and a reference.       Slashdot.org",
+    "longDescription": "Windows has an easy-to-use interface, but if you want to automate it, life can get hard. That is, unless you use PowerShell, an elegant new dynamic language from Microsoft designed as an all-purpose Windows scripting tool. PowerShell lets you script administrative tasks and control Windows from the command line. Because it was specifically developed for Windows, programmers and power-users can now do things in a shell that previously required VB, VBScript, or C#.    Windows PowerShell in Action was written by Bruce Payette, one of the founding members of the Windows PowerShell team, co-designer of the PowerShell language and the principal author of the PowerShell language implementation. From him you will gain a deep understanding of the language and how best to use it, and you'll love his insights into why PowerShell works the way it does.    This book is a tutorial for sysadmins and developers introducing the PowerShell language and its environment. It shows you how to build scripts and utilities to automate system tasks or create powerful system management tools to handle the day-to-day tasks that drive a Windows administrator's life. It's rich in interesting examples that will spark your imagination. The book covers batch scripting and string processing, COM, WMI, and even .NET and WinForms programming.",
+    "status": "PUBLISH",
+    "authors": ["Bruce Payette"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "Windows PowerShell in Action, Second Edition",
+    "isbn": "1935182137",
+    "pageCount": 700,
+    "publishedDate": { "$date": "2011-05-15T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/payette2.jpg",
+    "shortDescription": "Windows PowerShell in Action, Second Edition is a completely revised edition of the best selling book on PowerShell, written by Bruce Payette, one of the founding members of the Windows PowerShell team, co-designer of the PowerShell language, and the principal author of the PowerShell language implementation.    This new edition preserves the crystal-clear introduction to PowerShell, showing sysadmins and developers how to build scripts and utilities to automate system tasks or create powerful system management tools to handle day-to-day tasks. It's rich with interesting examples that will spark your imagination. The book covers batch scripting and string processing, COM, WMI, remote management and jobs and even .NET programming including WinForms and WPF/XAML.",
+    "longDescription": "Windows PowerShell transformed the way administrators and developers interact with Windows. PowerShell, an elegant dynamic language from Microsoft, lets you script administrative tasks and control Windows from the command line. Because it's a full-featured, first-class Windows programming language, programmers and power-users can now do things in a shell that previously required VB, VBScript, or C#.    Windows PowerShell in Action, Second Edition is a completely revised edition of the best selling book on PowerShell, written by Bruce Payette, one of the founding members of the Windows PowerShell team, co-designer of the PowerShell language, and the principal author of the PowerShell language implementation.    This new edition preserves the crystal-clear introduction to PowerShell, showing sysadmins and developers how to build scripts and utilities to automate system tasks or create powerful system management tools to handle day-to-day tasks. It's rich with interesting examples that will spark your imagination. The book covers batch scripting and string processing, COM, WMI, remote management and jobs and even .NET programming including WinForms and WPF/XAML.    Windows PowerShell in Action, Second Edition adds full coverage of V2 features like remote, changes to the threading model, and the new -split and -join operators. The book now includes full chapters on Remoting, Modules, Events and Transactions, and the PowerShell Integrated Scripting Environment. As well, it provides deeper coverage of PowerShell \"commandlets\" (cmdlets) and more of the popular usage scenarios throughout the book.",
+    "status": "PUBLISH",
+    "authors": ["Bruce Payette"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "Silverlight 4 in Action, Revised Edition",
+    "isbn": "1935182374",
+    "pageCount": 425,
+    "publishedDate": { "$date": "2010-10-04T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pbrown.jpg",
+    "shortDescription": "Silverlight in Action, Revised Edition is a comprehensive guide to Silverlight, taking you from Hello World through the techniques you'll need to build sophisticated rich web apps. This new edition covers all the new features added in the latest versions of Silverlight, Visual Studio, and Expression Blend, along with the best practices emerging in the Silverlight community. With more than 50% new content, you'll take a mind-expanding trip through the technology, features, and techniques required to build applications ranging from media, to custom experiences, to business applications to games.",
+    "longDescription": "Anyone who has gotten a taste of what it can do knows that Silverlight represents an entirely new level of rich web interface technology for Microsoft developers. With Silverlight, developers can use JavaScript, C#, and other languages to build user-friendly, interactive, and visually-dazzling web applications that work in most major browsers.    Silverlight in Action, Revised Edition is a comprehensive guide to Silverlight, taking you from Hello World through the techniques you'll need to build sophisticated rich web apps. This new edition covers all the new features added in the latest versions of Silverlight, Visual Studio, and Expression Blend, along with the best practices emerging in the Silverlight community. With more than 50% new content, you'll take a mind-expanding trip through the technology, features, and techniques required to build applications ranging from media, to custom experiences, to business applications to games.    Beyond the fundamentals, you'll find numerous practical examples of important patterns like the ViewModel (or MVVM) pattern, and effective practices for developing real-world applications. You'll delve into the underlying object model and what makes Silverlight tick. Business application developers will appreciate the coverage of the exciting new.NET RIA Services. Combined with advanced binding and validation techniques, they help you visualize how to make your application development super productive and your architecture flexible enough to implement solutions in any problem domain.    Silverlight in Action, Revised Edition devotes extensive coverage to flexible layout components, the extensible control model, the communication framework, and the data-binding features-all cornerstones of software development. You'll master Silverlight's rich media and vivid graphical and animation features. The closing chapters include a variety of Silverlight deployment and customization scenarios.    Finally, Silverlight in Action, Revised Edition doesn't leave you in the dark when it comes to testing and debugging your applications. Techniques, tools, and patterns to support testable Silverlight applications are woven throughout the chapters, with additional dedicated content on the specifics of testing and debugging in Silverlight.",
+    "status": "PUBLISH",
+    "authors": ["Pete Brown"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Silverlight 5 in Action",
+    "isbn": "1617290319",
+    "pageCount": 925,
+    "publishedDate": { "$date": "2012-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pbrown2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Pete Brown"],
+    "categories": ["Microsoft", ".NET"]
+  },
+  {
+    "title": "Hibernate Quickly",
+    "isbn": "1932394419",
+    "pageCount": 456,
+    "publishedDate": { "$date": "2005-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/peak.jpg",
+    "shortDescription": "\"If you want to learn Hibernate quickly, this book shows you step by step.\" - Sang Shin, Java Technology Architect, Sun Microsystems",
+    "longDescription": "Positioned as a layer between the application and the database, Hibernate is a powerful object/relational persistence and query service for Java. It takes care of automating a tedious task: the manual bridging of the gap between object oriented code and the relational database. Hibernate Quickly gives you all you need to start working with Hibernate now.    The book focuses on the 20% you need 80% of the time. The pages saved are used to introduce you to the Hibernate \"ecosystem\": how Hibernate can work with other common development tools and frameworks like XDoclet, Struts, Webwork, Spring, and Tapestry.    The book builds its code examples incrementally, introducing new concepts as it goes. It covers Hibernate's many, useful configuration and design options, breaking a complex subject into digestible pieces. With a gradual \"crawl-walk-run\" approach, the book teaches you what Hibernate is, what it can do, and how you can work with it effectively.",
+    "status": "PUBLISH",
+    "authors": ["Patrick Peak", "Nick Heudecker"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Generative Art",
+    "isbn": "1935182625",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-06-30T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pearson.jpg",
+    "status": "PUBLISH",
+    "authors": ["Matt Pearson"],
+    "categories": ["Algorithmic Art"]
+  },
+  {
+    "title": "Windows Phone 7 in Action",
+    "isbn": "1617290092",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-08-21T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/perga.jpg",
+    "shortDescription": "Windows Phone 7 in Action is a hands-on guide to building mobile applications for WP7 using Silverlight, C#, and XNA. Written for developers who already know their way around Visual Studio, this book zips through the basics, such as writing code to dial the phone, writing emails, and sending text messages, and moves on to the nuts and bolts of building great phone apps. By working through the numerous examples and tutorials, you'll master the APIs used to work with a phone's sensors and hardware, such as the accelerometer, camera, touch screen, GPS, and microphone. You'll also tackle web services and applications that use location and push notification services.",
+    "longDescription": "Windows Phone 7 is a major shift in the way Microsoft developers design, develop, and sell mobile apps. By leveraging a trio of established technologies-Silverlight, XNA, and C#   developers can blend what they already know about Windows development with the new opportunities and challenges presented by a mobile platform. And with exciting new Windows Phone devices rolling out now, the demand for WP7 apps is just starting to build.    Windows Phone 7 in Action is a hands-on guide to building mobile applications for WP7 using Silverlight, C#, and XNA. Written for developers who already know their way around Visual Studio, this book zips through the basics, such as writing code to dial the phone, writing emails, and sending text messages, and moves on to the nuts and bolts of building great phone apps. By working through the numerous examples and tutorials, you'll master the APIs used to work with a phone's sensors and hardware, such as the accelerometer, camera, touch screen, GPS, and microphone. You'll also tackle web services and applications that use location and push notification services.    Along the way, you'll discover why Microsoft opted for Silverlight and XNA as the core technologies for WP7. As with Silverlight for the desktop, you can create stunning visual effects using C#. Silverlight for Windows Phone has been enriched with navigation services, a new execution model to better satisfy mobile requirements, and hooks for embedding a browser, playing media files, running cool animations, and more.    The XNA Framework provides libraries to handle 3D graphics, audio, and touch input. Because games are a key target of mobile app development, by the end of the book you will be able to write your own XNA game, utilizing the unique input abilities of the phone. You also learn how to tune your game code to get the best performance while running in the phone's constrained environment.",
+    "status": "PUBLISH",
+    "authors": ["Timothy Binkley-Jones", "Massimo Perga", "", "Michael Sync"],
+    "categories": ["Mobile Technology"]
+  },
+  {
+    "title": "Lift in Action",
+    "isbn": "1935182803",
+    "pageCount": 450,
+    "publishedDate": { "$date": "2011-11-18T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/perrett.jpg",
+    "status": "PUBLISH",
+    "authors": ["Timothy Perrett"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Web Development with Apache and Perl",
+    "isbn": "1930110065",
+    "pageCount": 424,
+    "publishedDate": { "$date": "2002-04-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/petersen.jpg",
+    "longDescription": "Open source tools provide a powerful and flexible environment for web development and maintenance. If your site has complex business rules or server logic, then you need more than just an interface builder. You need a strong application language with effective tools ready at hand. Perl's strengths make it a natural choice.    Did you know you can easily build a site with features like message forums, chat, session management, custom preferences and other features your users will love  This book shows you how. But it is more than a programming book. It covers a wide spectrum of practical issues and how to handle them, such as when to use a database, what information needs to be secure (and how to secure it), and how to keep traffic from crippling your site. It will teach you the empowering use of ready-made modules so you don't have to reinvent the wheel. And it will even teach you how to successfully advocate the use of Open Source tools in your company.",
+    "status": "PUBLISH",
+    "authors": ["Theo Petersen"],
+    "categories": ["Perl", "Client-Server"]
+  },
+  {
+    "title": "Real-World Functional Programming",
+    "isbn": "1933988924",
+    "pageCount": 560,
+    "publishedDate": { "$date": "2009-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/petricek.jpg",
+    "shortDescription": "This book teaches the ideas and techniques of functional programming applied to real-world problems. You'll see how the functional way of thinking changes the game for .NET developers. Then, you'll tackle common issues using a functional approach. The book will also teach you the basics of the F# language and extend your C# skills into the functional domain. No prior experience with functional programming or F# is required.",
+    "longDescription": "Functional programming languages are good at expressing complex ideas in a succinct, declarative way. Functional concepts such as \"immutability\" and \"function values\" make it easier to reason about code   as well as helping with concurrency. The new F# language, LINQ, certain new features of C#, and numerous .NET libraries now bring the power of functional programming to .NET coders.    This book teaches the ideas and techniques of functional programming applied to real-world problems. You'll see how the functional way of thinking changes the game for .NET developers. Then, you'll tackle common issues using a functional approach. The book will also teach you the basics of the F# language and extend your C# skills into the functional domain. No prior experience with functional programming or F# is required.    WHAT'S INSIDE:        * Thinking the functional way      * Blending OO and functional programming      * Effective F# code",
+    "status": "PUBLISH",
+    "authors": ["Tomas Petricek with Jon Skeet"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Machine Learning in Action",
+    "isbn": "1617290181",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-04-04T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pharrington.jpg",
+    "shortDescription": "Machine Learning in Action is a unique book that blends the foundational theories of machine learning with the practical realities of building tools for everyday data analysis. In it, you'll use the flexible Python programming language to build programs that implement algorithms for data classification, forecasting, recommendations, and higher-level features like summarization and simplification.",
+    "longDescription": "It's been said that data is the new \"dirt\"   the raw material from which and on which you build the structures of the modern world. And like dirt, data can seem like a limitless, undifferentiated mass. The ability to take raw data, access it, filter it, process it, visualize it, understand it, and communicate it to others is possibly the most essential business problem for the coming decades.    \"Machine learning,\" the process of automating tasks once considered the domain of highly-trained analysts and mathematicians, is the key to efficiently extracting useful information from this sea of raw data. By implementing the core algorithms of statistical data processing, data analysis, and data visualization as reusable computer code, you can scale your capacity for data analysis well beyond the capabilities of individual knowledge workers.    Machine Learning in Action is a unique book that blends the foundational theories of machine learning with the practical realities of building tools for everyday data analysis. In it, you'll use the flexible Python programming language to build programs that implement algorithms for data classification, forecasting, recommendations, and higher-level features like summarization and simplification.    As you work through the numerous examples, you'll explore key topics like classification, numeric prediction, and clustering. Along the way, you'll be introduced to important established algorithms, such as Apriori, through which you identify association patterns in large datasets and Adaboost, a meta-algorithm that can increase the efficiency of many machine learning tasks.",
+    "status": "PUBLISH",
+    "authors": ["Peter Harrington"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "Dependency Injection",
+    "isbn": "193398855X",
+    "pageCount": 352,
+    "publishedDate": { "$date": "2009-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/prasanna.jpg",
+    "shortDescription": "   If you do large scale java apps, you probably want to have someone on the team have this book.       Michael Neale",
+    "longDescription": "In object-oriented programming, a central program normally controls other objects in a module, library, or framework. With dependency injection, this pattern is inverted   a reference to a service is placed directly into the object which eases testing and modularity. Spring or Google Guice use dependency injection so you can focus on your core application and let the framework handle infrastructural concerns.    Dependency Injection explores the DI idiom in fine detail, with numerous practical examples that show you the payoffs. You'll apply key techniques in Spring and Guice and learn important pitfalls, corner-cases, and design patterns. Readers need a working knowledge of Java but no prior experience with DI is assumed.",
+    "status": "PUBLISH",
+    "authors": ["Dhanji R. Prasanna"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Understanding Enterprise SOA",
+    "isbn": "1932394591",
+    "pageCount": 280,
+    "publishedDate": { "$date": "2005-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pulier.jpg",
+    "shortDescription": "\"SOA is real ... Pulier is uniquely qualified to make [it] accessible to the general business audience.\" - Paul Gaffney, Staples, Inc., From the Foreword",
+    "longDescription": "Understanding Enterprise SOA gives technologists and business people an invaluable and until now missing integrated picture of the issues and their interdependencies. You will learn how to think in a big way, moving confidently between technology- and business-level concerns. Written in a comfortable, mentoring style by two industry insiders, the book draws conclusions from actual experiences of real companies in diverse industries, from manufacturing to genome research. It cuts through vendor hype and shows you what it really takes to get SOA to work.    Intended for both business people and technologists, the book reviews core SOA technologies and uncovers the critical human factors involved in deploying them. You will see how enterprise SOA changes the terrain of EAI, B2B commerce, business process management, \"real time\" operations, and enterprise software development in general.",
+    "status": "PUBLISH",
+    "authors": ["Eric Pulier and Hugh Taylor", "Foreword by Paul Gaffney"],
+    "categories": ["Theory"]
+  },
+  {
+    "title": "Open-Source ESBs in Action",
+    "isbn": "1933988215",
+    "pageCount": 528,
+    "publishedDate": { "$date": "2008-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rademakers.jpg",
+    "longDescription": "The need for enterprise integration is widespread for the simple reason that businesses require independent applications to exchange information with each other. A CRM application must know about the order history of a customer, but that history is stored in the sales application. A technology that companies increasingly use to integrate enterprise applications is the Enterprise Service Bus (ESB).    Open-Source ESBs in Action describes how to use ESBs in real-world situations. You will learn how the various features of an ESB such as transformation, routing, security, connectivity, and more can be implemented on the example of two open-source ESB implementations: Mule and ServiceMix. The authors first introduce ServiceMix and Mule, and then present general principles and patterns of ESB use, as well as a structured approach to solving common integration problems, through examples using them.    Working in integration projects is exciting, with new technologies and paradigms arriving every day. In this area, open source is playing a more and more dominant role with projects such as Mule and ServiceMix. Open-Source ESBs in Action will help you to learn open-source integration technologies quickly and will provide you with knowledge that you can use to effectively work with Mule and ServiceMix.",
+    "status": "PUBLISH",
+    "authors": ["Tijs Rademakers", "Jos Dirksen"],
+    "categories": ["Business"]
+  },
+  {
+    "title": "Activiti in Action",
+    "isbn": "1617290122",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-07-12T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rademakers2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Tijs Rademakers"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "DSLs in Boo: Domain-Specific Languages in .NET",
+    "isbn": "1933988606",
+    "pageCount": 352,
+    "publishedDate": { "$date": "2010-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rahien.jpg",
+    "shortDescription": "DSLs in Boo shows you how to design, extend, and evolve DSLs for .NET by focusing on approaches and patterns. You learn to define an app in terms that match the domain, and to use Boo to build DSLs that generate efficient executables. And you won't deal with the awkward XML-laden syntax many DSLs require. The book concentrates on writing internal (textual) DSLs that allow easy extensibility of the application and framework. And if you don't know Boo, don't worry   you'll learn right here all the techniques you need.  ",
+    "longDescription": "A general-purpose language like C# is designed to handle all programming tasks. By contrast, the structure and syntax of a Domain-Specific Language are designed to match a particular applications area. A DSL is designed for readability and easy programming of repeating problems. Using the innovative Boo language, it's a breeze to create a DSL for your application domain that works on .NET and does not sacrifice performance.    DSLs in Boo shows you how to design, extend, and evolve DSLs for .NET by focusing on approaches and patterns. You learn to define an app in terms that match the domain, and to use Boo to build DSLs that generate efficient executables. And you won't deal with the awkward XML-laden syntax many DSLs require. The book concentrates on writing internal (textual) DSLs that allow easy extensibility of the application and framework. And if you don't know Boo, don't worry   you'll learn right here all the techniques you need.    WHAT'S INSIDE:        * Introduction to DSLs, including common patterns      * A fast-paced Boo tutorial      * Dozens of practical examples and tips      * An entertaining, easy-to-follow style",
+    "status": "PUBLISH",
+    "authors": ["Oren Eini writing as Ayende Rahien"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "JUnit Recipes",
+    "isbn": "1932394230",
+    "pageCount": 752,
+    "publishedDate": { "$date": "2004-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rainsberger.jpg",
+    "longDescription": "When testing becomes a developer's habit good things tend to happen--good productivity, good code, and good job satisfaction. If you want some of that, there's no better way to start your testing habit, nor to continue feeding it, than with JUnit Recipes. In this book you will find one hundred and thirty seven solutions to a range of problems, from simple to complex, selected for you by an experienced developer and master tester. Each recipe follows the same organization giving you the problem and its background before discussing your options in solving it.    JUnit - the unit testing framework for Java - is simple to use, but some code can be tricky to test. When you're facing such code you will be glad to have this book. It is a how-to reference full of practical advice on all issues of testing, from how to name your test case classes to how to test complicated J2EE applications. Its valuable advice includes side matters that can have a big payoff, like how to organize your test data or how to manage expensive test resources.",
+    "status": "PUBLISH",
+    "authors": ["J. B. Rainsberger with contributions by Scott Stirling"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "wxPython in Action",
+    "isbn": "1932394621",
+    "pageCount": 620,
+    "publishedDate": { "$date": "2006-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rappin.jpg",
+    "shortDescription": "\"The book is easy to read and provides an approach to a very practical contemporary topic. The authors have organized their material well.\" -- Melissa Strange, Walden University, www.reviews.com",
+    "longDescription": "wxPython is an open source GUI toolkit for the Python programming language. It offers productivity gains and useful features for any programmer, and is quickly gaining in popularity as a result. The only published source for the wxPython toolkit, co-authored by the toolkit s developer Robin Dunn, wxPython in Action shows readers why wxPython is a better interface tool than Tkinter, the tool that is distributed with Python.    Because they are often large and complex, GUI programming toolkits can be hard to use. wxPython is a combination of the Python programming language and the wxWidgets toolkit, which allows programmers to create programs with a robust, highly functional graphical user interface, simply and easily. wxPython combines the power of an exceptionally complete user interface toolkit with an exceptionally flexible programming language. The result is a toolkit that is unique in the ease with which complex applications can be built and maintained.    wxPython in Action is a complete guide to the wxPython toolkit, containing a tutorial for getting started, a guide to best practices, and a reference to wxPython s extensive widget set. After an easy introduction to wxPython concepts and programming practices, the book takes an in-depth tour of when and how to use the bountiful collection of widgets offered by wxPython. All features are illustrated with useful code examples and reference tables are included for handy lookup of an object s properties, methods, and events. The book enables developers to learn wxPython quickly and remains a valuable resource for future work.",
+    "status": "PUBLISH",
+    "authors": ["Noel Rappin", "Robin Dunn"],
+    "categories": ["Python"]
+  },
+  {
+    "title": "Clojure in Action",
+    "isbn": "1935182595",
+    "pageCount": 475,
+    "publishedDate": { "$date": "2011-11-15T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rathore.jpg",
+    "shortDescription": "Clojure in Action is a hands-on tutorial for the working programmer who has written code in a language like Java or Ruby, but has no prior experience with Lisp. It teaches Clojure from the basics to advanced topics using practical, real-world application examples. Blow through the theory and dive into practical matters like unit-testing, environment set up, all the way through building a scalable web-application using domain-specific languages, Hadoop, HBase, and RabbitMQ.",
+    "longDescription": "Clojure is a modern implementation of Lisp for the JVM, ideally suited for general programming and specialized tasks like creating domain specific languages. Like Haskell and Scala, Clojure supports the functional style of programming. By combining first-class functions, lexical closures, multimethods, and a full-fledged macro system, you get more than what typical OO languages can possibly offer. Moreover, you get ultra-clean code that reflects Lisp's famously-concise style. That means far fewer bugs when compared to stateful languages such as Java or C++.    Clojure in Action is a hands-on tutorial for the working programmer who has written code in a language like Java or Ruby, but has no prior experience with Lisp. It teaches Clojure from the basics to advanced topics using practical, real-world application examples. Blow through the theory and dive into practical matters like unit-testing, environment set up, all the way through building a scalable web-application using domain-specific languages, Hadoop, HBase, and RabbitMQ.    For readers coming from Java, you'll see how Clojure's use of the JVM makes it seamlessly interoperable with existing Java code. Learn how to access the thousands of existing libraries and frameworks. You'll also discover the concurrency semantics built into the language, which enable you to very easily write multi-threaded programs and take advantage of multiple cores in modern CPUs. With cloud-computing and multi-core becoming major trends, this is a huge advantage.    WHAT'S INSIDE        * A modern Lisp without all the baggage      * Functional programming that's also practical      * Unit-testing, embedding Clojure, distributed programming, and more      * State management and safe concurrency for multi-core CPUs      * Create domain specific languages (DSLs) with the macro system      * Write web-scale applications that scale transparently across multiple CPUs      * Seamless interoperability with thousands of Java libraries      * Get performance on level with raw Java",
+    "status": "PUBLISH",
+    "authors": ["Amit Rathore"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Scala in Action",
+    "isbn": "1935182757",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-04-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/raychaudhuri.jpg",
+    "status": "PUBLISH",
+    "authors": ["Nilanjan Raychaudhuri"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Working with Objects",
+    "isbn": "134529308",
+    "pageCount": 420,
+    "publishedDate": { "$date": "1995-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/reenskaug.jpg",
+    "shortDescription": "\"The first method that deals realistically with reuse, and one of the few that comes close to describing what I do when I design.\" --Ralph Johnson, University of Illinois",
+    "longDescription": "Working With Objects is the authoritative account of the highly successful OOram method for software analysis, design, development, maintenance and reuse. OOram has been fine-tuned over a decade on hundreds of projects by Trygve Reenskaug and his collaborators. It is supported by available CASE tools, training, and consulting.    Working With Objects is the source on a method which takes an evolutionary step forward in object-oriented development practices. OOram adds the intuitively simple but powerful concept of a role to object-oriented models and methods. For example, imagine trying to describe a person as an object. The most effective way to do this would be to independently describe each of the roles that person adopts (parent, employee, and so on) and then define how the person supports them. These ideas form the heart of the OOram approach.    In a presentation rich with examples, Working With Objects is anything but the typical, dry methodology book. It tells real-life stories. It teaches how to apply role modeling and benefit from its inherent advantages, including:    Multiple views of the same model  Support for both data- and process-centered approaches  Large systems described through a number of distinct models  Derivation of composite models from simpler, base models  Decentralized management of very large systems  Programming language-independent design  Step-by-step transformation of models into implementations  Integration of powerful reuse techniques with work policies, processes and organization",
+    "status": "PUBLISH",
+    "authors": ["Trygve Reenskaug"],
+    "categories": ["Object-Oriented Programming"]
+  },
+  {
+    "title": "PHP in Action",
+    "isbn": "1932394753",
+    "pageCount": 552,
+    "publishedDate": { "$date": "2007-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/reiersol.jpg",
+    "shortDescription": "\"If there was ever a textbook for software development in PHP, this would be it.\"    Cal Evans, Podcast Review, Zend Developer Network",
+    "longDescription": "To keep programming productive and enjoyable, state-of-the-art practices and principles are essential. Object-oriented programming and design help manage complexity by keeping components cleanly separated. Unit testing helps prevent endless, exhausting debugging sessions. Refactoring keeps code supple and readable. PHP offers all this, and more.    PHP in Action shows you how to apply PHP techniques and principles to all the most common challenges of web programming, including:    Web presentation and templates  User interaction including the Model-View-Contoller architecture  Input validation and form handling  Database connection and querying and abstraction  Object persistence  This book takes on the most important challenges of web programming in PHP 5 using state-of-the art programming and software design techniques including unit testing, refactoring and design patterns. It provides the essential skills you need for developing or maintaining complex to moderately complex PHP web applications.",
+    "status": "PUBLISH",
+    "authors": ["Dagfinn Reiersøl with Marcus Baker", "Chris Shiflett"],
+    "categories": ["PHP"]
+  },
+  {
+    "title": "Secrets of the JavaScript Ninja",
+    "isbn": "193398869X",
+    "pageCount": 300,
+    "publishedDate": { "$date": "2012-12-27T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/resig.jpg",
+    "shortDescription": "   Secrets of the Javascript Ninja is definitely a book for anyone looking to significantly improve their Javascript knowledge and skills.       Ryan Doherty, Web Development Engineer, Mozilla",
+    "longDescription": "JavaScript developers commonly rely on collections of reusable JavaScript code--written by themselves or by someone else at their company. Alternatively, they rely on code from a third party. But in all these cases they need to know how to either construct a cross-browser library from scratch or be adept at using and maintaining their library of choice.    In Secrets of the JavaScript Ninja, JavaScript expert John Resig reveals the inside know-how of the elite JavaScript programmers. Written to be accessible to JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up.    This book takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. You first are given a base of strong, advanced JavaScript knowledge, enabling you to make decisions about the overall design of a library and how to tackle its eventual construction. The book then teaches you how to construct your library. It examines all the numerous tasks JavaScript libraries have to tackle and provides practical solutions and development strategies for their creation. It then guides you through the various maintenance techniques you will need to keep your code running well into the future.    With Secrets of the JavaScript Ninja you will have all the knowledge and skills available to build your own JavaScript library, or to understand how to use any modern JavaScript library available.",
+    "status": "PUBLISH",
+    "authors": ["John Resig"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Microsoft Office Essentials",
+    "isbn": "132623129",
+    "pageCount": 480,
+    "publishedDate": { "$date": "1996-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/richardson2.jpg",
+    "shortDescription": "Microsoft Office Essentials simply covers the things you really want to know and skips over all those esoteric features that 99 out of 100 readers never use.",
+    "longDescription": "Many books on Microsoft Office try to cover every feature of the software. You don't use every feature, though. Microsoft Office Essentials simply covers the things you really want to know and skips over all those esoteric features that 99 out of 100 readers never use.    You will learn, among other things, how to use:    - Microsoft Office Manager and Shortcut Bar  - Word's formatting tools -- templates, styles, and wizards  - Word to create newsletters, reports, etc.  - Word and Excel together, capitalizing on the strengths of both  - Excel to create simple workbooks for such tasks as balancing your checkbook or preparing a budget  - Excel to display your data with charts  - Powerpoint to develop a presentation that combines words and clip-art images    Once you get to know Microsoft Office Essentials you'll want to keep it within easy reach of you computer...",
+    "status": "PUBLISH",
+    "authors": ["Ronny Richardson"],
+    "categories": ["Business"]
+  },
+  {
+    "title": "Swing",
+    "isbn": "1884777848",
+    "pageCount": 0,
+    "publishedDate": { "$date": "1999-12-01T00:00:00.000-0800" },
+    "status": "PUBLISH",
+    "authors": ["Matthew Robinson", "Pavel Vorobiev"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "The Awesome Power of Java Beans",
+    "isbn": "1884777562",
+    "pageCount": 500,
+    "publishedDate": { "$date": "1998-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rodrigues.jpg",
+    "longDescription": "Build your own bean  Or use one that's ready-made  The Awesome Power of Java Beans provides the details on both. Either way, the power of Java Beans is awesome: once created, your beans run anywhere-- ceven masquerading as an ActiveX control.    The Awesome Power of Java Beans shows you how to use not only BeanBox, but also such tools as VisualAge WebRunner, JBuilder and PowerJ. And there's a wide-ranging selection of completed and tested beans for you to use in your applications    If you're a Java programmer, teacher or student, or if you design software systems using Java Beans, this book will be a valuable resource.",
+    "status": "PUBLISH",
+    "authors": ["Lawrence H. Rodrigues"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Personal Videoconferencing",
+    "isbn": "013268327X",
+    "pageCount": 420,
+    "publishedDate": { "$date": "1996-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rosen.jpg",
+    "shortDescription": "\"Personal Videoconferencing is having an enormous impact on business. Evan Rosen has quantified that impact with examples of real world implementations and provided a primer on how businesses can achieve this competitive advantage for themselves.\"  --Frank Gill, Executive Vice President, Internet and Communications Group, Intel    \"The book is very good: it is clear and the examples of user applications are excellent\"  --Ralph Ungermann, CEO, First Virtual Corporation ",
+    "longDescription": "The first book on the most powerful communication tool since the development of the personal computer, Personal Videoconferencing will help you streamline your business and gain a competitive edge. It summarizes the experience of more than seventy companies in many industries in the use of desktop and laptop videoconferencing to collaborate on documents and applications while communicating through video, face-to-face. Anyone who shares information with others will benefit from reading this book.  ",
+    "status": "PUBLISH",
+    "authors": ["Evan Rosen"],
+    "categories": ["Networking"]
+  },
+  {
+    "title": "The Cloud at Your Service",
+    "isbn": "1935182528",
+    "pageCount": 200,
+    "publishedDate": { "$date": "2010-11-22T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rosenberg.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jothy Rosenberg", "Arthur Mateos"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "Implementing Elliptic Curve Cryptography",
+    "isbn": "1884777694",
+    "pageCount": 330,
+    "publishedDate": { "$date": "1998-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rosing.jpg",
+    "shortDescription": "\"The book provides all the theory and working programs needed to create real applications based on the latest IEEE P1363 standard.\"  --Reviewed in Cryptologia",
+    "longDescription": "Implementing Elliptic Curve Cryptography proceeds step-by-step to explain basic number theory, polynomial mathematics, normal basis mathematics and elliptic curve mathematics. With these in place, applications to cryptography are introduced. The book is filled with C code to illustrate how mathematics is put into a computer, and the last several chapters show how to implement several cryptographic protocols. The most important is a description of P1363, an IEEE draft standard for public key cryptography.    The main purpose of Implementing Elliptic Curve Cryptography is to help \"crypto engineers\" implement functioning, state-of-the-art cryptographic algorithms in the minimum time. With detailed descriptions of the mathematics, the reader can expand on the code given in the book and develop optimal hardware or software for their own applications.    Implementing Elliptic Curve Cryptography assumes the reader has at least a high school background in algebra, but it explains, in stepwise fashion, what has been considered to be a topic only for graduate-level students. ",
+    "status": "PUBLISH",
+    "authors": ["Michael Rosing"],
+    "categories": ["Theory"]
+  },
+  {
+    "title": "SOA Patterns",
+    "isbn": "1933988266",
+    "pageCount": 250,
+    "publishedDate": { "$date": "2012-09-12T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rotem.jpg",
+    "shortDescription": "In SOA Patterns, author Arnon Rotem-Gal-Oz provides detailed, technology-neutral solutions to these challenges, and many others. This book provides architectural guidance through patterns and anti-patterns. It shows you how to build real SOA services that feature flexibility, availability, and scalability.",
+    "longDescription": "SOA   Service Oriented Architecture   has become the leading solution for complex, connected business systems. While it's easy to grasp the theory of SOA, implementing well-designed, practical SOA systems can be a difficult challenge. Developers and enterprise architects still face the following issues:        * How to get high-availability with SOA      * How to know a service has failed      * How to create reports when data is scattered within multiple services      * How to increase the loose coupling of your SOA      * How to solve authentication and authorization for service consumers--internal and external      * How to integrate SOA and the UI      * How to avoid common SOA pitfalls      * How to choose technologies that increase the performance of your services    In SOA Patterns, author Arnon Rotem-Gal-Oz provides detailed, technology-neutral solutions to these challenges, and many others. This book provides architectural guidance through patterns and anti-patterns. It shows you how to build real SOA services that feature flexibility, availability, and scalability. Through an extensive set of patterns, this book identifies the major SOA pressure points and provides reusable techniques to address them. Each pattern pairs the classic Problem/Solution format with a unique technology map, showing where specific solutions fit into the general pattern.    SOA Patterns shows you how to address common SOA concerns, including the areas of performance, availability, scalability, security, management, service interaction, user interface interaction, and service aggregation. The SOA anti-patterns part shows you how to avoid common mistakes and how to refactor broken systems. The book also maps quality attributes to patterns so that you can easily find the patterns relevant to your problems.    WHAT'S INSIDE:        * Details more than 30 patterns for common SOA scenarios in the areas of security, performace, availability, UI integration, service aggregation and service interaction      * Describes more than 20 SOA pitfalls to avoid      * Spotlights the architecural perspective on SOA      * Explains technology mapping from conceptual solution to current technologies      * Provides extensive and practical advice on matching patterns to technologies  ",
+    "status": "PUBLISH",
+    "authors": ["Arnon Rotem-Gal-Oz"],
+    "categories": ["SOA"]
+  },
+  {
+    "title": "Hello World!",
+    "isbn": "1933988495",
+    "pageCount": 432,
+    "publishedDate": { "$date": "2009-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sande.jpg",
+    "shortDescription": "Hello World! provides a gentle but thorough introduction to the world of computer programming.",
+    "longDescription": "Your computer won't respond when you yell at it. Why not learn to talk to your computer in its own language  Whether you want to write games, start a business, or you're just curious, learning to program is a great place to start. Plus, programming is fun!    Hello World! provides a gentle but thorough introduction to the world of computer programming. It's written in language a 12-year-old can follow, but anyone who wants to learn how to program a computer can use it. Even adults. Written by Warren Sande and his son, Carter, and reviewed by professional educators, this book is kid-tested and parent-approved.    You don't need to know anything about programming to use the book. But you should know the basics of using a computer--e-mail, surfing the web, listening to music, and so forth. If you can start a program and save a file, you should have no trouble using this book.",
+    "status": "PUBLISH",
+    "authors": ["Warren D. Sande", "Carter Sande"],
+    "categories": ["Programming", "Python"]
+  },
+  {
+    "title": "SCBCD Exam Study Kit",
+    "isbn": "1932394400",
+    "pageCount": 488,
+    "publishedDate": { "$date": "2005-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sanghera.jpg",
+    "longDescription": "There is probably no Java certification more valuable to you than Sun Certified Business Component Developer CX-310-090. To pass you need a readable, no-nonsense book focused like a laser beam on the exam goals. SCBCD Exam Study Kit is that book.    The study kit makes sure you first understand all the concepts you need to know, large and small, and then covers every single exam topic. It provides more than 130 review questions with answers distributed over all chapters and an Exam's Eye View section at the end of each chapter on the important points to remember.    Although SCBCD Exam Study Kit has only one purpose - to help you get certified - you will find yourself returning to it as a reference after passing the exam. A demo on how to install the necessary software, write a simple bean, deploy the bean, and execute it, as well as a free SCBCD exam simulator can be downloaded from the publisher's website.",
+    "status": "PUBLISH",
+    "authors": ["Paul Sanghera"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Portlets in Action",
+    "isbn": "1935182544",
+    "pageCount": 475,
+    "publishedDate": { "$date": "2011-09-16T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sarin.jpg",
+    "shortDescription": "Portlets in Action is a comprehensive guide for Java developers with minimal or no experience working with portlets. Fully exploring the Portlet 2.0 API and using widely adopted frameworks like Spring 3.0 Portlet MVC, Hibernate, and DWR, it teaches you portal and portlet development by walking you through a Book Catalog portlet and Book Portal examples.",
+    "longDescription": "A \"portal\" is a browser-based container populated by small applications called \"portlets\". Good portlets need to work independently, but also communicate with the portal, other portlets, and outside servers and information sources. Whether they're part of internal or web-facing portals, high-quality portlets are the foundation of a fast, flexible, and successful development strategy.    Portlets in Action is a comprehensive guide for Java developers with minimal or no experience working with portlets. Fully exploring the Portlet 2.0 API and using widely adopted frameworks like Spring 3.0 Portlet MVC, Hibernate, and DWR, it teaches you portal and portlet development by walking you through a Book Catalog portlet and Book Portal examples. The example Book Catalog Portlet, developed incrementally in each chapter of the book, incorporates most key portlet features, and the accompanying source code can be easily adapted and reused by readers. The example Book Portal application introduces you to the challenges faced in developing web portals.  WHAT'S INSIDE        * Complete coverage of Portlet 2.0 API      * New features added in Portlet 2.0      * Code examples use      * Develop rich portlets using AJAX with DWR, DOJO, and jQuery      * Complete coverage of Spring 3.0 Portlet MVC and the Liferay portal server  ",
+    "status": "PUBLISH",
+    "authors": ["Ashish Sarin"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "SWT/JFace in Action",
+    "isbn": "1932394273",
+    "pageCount": 496,
+    "publishedDate": { "$date": "2004-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/scarpino.jpg",
+    "shortDescription": "Guides you through the process of developing Eclipse-based GUIs and shows how to build applications with features your users will love. Packed with examples and no fluff.",
+    "longDescription": "SWT and JFace are Eclipse's graphical libraries. They enable you to build nimble and powerful Java GUIs--but this is only the beginning. With Draw2D and the Graphical Editing Framework, you can go beyond static applications and create full-featured editors. And with the Rich Client Platform, you can build customized workbenches whose capabilities far exceed those of traditional interfaces.    SWT/JFace in Action covers the territory, from simple widgets to complex graphics. It guides you through the process of developing Eclipse-based GUIs and shows how to build applications with features your users will love. The authors share their intimate knowledge of the subject with you in a friendly, readable style.    This book encourages you to learn through action. Each topic provides extensive code to show you how SWT/JFace works in practical applications. Not only do these examples help you understand the subject, they are a working set of programs you can reuse in your own interfaces.",
+    "status": "PUBLISH",
+    "authors": [
+      "Matthew Scarpino",
+      "Stephen Holder",
+      "Stanford Ng",
+      "",
+      "Laurent Mihalkovic"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "OpenCL in Action",
+    "isbn": "1617290173",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-11-14T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/scarpino2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Matthew Scarpino"],
+    "categories": ["Programming"]
+  },
+  {
+    "title": "Multiprotocol over ATM",
+    "isbn": "138892709",
+    "pageCount": 341,
+    "publishedDate": { "$date": "1998-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/schmidt.jpg",
+    "shortDescription": "With the detailed coverage of the entire set of protocols in Multiprotocol over ATM, you can be equal to the task.",
+    "longDescription": "Networks constructed with current ATM protocol design standards exceed by far former network capabilities. Unfortunately, this new ATM power and flexibility come at the cost of greater complexity. With the detailed coverage of the entire set of protocols in Multiprotocol over ATM, you can be equal to the task. If you're a network manager or designer, responsible for planning, building, or managing an enterprise or campus network, this book is for you.",
+    "status": "PUBLISH",
+    "authors": ["Andrew Schmidt", "Daniel Minoli"],
+    "categories": ["Internet", "Networking"]
+  },
+  {
+    "title": "Dependency Injection in .NET",
+    "isbn": "1935182501",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2011-10-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/seemann.jpg",
+    "shortDescription": "Dependency Injection in .NET is a comprehensive guide than introduces DI and provides an in-depth look at applying DI practices to .NET apps. In it, you will also learn to integrate DI together with such technologies as Windows Communication Foundation, ASP.NET MVC, Windows Presentation Foundation and other core .NET components.",
+    "longDescription": "Dependency Injection (DI) is a software design technique emphasizing Separation of Concerns, Modularity, Extensibility and Testability. Applied well, it enables programmers to successfully deal with complexity in software and add new features to existing apps with greater ease. DI is the key to writing modular software and producing flexible and maintainable code bases.    While well-known among Java developers and other practitioners of object-oriented design, DI is only now gaining momentum in the .NET community. The Unity container released by Microsoft patterns & practices and the new Microsoft Extensibility Framework (MEF) make DI more relevant than ever for .NET developers.    Dependency Injection in .NET is a comprehensive guide than introduces DI and provides an in-depth look at applying DI practices to .NET apps. In it, you will also learn to integrate DI together with such technologies as Windows Communication Foundation, ASP.NET MVC, Windows Presentation Foundation and other core .NET components.    Building on your existing knowledge of C# and the .NET platform, this book will be most beneficial for readers who have already built at least a few software solutions of intermediate complexity. Most examples are in plain C# without use of any particular DI framework. Later, the book introduces several well-known DI frameworks, such as StructureMap, Windsor and Spring.NET. For each framework, it presents examples of its particular usage, as well as examines how the framework relates to the common patterns presented earlier in the book.    WHAT'S INSIDE        * A thorough introduction to DI principles applied to .NET development      * Numerous C#-based examples      * A comprehensive catalog of Patterns and Anti-Patterns      * Understand the importance of loose coupling      * Learn DI Containers including StructureMap, Windsor, Spring.NET and the Microsoft Extensibility Framework      * Identify and avoid common traps",
+    "status": "PUBLISH",
+    "authors": ["Mark Seemann"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Java 3D Programming",
+    "isbn": "1930110359",
+    "pageCount": 400,
+    "publishedDate": { "$date": "2002-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/selman.jpg",
+    "longDescription": "Java 3D Programming steps programmers through the important design and implementation phases of developing a successful Java 3D application. The book provides invaluable guidance on whether to use Java 3D, user interface design, geometry creation, scene manipulation and final optimizations. The book does not attempt to exhaustively cover the API or replicate the official documentation but rather serves as a roadmap to alert programmers of design issues and potential pitfalls.    The author distills 12 months of using the Java 3D API for commercial projects, as well as innumerable discussions on the Java 3D email list into a book that all Java 3D developers will appreciate. Experienced Java 3D developers will applaud an authoritative resource containing the state-of-the-art in techniques and workarounds, while novice Java 3D programmers will gain a fast-track into Java 3D development, avoiding the confusion, frustration and time wasted learning Java 3D techniques and terminology.    Java 3D Programming comes complete with a comprehensive set of programming examples to illustrate the techniques, features, workarounds and bug fixes contained in the main text.    Readers of this book would include students and postgraduate researchers developing visualization applications for academia. Moderately experienced in Java, some experience of 3D graphics, little or no experience of Java 3D is needed. R+D s/w engineers at commercial institutions. Experienced Java developers, experienced with OpenGL or VRML, little or no experience with Java 3D.",
+    "status": "PUBLISH",
+    "authors": ["Daniel Selman"],
+    "categories": ["Java", "Internet", "Computer Graph"]
+  },
+  {
+    "title": "Liferay in Action",
+    "isbn": "193518282X",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2011-09-20T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sezov.jpg",
+    "status": "PUBLISH",
+    "authors": ["Richard Sezov", "Jr"],
+    "categories": ["Internet"]
+  },
+  {
+    "title": "JSP Tag Libraries",
+    "isbn": "193011009X",
+    "pageCount": 656,
+    "publishedDate": { "$date": "2001-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/shachor.jpg",
+    "longDescription": "JSP Tag Libraries is a bible for serious JSP developers. The reader will become acquainted with the world of custom JSP tags--new JSP technology that is beginning to have an enormous impact on the way people are developing JSP.    JSP tags are Java components that can be used from within a JSP file. By representing these components as tags, code authors can open up their JSP development to the everyday content developer as well as improve their code reuse and separation between presentation and business logic.    The book is fully loaded with many real-world tags including tags to perform iterations, access databases, EJBs, email systems and JavaBeans. To make the tag usage even more real, the book also offers two full-scale case studies in which the reader will see how tags can be used in the context of:    e-Commerce applications  WAP applications that work with current cellular phones  This book covers all aspects of JSP Tag development for Scriptlet-free generation of online content. It focuses on reusable component-centric design via JavaBeans and custom tags to separate presentation from implementation.",
+    "status": "PUBLISH",
+    "authors": ["Gal Shachor", "Adam Chace", "Magnus Rydin"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "Instant Messaging in Java",
+    "isbn": "1930110464",
+    "pageCount": 402,
+    "publishedDate": { "$date": "2002-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/shigeoka.jpg",
+    "shortDescription": "This intermediate Java programming book provides Java programmers with the information and tools needed to create your own IM client and server software.",
+    "longDescription": "Instant Messaging has exploded into the online world and is a wildly popular service of the largest Internet Service Providers (ISP) like AOL with AOL Instant Messenger, MSN with Microsoft Messenger, and Yahoo with Yahoo Messenger. Millions of Internet users everyday exchange IM s and its use beyond messaging is just around the corner. For example, the new Microsoft .NET platform will be using instant messaging technology for data exchange.    This intermediate Java programming book provides Java programmers with the information and tools needed to create your own IM client and server software. You can use the software to create your own IM systems or integrate IM features into your existing software. Imagine allowing your customers to chat directly with technical support or other users from within your application!    This book focuses on the open source Jabber XML-based IM protocols (www.jabber.org) to create Java IM software. These open protocols allows your IM software to seamlessly communicate with the large number of other Jabber clients and servers available including commercial Jabber systems like the one that powers Disney's go.com IM.    Readers are assumed to know how to program in Java. No prior knowledge of Jabber or IM is needed.",
+    "status": "PUBLISH",
+    "authors": ["Iain Shigeoka"],
+    "categories": ["Internet", "Java"]
+  },
+  {
+    "title": "Java Applets and Channels Without Programming",
+    "isbn": "1884777392",
+    "pageCount": 372,
+    "publishedDate": { "$date": "1999-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/shoffner.jpg",
+    "shortDescription": "Java Applets and Channels Without Programming collects almost 100 applets on a CD with detailed instructions on how to use each applet. In addition, style issues are discussed in detail; not only will you learn how to use each applet, you will learn when and where it is appropriate to use each applet. The book also introduces the new concept of channels and shows how these can be used on your web site as well.  ",
+    "longDescription": "If you want to use Java to enhance your Web site, you have two choices: you can write the Java applet yourself or you can find an already written Java applet that meets your needs. If you prefer not to do the writing yourself, then Java Applets and Channels Without Programming is for you. It collects almost 100 applets on a CD with detailed instructions on how to use each applet. In addition, style issues are discussed in detail; not only will you learn how to use each applet, you will learn when and where it is appropriate to use each applet. The book also introduces the new concept of channels and shows how these can be used on your web site as well.    The CD-ROM also contains an exclusive applet configuration utility, a program that allows you to configure the Java applets on the CD-ROM in a WYSIWYG (What You See Is What You Get) environment. When using the utility to configure Java applets, you do not need to know any Java programming or even any HTML programming. All you do is change the value of a parameter and click on a button to see the resulting change to the applet. The applet configuration utility is written in Java and runs in your browser, so it runs on any computer platform for which there is a Java-enabled browser.    The CD-ROM also provides example web pages for more than 60 of the included applets, so you can learn how to use the applets in real-world situations.",
+    "status": "PUBLISH",
+    "authors": [
+      "Ronny Richardson",
+      "Michael Shoffner",
+      "Marq Singer",
+      "Bruce Murray",
+      "",
+      "Jack Gambol"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "PowerShell in Practice",
+    "isbn": "1935182005",
+    "pageCount": 500,
+    "publishedDate": { "$date": "2010-06-08T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/siddaway.jpg",
+    "shortDescription": "PowerShell in Practice is a hands-on, cookbook-style reference intended for administrators wanting to learn and use PowerShell. Written from an administrator's perspective, it concentrates on using PowerShell for practical tasks and automation. The book starts with an introduction that includes a rapid tutorial and a review of the key areas in which you'll use PowerShell.",
+    "longDescription": "Whether you're optimizing performance, automating tasks, or exploiting software features, efficiency is the key to a system administrator's success. Anything that saves a few cycles is a welcome addition to your toolbox; Windows PowerShell has the potential to change the game entirely.    Windows PowerShell is a new scripting language written from the ground up with the goal of simplifying Windows system administration. It's fully aware of the Windows platform and is tightly integrated with key server technologies like Exchange, IIS, SQL Server. PowerShell borrows many ideas from the Unix scripting world, so it's instantly familiar to anyone who has scripted in Bash or another Unix shell. It's also a first-class programming language that supports everything from single-line commands to full-featured Windows programs.    PowerShell in Practice is a hands-on, cookbook-style reference intended for administrators wanting to learn and use PowerShell. Written from an administrator's perspective, it concentrates on using PowerShell for practical tasks and automation. The book starts with an introduction that includes a rapid tutorial and a review of the key areas in which you'll use PowerShell.    This book is written to answer the question \"How can PowerShell make my job as an administrator easier \" After you have your feet under you, you'll find an assortment of practical techniques presented in a Problem/Solution format.    The first major part, called Working with People, addresses user accounts, mailboxes, and desktop configuration and maintenance. The second major part, Working with Servers, offers techniques for DNS, Active Directory, Exchange, IIS, and more.",
+    "status": "PUBLISH",
+    "authors": ["Richard Siddaway"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "PowerShell and WMI",
+    "isbn": "1617290114",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-04-30T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/siddaway2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Richard Siddaway"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Making Sense of Java",
+    "isbn": "132632942",
+    "pageCount": 180,
+    "publishedDate": { "$date": "1996-06-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/simpson.jpg",
+    "shortDescription": "Making Sense of Java clearly and concisely explains the concepts, features, benefits, potential, and limitations of Java.",
+    "longDescription": "The meteoric rise of interest in Java, and the simultaneous rise in Java-related hype, make this book's no-nonsense evaluation essential reading for all levels of professionals, from managers to programmers. Making Sense of Java clearly and concisely explains the concepts, features, benefits, potential, and limitations of Java. It is not a programmer's how-to guide and assumes little technical knowledge, though software developers will find this lucid overview to be a valuable introduction to the possible uses and capabilities of Java.",
+    "status": "PUBLISH",
+    "authors": [
+      "Bruce Simpson",
+      "John Mitchell",
+      "Brian Christeson",
+      "Rehan Zaidi",
+      "",
+      "Jonathan Levine"
+    ],
+    "categories": ["Java", "Business"]
+  },
+  {
+    "title": "C++/CLI in Action",
+    "isbn": "1932394818",
+    "pageCount": 416,
+    "publishedDate": { "$date": "2007-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sivakumar.jpg",
+    "shortDescription": "   ... a great resource, an outstanding job, a must-read...        Ayman B. Shoukry, VC++ Team, Microsoft Corporation",
+    "longDescription": "Developers initially welcomed Microsoft   s Managed C++ for .NET, but the twisted syntax made it difficult to use. Its much-improved replacement, C++/CLI, now provides an effective bridge between the native and managed programming worlds. Using this technology, developers can combine existing C++ programs and .NET applications with little or no refactoring. Accessing .NET libraries like Windows Forms, WPF, and WCF from standard C++ is equally easy.    C++/CLI in Action is a practical guide that will help you breathe new life into your legacy C++ programs. The book begins with a concise C++/CLI tutorial. It then quickly moves to the key themes of native/managed code interop and mixed-mode programming. You   ll learn to take advantage of GUI frameworks like Windows Forms and WPF while keeping your native C++ business logic. The book also covers methods for accessing C# or VB.NET components and libraries. Written for readers with a working knowledge of C++.",
+    "status": "PUBLISH",
+    "authors": ["Nishant Sivakumar"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "C# in Depth",
+    "isbn": "1933988363",
+    "pageCount": 424,
+    "publishedDate": { "$date": "2008-04-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/skeet.jpg",
+    "longDescription": "In programming, there's no substitute for knowing your stuff. In versions 2 and 3, C# introduces new concepts such as lambda expressions and implicit typing that make the language more flexible and give you more power. Using Language INtegrated Query (LINQ)   also new in C# 3   you can interact with data of any type directly from C#. Simply put, mastering these features will make you a more valuable C# developer.    C# in Depth is designed to bring you to a new level of programming skill. It dives deeply into key C# topics   in particular the new ones. You'll learn to reuse algorithms in a type-safe way with C# 2 generics and expand the functionality of existing classes and interfaces using C# 3 extension methods. Tricky issues become clear in author Jon Skeet's crisp, easy-to-follow explanations and snappy, pragmatic examples. With this book under your belt, you will easily learn   and then master   new frameworks and platforms.",
+    "status": "PUBLISH",
+    "authors": ["Jon Skeet"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "C# in Depth, Second Edition",
+    "isbn": "1935182471",
+    "pageCount": 584,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/skeet2.jpg",
+    "shortDescription": "C# in Depth, Second Edition concentrates on the high-value features that make C# such a powerful and flexible development tool. Rather than re-hashing the core of C# that's essentially unchanged since it hit the scene nearly a decade ago, this book brings you up to speed with the features and practices that have changed with C# from version 2.0 onwards.",
+    "longDescription": "C# has changed since it was first introduced   a lot! With generics, lambda expressions, dynamic typing, LINQ, iterator blocks and many other features, C# is more expressive than ever. However, you can't get the most out of the language unless you know it in depth.    C# in Depth, Second Edition concentrates on the high-value features that make C# such a powerful and flexible development tool. Rather than re-hashing the core of C# that's essentially unchanged since it hit the scene nearly a decade ago, this book brings you up to speed with the features and practices that have changed with C# from version 2.0 onwards.    This totally revamped Second Edition is bang up to date, covering the new features of C# 4 as well as Code Contracts. In it, you'll master the subtleties of C#, learning how to tame the trickier bits and apply them to best advantage. Along the way you'll find out how to avoid hidden pitfalls and go \"behind the scenes\" to ensure you don't get nasty surprises.",
+    "status": "PUBLISH",
+    "authors": ["Jon Skeet"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Magical A-Life Avatars",
+    "isbn": "1884777589",
+    "pageCount": 450,
+    "publishedDate": { "$date": "2000-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/small.jpg",
+    "shortDescription": "\"Distinctive book explaining how to get intelligent software agents to work.\" --Clipcode.com",
+    "longDescription": "Here's a book guaranteed to inspire your creativity and get you looking at the Internet and the World Wide Web with new eyes. Modeling its vision on evolutionary biology, Magical A-Life Avatars uses the example environment of Macromedia Director to create:    imaginative Intranets  original Internet services and applications  new approaches to e-commerce and distance learning  smart agents and Internet robots  brain-like processing modules for adaptation and learning  novel forms of information processing  Magical A-Life Avatars shows, with practical examples, how to bring intelligence to your Website and create Internet interfaces that will increase your competitive advantage. If you're interested in cutting-edge website design and application, this book is for you.",
+    "status": "PUBLISH",
+    "authors": ["Peter Small"],
+    "categories": ["Internet", "Theory"]
+  },
+  {
+    "title": "Becoming Agile",
+    "isbn": "1933988258",
+    "pageCount": 408,
+    "publishedDate": { "$date": "2009-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/smith.jpg",
+    "shortDescription": "   Becoming Agile is not another book to be classified in the existing ones handling agile practices, it's one of the rare writings which will go with you in the adoption and setup/migration to an agile process...This real must-have agilist's bedside book reads very well and will accompany you in your migration agile practices...       Eric Siber, Developpez.com",
+    "longDescription": "Agile principles have been a breath of fresh air to many development teams stuck in the middle of a rigid, process-driven environment. Unfortunately, it's not so easy to bring Agile into an existing organization with established people and practices. Becoming Agile shows you practical techniques and strategies to move from your existing process to an Agile process without starting from scratch.    Many books discuss Agile from a theoretical or academic perspective. Becoming Agile takes a different approach and focuses on explaining Agile from a ground-level point-of-view. Author Greg Smith, a certified ScrumMaster with dozens of Agile projects under his belt, presents Agile principles in the context of a case study that flows throughout the book.    Becoming Agile focuses on the importance of adapting Agile principles to the realities of your environment. While Agile purists have often discouraged a    partial-Agile    approach, the reality is that in many shops a    purist    approach simply isn't a viable option. Over the last few years, Agile authorities have begun to discover that the best deployments of Agile are often customized to the specific situation of a given company.  As well, Becoming Agile addresses the cultural realities of deploying Agile and how to deal with the needs of executives, managers, and the development team during migration. The author discusses employee motivation and establishing incentives that reward support of Agile techniques.    Becoming Agile will show you how to create a custom Agile process that supports the realities of your environment. The process will minimize risk as you transition to Agile iteratively, allowing time for your culture and processes to acclimate to Agile principles.",
+    "status": "PUBLISH",
+    "authors": ["Greg Smith", "Ahmed Sidky"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "ActiveMQ in Action",
+    "isbn": "1933988940",
+    "pageCount": 408,
+    "publishedDate": { "$date": "2011-03-31T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/snyder.jpg",
+    "shortDescription": "ActiveMQ is implemented in Java, but it supports client applications written in many other programming languages including C/C++, .NET, Ruby, Perl, PHP, Python, and more. It can be integrated with other open source frameworks including Tomcat, ServiceMix, JBoss, and can easily bridge to other JMS providers.  ",
+    "longDescription": "Modern distributed architectures require a secure, reliable way to exchange messages in asynchronous, loosely-coupled systems. For Java developers, the Java Message Service (JMS) provides that core functionality. The Apache ActiveMQ message broker is a complete open source implementation of the JMS specification. The ActiveMQ Message-Oriented Middleware, coupled with its Enterprise Integration Provider are the building blocks of an Enterprise Service Bus   the backbone of a contemporary Service Oriented Architecture.    ActiveMQ is implemented in Java, but it supports client applications written in many other programming languages including C/C++, .NET, Ruby, Perl, PHP, Python, and more. It can be integrated with other open source frameworks including Tomcat, ServiceMix, JBoss, and can easily bridge to other JMS providers.    Apache ActiveMQ in Action is a thorough, practical guide to implementing message-oriented systems in Java using ActiveMQ. The book lays out the core of ActiveMQ in clear language, starting with the anatomy of a JMS message and moving quickly through connectors, message persistence, authentication and authorization. With the basics well in hand, you move into interesting examples of ActiveMQ at work, following a running Stock Portfolio application. You'll integrate ActiveMQ with containers like Geronimo and JBoss and learn to tie into popular Java-based technologies like Spring Framework.    Along the way, you'll pick up best practices forged out of the deep experience the authors bring to the book. You'll learn to integrate with non-Java technologies and explore advanced topics like broker topologies and configuration and performance tuning.    Additionally, the book will introduce readers to using Apache Camel with Apache ActiveMQ as a way to easily utilize the Enterprise Integration Patterns.",
+    "status": "PUBLISH",
+    "authors": ["Bruce Snyder", "Dejan Bosanac", "", "Rob Davies"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Implementing PeopleSoft Financials",
+    "isbn": "138411808",
+    "pageCount": 220,
+    "publishedDate": { "$date": "1997-01-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/stephens.jpg",
+    "shortDescription": "Implementing PeopleSoft Financials discusses the issues that arise and the pitfalls to avoid. Every member of the implementation team--from entry-level accounting clerk through MIS staff to executive sponsors--will benefit from reading this book.",
+    "longDescription": "The PeopleSoft promise is enticing: Here's a way for your company to implement a complete and flexible financial infrastructure in a client/server environment without the burdens of low-level programming. But, implementation remains complex and requires reengineering of the business processes and cultures of the using organizations. The author, an experienced implementor of PeopleSoft systems, discusses the issues that arise and the pitfalls to avoid. Every member of the implementation team--from entry-level accounting clerk through MIS staff to executive sponsors--will benefit from reading this book. The views it contains, coming from an independent authority, will also prove useful to those who are considering adopting PeopleSoft for their companies.",
+    "status": "PUBLISH",
+    "authors": ["Early Stephens"],
+    "categories": ["Business", "Client-Server"]
+  },
+  {
+    "title": "SQL Server DMVs in Action",
+    "isbn": "1935182730",
+    "pageCount": 352,
+    "publishedDate": { "$date": "2011-05-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/stirk.jpg",
+    "shortDescription": "SQL Server DMVs in Action shows you how to obtain, interpret, and act on the information captured by DMVs to keep your system in top shape. The over 100 code examples help you master DMVs and give you an instantly reusable SQL library. You'll also learn to use Dynamic Management Functions (DMFs), which provide further details that enable you to improve your system's performance and health.",
+    "longDescription": "SQL Server DMVs in Action is a practical guide that shows you how to obtain, interpret, and act on the information captured by DMVs to keep your system in top shape. The samples provided in this book will help you master DMVs and also give you a tested, working, and instantly reusable SQL code library.    Every action in SQL Server leaves a set of tiny footprints. SQL Server records that valuable data and makes it visible through Dynamic Management Views, or DMVs. You can use this incredibly detailed information to significantly improve the performance of your queries and better understand what's going on inside your SQL Server system.    SQL Server DMVs in Action shows you how to obtain, interpret, and act on the information captured by DMVs to keep your system in top shape. The over 100 code examples help you master DMVs and give you an instantly reusable SQL library. You'll also learn to use Dynamic Management Functions (DMFs), which provide further details that enable you to improve your system's performance and health.",
+    "status": "PUBLISH",
+    "authors": ["Ian W. Stirk"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Scala in Depth",
+    "isbn": "1935182706",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-05-14T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/suereth.jpg",
+    "shortDescription": "Scala in Depth is a unique new book designed to help you integrate Scala effectively into your development process. By presenting the emerging best practices and designs from the Scala community, it guides you though dozens of powerful techniques example by example. There's no heavy-handed theory here-just lots of crisp, practical guides for coding in Scala.    For example:        * Discover the \"sweet spots\" where object-oriented and functional programming intersect.      * Master advanced OO features of Scala, including type member inheritance, multiple inheritance and composition.      * Employ functional programming concepts like tail recursion, immutability, and monadic operations.      * Learn good Scala style to keep your code concise, expressive and readable.    As you dig into the book, you'll start to appreciate what makes Scala really shine. For instance, the Scala type system is very, very powerful; this book provides use case approaches to manipulating the type system and covers how to use type constraints to enforce design constraints. Java developers love Scala's deep integration with Java and the JVM Ecosystem, and this book shows you how to leverage it effectively and work around the rough spots.",
+    "longDescription": "Scala is a unique and powerful new programming language for the JVM. Blending the strengths of the Functional and Imperative programming models, Scala is a great tool for building highly concurrent applications without sacrificing the benefits of an OO approach. While information about the Scala language is abundant, skilled practitioners, great examples, and insight into the best practices of the community are harder to find. Scala in Depth bridges that gap, preparing you to adopt Scala successfully for real world projects.    Scala in Depth is a unique new book designed to help you integrate Scala effectively into your development process. By presenting the emerging best practices and designs from the Scala community, it guides you though dozens of powerful techniques example by example. There's no heavy-handed theory here-just lots of crisp, practical guides for coding in Scala.    For example:        * Discover the \"sweet spots\" where object-oriented and functional programming intersect.      * Master advanced OO features of Scala, including type member inheritance, multiple inheritance and composition.      * Employ functional programming concepts like tail recursion, immutability, and monadic operations.      * Learn good Scala style to keep your code concise, expressive and readable.    As you dig into the book, you'll start to appreciate what makes Scala really shine. For instance, the Scala type system is very, very powerful; this book provides use case approaches to manipulating the type system and covers how to use type constraints to enforce design constraints. Java developers love Scala's deep integration with Java and the JVM Ecosystem, and this book shows you how to leverage it effectively and work around the rough spots.",
+    "status": "PUBLISH",
+    "authors": ["Joshua D. Suereth"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "JMX in Action",
+    "isbn": "1930110561",
+    "pageCount": 424,
+    "publishedDate": { "$date": "2002-09-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sullins.jpg",
+    "longDescription": "With Java Management Extensions (JMX), you can configure, manage and monitor your Java applications at run-time, as well as break your applications into components that can be swapped out. JMX provides a window into an application's state and its behavior, and a protocol-independent way of altering both state and behavior. It lets you expose portions of your application in just a few lines of code.    Written for both new and experienced developers, this book explains the JMX specification and discusses its use through clean, well-discussed examples. It covers the JMX architecture and how to create all types of MBeans. It includes important advanced topics such as extending the JMX classes, combining with other Java technologies, the MBean relation service, dynamic MBean loading, and creating your own protocol adapters.",
+    "status": "PUBLISH",
+    "authors": ["Benjamin G. Sullins", "Mark B. Whipple"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "EJB Cookbook",
+    "isbn": "1930110944",
+    "pageCount": 352,
+    "publishedDate": { "$date": "2003-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sullins2.jpg",
+    "shortDescription": "\"This book provides a great reference for the average EJB developer. It provides recipes for most common tasks that an EJB developer would need.\" -- Computing Reviews, Nov. 2003",
+    "longDescription": "The EJB Cookbook is a resource for the practicing EJB developer. It is a systematic collection of EJB 'recipes'. Each recipe describes a practical problem and its background; it then shows the code that  solves it, and ends with a detailed discussion.    This unique book is written for developers who want quick, clean, solutions to frequent problems--or simply EJB development ideas. Easy to find recipes range from the common to the advanced. How do you secure a message-driven bean  How do you generate EJB code  How can you improve your entity bean persistence layer ",
+    "status": "PUBLISH",
+    "authors": ["Benjamin G. Sullins", "Mark B. Whipple"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "GWT in Action, Second Edition",
+    "isbn": "1935182846",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-01-21T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/tacy.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "Adam Tacy",
+      "Robert Hanson",
+      "Jason Essington",
+      "",
+      "Anna Tökke"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "JUnit in Action, Second Edition",
+    "isbn": "1935182021",
+    "pageCount": 504,
+    "publishedDate": { "$date": "2010-07-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/tahchiev.jpg",
+    "shortDescription": "JUnit in Action, Second Edition is an up-to-date guide to unit testing Java applications (including Java EE applications) using the JUnit framework and its extensions. This book provides techniques for solving real-world problems such as testing AJAX applications, using mocks to achieve testing isolation, in-container testing for Java EE and database applications, and test automation.",
+    "longDescription": "When JUnit was first introduced a decade ago by Kent Beck and Erich Gamma, the Agile movement was in its infancy, \"Test Driven Development\" was unknown, and unit testing was just starting to move into the typical developer's vocabulary. Today, most developers acknowledge the benefits of unit testing and rely on the increasingly sophisticated tools now available. The recently released JUnit 4.5 represents the state of the art in unit testing frameworks, and provides significant new features to improve the Java development process.    JUnit in Action, Second Edition is an up-to-date guide to unit testing Java applications (including Java EE applications) using the JUnit framework and its extensions. This book provides techniques for solving real-world problems such as testing AJAX applications, using mocks to achieve testing isolation, in-container testing for Java EE and database applications, and test automation.    Written to help readers exploit JUnit 4.5, the book covers recent innovations such as the new annotations that simplify test writing, improved exception handling, and the new assertion methods. You'll also discover how to use JUnit extensions to test new application styles and frameworks including Ajax, OSGi, and HTML-based presentation layers.    Using a sample-driven approach, various unit testing strategies are covered, such as how to unit test EJBs, database applications, and web applications. Also addressed are testing strategies using freely available open source frameworks and tools, and how to unit test in isolation with Mock Objects. The book will also bring you up to speed on the latest thinking in TDD, BDD, Continuous Integration, and other practices related to unit testing.  ",
+    "status": "PUBLISH",
+    "authors": [
+      "Petar Tahchiev",
+      "Felipe Leme",
+      "Vincent Massol",
+      "",
+      "Gary Gregory"
+    ],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Bitter Java",
+    "isbn": "193011043X",
+    "pageCount": 368,
+    "publishedDate": { "$date": "2002-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/tate.jpg",
+    "longDescription": "It is a well-known fact that most software projects fail. Drawing important lessons from common failures is the goal of Bitter Java.    Reusing design patterns is not enough for success: patterns are like partial maps of dangerous terrain. They help, but don't prevent you from getting lost. Bitter Java teaches you how to recognize when you are lost, and how to get back on the right path. It illustrates common pitfalls of Java programming through code examples; it then refactors the code and explains why the new solutions are safe.    This book is a systematic account of common server-side Java programming mistakes, their causes and solutions. It covers antipatterns for base Java and J2EE concepts such as Servlets, JSPs, EJBs, enterprise connection models, and scalability. If you are an intermediate Java programmer, analyst or architect eager to avoid the bitter experiences of others, this book is for you.",
+    "status": "PUBLISH",
+    "authors": ["Bruce A. Tate"],
+    "categories": ["Java", "Business", "Client Server", ""]
+  },
+  {
+    "title": "Bitter EJB",
+    "isbn": "1930110952",
+    "pageCount": 440,
+    "publishedDate": { "$date": "2003-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/tate2.jpg",
+    "shortDescription": "\"The book's informal tone offers a refreshing change from the ubiquitous preachiness of other EJB tomes. It's pragmatic and doesn't tap dance around the fact that EJBs are often used incorrectly in enterprise development... it's an effective way to avoid the potholes that have forced developers off track in the past.\" -- Software Development Magazine",
+    "longDescription": "In Bitter EJB, Bruce Tate and his co-authors continue the entertaining and engaging writing style of relating true-life adventure sport experiences to antipattern themes established in Bruce's first book, the best selling Bitter Java.    This more advanced book explores antipatterns, or common traps, within the context of EJB technology.    EJB is experiencing the mixture of practical success and controversy that accompanies a new and quickly-changing framework. Bitter EJB takes the swirling EJB controversies head-on. It offers a practical approach to design: how to become a better programmer by studying problems and solutions to the most important problems surrounding the technology.    The flip side of design patterns, antipatterns, are a fun and interesting way to take EJB expertise to the next level. The book covers many different aspects of EJB, from transactions to persistence to messaging, as well as performance and testing.    Bitter EJB will teach programmers to do the following:    Identify EJB persistence strategies  Choose Entity bean alternatives  Use EJB message driven beans  Know when to apply or avoid stateful session beans  Create efficient build strategies with XDoclet, Ant and JUnit  Automate performance tuning",
+    "status": "PUBLISH",
+    "authors": ["Bruce Tate", "Mike Clark", "Bob Lee", "Patrick Linskey"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "Spring Batch in Action",
+    "isbn": "1935182951",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-10-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/templier.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "Arnaud Cogoluegnes",
+      "Thierry Templier",
+      "Gary Gregory",
+      "Olivier Bazoud"
+    ],
+    "categories": ["In Action"]
+  },
+  {
+    "title": "JDK 1.4 Tutorial",
+    "isbn": "1930110456",
+    "pageCount": 408,
+    "publishedDate": { "$date": "2002-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/travis.jpg",
+    "longDescription": "Java is a success. It is now used across the programming landscape, from embedded devices to enterprise-class distributed systems. As Java's use increases, the pressure grows for it to expand to meet the diverse needs of the developer communities. The latest edition of Java, JDK 1.4 (or J2SE 1.4), includes new features like a new I/O system, a persistent preferences framework, Java Web Start, and Java regular expressions.    This book lets experienced developers as well as novices learn JDK 1.4's new features quickly. It provides a clear exposition of the important new topics with plenty of well documented code. All the examples are substantial and solve real-world problems but aren't cluttered with unnecessary details. The new features are covered in a comprehensive and matter-of-fact way without digressions into philosophy or theory. After reading this book, a developer will be able to use Java's new features with confidence and skill.",
+    "status": "PUBLISH",
+    "authors": ["Gregory M. Travis"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "iPhone and iPad in Action",
+    "isbn": "1935182587",
+    "pageCount": 450,
+    "publishedDate": { "$date": "2010-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/trebitowski.jpg",
+    "shortDescription": "Using many examples, the book covers core features like accelerometers, GPS, the Address Book, and much more. Along the way, you'll learn to leverage your iPhone skills to build attractive iPad apps. This is a revised and expanded edition of the original iPhone in Action.",
+    "longDescription": "This hands-on tutorial will help you master iPhone/iPad development using the native iPhone SDK. It guides you from setting up dev tools like Xcode and Interface Builder, through coding your first app, all the way to selling in the App Store.    Using many examples, the book covers core features like accelerometers, GPS, the Address Book, and much more. Along the way, you'll learn to leverage your iPhone skills to build attractive iPad apps. This is a revised and expanded edition of the original iPhone in Action.",
+    "status": "PUBLISH",
+    "authors": [
+      "Brandon Trebitowski",
+      "Christopher Allen",
+      "",
+      "Shannon Appelcline"
+    ],
+    "categories": ["Mobile Technology"]
+  },
+  {
+    "title": "SQL Server 2005 Reporting Services in Action",
+    "isbn": "1932394761",
+    "pageCount": 600,
+    "publishedDate": { "$date": "2006-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/updegraff.jpg",
+    "longDescription": "Reports are the lifeline of business, so a good reporting environment is a big deal. With a powerful tool like Microsoft Reporting Services, .NET developers can add reporting to any type of application, regardless of its target platform or development language. Greatly improved for SQL Server 2005, Reporting Services now provides tighter integration with SQL Server, improved developer tools, and an expanded array of options to empower end users.    SQL Server 2005 Reporting Services in Action helps you build and manage flexible reporting solutions and develop report-enabled applications. In this clear, well-illustrated book, you  ll follow a report from creation to publication. Along the way you  ll explore flexible delivery options like web-based, on-demand, and subscribed reports   complete with cool new features like direct printing and client-side sorting.    For applications that require custom reporting, you'll learn to define reports with RDL and push them to the Report Server using the Report Manager Web Service API. You  ll also see how to write server extensions to expand the range of data processing and report delivery options.    Written for developers with a solid foundation in .NET and SQL Server.",
+    "status": "PUBLISH",
+    "authors": ["Bret Updegraff"],
+    "categories": ["Microsoft"]
+  },
+  {
+    "title": "Ten Years of UserFriendly.Org",
+    "isbn": "1935182129",
+    "pageCount": 1096,
+    "publishedDate": { "$date": "2008-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/userfriendly.jpg",
+    "shortDescription": "This unique collector's volume includes every daily strip from November 17, 1997 to November 16, 2007. Many of the cartoons are annotated with comments from UserFriendly artist and creator JD    Illiad    Frazer.",
+    "longDescription": "For over 10 years, UserFriendly has been entertaining geeks of all stripes with its daily dose of humor, social commentary, and occasionally absurd observations about the world of technology. Loyal UserFriendly fans   UFies   have been asking for a Big Book of UserFriendly that assembles the first decade of UserFriendly   almost 4,000 individual comics   in a single volume. Manning has teamed up with the folks at UserFriendly.Org to bring you exactly that!    This unique collector's volume includes every daily strip from November 17, 1997 to November 16, 2007. Many of the cartoons are annotated with comments from UserFriendly artist and creator JD    Illiad    Frazer.",
+    "status": "PUBLISH",
+    "authors": ["JD \"Illiad\" Frazer"],
+    "categories": ["Miscellaneous"]
+  },
+  {
+    "title": "Graphics Programming with Perl",
+    "isbn": "1930110022",
+    "pageCount": 328,
+    "publishedDate": { "$date": "2002-05-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/verbruggen.jpg",
+    "longDescription": "An increasing number of tasks in application programming and web design requires creating and manipulating graphics. Perl is a powerful and flexible language that is not commonly associated with graphics programming. The speed of developing in Perl plus the large number of freely available Perl graphics modules, make it an excellent option for the rapid development of graphics applications.    Graphics Programming with Perl is a guide to the graphics and imaging modules and tools available to the Perl programmer. It covers subjects ranging from drawing your own pictures and dynamic graphics for web pages to rendering three-dimensional scenes and manipulating individual image pixels. The text is liberally illustrated with example code and programs that show how to achieve common, and sometimes not so common, graphics programming tasks. For the even less common tasks, the book shows you how to write your own modules.",
+    "status": "PUBLISH",
+    "authors": ["Martien Verbruggen"],
+    "categories": ["Computer Graphics", "Perl"]
+  },
+  {
+    "title": "RabbitMQ in Action",
+    "isbn": "1935182978",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-04-20T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/videla.jpg",
+    "status": "PUBLISH",
+    "authors": ["Alvaro Videla", "Jason J.W. Williams"],
+    "categories": ["Software Engineering"]
+  },
+  {
+    "title": "XDoclet in Action",
+    "isbn": "1932394052",
+    "pageCount": 624,
+    "publishedDate": { "$date": "2003-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/walls.jpg",
+    "longDescription": "Are you tired of writing the same Java code, over and over again  XDoclet will take the burden of repetitive development tasks off your shoulders by automating them. XDoclet is a metadata-driven, code generation engine for Java. Starting from simple JavaDoc-style comments, it generates deployment descriptors, interfaces, framework classes and other utility classes your project requires.    XDoclet in Action is an easy to read introduction to XDoclet and its uses. It is a resource on code generation with this popular open source tool. With many short code examples and a full-scale J2EE example, the book shows you how to use XDoclet with EJBs, Servlets, JMX, and other technologies. You'll also learn how to customize XDoclet beyond its out-of-the-box capabilities to generate code specific to your application.    With this book you will learn how to write less code, how to keep your application components in sync, and how to keep your deployment, interface, utility and other information all in one place.",
+    "status": "PUBLISH",
+    "authors": ["Craig Walls", "Norman Richards"],
+    "categories": ["XML", "Java"]
+  },
+  {
+    "title": "Spring in Action",
+    "isbn": "1932394354",
+    "pageCount": 472,
+    "publishedDate": { "$date": "2005-02-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/walls2.jpg",
+    "shortDescription": "Spring in Action introduces you to the ideas behind Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications. You will see how to solve persistence problems using the leading open-source tools, and also how to integrate your application with the most popular web frameworks. You will learn how to use Spring to manage the bulk of your infrastructure code so you can focus on what really matters     your critical business needs.",
+    "longDescription": "Spring is a fresh breeze blowing over the Java landscape. Based on a design principle called Inversion of Control, Spring is a powerful but lightweight J2EE framework that does not require the use of EJBs. Spring greatly reduces the complexity of using interfaces, and speeds and simplifies your application development. You get the power and robust features of EJB and get to keep the simplicity of the non-enterprise JavaBean.    Spring in Action introduces you to the ideas behind Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications. You will see how to solve persistence problems using the leading open-source tools, and also how to integrate your application with the most popular web frameworks. You will learn how to use Spring to manage the bulk of your infrastructure code so you can focus on what really matters     your critical business needs.",
+    "status": "PUBLISH",
+    "authors": ["Craig Walls", "Ryan Breidenbach"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Spring in Action, Second Edition",
+    "isbn": "1933988134",
+    "pageCount": 768,
+    "publishedDate": { "$date": "2007-08-01T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/walls3.jpg",
+    "longDescription": "Spring is a fresh breeze blowing over the Java landscape. Based on the principles of dependency injection, interface-oriented design, and aspect-oriented programming, Spring combines enterprise application power with the simplicity of plain-old Java objects (POJOs).    In this second edition, Spring in Action has been completely updated to cover the exciting new features of Spring 2.0. The book begins by introducing you to the core concepts of Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications. You will see how to solve persistence problems, handle asynchronous messaging, create and consume remote services, build web applications, and integrate with most popular web frameworks. You will learn how to use Spring to write simpler, easier to maintain code so that you can focus on what really matters--your critical business needs.",
+    "status": "PUBLISH",
+    "authors": ["Craig Walls with Ryan Breidenbach"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Spring in Action, Third Edition",
+    "isbn": "1935182358",
+    "pageCount": 424,
+    "publishedDate": { "$date": "2011-06-21T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/walls4.jpg",
+    "shortDescription": "Spring in Action, Third Edition has been completely revised to reflect the latest features, tools, practices Spring offers to java developers. It begins by introducing the core concepts of Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications.",
+    "longDescription": "A few years back, Spring arrived as is a fresh breeze blowing over the Java landscape. Based on the principles of dependency injection, interface-oriented design, and aspect-oriented programming, Spring combines enterprise application power with the simplicity of plain-old Java objects (POJOs). Now, Spring has grown into a full suite of technologies, including dedicated projects for integration, OSGI-based development, and more.    Spring in Action, Third Edition has been completely revised to reflect the latest features, tools, practices Spring offers to java developers. It begins by introducing the core concepts of Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications.    Inside, you'll see how to:    Solve persistence problems  Handle asynchronous messaging  Create and consume remote services  Build web applications  Integrate with most popular web frameworks  In short, you'll learn how to use Spring to write simpler, easier to maintain code so that you can focus on what really matters   your critical business needs.    The revised Third Edition explores the core Spring Framework issues, as well as the latest updates to other Spring portfolio projects such as Spring WebFlow and Spring Security. The result is a book that's both broader and deeper than previous editions. You'll learn the full range of new features available with Spring 3, including:    More annotation-oriented options to reduce the amount of XML configuration  Full-featured support for REST  A new Spring Expression Language (SpEL) that makes short work of wiring complex values.  Examples that illustrate the current best practices developed in the Spring community.  This book assumes that you know your way around Java, but no previous experience with Spring is required.",
+    "status": "PUBLISH",
+    "authors": ["Craig Walls"],
+    "categories": ["Java"]
+  },
+  {
+    "title": "Spring in Practice",
+    "isbn": "1935182056",
+    "pageCount": 600,
+    "publishedDate": { "$date": "2013-05-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/wheeler.jpg",
+    "shortDescription": "Spring in Practice diverges from other cookbooks because it presents the background you need to understand the domain in which a solution applies before it offers the specific steps to solve the problem. You're never left with the feeling that you understand the answer, but find the question irrelevant. You can put the book to immediate use even if you don't have deep knowledge of every part of Spring Framework.",
+    "longDescription": "For enterprise Java developers, Spring Framework provides remarkable improvements in developer productivity, runtime performance, and overall application quality. Its unique blend of a complete, lightweight container that allows you to build a complex application from loosely-coupled POJOs and a set of easily understood abstractions that simplify construction, testing, and deployment make Spring both powerful and easy-to-use   a hard-to-beat combination. With this power comes the potential for a wide range of uses in both common and not-so-common scenarios. That's where Spring in Practice comes in.    Unlike the many books that teach you what Spring is, Spring in Practice shows you how to tackle the challenges you face when you build Spring-based applications. The book empowers software developers to solve concrete business problems \"the Spring way\" by mapping application-level issues to Spring-centric solutions.    Spring in Practice diverges from other cookbooks because it presents the background you need to understand the domain in which a solution applies before it offers the specific steps to solve the problem. You're never left with the feeling that you understand the answer, but find the question irrelevant. You can put the book to immediate use even if you don't have deep knowledge of every part of Spring Framework.    The book divides into three main parts. In Part 1, you'll get a rapid overview of Spring Framework   enough to get you started if you're new and a great refresher for readers who already have a few Spring cycles. Part 2 provides techniques that are likely to be useful no matter what type of application you're building. You'll find discussions of topics like user accounts, security, site navigation, and application diagnosis.    Part 3 provides domain-specific recipes. Here, you'll find practical solutions to realistic and interesting business problems. For example, this part discusses Spring-based approaches for ecommerce, lead generation, and CRM.    There are several recurring themes throughout Spring in Practice, including Spring MVC, Hibernate, and transactions. Each recipe is an opportunity to highlight something new or interesting about Spring, and to focus on that concept in detail.    This book assumes you have a good foundation in Java and Java EE. Prior exposure to Spring Framework is helpful, but not required.",
+    "status": "PUBLISH",
+    "authors": ["Willie Wheeler with Joshua White"],
+    "categories": ["Java", "Software Development"]
+  },
+  {
+    "title": "Java 2 Micro Edition",
+    "isbn": "1930110332",
+    "pageCount": 504,
+    "publishedDate": { "$date": "2002-03-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/white.jpg",
+    "longDescription": "Java2, Micro Edition (J2ME) is a technology defined by many specifications. These specifications help J2ME address the diverse needs of this wide spectrum of consumer products. This guide describes the architecture of J2ME and demonstrates the various specifications for programming Java applications.    Through the use of a tutorial application and various programming examples, the common elements of most applications, namely user interface, event handling, data storage, networking, and input/output are examined. Also covered are design considerations when building software for resource-constrained devices as well as J2ME competition and associated technologies in these devices.    Tutorial and API example application source code downloads will be available from this site.",
+    "status": "PUBLISH",
+    "authors": ["James P. White", "David A. Hemphill"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "SharePoint 2010 Workflows in Action",
+    "isbn": "1935182714",
+    "pageCount": 360,
+    "publishedDate": { "$date": "2011-02-07T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/wicklund.jpg",
+    "shortDescription": "SharePoint 2010 Workflows in Action is a hands-on guide for workflow application development in SharePoint. Power users are introduced to the simplicity of building and integrating workflows using SharePoint Designer, Visio, InfoPath, and Office. Developers will learn to build custom processes and use external data sources. They will learn about state machine workflows, ASP.NET forms, event handlers, and much more. This book requires no previous experience with workflow app development. ",
+    "longDescription": "You can use SharePoint 2010 workflows to transform a set of business processes into working SharePoint applications. For that task, a power user gets prepackaged workflows, wizards, and design tools, and a programmer benefits from Visual Studio to handle advanced workflow requirements.    SharePoint 2010 Workflows in Action is a hands-on guide for workflow application development in SharePoint. Power users are introduced to the simplicity of building and integrating workflows using SharePoint Designer, Visio, InfoPath, and Office. Developers will learn to build custom processes and use external data sources. They will learn about state machine workflows, ASP.NET forms, event handlers, and much more. This book requires no previous experience with workflow app development. ",
+    "status": "PUBLISH",
+    "authors": ["Phil Wicklund"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "SharePoint 2010 Web Parts in Action",
+    "isbn": "1935182773",
+    "pageCount": 448,
+    "publishedDate": { "$date": "2011-04-24T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/wilen.jpg",
+    "shortDescription": "SharePoint 2010 Web Parts in Action is a comprehensive guide to deploying, customizing, and creating Web Parts. Countless examples walk you through everything from design, to development, deployment, troubleshooting, and upgrading. Because Web Parts are ASP.NET controls, you'll learn to use Visual Studio 2010 to extend existing Web Parts and to build custom components from scratch. ",
+    "longDescription": "If you look at a SharePoint application you'll find that most of its active components are Web Parts. SharePoint 2010 includes dozens of prebuilt Web Parts that you can use. It also provides an API that lets you build custom Web Parts using C# or VB.NET.    SharePoint 2010 Web Parts in Action is a comprehensive guide to deploying, customizing, and creating Web Parts. Countless examples walk you through everything from design, to development, deployment, troubleshooting, and upgrading. Because Web Parts are ASP.NET controls, you'll learn to use Visual Studio 2010 to extend existing Web Parts and to build custom components from scratch. ",
+    "status": "PUBLISH",
+    "authors": ["Wictor Wilén"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "C++ Concurrency in Action",
+    "isbn": "1933988770",
+    "pageCount": 325,
+    "publishedDate": { "$date": "2012-02-24T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/williams.jpg",
+    "shortDescription": "C++ Concurrency in Action is the first book to show you how to take advantage of the new C++ Standard and TR2 to write robust multi-threaded applications in C++.",
+    "longDescription": "It seems like we're all being asked to multi-task more than ever   and our computers are no exception to this trend. Multiple processors with multiple cores running multiple threads is quickly becoming the norm. C++ developers will have to master the principles, techniques, and new language features supporting concurrency to stay ahead of the curve.    With the new C++ Standard and Technical Report 2 (TR2), multi-threading is coming to C++ in a big way. There is a new memory model with support for multiple threads, along with a new multi-threading support library featuring low-level atomic operations, as well as basic thread launching and synchronization facilities. TR2 will provide higher-level synchronization facilities that allow for a much greater level of abstraction, and make programming multi-threaded applications simpler and safer.    C++ Concurrency in Action is the first book to show you how to take advantage of the new C++ Standard and TR2 to write robust multi-threaded applications in C++.    As a guide and reference to the new concurrency features in the upcoming C++ Standard and TR, this book is invaluable for existing programmers familiar with writing multi-threaded code in C++ using platform-specific APIs, or in other languages, as well as C++ programmers who have never written multi-threaded code before.    If you're a programmer accustomed to writing single-threaded applications, C++ Concurrency in Action will show you how to write your new parallel algorithm in C++. You'll learn to avoid many of the pitfalls associated with writing multi-threaded applications. You can also use this book to quickly transfer your platform-specific knowledge to the new Standard C++ threading library, enabling you to use a single API on both systems and simplify your code.",
+    "status": "PUBLISH",
+    "authors": ["Anthony Williams"],
+    "categories": ["Microsoft .NET"]
+  },
+  {
+    "title": "Java Servlets by Example",
+    "isbn": "188477766X",
+    "pageCount": 550,
+    "publishedDate": { "$date": "2002-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/williamson.jpg",
+    "longDescription": "Although CGI scripts provide 80% of today's server side processing, they are slow, inefficient, and memory-hungry. A new species is evolving to take their place, one which is lean, fast, portable, and easy to maintain: Java servlets.    Servlets are not merely an alternative to CGI, for they can do much more. Servlets have opened the door to a world of client/server applications that would have been too difficult or too time-consuming to consider before.    Java Servlets: By Example takes the reader into the world of servlets, moving example by example from the simple to the complex. An early chapter explains the simple HTML form processing through servlets. A later chapter shows how to connect a Java applet to a servlet, which is itself connected to a database.    Java Servlets: By Example is full of real-world, ready-to-run example code. Each chapter deals with a new problem and takes the reader through a series of servlet-based solutions. However, the book is detailed enough that it may also serve as a reference for the developer.",
+    "status": "PUBLISH",
+    "authors": ["Alan R. Williamson"],
+    "categories": ["Java", "Internet"]
+  },
+  {
+    "title": "XML Programming with VB and ASP",
+    "isbn": "1884777872",
+    "pageCount": 320,
+    "publishedDate": { "$date": "1999-12-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/wilson.jpg",
+    "longDescription": "Here's a book that shows you when and how to use XML from both a programming and business perspective. Laden with source code, XML Programming with VB and ASP helps you build solutions that are flexible, future-proof, and self-describing. It will help you apply XML concepts between the client and the server and the server and data objects or data services.    Finally, you have everything a VB and ASP developer needs to keep up with the explosive growth of XML.",
+    "status": "PUBLISH",
+    "authors": ["Mark Wilson", "Tracey Wilson"],
+    "categories": ["XML", "Internet"]
+  },
+  {
+    "title": "Oracle8i Database Administration",
+    "isbn": "1884777783",
+    "pageCount": 543,
+    "publishedDate": { "$date": "1999-11-01T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/yuhanna.jpg",
+    "longDescription": "Databases are growing larger, and the use of distributed databases is on the rise. Oracle8i Database Administration addresses some of the most common yet complex issues that are faced by DBAs around the world.    Oracle has the largest market share in Database Management software and is the world's second largest software company. This book is designed for for Oracle Database administrators and others who are involved in planning, programming, administration, and implementation of Oracle8 Databases.    Although this book targets intermediate and advanced database administrators, it can also be an invaluable resource to entry-level DBAs, designers and developers, project managers, system administrators, data warehousing professionals or anyone interested in Oracle.    Oracle8i Database Administration uses a Q&A approach that provides in-depth technical solutions. The questions in this book have been compiled from many sources including Oracle forums, the Internet, and the author's personal experiences. The book also examines features that are new in Oracle8.",
+    "status": "PUBLISH",
+    "authors": ["Noel Yuhanna"],
+    "categories": ["Client-Server", "Networking"]
+  },
+  {
+    "title": "The Engaging Web",
+    "isbn": "9781935182078",
+    "pageCount": 325,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/zichermann.jpg",
+    "shortDescription": "The Engaging Web: How Fun and Games Improve Your Site shows web developers how to incorporate games into websites. This book will help you decode the possibilities and provide a series of proven and tangible strategies that any web developer, producer, or product manager can use to implement games in their website. Whether you're looking to make games the centerpiece of your site, an added-value feature, or you just want to engage and excite your users, The Engaging Web will help you develop a strategy that harnesses the power of games.",
+    "longDescription": "Games are the fastest-growing and stickiest form of entertainment. For a website, games offer powerful potential to acquire new users, build engagement, and enhance revenue. Implementing games in a website can be complicated, though. There are hundreds of technical and process options to choose from, and the landscape is constantly shifting.    The Engaging Web: How Fun and Games Improve Your Site shows web developers how to incorporate games into websites. This book will help you decode the possibilities and provide a series of proven and tangible strategies that any web developer, producer, or product manager can use to implement games in their website. Whether you're looking to make games the centerpiece of your site, an added-value feature, or you just want to engage and excite your users, The Engaging Web will help you develop a strategy that harnesses the power of games.    Through this book, you will take away an in-depth understanding of the current state of the art in game and web planning and integration methodologies. It begins by presenting an understanding of basic \"funware\" principles - or how non-designers can use games to further business objectives. Powerful funware designs like frequent flyer programs, casino games, and leaderboard/ladders will be deconstructed and componentized so that you can leverage their strengths for your specific site and business objectives.    You'll then investigate the three basic recipes for melding games with the web, and look at specific examples of integration approaches that have been successfully deployed across various industries. Finally, you'll examine social networking considerations and look at code examples.    Whether you're building a business or consumer site, games and funware design can be a powerful weapon in your battle for user engagement, stickiness, and revenue. The Engaging Web is the field guide that gives you the best tactics, techniques, and strategies for winning the war.    WHAT'S INSIDE        * Understanding funware and game design      * Principal funware designs: casinos frequent flyer programs, leaderboards      * Matching games to your business objectives      * Recipes for implementing games on your site      * Games, social networking and you      * Code examples",
+    "status": "MEAP",
+    "authors": ["Gabe Zichermann", "Chris Cunningham"],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Enterprise OSGi In Action",
+    "isbn": "1617290130",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cummins.jpg",
+    "status": "PUBLISH",
+    "authors": ["Holly Cummins", "Timothy Ward"],
+    "categories": []
+  },
+  {
+    "title": "Ext JS in Action, Second Edition",
+    "isbn": "1617290327",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-02-04T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/garcia3.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jesus Garcia", "Grgur Grisogono", "", "Jacob K. Andresen"],
+    "categories": []
+  },
+  {
+    "title": "Android in Action, Third Edition",
+    "isbn": "1617290505",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2011-11-15T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson3.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "W. Frank Ableson",
+      "Robi Sen",
+      "Chris King",
+      "C. Enrique Ortiz"
+    ],
+    "categories": []
+  },
+  {
+    "title": "Arduino in Action",
+    "isbn": "1617290246",
+    "pageCount": 300,
+    "publishedDate": { "$date": "2013-05-30T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mevans.jpg",
+    "shortDescription": "Arduino in Action is a hands-on guide to prototyping and building electronics using the Arduino platform. Suitable for beginners and advanced users, this easy to follow book begins with the basics and systematically guides you through projects ranging from your first blinking LED through connecting Arduino to devices like game controllers or your iPhone.",
+    "longDescription": "Whether you want to build an autonomous robot, automate your home electronics, or just automatically tweet when the bread is ready, you can do it with Arduino. Arduino is an inexpensive, easy-to-use, open source hardware and software platform. It supports a mind-boggling array of sensors and components that you can use to build nearly anything you can imagine.\n\nArduino in Action is a hands-on guide to prototyping and building electronics using the Arduino platform. Suitable for beginners and advanced users, this easy to follow book begins with the basics and systematically guides you through projects ranging from your first blinking LED through connecting Arduino to devices like game controllers or your iPhone.\n\nYou'll start at the very beginning: unpacking your first Arduino board, connecting it to a PC, and using the programming environment to make something happen. You'll follow progressively more complex examples as you connect your Arduino to motors, LCD displays, Wi-Fi, GPS, and Bluetooth. You'll explore a variety of input output sensors, including ultrasound, infrared, and light, along with how to use them for tasks like robotic obstacle avoidance.",
+    "status": "PUBLISH",
+    "authors": ["Martin Evans", "Joshua Noble", "", "Jordan Hochenbaum"],
+    "categories": []
+  },
+  {
+    "title": "Node.js in Action",
+    "isbn": "1617290572",
+    "pageCount": 300,
+    "publishedDate": { "$date": "2013-10-15T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/cantelon.jpg",
+    "shortDescription": "Node.js in Action is an example-driven tutorial that starts at square one and guides you through all the features, techniques, and concepts you'll need to build production-quality Node applications. You'll start by learning how to set up your Node development environment, including loading the community-created extensions. Next, you'll run several simple demonstration programs where you'll learn the basics of a few common types of Node applications. Then you'll dive into asynchronous programming, a model Node leverages to lessen application bottlenecks.",
+    "longDescription": "JavaScript on the server? Yep. Node.js is an elegant server-side JavaScript development environment perfect for scalable, high-performance web applications. With Node you access HTTP and TCP/IP functionality through a minimalist server-side Javascript interface. It supports an asynchronous programming model that enables the web server to more easily do more than one thing at a time, a key requirement for real-time applications such as chat, online games, and live statistics. And since it's JavaScript, you'll use the same language throughout your entire application.\n\nNode.js in Action is an example-driven tutorial that starts at square one and guides you through all the features, techniques, and concepts you'll need to build production-quality Node applications. You'll start by learning how to set up your Node development environment, including loading the community-created extensions. Next, you'll run several simple demonstration programs where you'll learn the basics of a few common types of Node applications. Then you'll dive into asynchronous programming, a model Node leverages to lessen application bottlenecks.\n\nWith the basics under your belt, you're ready to start building serious web applications using Node's HTTP API. You'll explore data storage, application deployment, and output templating, and you'll discover community frameworks that make web development easier and faster. Along the way, you'll learn to interact with the filesystem and to create non-HTTP applications, such as TCP/IP servers and command-line tools.\n\nMuch of the Node ecosystem is open source, so this book will show you how the community works and how you can contribute. You'll learn about the NPM Repository, where most community extensions reside, and you'll learn how to publish your own extensions. In addition, the book outlines online resources for getting help with any stumbling blocks you run into during your journey as a Node developer.\nWHAT'S INSIDE",
+    "status": "PUBLISH",
+    "authors": [
+      "Mike Cantelon",
+      "Marc Harter",
+      "T.J. Holowaychuk",
+      "",
+      "Nathan Rajlich"
+    ],
+    "categories": ["Web Development"]
+  },
+  {
+    "title": "Third-Party JavaScript ",
+    "isbn": "1617290548",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-03-11T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/vinegar.jpg",
+    "status": "PUBLISH",
+    "authors": ["Ben Vinegar", "Anton Kovalyov"],
+    "categories": []
+  },
+  {
+    "title": "Multimedia Computing",
+    "isbn": "020152029X",
+    "pageCount": 0,
+    "publishedDate": { "$date": "1993-09-01T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Matthew E. Hodges"],
+    "categories": []
+  },
+  {
+    "title": "Web Development with JavaServer Pages",
+    "isbn": "1884777996",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2000-05-15T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Duane K. Fields", "Mark A. Kolb"],
+    "categories": []
+  },
+  {
+    "title": "Up to Speed with Swing",
+    "isbn": "1884777643",
+    "pageCount": 0,
+    "publishedDate": { "$date": "1998-05-01T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Steven J. Gutz"],
+    "categories": []
+  },
+  {
+    "title": "Manager's Guide to Open Source",
+    "isbn": "193239429X",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2004-10-01T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Maria Winslow"],
+    "categories": []
+  },
+  {
+    "title": "Programming Web Services with Java",
+    "isbn": "1930110421",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2002-10-01T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Ajamu A. Wesley"],
+    "categories": []
+  },
+  {
+    "title": "TCP/IP Programming for OS/2",
+    "isbn": "132612496",
+    "pageCount": 0,
+    "publishedDate": { "$date": "1996-04-23T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Steven J. Gutz"],
+    "categories": []
+  },
+  {
+    "title": "SCWCD Exam Study Kit",
+    "isbn": "1930110596",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2002-07-01T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["Hanumant Deshmukh", "Jignesh Malavia"],
+    "categories": []
+  },
+  {
+    "title": "Unit Testing in C++",
+    "isbn": "1617290386",
+    "pageCount": 0,
+    "status": "PUBLISH",
+    "authors": ["Bruce Trask", "Angel Roman"],
+    "categories": []
+  },
+  {
+    "title": "Big Data",
+    "isbn": "1617290343",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/marz.jpg",
+    "status": "MEAP",
+    "authors": ["Nathan Marz", "James Warren"],
+    "categories": []
+  },
+  {
+    "title": "CoffeeScript in Action",
+    "isbn": "1617290629",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-05-09T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lee.jpg",
+    "status": "PUBLISH",
+    "authors": ["Patrick Lee"],
+    "categories": []
+  },
+  {
+    "title": "SQL Server MVP Deep Dives, Volume 2",
+    "isbn": "1617290475",
+    "pageCount": 750,
+    "publishedDate": { "$date": "2011-10-13T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/delaney.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "Kalen Delaney",
+      "Louis Davidson",
+      "Greg Low",
+      "Brad McGehee",
+      "Paul Nielsen",
+      "Paul Randal",
+      "",
+      "Kimberly Tripp"
+    ],
+    "categories": []
+  },
+  {
+    "title": "HTML5 in Action",
+    "isbn": "1617290491",
+    "pageCount": 375,
+    "publishedDate": { "$date": "2014-02-10T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/crowther2.jpg",
+    "shortDescription": "HTML5 In Action provides a complete introduction to web development using HTML5. You'll explore every aspect of the HTML5 specification through real-world examples and code samples. It's much more than just a specification reference, though. It lives up to the name HTML5 in Action by giving you the practical, hands-on guidance you'll need to use key features.",
+    "longDescription": "The Web is buzzing about HTML5. What is it? Which browsers support what features? When the specification will be complete? HTML5, along with supporting technologies like CSS3, SVG, and JavaScript, gives web developers powerful new features like local storage, better audio and video support, and standards-driven mobile application development. And it's ready to use now, with browser support from Microsoft, Google, Apple, Mozilla, and Opera.\n\nHTML5 In Action provides a complete introduction to web development using HTML5. You'll explore every aspect of the HTML5 specification through real-world examples and code samples. It's much more than just a specification reference, though. It lives up to the name HTML5 in Action by giving you the practical, hands-on guidance you'll need to use key features like:\n\n    * The new semantic elements and form input types\n    * Native multimedia playback with the video and audio elements\n    * Canvas and 2D drawing APIs\n    * Offline applications\n    * Local and session storage, IndexedDB databases\n    * Web workers\n    * Geolocation, File API, History API\n    * Cross-document Message API\n    * Much, much more\n\nWith this book, you can confidently start using HTML5 today. The relevant, easy-to-follow examples will make you a HTML5 master in no time. You'll even learn how to provide fallbacks for browsers that don't support particular HTML5 features.",
+    "status": "PUBLISH",
+    "authors": ["Rob Crowther", "Joe Lennon", "Ash Blue", "", "Greg Wanish"],
+    "categories": []
+  },
+  {
+    "title": "Java Persistence with Hibernate, Second Edition",
+    "isbn": "1617290459",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bauer3.jpg",
+    "status": "MEAP",
+    "authors": ["Christian Bauer", "Gavin King", "", "Gary Gregory"],
+    "categories": []
+  },
+  {
+    "title": "Hadoop in Practice",
+    "isbn": "1617290238",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-10-02T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/holmes.jpg",
+    "status": "PUBLISH",
+    "authors": ["Alex Holmes"],
+    "categories": []
+  },
+  {
+    "title": "HBase in Action",
+    "isbn": "1617290521",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-11-02T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dimidukkhurana.jpg",
+    "status": "PUBLISH",
+    "authors": ["Nicholas Dimiduk", "Amandeep Khurana"],
+    "categories": []
+  },
+  {
+    "title": "Flex Mobile in Action",
+    "isbn": "1617290610",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-05-30T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/campos.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jonathan Campos"],
+    "categories": []
+  },
+  {
+    "title": "HTML5 for .NET Developers",
+    "isbn": "1617290432",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-11-30T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jackson.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jim Jackson", "II", "Ian Gilman"],
+    "categories": []
+  },
+  {
+    "title": "50 Android Hacks",
+    "isbn": "1617290564",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-06-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sessa.jpg",
+    "status": "PUBLISH",
+    "authors": ["Carlos M. Sessa"],
+    "categories": []
+  },
+  {
+    "title": "PowerShell in Depth",
+    "isbn": "1617290556",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-02-20T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jones2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Don Jones", "Richard Siddaway", "", "Jeffery Hicks"],
+    "categories": []
+  },
+  {
+    "title": "Augmented Reality Revealed",
+    "isbn": "1617290165",
+    "pageCount": 0,
+    "status": "MEAP",
+    "authors": ["Robert A. Rice Jr."],
+    "categories": []
+  },
+  {
+    "title": "Building Well-Structured JavaScript Applications",
+    "isbn": "1617290599",
+    "pageCount": 0,
+    "status": "MEAP",
+    "authors": ["Julio C. Ody"],
+    "categories": []
+  },
+  {
+    "title": "Linked Data",
+    "isbn": "1617290394",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-12-31T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dwood.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "David Wood",
+      "Marsha Zaidman",
+      "Luke Ruth",
+      "with Michael Hausenblas"
+    ],
+    "categories": []
+  },
+  {
+    "title": "Mule in Action, Second Edition",
+    "isbn": "1617290823",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-02-20T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/dossot2.jpg",
+    "status": "PUBLISH",
+    "authors": ["David Dossot", "John D'Emic", "", "Victor Romero"],
+    "categories": []
+  },
+  {
+    "title": "Single Page Web Applications",
+    "isbn": "1617290750",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-09-19T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mikowski.jpg",
+    "status": "PUBLISH",
+    "authors": ["Michael S. Mikowski", "Josh C. Powell"],
+    "categories": []
+  },
+  {
+    "title": "The Art of Unit Testing, Second Edition",
+    "isbn": "1617290890",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-11-25T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/osherove2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Roy Osherove"],
+    "categories": []
+  },
+  {
+    "title": "Play for Java",
+    "isbn": "1617290904",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-03-14T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/leroux.jpg",
+    "status": "PUBLISH",
+    "authors": ["Nicolas Leroux", "Sietse de Kaper"],
+    "categories": []
+  },
+  {
+    "title": "Hello World! Second Edition",
+    "isbn": "1617290920",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-12-12T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sande2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Warren Sande", "Carter Sande"],
+    "categories": []
+  },
+  {
+    "title": "Dart in Action",
+    "isbn": "1617290866",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-12-31T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/buckett.jpg",
+    "status": "PUBLISH",
+    "authors": ["Chris Buckett"],
+    "categories": []
+  },
+  {
+    "title": "Redis in Action",
+    "isbn": "1617290858",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-06-18T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/carlson.jpg",
+    "status": "PUBLISH",
+    "authors": ["Josiah Carlson"],
+    "categories": []
+  },
+  {
+    "title": "Using the TI-83 Plus/TI-84 Plus",
+    "isbn": "161729084X",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-08-19T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mitchell2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Christopher R. Mitchell"],
+    "categories": []
+  },
+  {
+    "title": "Neo4j in Action",
+    "isbn": "1617290769",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/partner.jpg",
+    "status": "MEAP",
+    "authors": ["Jonas Partner", "Aleksa Vukotic", "", "Nicki Watt"],
+    "categories": []
+  },
+  {
+    "title": "Programming the TI-83 Plus/TI-84 Plus",
+    "isbn": "1617290777",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-09-14T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mitchell.jpg",
+    "status": "PUBLISH",
+    "authors": ["Christopher R. Mitchell"],
+    "categories": []
+  },
+  {
+    "title": "Functional Programming in Scala",
+    "isbn": "1617290653",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bjarnason.jpg",
+    "status": "MEAP",
+    "authors": ["Paul Chiusano", "Rúnar Bjarnason"],
+    "categories": []
+  },
+  {
+    "title": "Play for Scala",
+    "isbn": "1617290793",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-10-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hilton.jpg",
+    "status": "PUBLISH",
+    "authors": ["Peter Hilton", "Erik Bakker", "", "Francisco Canedo"],
+    "categories": []
+  },
+  {
+    "title": "Node.js in Practice",
+    "isbn": "1617290939",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/templier2.jpg",
+    "status": "MEAP",
+    "authors": ["Alex Young", "Marc Harter"],
+    "categories": []
+  },
+  {
+    "title": "SonarQube in Action",
+    "isbn": "1617290955",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-10-30T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/papapetrou.jpg",
+    "status": "PUBLISH",
+    "authors": ["G. Ann Campbell", "Patroklos P. Papapetrou"],
+    "categories": []
+  },
+  {
+    "title": "Windows Store App Development: C# and XAML",
+    "isbn": "1617290947",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-06-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pbrown3.jpg",
+    "status": "PUBLISH",
+    "authors": ["Peter M. Brown"],
+    "categories": []
+  },
+  {
+    "title": "Learn Windows IIS in a Month of Lunches",
+    "isbn": "1617290971",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-12-31T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/helmick.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jason C. Helmick"],
+    "categories": []
+  },
+  {
+    "title": "Mondrian in Action",
+    "isbn": "161729098X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/back.jpg",
+    "status": "PUBLISH",
+    "authors": ["William Back", "Nicholas Goodman", "", "Julian Hyde"],
+    "categories": []
+  },
+  {
+    "title": "RabbitMQ in Depth",
+    "isbn": "1617291005",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/roy.jpg",
+    "status": "MEAP",
+    "authors": ["Gavin M. Roy"],
+    "categories": []
+  },
+  {
+    "title": "Akka in Action",
+    "isbn": "1617291013",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/roestenburg.jpg",
+    "status": "MEAP",
+    "authors": [
+      "Raymond Roestenburg",
+      "Rob Bakker",
+      "Rob Williams",
+      "Steven Haines"
+    ],
+    "categories": []
+  },
+  {
+    "title": "Extending jQuery",
+    "isbn": "161729103X",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-08-12T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/wood.jpg",
+    "status": "PUBLISH",
+    "authors": ["Keith B. Wood"],
+    "categories": []
+  },
+  {
+    "title": "OCA Java SE 7 Programmer I Certification Guide",
+    "isbn": "1617291048",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-04-02T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/gupta.jpg",
+    "status": "PUBLISH",
+    "authors": ["Mala Gupta"],
+    "categories": []
+  },
+  {
+    "title": "Kanban in Action",
+    "isbn": "1617291056",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-03-04T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hammarberg.jpg",
+    "status": "PUBLISH",
+    "authors": ["Marcus Hammarberg", "Joakim Sunden"],
+    "categories": []
+  },
+  {
+    "title": "Solr in Action",
+    "isbn": "1617291021",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-03-25T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/grainger.jpg",
+    "status": "PUBLISH",
+    "authors": ["Trey Grainger", "Timothy Potter"],
+    "categories": []
+  },
+  {
+    "title": "Making Sense of NoSQL",
+    "isbn": "1617291072",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-09-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mccreary.jpg",
+    "status": "PUBLISH",
+    "authors": ["Daniel G. McCreary", "Ann M. Kelly"],
+    "categories": []
+  },
+  {
+    "title": "Jaguar Development with PowerBuilder 7",
+    "isbn": "1884777864",
+    "pageCount": 0,
+    "publishedDate": { "$date": "1999-08-09T00:00:00.000-0700" },
+    "status": "PUBLISH",
+    "authors": ["MIchael Barlotta"],
+    "categories": []
+  },
+  {
+    "title": "Grails in Action, Second Edition",
+    "isbn": "1617290963",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/gsmith2.jpg",
+    "status": "MEAP",
+    "authors": ["Glen Smith", "Peter Ledbrook"],
+    "categories": []
+  },
+  {
+    "title": "Rails 4 in Action",
+    "isbn": "1617291099",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bigg2.jpg",
+    "status": "MEAP",
+    "authors": ["Ryan Bigg", "Yehuda Katz", "and Steve Klabnik", ""],
+    "categories": []
+  },
+  {
+    "title": "Learn Windows PowerShell in a Month of Lunches, Second Edition",
+    "isbn": "1617291080",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-11-12T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jones3.jpg",
+    "status": "PUBLISH",
+    "authors": ["Don Jones", "Jeffery D. Hicks"],
+    "categories": []
+  },
+  {
+    "title": "AOP in .NET",
+    "isbn": "1617291145",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-06-21T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/groves.jpg",
+    "status": "PUBLISH",
+    "authors": ["Matthew D. Groves"],
+    "categories": []
+  },
+  {
+    "title": "Learn PowerShell Toolmaking in a Month of Lunches",
+    "isbn": "1617291161",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2012-12-12T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jones4.jpg",
+    "status": "PUBLISH",
+    "authors": ["Don Jones", "Jeffery Hicks"],
+    "categories": []
+  },
+  {
+    "title": "CMIS and Apache Chemistry in Action",
+    "isbn": "1617291153",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mueller.jpg",
+    "status": "PUBLISH",
+    "authors": ["Florian Müller", "Jay Brown", "Jeff Potts"],
+    "categories": []
+  },
+  {
+    "title": "Action Guide (aka VB .NET)",
+    "isbn": "1930110324",
+    "pageCount": 0,
+    "status": "PUBLISH",
+    "authors": ["Paul Messick"],
+    "categories": []
+  },
+  {
+    "title": "Learn Active Directory Management in a Month of Lunches",
+    "isbn": "1617291196",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/siddaway3.jpg",
+    "status": "PUBLISH",
+    "authors": ["Richard Siddaway"],
+    "categories": []
+  },
+  {
+    "title": "Spring in Action, Fourth Edition",
+    "isbn": "161729120X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/walls5.jpg",
+    "status": "MEAP",
+    "authors": ["Craig Walls"],
+    "categories": []
+  },
+  {
+    "title": "The Mikado Method",
+    "isbn": "1617291218",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-03-05T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ellnestam.jpg",
+    "status": "PUBLISH",
+    "authors": ["Ola Ellnestam", "Daniel Brolund"],
+    "categories": []
+  },
+  {
+    "title": "The Responsive Web",
+    "isbn": "1617291242",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/carver.jpg",
+    "status": "MEAP",
+    "authors": ["Matthew Carver"],
+    "categories": []
+  },
+  {
+    "title": "Fast ASP.NET Websites",
+    "isbn": "1617291250",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-08-29T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hume.jpg",
+    "status": "PUBLISH",
+    "authors": ["Dean Alan Hume"],
+    "categories": []
+  },
+  {
+    "title": "SBT in Action",
+    "isbn": "1617291277",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/suereth2.jpg",
+    "status": "MEAP",
+    "authors": ["Joshua Suereth", "Matthew Farwell"],
+    "categories": []
+  },
+  {
+    "title": "PowerShell Deep Dives",
+    "isbn": "1617291315",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hicks.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "Edited by Jeffery Hicks",
+      "Richard Siddaway",
+      "Oisin Grehan",
+      "",
+      "Aleksandar Nikolic"
+    ],
+    "categories": []
+  },
+  {
+    "title": "Gradle in Action",
+    "isbn": "1617291307",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-02-18T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/muschko.jpg",
+    "status": "PUBLISH",
+    "authors": ["Benjamin Muschko"],
+    "categories": []
+  },
+  {
+    "title": "Scalatra in Action",
+    "isbn": "1617291293",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/carrero2.jpg",
+    "status": "MEAP",
+    "authors": [
+      "Ivan Porto Carrero",
+      "Ross A. Baker",
+      "Dave Hrycyszyn",
+      "Stefan Ollinger",
+      "",
+      "Jared Armstrong"
+    ],
+    "categories": []
+  },
+  {
+    "title": "AngularJS in Action",
+    "isbn": "1617291331",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bford.jpg",
+    "status": "MEAP",
+    "authors": ["Brian Ford", "Lukas Ruebbelke"],
+    "categories": []
+  },
+  {
+    "title": "Software Development Metrics",
+    "isbn": "1617291358",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nicolette.jpg",
+    "status": "MEAP",
+    "authors": ["David Nicolette"],
+    "categories": []
+  },
+  {
+    "title": "F# Deep Dives",
+    "isbn": "1617291323",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/petricek_trelford.jpg",
+    "status": "MEAP",
+    "authors": ["Tomas Petricek", "Phillip Trelford"],
+    "categories": []
+  },
+  {
+    "title": "C# in Depth, Third Edition",
+    "isbn": "161729134X",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-09-19T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/skeet3.jpg",
+    "status": "PUBLISH",
+    "authors": ["Jon Skeet"],
+    "categories": []
+  },
+  {
+    "title": "PostGIS in Action, Second Edition",
+    "isbn": "1617291390",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/obe2.jpg",
+    "status": "MEAP",
+    "authors": ["Regina Obe", "Leo Hsu"],
+    "categories": []
+  },
+  {
+    "title": "R in Action, Second Edition",
+    "isbn": "1617291382",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kabacoff2.jpg",
+    "status": "MEAP",
+    "authors": ["Robert Kabacoff"],
+    "categories": []
+  },
+  {
+    "title": "The Joy of Clojure, Second Edition",
+    "isbn": "1617291412",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-05-29T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/fogus2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Michael Fogus", "Chris Houser"],
+    "categories": []
+  },
+  {
+    "title": "iOS 7 in Action",
+    "isbn": "1617291420",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-04-03T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/lim2.jpg",
+    "status": "PUBLISH",
+    "authors": ["Brendan G. Lim", "Martin Conte Mac Donell"],
+    "categories": []
+  },
+  {
+    "title": "Hello App Inventor!",
+    "isbn": "1617291439",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/beer.jpg",
+    "status": "MEAP",
+    "authors": ["Paula Beer", "Carl Simmons"],
+    "categories": []
+  },
+  {
+    "title": "Ember.js in Action",
+    "isbn": "1617291455",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-06-10T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/skeie.jpg",
+    "status": "PUBLISH",
+    "authors": ["Joachim Haagen Skeie"],
+    "categories": []
+  },
+  {
+    "title": "Netty in Action",
+    "isbn": "1617291471",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/maurer.jpg",
+    "status": "MEAP",
+    "authors": ["Norman Maurer", "Courtney Robinson"],
+    "categories": []
+  },
+  {
+    "title": "RavenDB in Action",
+    "isbn": "1617291501",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/syn-hershko.jpg",
+    "status": "MEAP",
+    "authors": ["Itamar Syn-Hershko"],
+    "categories": []
+  },
+  {
+    "title": "OCP Java SE 7 Programmer II Certification Guide",
+    "isbn": "161729148X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/gupta2.jpg",
+    "status": "MEAP",
+    "authors": ["Mala Gupta"],
+    "categories": []
+  },
+  {
+    "title": "Backbone.js in Action",
+    "isbn": "1617291536",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/breed.jpg",
+    "status": "MEAP",
+    "authors": ["Samuel M. Breed", "Cole Krumbholz", "", "Phillip Whisenhunt"],
+    "categories": []
+  },
+  {
+    "title": "Clojure in Action, Second Edition",
+    "isbn": "1617291528",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rathore2.jpg",
+    "status": "MEAP",
+    "authors": ["Amit Rathore"],
+    "categories": []
+  },
+  {
+    "title": "Practical Data Science with R",
+    "isbn": "1617291560",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-04-02T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/zumel.jpg",
+    "status": "PUBLISH",
+    "authors": ["Nina Zumel", "John Mount"],
+    "categories": []
+  },
+  {
+    "title": "ArcGIS Web Development",
+    "isbn": "1617291617",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/rubalcava.jpg",
+    "status": "MEAP",
+    "authors": ["Rene Rubalcava"],
+    "categories": []
+  },
+  {
+    "title": "Elasticsearch in Action",
+    "isbn": "1617291625",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hinman.jpg",
+    "status": "MEAP",
+    "authors": ["Radu Gheorghe", "Matthew Lee Hinman"],
+    "categories": []
+  },
+  {
+    "title": "Learn SCCM 2012 in a Month of Lunches",
+    "isbn": "1617291684",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bannan.jpg",
+    "status": "MEAP",
+    "authors": ["James Bannan"],
+    "categories": []
+  },
+  {
+    "title": "Programming for Musicians and Digital Artists",
+    "isbn": "1617291706",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kapur.jpg",
+    "status": "MEAP",
+    "authors": ["Ajay Kapur", "Perry Cook", "Spencer Salazar", "", "Ge Wang"],
+    "categories": []
+  },
+  {
+    "title": "BDD in Action",
+    "isbn": "161729165X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/smart.jpg",
+    "status": "MEAP",
+    "authors": ["John F. Smart"],
+    "categories": []
+  },
+  {
+    "title": "Windows Phone 8 in Action",
+    "isbn": "1617291374",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2013-12-31T00:00:00.000-0800" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/binkley.jpg",
+    "status": "PUBLISH",
+    "authors": [
+      "Timothy Binkley-Jones",
+      "Massimo Perga",
+      "Michael Sync",
+      "Adam Benoit"
+    ],
+    "categories": []
+  },
+  {
+    "title": "Titanium Alloy in Action",
+    "isbn": "1617291749",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alcocer.jpg",
+    "status": "MEAP",
+    "authors": ["Ricardo Alcocer"],
+    "categories": []
+  },
+  {
+    "title": "Giraph in Action",
+    "isbn": "1617291757",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/martella.jpg",
+    "status": "MEAP",
+    "authors": [
+      "Claudio Martella",
+      "Roman Shaposhnik",
+      "",
+      "Dionysios Logothetis"
+    ],
+    "categories": []
+  },
+  {
+    "title": "The Well-Grounded Rubyist, Second Edition",
+    "isbn": "1617291692",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-06-24T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/black3.jpg",
+    "status": "PUBLISH",
+    "authors": ["David A. Black"],
+    "categories": []
+  },
+  {
+    "title": "Go in Action",
+    "isbn": "1617291781",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ketelsen.jpg",
+    "status": "MEAP",
+    "authors": ["Brian Ketelsen", "Erik St. Martin", "", "William Kennedy"],
+    "categories": []
+  },
+  {
+    "title": "The Programmer's Guide to Apache Thrift ",
+    "isbn": "1617291811",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/abernethy.jpg",
+    "status": "MEAP",
+    "authors": ["Randy Abernethy"],
+    "categories": []
+  },
+  {
+    "title": "Grokking Functional Programming",
+    "isbn": "1617291838",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/khan.jpg",
+    "status": "MEAP",
+    "authors": ["Aslam Khan"],
+    "categories": []
+  },
+  {
+    "title": "CORS in Action",
+    "isbn": "161729182X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hossain.jpg",
+    "status": "MEAP",
+    "authors": ["Monsur Hossain"],
+    "categories": []
+  },
+  {
+    "title": "Reactive Design Patterns",
+    "isbn": "1617291803",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kuhn.jpg",
+    "status": "MEAP",
+    "authors": ["Roland Kuhn", "Jamie Allen"],
+    "categories": []
+  },
+  {
+    "title": "Storm Applied",
+    "isbn": "1617291897",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pathirana.jpg",
+    "status": "MEAP",
+    "authors": ["Sean Allen", "Peter Pathirana", "", "Matthew Jankowski"],
+    "categories": []
+  },
+  {
+    "title": "Real-World Machine Learning",
+    "isbn": "1617291927",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/brink.jpg",
+    "status": "MEAP",
+    "authors": ["Henrik Brink", "Joseph Richards"],
+    "categories": []
+  },
+  {
+    "title": "jQuery UI in Action",
+    "isbn": "1617291935",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/vantoll.jpg",
+    "status": "MEAP",
+    "authors": ["Theodore J. (T.J.) VanToll III"],
+    "categories": []
+  },
+  {
+    "title": "Web Components in Action",
+    "isbn": "1617291943",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/buckett2.jpg",
+    "status": "MEAP",
+    "authors": ["Chris Buckett"],
+    "categories": []
+  },
+  {
+    "title": "JavaScript Application Design",
+    "isbn": "1617291951",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bevacqua.jpg",
+    "status": "MEAP",
+    "authors": ["Nicolas G. Bevacqua"],
+    "categories": []
+  },
+  {
+    "title": "Git in Practice",
+    "isbn": "1617291978",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/mcquaid.jpg",
+    "status": "MEAP",
+    "authors": ["Mike McQuaid"],
+    "categories": []
+  },
+  {
+    "title": "Impala in Action",
+    "isbn": "1617291986",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/saltzer.jpg",
+    "status": "MEAP",
+    "authors": ["Richard L. Saltzer", "Istvan Szegedi"],
+    "categories": []
+  },
+  {
+    "title": "Java 8 in Action",
+    "isbn": "1617291994",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/urma.jpg",
+    "status": "MEAP",
+    "authors": ["Raoul-Gabriel Urma", "Mario Fusco", "", "Alan Mycroft"],
+    "categories": []
+  },
+  {
+    "title": "Elixir in Action",
+    "isbn": "161729201X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/juric.jpg",
+    "status": "MEAP",
+    "authors": ["Saša Juric´"],
+    "categories": []
+  },
+  {
+    "title": "MongoDB in Action, Second Edition",
+    "isbn": "1617291609",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/banker2.jpg",
+    "status": "MEAP",
+    "authors": [
+      "Kyle Banker",
+      "Peter Bakkum",
+      "Tim Hawkins",
+      "Shaun Verch",
+      "",
+      "Douglas Garrett"
+    ],
+    "categories": []
+  },
+  {
+    "title": "Getting MEAN with Mongo, Express, Angular, and Node",
+    "isbn": "1617292036",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sholmes.jpg",
+    "status": "MEAP",
+    "authors": ["Simon Holmes"],
+    "categories": []
+  },
+  {
+    "title": "jQuery in Action, Third Edition",
+    "isbn": "1617292079",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/derosa.jpg",
+    "status": "MEAP",
+    "authors": ["Bear Bibeault", "Yehuda Katz", "", "Aurelio De Rosa"],
+    "categories": []
+  },
+  {
+    "title": "D3.js in Action",
+    "isbn": "1617292117",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/meeks.jpg",
+    "status": "MEAP",
+    "authors": ["Elijah Meeks"],
+    "categories": []
+  },
+  {
+    "title": "Learn SQL Server Administration in a Month of Lunches",
+    "isbn": "1617292133",
+    "pageCount": 0,
+    "publishedDate": { "$date": "2014-05-02T00:00:00.000-0700" },
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jones5.jpg",
+    "status": "PUBLISH",
+    "authors": ["Don Jones"],
+    "categories": []
+  },
+  {
+    "title": "Geoprocessing with Python",
+    "isbn": "1617292141",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/garrard.jpg",
+    "status": "MEAP",
+    "authors": ["Chris Garrard"],
+    "categories": []
+  },
+  {
+    "title": "Barcodes with iOS",
+    "isbn": "161729215X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/drobnik.jpg",
+    "status": "MEAP",
+    "authors": ["Oliver Drobnik"],
+    "categories": []
+  },
+  {
+    "title": "Chef in Action",
+    "isbn": "1617292214",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/aivaliotis.jpg",
+    "status": "MEAP",
+    "authors": ["Dimitri Aivaliotis"],
+    "categories": []
+  },
+  {
+    "title": "Hadoop in Practice, Second Edition",
+    "isbn": "1617292222",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/holmes2.jpg",
+    "status": "MEAP",
+    "authors": ["Alex Holmes"],
+    "categories": []
+  },
+  {
+    "title": "Oculus Rift in Action",
+    "isbn": "1617292192",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bdavis.jpg",
+    "status": "MEAP",
+    "authors": ["Bradley Austin Davis", "Karen Bryla", "", "Alex Benton"],
+    "categories": []
+  },
+  {
+    "title": "OpenStack in Action",
+    "isbn": "1617292168",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bumgardner.jpg",
+    "status": "MEAP",
+    "authors": ["Cody Bumgardner"],
+    "categories": []
+  },
+  {
+    "title": "PowerShell in Depth, Second Edition",
+    "isbn": "1617292184",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/jones6.jpg",
+    "status": "MEAP",
+    "authors": ["Don Jones", "Jeffery Hicks", "", "Richard Siddaway"],
+    "categories": []
+  },
+  {
+    "title": "Practical Probabilistic Programming",
+    "isbn": "1617292338",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/pfeffer.jpg",
+    "status": "MEAP",
+    "authors": ["Avi Pfeffer"],
+    "categories": []
+  },
+  {
+    "title": "Unity in Action",
+    "isbn": "161729232X",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hocking.jpg",
+    "status": "MEAP",
+    "authors": ["Joseph Hocking"],
+    "categories": []
+  },
+  {
+    "title": "Express.js in Action",
+    "isbn": "1617292427",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hahn.jpg",
+    "status": "MEAP",
+    "authors": ["Evan M. Hahn"],
+    "categories": []
+  },
+  {
+    "title": "Learn Git in a Month of Lunches",
+    "isbn": "1617292419",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/umali.jpg",
+    "status": "MEAP",
+    "authors": ["Rick Umali"],
+    "categories": []
+  },
+  {
+    "title": "Understanding SPAs",
+    "isbn": "1617292435",
+    "pageCount": 0,
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/scott2.jpg",
+    "status": "MEAP",
+    "authors": ["Emmit A. Scott", "Jr."],
+    "categories": []
+  }
+]
 
-# List of fake full name
-fake_full_name = []
-for i in range(1000):
-    fake_full_name.append(fake_data.name())
-
-# List of fake first name
-fake_first_name = []
-for full_name in fake_full_name:
-    fake_first_name.append(full_name.split()[0])
-
-# List of fake last name
-fake_last_name = []
-for full_name in fake_full_name:
-    fake_last_name.append(full_name.split()[1])
-
-# List of fake e-mail
-fake_email = []
-for i in range(1000):
-    fake_email.append(fake_data.email())
-
-# List of fake password
-fake_password = []
-for i in range(1000):
-    fake_password.append(fake_data.password())
-
-# List of fake date of birth, between 18 yo and 120 yo
-fake_birthdate = []
-for i in range(1000):
-    fake_dob = (fake_data.date_of_birth(None, 18, 100))
-    fake_birthdate.append(fake_dob.strftime('%Y-%m-%d'))
-
-# List of fake adress
-fake_adress = []
-for i in range(1000):
-    fake_adress.append((fake_data.address()).replace('\n', ', '))
-
-# List of fake profiles
-fake_profiles = []
-fake_list = [fake_email, fake_password, fake_first_name, fake_last_name, fake_adress, fake_birthdate]
-for x in range(len(fake_email)):
-    fake_profiles.append([item[x] for item in fake_list])
-print(fake_profiles)
+books = [['1933988673', 'Unlocking Android', 'W. Frank Ableson', '2009', "Unlocking Android: A Developer's Guide provides concise, hands-on instruction for the Android operating system and development tools. This book teaches important architectural concepts in a straightforward writing style and builds on this with practical and useful examples throughout."], ['1935182722', 'Android in Action, Second Edition', 'W. Frank Ableson', '2011', 'Android in Action, Second Edition is a comprehensive tutorial for Android developers. Taking you far beyond "Hello Android," this fast-paced book puts you in the driver\'s seat as you learn important architectural concepts and implementation strategies. You\'ll master the SDK, build WebKit apps using HTML 5, and even learn to extend or replace Android\'s built-in features by building useful and intriguing examples. '], ['1617290084', 'Specification by Example', 'Gojko Adzic', '2011', 'Join want no shake mind. Evidence candidate moment carry. Strong sing man address good avoid their.'], ['1933988746', 'Flex 3 in Action', 'Tariq Ahmed with Jon Hirschi', '2009', 'Senior evening government evidence yeah. What old what after old sing. Week state federal candidate my training bed. Owner food point.'], ['1935182420', 'Flex 4 in Action', 'Tariq Ahmed', '2010', 'Color chance particularly. Identify but stage debate. College political decade anything clearly. Director avoid charge degree reality. Plant vote interesting operation end its.'], ['1933988312', 'Collective Intelligence in Action', 'Satnam Alag', '2008', 'Yourself middle management. Along mind state simply rate government learn no.'], ['1933988320', 'Zend Framework in Action', 'Rob Allen', '2008', 'Zend Framework in Action is a comprehensive tutorial that shows how to use the Zend Framework to create web-based applications and web services. This book takes you on an over-the-shoulder tour of the components of the Zend Framework as you build a high quality, real-world web application.'], ['1933988797', 'Flex on Java', 'Bernerd Allmon', '2010', '   A beautifully written book that is a must have for every Java Developer.       Ashish Kulkarni, Technical Director, E-Business Software Solutions Ltd.'], ['1935182234', 'Griffon in Action', 'Andres Almiray', '2012', "Griffon in Action is a comprehensive tutorial written for Java developers who want a more productive approach to UI development. In this book, you'll immediately dive into Griffon. After a Griffon orientation and a quick Groovy tutorial, you'll start building examples that explore Griffon's high productivity approach to Swing development. One of the troublesome parts of Swing development is the amount of Java code that is required to get a simple application off the ground."], ['193518217X', 'OSGi in Depth', 'Alexandre de Castro Alves', '2011', 'Enterprise OSGi shows a Java developer how to develop to the OSGi Service Platform Enterprise specification, an emerging Java-based technology for developing modular enterprise applications. Enterprise OSGi addresses several shortcomings of existing enterprise platforms, such as allowing the creation of better maintainable and extensible applications, and provide a simpler, easier-to-use, light-weight solution to enterprise software development.'], ['1933988509', 'Flexible Rails', 'Peter Armstrong', '2008', '"Flexible Rails created a standard to which I hold other technical books. You definitely get your money\'s worth."'], ['1933988762', 'Hello! Flex 4', 'Peter Armstrong', '2009', "Hello! Flex 4 progresses through 26 self-contained examples selected so you can progressively master Flex. They vary from small one-page apps, to a 3D rotating haiku, to a Connect Four-like game. And in the last chapter you'll learn to build a full Flex application called SocialStalkr   a mashup that lets you follow your friends by showing their tweets on a Yahoo map."], ['1884777384', 'Coffeehouse', 'Levi Asher', '1997', 'Coffeehouse is an anthology of stories, poems and essays originally published on the World Wide Web.'], ['1933988592', 'Team Foundation Server 2008 in Action', 'Jamil Azher', '2008', 'Treat be soon physical trial everything wide. Half meeting generation attorney example difficult responsibility deep. Environmental anyone price nature the middle. Blue season already.'], ['1933988711', 'Brownfield Application Development in .NET', 'Kyle Baley', '2010', "Brownfield Application Development in .Net shows you how to approach legacy applications with the state-of-the-art concepts, patterns, and tools you've learned to apply to new projects. Using an existing application as an example, this book guides you in applying the techniques and best practices you need to make it more maintainable and receptive to change."], ['1935182870', 'MongoDB in Action', 'Kyle Banker', '2011', 'MongoDB In Action is a comprehensive guide to MongoDB for application developers. The book begins by explaining what makes MongoDB unique and describing its ideal use cases. A series of tutorials designed for MongoDB mastery then leads into detailed examples for leveraging MongoDB in e-commerce, social networking, analytics, and other common applications.'], ['1884777686', 'Distributed Application Development with PowerBuilder 6.0', 'Michael J. Barlotta', '1998', 'Trouble like soldier above best medical official peace. Action military body. Theory kid change method another occur until. Authority although lawyer. Instead us force oil. Happy I wind physical.'], ['1884777864', 'Jaguar Development with PowerBuilder 7', 'Michael Barlotta', '1999', 'Jaguar Development with PowerBuilder 7 is the definitive guide to distributed application development with PowerBuilder. It is the only book dedicated to preparing PowerBuilder developers for Jaguar applications and has been approved by Sybase engineers and product specialists who build the tools described in the book.'], ['1884777686', 'Taming Jaguar', 'Michael J. Barlotta', '2000', 'Possible look for seem individual wish. Bring meeting really rock leg late. Speech so little. Become occur like born her blood key.'], ['1884777902', '3D User Interfaces with Java 3D', 'Jon Barrilleaux', '2000', 'Before simple there already later station through. Hope management anyone message upon stop doctor main. Strategy herself sea open ten address write.'], ['193239415X', 'Hibernate in Action', 'Christian Bauer', '2004', '"2005 Best Java Book!" -- Java Developer\'s Journal'], [None, 'Hibernate in Action (Chinese Edition)', 'Christian Bauer', '1999', 'Seat face skin. System specific stop. Hear yourself become network. Fall fly different election eight information. Minute great deal among exactly statement share.'], ['1932394885', 'Java Persistence with Hibernate', 'Christian Bauer', '2006', '"...this book is the ultimate solution. If you are going to use Hibernate in your application, you have no other choice, go rush to the store and get this book." --JavaLobby'], ['1930110529', 'JSTL in Action', 'Shawn Bayern', '2002', 'Camera commercial after teach phone former. A create religious behind nature.'], ['1932394826', 'iBATIS in Action', 'Clinton Begin', '2007', '   Gets new users going and gives experienced users in-depth coverage of advanced features.       Jeff Cunningham, The Weather Channel Interactive'], ['133046192', 'Designing Hard Software', 'Douglas W. Bennett', '1997', '"This book is well written ... The author does not fear to be controversial. In doing so, he writes a coherent book." --Dr. Frank J. van der Linden, Phillips Research Laboratories'], ['1933988649', 'Hibernate Search in Action', 'Emmanuel Bernard', '2008', '"A great resource for true database independent full text search." --Aaron Walker, base2Services'], ['1933988355', 'jQuery in Action', 'Bear Bibeault', '2008', '"The best-thought-out and researched piece of literature on the jQuery library." --From the forward by John Resig, Creator of jQuery'], ['1935182323', 'jQuery in Action, Second Edition', 'Bear Bibeault', '2010', 'jQuery in Action, Second Edition is a fast-paced introduction to jQuery that will take your JavaScript programming to the next level. An in-depth rewrite of the bestselling first edition, this edition provides deep and practical coverage of the latest jQuery and jQuery UI releases. The book\'s unique "lab pages" anchor the explanation of each new concept in a practical example. You\'ll learn how to traverse HTML documents, handle events, perform animations, and add Ajax to your web pages. This co'], ['1884777295', 'Building Secure and Reliable Network Applications', 'Kenneth P. Birman', '1996', '"... tackles the difficult problem of building reliable distributed computing systems in a way that not only presents the principles but also describes proven practical solutions." --John Warne, BNR Europe'], ['1932394699', 'Ruby for Rails', 'David A. Black', '2006', 'The word is out: with Ruby on Rails you can build powerful Web applications easily and quickly! And just like the Rails framework itself, Rails applications are Ruby programs. That means you can   t tap into the full power of Rails unless you master the Ruby language.'], ['1933988657', 'The Well-Grounded Rubyist', 'David A. Black', '2009', 'What would appear to be the most complex topic of the book is in fact surprisingly easy to assimilate, and one realizes that the efforts of the author to gradually lead us to a sufficient knowledge of Ruby in order to tackle without pain the most difficult subjects, bears its fruit.       Eric Grimois, Developpez.com'], ['1933988452', "Website Owner's Manual", 'Paul A. Boag', '2009', "Website Owner's Manual helps you form a vision for your site, guides you through the process of selecting a web design agency, and gives you enough background information to make intelligent decisions throughout the development process. This book provides a jargon-free overview of web design, including accessibility, usability, online marketing, and web development techniques. You'll gain a practical understanding of the technologies, processes, and ideas that drive a successful website."], ['1935182463', 'ASP.NET 4.0 in Practice', 'Daniele Bochicchio', '2011', 'ASP.NET 4.0 in Practice contains real world techniques from well-known professionals who have been using ASP.NET since the first previews.'], ['1935182080', 'Hello! Python', 'Anthony Briggs', '2012', 'Hello! Python fully covers the building blocks of Python programming and gives you a gentle introduction to more advanced topics such as object oriented programming, functional programming, network programming, and program design. New (or nearly new) programmers will learn most of what they need to know to start using Python immediately.'], ['1884777554', "PFC Programmer's Reference Manual", 'Richard Brooks', '1998', 'List peace may table stand. Discussion treatment run good on society office. Line resource political artist away push miss. For learn hour media office around case.'], ['133034054', 'Graphics File Formats', 'C. Wayne Brown', '1995', 'Foreign number than community plant trial. Her husband visit product. Development common western tonight generation. Poor significant line.'], ['131723979', 'Visual Object Oriented Programming', 'Margaret M. Burnett', '1995', 'Make impact always family who address. Age opportunity couple art position. Party behavior business.'], ['1617291269', 'iOS in Practice', 'Bear P. Cahill', '2013', 'Herself operation station realize prevent health group. Central purpose effect sense. Meeting son after theory little.'], ['193398886X', 'iPhone in Action', 'Christopher Allen', '2008', '   There is not another iPhone title that does such a great coverage of both Web and SDK topics under one roof, thus providing a well-rounded developer education.       Vladimir Pasman, Cocoacast.com'], ['1933988428', 'Silverlight 2 in Action', 'Chad A. Campbell', '2008', '   Silverlight 2 in Action gives you a solid, well-thought out and coherent foundation for building RIA web applications, and provides you with lots of technical details without ever becoming cloudy.       Golo Roden, author, trainer and speaker for .NET technologies'], ['193518220X', 'The Quick Python Book, Second Edition', 'Naomi R. Ceder', '2010', "This revision of Manning's popular The Quick Python Book offers a clear, crisp introduction to the elegant Python programming language and its famously easy-to-read syntax. Written for programmers new to Python, this updated edition covers features common to other languages concisely, while introducing Python's comprehensive standard functions library and unique features in detail."], ['1884777600', 'Internet and Intranet Applications with PowerBuilder 6', 'Tom Cervenka', '2000', 'Past hit result forget much agreement. Task room and until. Natural suddenly rule election scene quickly.'], ['188477752X', 'Practical Methods for Your Year 2000 Problem', 'Robert Chapman', '1998', 'Practical Methods for Your Year 2000 Problem gives the Year 2000 project team a step-by-step methodology for addressing the Year 2000 problem.'], ['1884777368', 'Mobile Agents', 'William R. Cockayne and Michael Zyda', '1997', 'Mobile Agents is the first book to give the reader the ability to create and use powerful mobile agents on the Internet.'], ['1935182307', 'Spring Dynamic Modules in Action', 'Arnaud Cogoluegnes', '2010', "Spring Dynamic Modules in Action introduces Spring DM and OSGi to Java EE developers and architects. It presents the fundamental concepts of OSGi-based apps and maps them to the familiar ideas of the Spring framework. Then, it engages you with the techniques and concepts you'll need to develop stable, flexible enterprise apps. You'll learn how to embed a Spring container inside an OSGi bundle, and how Spring DM lets you blend Spring strengths like dependency injection with OSGi-based services. "], ['193398872X', 'SQL Server 2008 Administration in Action', 'Rod Colledge', '2009', 'Agent way series. Billion discuss traditional society forget room. Yard college result field pass total.'], ['1935182927', 'Android in Practice', 'Charlie Collins', '2011', 'Android in Practice is treasure trove of Android goodness, with over 100 tested, ready-to-use techniques including complete end-to-end example applications and practical tips for real world mobile application developers. Written by real world Android developers, this book addresses the trickiest questions raised in forums and mailing lists. Using an easy-to-follow problem/solution/discussion format, it dives into important topics not covered in other Android books, like advanced drawing and gra'], ['1884777791', 'Object Oriented Perl', 'Damian Conway', '1999', 'Analysis tonight suggest rock protect knowledge moment son. Matter you church subject yeah model team Republican. Yourself very list everything. Certainly manager reflect indicate adult increase.'], ['1933988290', 'GWT in Practice', 'Robert Cooper', '2008', 'Box cold media claim tax paper work. Star here history woman full fish itself. Record painting despite which. Kitchen site those exactly green mission. Can court call board soldier act charge.'], ['1932394613', 'Ajax in Action', 'Dave Crane', '2005', 'Money simple eye face. Someone magazine serve character loss third. Base morning not forward box. Visit other minute resource. Speech once product material meet concern.'], ['1932394990', 'Ajax in Practice', 'Dave Crane', '2007', 'Face way election word couple. Young simple specific true everybody try each. Across remain himself discussion conference guess. American bit leg can professional.'], ['1933988037', 'Prototype and Scriptaculous in Action', 'Dave Crane', '2007', 'Our employee of by feel fund. Know question TV assume hand eye trip. Three fear indicate study without anything.'], ['1932394583', 'POJOs in Action', 'Chris Richardson', '2006', '"POJOs in Action is required reading for battle-weary EJB developers and for new developers who want to avoid the sins of the fathers by using lightweight frameworks.    -- C# Online.NET'], ['1930110006', 'Data Munging with Perl', 'David Cross', '2001', 'Brother doctor run cost. Explain many yes second firm and training among.'], ['1935182897', 'Hello! HTML5 & CSS3', 'Rob Crowther', '2012', "Quick and Easy HTML5 and CSS3 is written for the web designer or developer who wants a fast, example-oriented introduction to the new HTML and CSS features. After a quick review of the basics, you'll turn to what's new. Start by learning to apply important new elements and attributes by building your first real HTML5 pages. You'll then take a quick tour through the new APIs: Form Validation, Canvas, Drag & Drop, Geolocation and Offline Applications. You'll also discover how to include video and"], ['1933988401', 'Seam in Action', 'Dan Allen', '2008', 'Seam in Action goes into great detail on the ways in which Seam helps reduce the burden of integration with different technologies such as Hibernate and JSF, allowing the developer to focus on the core business objective at hand.       Shobana Jayaraman, Digital Infrastructure Analyst, University of Texas Southwestern Medical Center Library, The Tech Static'], ['1932394982', 'Wicket in Action', 'Martijn Dashorst', '2008', 'Year Mr method. Quite investment already church structure win. Seek camera popular from effect same case. Air person democratic company should strong support. Rather their tree listen.'], ['1933988541', 'Open Source SOA', 'Jeff Davis', '2009', 'Its clearly also participant alone hot. Executive low line note. Low risk treat support. Attorney wall challenge. Around apply can partner wide. Single sit ago education will again their.'], ['193398807X', 'Struts 2 in Action', 'Donald Brown', '2008', 'Trip again military pick can different. Behavior main leave ask significant out throw. Position section song. Piece statement answer bed necessary effort doctor.'], ['1884777929', 'Essential Guide to Peoplesoft Development and Customization', 'Tony DeLia', '2000', 'Lot subject help guy when focus. Its very challenge anyone article. Send total specific mean along poor.'], ['1930110545', '.NET Multithreading', 'Alan Dennis', '2002', 'Each everybody international worry at. Arrive senior turn food item others thus study. Parent response eye hit. Inside might ask billion agree.'], ['1932394389', 'SCWCD Exam Study Kit Second Edition', 'Hanumant Deshmukh', '2005', 'Edge lead staff if player bill. Quality involve image better ten way produce. Model leg factor list walk. Themselves past bag should hair. Itself visit who national grow member.'], ['193518296X', 'Spring Roo in Action', 'Ken Rimple', '2012', 'Scientist write able its anything why. Many thank follow Republican agency loss pass. Perhaps rule strong officer catch. Person hair nearly story region.'], ['1617290270', 'SOA Governance in Action', 'Jos Dirksen', '2012', 'Himself mind benefit maybe try very create. Community both particular ten ready over democratic. Campaign beautiful reality identify ask somebody. Economic short major maintain lead water.'], ['1932394494', 'RSS and Atom in Action', 'Dave Johnson', '2006', 'Gun tonight ever me reflect serious. Hear room apply from get. Attention fast what news crime kid hit message. Billion society authority rich individual. Campaign husband section long serve black.'], ['1930110405', 'LDAP Programming, Management and Integration', 'Clayton Donley', '2002', 'Quickly price medical like major able. Under ask expect world. Air prove even national debate. Include growth send. Say same fund ask security difference message society.'], ['1933988967', 'Mule in Action', 'David Dossot', '2009', 'Recognize response once water various social. Minute artist through middle. Receive poor often data message pay walk.'], ['1884777678', 'Java Foundation Classes', 'Stephen C. Drye', '2001', 'Cell grow once left second center body. Herself prepare fear man financial. Billion produce right activity.'], ['1932394524k-e', 'Managing Components with Modeler', 'Vikram Goyal', '2005', 'Truth dinner store sure person foreign order. Style put for. Home evidence forward value. Success they write. Plant should see buy. Hand employee research trial she chair work feel.'], ['1932394524l-e', 'Command-line Processing with CLI', 'Vikram Goyal', '2005', 'White fast traditional key. Different water successful action trial politics usually serve. Somebody form after education the book.'], ['1932394524m-e', 'Understanding and Using Chain', 'Vikram Goyal', '2005', 'Case ok herself side as. Blood play value traditional everybody never. Skill difficult one take offer.'], ['1932394524n-e', 'Working with the Logging and Discovery Components', 'Vikram Goyal', '2005', 'Hand value in heart home inside. Road modern body any. Civil Democrat fill when traditional site either that. Community so whose into more like finally site. Condition form short school fill such.'], ['1932394524b-e', 'Uploading files with FileUpload', 'Vikram Goyal', '2005', 'Decision let public low challenge gas first. Return Republican per yourself moment. Entire result before you her population. Instead social expect. Suggest line outside want who rise.'], ['1932394524c-e', 'Handling Protocols with the Net Component', 'Vikram Goyal', '2005', 'Region significant degree table. Program ability race another interview contain understand exactly.'], ['1932394524d-e', 'XML Parsing with Digester', 'Vikram Goyal', '2005', 'Attention despite however writer. Take subject water. Inside each point wait buy think church. Second whom general option movement meeting magazine. Knowledge production hand. Visit sell dog now.'], ['1932394524e-e', 'JXPath and Betwixt: Working with XML', 'Vikram Goyal', '2005', 'Physical really despite service listen trouble. Speak follow need success let data. Will happy hand allow big remain. Fine case adult perhaps.'], ['1932394524f-e', 'Validating Data with Validator', 'Vikram Goyal', '2005', 'We station answer throughout. Situation like ability. Tax action bad. Film black people certain. Which make garden hear something child.'], ['1932394524g-e', 'Enhancing Java Core Libraries with Collections', 'Vikram Goyal', '2005', 'Learn with little fill whose ago. Since main could down turn throughout. Sell bed simple police.'], ['1932394524h-e', 'Enhancing Java Core Libraries with BeanUtils and Lang', 'Vikram Goyal', '2005', 'Yard energy attention suddenly product scene. Have then and can day knowledge soon talk. Alone brother toward like we. Threat simple pull soon star end. Manager price here capital.'], ['1932394524i-e', 'Pool and DBCP: Creating and Using Object Pools', 'Vikram Goyal', '2005', 'Business work special edge evening scene mean. Student food military. Happen require sound opportunity begin near third.'], ['1884777813', 'Python and Tkinter Programming', 'John E. Grayson', '2000', 'Want stock step hot four. Course can try task be pressure special. Upon onto from message president address above. Interesting street method road.'], ['1930110197', 'Microsoft.NET for Programmers', 'Fergal Grimes', '2002', 'National clearly require support. Nearly member born expect court determine. Teacher social prove leg allow human control. Best beautiful impact language. Use man company I early break.'], ['1933988932', 'Grails in Action', 'Glen Smith', '2009', "Grails in Action is a comprehensive guide to the Grails framework. First, the basics: the domain model, controllers, views, and services. Then, the fun! Dive into a Twitter-style app with features like AJAX/JSON, animation, search, wizards   even messaging and Jabber integration. Along the way, you'll discover loads of great plugins that'll make your app shine. Learn to integrate with existing Java systems using Spring and Hibernate. You'll need basic familiarity with Java and the web."], ['1884777759', 'Up to Speed with Swing, Second Edition', 'Steven Gutz', '1999', 'Now in its Second Edition, Up to Speed with Swing is for you if you want to get on the fast track to Java Swing. The second edition has been extensively updated to cover Java 1.2 with additional code examples and illustrations.'], ['1933988916', 'OSGi in Action', 'Richard S. Hall', '2011', "OSGi in Action is a comprehensive guide to OSGi with two primary goals. First, it provides a clear introduction to OSGi concepts with examples that are relevant both for architects and developers. The central idea of OSGi is modularity, so you start by learning about OSGi bundles. You'll then see how OSGi handles module lifecycles and follow up with how it promotes service-oriented interaction among application components."], ['1933988231', 'GWT in Action', 'Robert Hanson', '2007', 'Southern certainly through threat make. Into rock join store degree. Floor seem red newspaper today market organization. Show officer face form.'], ['1884777740', 'The Quick Python Book', 'Daryl Harms', '1999', 'Power record mother form ten truth. Shake bank sell color. Usually force speak. Performance federal politics exactly likely later two. Notice pass sort join agency particularly.'], ['1933988754', "SharePoint 2010 Site Owner's Manual", 'Yvonne M. Harryman', '2012', 'SharePoint 2010 Site Owner\'s Manual starts by assuming you already have SharePoint installed on your system and are looking for ways to solve the problems you face every day in your organization. You\'ll learn to determine what type of SharePoint installation you have   Microsoft Office SharePoint Server (MOSS), Windows SharePoint Services (WSS), the "Fabulous 40" templates   and what features are at your disposal. Once you know the lay of the land, you\'ll discover what you can do yourself, when'], ['1930110588', 'Java Development with Ant', 'Erik Hatcher', '2002', "The most widely used build tool for Java projects, Ant is cross-platform, extensible, simple, and fast. It scales from small personal projects to large, multi-team J2EE projects. And, most important, it's easy to learn."], ['1932394281', 'Lucene in Action', 'Erik Hatcher', '2004', 'Father least worry movie third white employee security. Appear stay gun suddenly American.'], ['1933988177', 'Lucene in Action, Second Edition', 'Erik Hatcher', '2010', 'With clear writing, reusable examples, and unmatched advice on best practices, Lucene in Action is still the definitive guide to developing with Lucene.'], ['1884777708', 'PowerBuilder 6.0 Questions & Answers', 'Tim Hatton', '1998', 'If you\'d like to learn PowerBuilder--or enhance your skills-- this book is for you. Its hands-on approach will show you how to write real code. Each section takes a specific "How do I " topic and answers commonly asked questions in an easy-to-understand, conversational manner. It then shows you how the same technique can be used over and over again to decrease your overall code-writing time.'], ['1884777538', 'The Awesome Power of PowerJ', 'Tim Hatton', '1998', "The Awesome Power of PowerJ shows you how you can write Java programs the very first day with PowerJ, even if you don't know Java. Through a hands-on approach that makes liberal use of figures and code snippets, you will learn how to use PowerJ to build effective Java applets and applications."], ['1884777546', 'The Awesome Power of Power++', 'Tim Hatton', '1998', 'The Awesome Power of Power++ is for the beginning to intermediate Power++ programmer. It assumes that you have little or no knowledge of the C++ language but that you do know programming constructs. The purpose is to teach you how to use Power++ to build C++ applets and applications even if you are not a C++ expert. To this end it takes a hands-on approach and makes liberal use of figures and code snippets.'], ['193518248X', 'Azure in Action', 'Chris Hay', '2010', "Azure in Action is a fast-paced tutorial intended for architects and developers looking to develop on Windows Azure and the Windows Azure Platform. It's designed both for readers new to cloud concepts and for those familiar with cloud development but new to Azure. After a quick walk through the basics, it guides you all the way from your first app through more advanced concepts of the Windows Azure Platform."], ['1935182412', 'Distributed Agile in Action', 'Vikas Hazrati', 2005, "Distributed Agile in Action is the first book to directly address the unique task of going Agile in a distributed team. Rather than rehashing Agile theories, this book supplies the practical examples and step by step advice you need to help your distributed teams adopt and embrace Agile principles. It's a distilled and carefully organized learning aid for working in a distributed Agile environment, with in-depth focus on how to approach three critical components of development-People, Process a"], ['1617290262', 'Metaprogramming in .NET', 'Kevin Hazzard', '2012', 'Affect ever become cold. Subject measure something. Bring phone to.'], [None, 'Portlets and Apache Portals', 'Stefan Hepper', '2005', 'Portlets and Apache Portals was not published by Manning, but the manuscript is available for download from our website "as is."'], ['1930110979', 'Code Generation in Action', 'Jack Herrington', '2003', 'Code Generation In Action covers building database access, user interface, remote procedure, test cases, and business logic code as well as code for other key system functions.'], ['138582262', 'Illustrated Guide to HTTP', 'Paul S. Hethmon', '1997', 'Allow bad anything ability trade. Production reach fine standard particular home. Teach player occur he really around cause.'], ['1935182633', 'Agile ALM', 'Michael Hüttermann', '2011', 'Many software projects fail unnecessarily because of unclear objectives, redundant and unproductive work, cost overruns, and a host of other avoidable process problems. In response, agile processes and lightweight tooling have begun to replace traditional engineering processes throughout the development lifecycle. An agile approach to application lifecycle management improves product quality, reduces time to market, and makes for happier developers.    Agile ALM is a guide for Java developers w'], ['188477749X', 'Java Network Programming, Second Edition', 'Merlin Hughes', '1999', 'Yes election draw traditional site bit wide. Technology scene economic respond much unit adult. Heavy off amount them cup make effort.'], ['1932394249', 'Struts in Action', 'Ted N. Husted', '2002', 'Here away reason suffer two tend. Model people candidate street area throw. Over apply relationship man may.'], ['1935182366', 'Camel in Action', 'Claus Ibsen', '2011', "Camel in Action is for developers working with integration of any kind. This highly practical book introduces Camel and shows examples of how to use it with the 45+ supported enterprise integration patterns. Written by the people who wrote the Camel code, it's up to date and distills details and insights that only people deeply involved with Camel could provide."], ['193398838X', 'Taming Text', 'Grant S. Ingersoll', '2012', 'Taming Text is a hands-on, example-driven guide to working with unstructured text in the context of real-world applications. This book explores how to automatically organize text using approaches such as full-text search, proper name recognition, clustering, tagging, information extraction, and summarization. The book guides you through examples illustrating each of these topics, as well as the foundations upon which they are built.'], ['1933988029', 'JBoss in Action', 'Javid Jamae', '2009', 'Several employee baby these game former. Rest no stuff window receive cost approach. Much whole personal article color. He democratic speech far exist hour.'], ['1933988398', 'Gnuplot in Action', 'Philipp K. Janert', '2009', 'Hotel home watch another firm culture yeah. Short indeed attention benefit story write. Should position camera wind environment.'], ['1930110820', 'Extending and Embedding Perl', 'Tim Jenness', '2002', 'Everything military account surface trial none management what. Later interesting thing why. Office attorney lawyer manager get watch improve. Kind education mouth treatment. Keep article support.'], ['1617290017', 'iOS 4 in Action', 'Jocelyn Harrington', '2011', "iOS 4 in Action, written for Xcode 4, is a detailed, hands-on guide that goes from setting up your development environment, through your first coding steps, all the way to creating a polished, commercial iOS 4 application. You'll run through examples from a variety of areas including a chat client, a video game, an interactive map, and background audio. You'll also learn how the new iOS 4 features apply to your existing iOS 3 based apps. This book will help you become a confident, well-rounded "], ['1884777805', 'Elements of Programming with Perl', 'Andrew L. Johnson', '1999', 'Peace detail including position suffer at serve daughter. Yard stage show us imagine successful ready right. Right account more actually teacher somebody.'], ['1617290211', 'Learn Windows PowerShell in a Month of Lunches', 'Don Jones', '2011', "Learn Windows PowerShell in a Month of Lunches is an innovative tutorial designed for busy administrators. Author Don Jones has taught thousands of administrators to use PowerShell, and now he'll teach you, bringing his years of training techniques to a concise, easy-to-follow book. Just set aside one hour a day   lunchtime would be perfect   for an entire month, and you'll be automating administrative tasks faster than you ever thought possible. Don combines his own in-the-trenches experience "], ['1935182390', 'R in Action', 'Robert I. Kabacoff', '2011', "R in Action is the first book to present both the R system and the use cases that make it such a compelling package for business developers. The book begins by introducing the R language, including the development environment. As you work through various examples illustrating R's features, you'll also get a crash course in practical statistics, including basic and advanced models for normal and non-normal data, longitudinal and survival data, and a wide variety of multivariate methods. Both dat"], ['9781935182924', 'Android in Practice', 'Matthias Kaeppler', 1995, 'Serve all rest speech heavy. Visit story each surface fire hot thought. Form huge author reflect. Speak her yes peace million. Pressure travel company score eight late.'], ['1932394680', 'SOA Security', 'Ramarao Kanneganti', '2007', 'Follow law physical west. Seek reason section election he radio. Prove child season.'], ['1935182277', 'Rails 3 in Action', 'Ryan Bigg', '2011', 'Rails 3 in Action will provide a thorough introduction to Ruby-based web development using Rails. Like Rails 3 itself, this book combines Merb and Rails in the form of authors Yehuda Katz, Merb Lead Developer.'], ['1935182552', 'Continuous Integration in .NET', 'Marcin Kawalerowicz', '2011', 'Continuous Integration in .NET is a tutorial for developers and team leads that teaches you to reimagine your development strategy by creating a consistent continuous integration process. This book shows you how to build on the tools you already know--.NET Framework and Visual Studio and to use powerful software like MSBuild, Subversion, TFS 2010, Team City, CruiseControl.NET, NUnit, and Selenium.'], ['1932394133', 'Technology Paradise Lost', 'Erik Keller', '2004', "In Technology Paradise Lost Keller describes how the new thinking is working inside some of the country's most complex and successful organizations, including Merrill Lynch, JetBlue, Harrah's, and Motorola which have cut IT spending to gain a competitive edge, and experienced marked gains to their bottom lines."], ['1930110057', 'Kermit 95+', 'Kermit Project at Columbia University', '2003', 'Spring growth huge none. Concern control painting laugh land law group federal. Increase chance major form. Talk attention she involve.'], ['1932394834', 'Laszlo in Action', 'Norman Klein', '2008', 'Commercial cultural job none improve mother name. Term material government by voice whom. Second wait fish true cell network green.'], ['1932394842', 'Groovy in Action', 'Dierk Koenig with Andrew Glover', '2007', 'Force bag believe especially have. Power friend measure region. Order explain science treat. Second because financial method successful hand different. Must before kitchen five against.'], ['1935182447', 'Groovy in Action, Second Edition', 'Dierk König', 1998, 'Groovy in Action, Second Edition is a thoroughly-revised, comprehensive guide to Groovy programming. It introduces Java developers to the dynamic features that Groovy provides, and shows you how to apply Groovy to a range of tasks including building new apps, integration with existing code, and DSL development.'], ['132612313', 'Object Technology Centers of Excellence', 'Timothy D. Korson', '1996', 'Object Technology Centers of Excellence provides guidance to those charged with managing the shift to object technology. It is the only book on the market aimed not at the project level but at the corporate level, with a focus on the infrastructures necessary for a successful transition.'], ['1932394850', 'Test Driven', 'Lasse Koskela', '2007', 'Yes treatment guy laugh ability as. Money service although plan discussion upon customer. Carry sea inside author city. Put his late organization.'], ['1935182579', 'Effective Unit Testing', 'Lasse Koskela', '2013', 'Yard already her subject last event argue. Itself out million up. Art throughout story where. Concern charge method open shoulder he nature. Certainly year onto somebody matter field he receive.'], ['1935182943', 'Making Java Groovy', 'Kenneth A. Kousen', '2013', 'Making Java Groovy is a practical handbook for developers who want to blend Groovy into their day-to-day work with Java. It starts by introducing the key differences between Java and Groovy   and how you can use them to your advantage. Then, it guides you step-by-step through realistic development challenges, from web applications to web services to desktop applications, and shows how Groovy makes them easier to put into production.'], ['1884777473', 'The Awesome Power of Direct3D/DirectX', 'Peter J. Kovach', '2002', 'The Awesome Power of Direct3D/DirectX shows you how to build a complete working 3D application, including 3D sound, joystick input, animation, textures, shadows, and even collision detection.'], ['1884777597', 'Practical Software Requirements', 'Benjamin L. Kovitz', '1998', 'Skin continue if because own summer a. Manager ask entire which bad wrong. Same trial data. Both happen road glass glass free. After plan kid only draw media role continue.'], ['1932394923', 'NHibernate in Action', 'Pierre Henri Kuate', '2009', 'But message type paper structure tough couple. Then little beat. Husband allow brother. Hair it job treatment nature others character. Issue answer movie.'], ['1932394222', 'Microsoft Reporting Services in Action', 'Teo Lachev', '2004', 'Recently he company number kind usually. Especially group crime this watch recently avoid. School kid notice treat story. Perhaps worker east decade lose.'], ['1930110936', 'AspectJ in Action', 'Ramnivas Laddad', '2003', 'Prove question think white really. Yes shoulder thank study deep rest. Hot number three expert. Little executive police scene space blood result. Student last modern surface.'], ['1933988053', 'AspectJ in Action, Second Edition', 'Ramnivas Laddad', '2009', "AspectJ in Action, Second Edition is a fully updated, major revision of Ramnivas Laddad's best-selling first edition. It's a hands-on guide for Java developers. After introducing the core principles of AOP, it shows you how to create reusable solutions using AspectJ 6 and Spring 3. You'll master key features including annotation-based syntax, load-time weaver, annotation-based crosscutting, and Spring-AspectJ integration. Building on familiar technologies such as JDBC, Hibernate, JPA, Spring Se"], ['1935182196', 'Hadoop in Action', 'Chuck Lam', '2010', 'Hadoop in Action teaches readers how to use Hadoop and write MapReduce programs. The intended readers are programmers, architects, and project managers who have to process large amounts of data offline. Hadoop in Action will lead the reader from obtaining a copy of Hadoop to setting it up in a cluster and writing data analytic programs.'], ['1884777775', 'SQR in PeopleSoft and Other Applications', 'Galina', '2003', 'Pass begin current both past performance. Right prevent in war wrong heart. Future total market produce seek trip score. Region level total point resource continue least. Throughout treat do miss.'], ['1932394001', 'SQR in PeopleSoft and Other Applications, Second Edition', 'Galina Landres', '2003', 'Drug condition computer yourself might scene later. Meet baby campaign keep remain watch after. Free hold family control major measure me.'], ['1935182250', 'F# in Action', 'Amanda Laucher', 1998, 'F# in Action introduces the F# language, but it goes well beyond the standard tutorial and reference approach. F# expert Amanda Laucher draws on her extensive experience deploying F#-based solutions to show you how to use F# in real, day-to-day work.'], ['1933988894', 'Tuscany SCA in Action', 'Simon Laws', '2011', 'Tuscany in Action is a comprehensive, hands-on guide for developing technology agnostic, extensible applications using Apache Tuscany\'s lightweight SCA infrastructure. The book uses practical examples based on a travel booking scenario to demonstrate how to develop applications with Tuscany SCA. Apache Tuscany supports a variety of programming environments, data bindings and communication protocols "out of the box" and can be easily extended to support other technologies.'], ['1884777082', 'Client/Server Yellow Pages', 'Compiled', '1995', 'This unique guide covers software products and vendors active in the client/server marketplace. Over 200 products and over 250 vendors are included.'], ['1884777066', 'Object Oriented Application Frameworks', 'Ted Lewis', '1995', 'Frameworks are object-oriented programming environments for vertical application areas. This book is the first to survey this exciting new technology, its concepts, and practical applications.'], ['1932394117', 'Tapestry in Action', 'Howard M. Lewis Ship', '2004', 'Hour difference involve because science. Popular degree everybody each.'], ['1932394532', 'WebWork in Action', 'Patrick Lightbody', '2005', 'Low just indeed water section gun paper. Image direction table religious open response firm. Avoid fill water throw expect manage drug. Audience mean ball check respond lose yard soldier.'], ['1935182498', 'MacRuby in Action', 'Brendan G. Lim with Jerry Cheung', '2012', 'Behind its exist else method camera. Phone television begin similar. Born fear lay cup person present subject. Line wear weight boy body best. Key hard picture the spend Mr.'], ['1933988789', 'Erlang and OTP in Action', 'Martin Logan', '2010', "Erlang and OTP in Action teaches you to apply Erlang's shared-state model for concurrent programming--a completely different way of tackling the problem of parallel programming from the more common multi-threaded approach. This book walks you through the practical considerations and steps of building systems in Erlang and integrating them with real-world C/C++, Java, and .NET applications. Unlike other books on the market, Erlang and OTP in Action offers a comprehensive view of how concurrency "], ['1933988819', "SharePoint 2007 Developer's Guide to Business Data Catalog", 'Brett Lonsdale', '2009', "SharePoint 2007 Developer's Guide to Business Data Catalog is a practical, example-rich guide to the features of the BDC and the techniques you need to build solutions for end users. The book starts with the basics   what the BDC is, what you can do with it, and how to pull together a BDC solution. With the fundamentals in hand, it explores the techniques and ideas you need to put BDC into use effectively in your organization."], ['133964256', 'Doing IT Right', 'Harold Lorin', '1995', 'Doing IT Right explores IT in its full complexity. It explains fundamental issues of hardware and software structures; it illuminates central issues of networking and encapsulates the essence of client/server computing; its coverage of costing, risk assessment, and due diligence in making computing decisions is unique.'], ['1933988487', 'Adobe AIR in Action', 'Joey Lott', '2008', 'Difference full pay history. Evidence chair company media we but drug. Voice medical son live soldier rich environment.'], ['193239480X', 'Ant in Action', 'Steve Loughran', '2007', 'The most widely used build tool for Java projects, Ant is cross-platform, extensible, simple, and fast. It scales from small personal projects to large, multi-team enterprise projects. And, most important, it   s easy to learn.'], ['193518234X', 'Restlet in Action', 'Jerome Louvel', '2012', "Restlet in Action gets you started with the Restlet Framework and the REST architecture style. You'll create and deploy applications in record time while learning to use popular RESTful Web APIs effectively. This book looks at the many faces of web development, including server- and client-side, along with cloud computing, mobile Android devices, and semantic web applications. It offers a particular focus on Google's innovative Google Web Toolkit, Google App Engine, and Android technologies."], ['1932394796', 'iText in Action', 'Bruno Lowagie', '2006', '"I\'ve been using iText for over a year, but I still learnt an awful lot while reading this book." --JavaLobby'], ['1935182617', 'iText in Action, Second Edition', 'Bruno Lowagie', '2010', "iText in Action, Second Edition offers an introduction and a practical guide to iText and the internals of PDF. While at the entry level iText is easy to learn, there's an astonishing range of things you can do once you dive below the surface. This book lowers the learning curve and, though numerous innovative and practical examples, unlocks the secrets hidden in Adobe's PDF Reference. The examples are in Java but they can be easily adapted to .NET using one of iText's .NET ports: iTextSharp or"], ['138412146', 'Power-3D', 'Kyle Lussier', '1997', 'Point like around particularly television American onto. She official page society.'], ['131271687', 'SNA and TCP/IP Enterprise Networking', 'Daniel C. Lynch', '1997', "SNA and TCP/IP Enterprise Networking shows the reader how enterprise networking evolved, what approaches and techniques can be used today, and where tomorrow's trends lie, illustrating among others Web-to-SNA connectivity and Java based integration approaches."], ['1932394478', 'Subversion in Action', 'Jeffrey Machols', '2004', 'Learn all about this new open source version control application and why it is replacing CVS as the standard. Examples demonstrate how to customize features to deal with day-to-day problems.'], ['1932394508', 'Minimal Perl', 'Tim Maher', '2006', 'Write trial already service either order law. Speech toward control street again which authority. Wonder value here quality eye thank agent.'], ['1884777651', 'Distributed Programming with Java', 'Qusay H. Mahmoud', '1999', 'See itself food never wonder book. Finish candidate rule role effect. Face it according scene someone trade. Century blood for various. Imagine begin like become another fine.'], ['013319955X', 'Comprehensive Networking Glossary and Acronym Guide', 'Gary Scott Malkin', '1995', 'This glossary offers a complete collection of technical terms and acronyms used in the networking industry.'], ['1932394125', 'JavaServer Faces in Action', 'Kito D. Mann', '2004', 'Run form politics then. Represent cut trouble light senior. Three someone beautiful lose be give right. Whom involve just site reflect. Surface coach dog of energy year herself.'], ['1933988169', 'LINQ in Action', 'Fabrice Marguerie', '2008', 'Election red teach soldier land. Follow adult total data single me remember. Use many drug chance purpose organization cell design.'], ['132869985', 'Internet BBSs', 'Richard Scott Mark', '1996', 'Internet BBSs: A Guided Tour provides in-depth coverage of the new world of true BBSs now available world-wide. It is a valuable resource for anyone currently using the Internet.'], ['1933988665', 'Algorithms of the Intelligent Web', 'Haralambos Marmanis', '2009', 'Box entire common result phone mission city. Kind character station.'], ['1930110995', 'JUnit in Action', 'Vincent Massol with Ted Husted', '2003', 'Area them write civil. Our generation green toward. Have door later environment available keep. Order single he require.'], ['1935182854', 'Tika in Action', 'Chris A. Mattmann', '2011', 'Treat sport work necessary hope building body. Majority blue nearly change minute group guy. Large mind decide. Fill blood across feel same. Or speech until indeed personal.'], ['1933988479', 'Ruby in Practice', 'Jeremy McAnally', '2009', 'North cultural the true attention. I one help career decision we almost. Training activity perhaps lead. Issue face member tree film black beat. Behavior spend smile thank.'], ['1884777481', 'Inside LotusScript', 'Joe McGinn', '1997', 'Develop Notes and Domino Web applications by providing advanced LotusScript code for direct use in your programs. This book emphasizes practical, useable code and solutions to common Notes programming problems.'], ['1884777449', 'Maximum MIDI', 'Paul Messick', '1997', 'Hundred finally than respond director fly cold baby. Thousand apply him particularly. Hold there road record. Half respond common scientist.'], ['132621894', 'Planning and Managing ATM Networks', 'Daniel Minoli', '1997', 'Planning and Managing ATM Networks covers strategic planning, initial deployment, overall management, and the day-to-day operation of ATM networks.'], ['137353006', 'Client/Server Applications on ATM Networks', 'Daniel Minoli', '1997', 'Client/Server Appliactions on ATM Networks discusses ATM as the key technology for transforming the enterprise network from data-only to an integrated data, voice, video, image and multimedia corporate infrastructure.'], ['1933988991', 'JavaFX in Action', 'Simon Morris', '2009', 'History easy billion him along. Authority stand current teacher bad fall face. Include hundred early it memory boy find bit. Seek run who blood another partner again. Skin list write high bed.'], ['1935182188', 'Entity Framework 4 in Action', 'Stefano Mostarda', '2011', 'Microsoft Entity Framework in Action introduces the Entity Framework to developers working in .NET who already have some knowledge of ADO.NET. The book begins with a review of the core ideas behind the ORM model and shows how Entity Framework offers a smooth transition from a traditional ADO.NET approach. By presenting numerous small examples and a couple larger case studies, the book unfolds the Entity Framework story in clear, easy-to-follow detail. The infrastructure and inner workings will '], ['193239477X', 'ASP.NET 2.0 Web Parts in Action', 'Darren Neimke', '2006', '"ASP.NET Web Parts in Action is a must read book for every developer who wants to extend his knowledge of the ASP.NET framework." -- Simon Busoli, DotNetSlackers.com'], ['1617290149', 'Sass and Compass in Action', 'Wynn Netherland', '2013', 'Sass and Compass in Action is the definitive guide to stylesheet authoring using these two revolutionary tools. Written for both designers and developers, this book demonstrates the power of both Sass and Compass through a series of examples that address common pain points associated with traditional stylesheet authoring. The book begins with simple topics such as CSS resets and moves on to more involved topics such as grid frameworks and CSS3 vendor implementation differences.'], ['1884777503', 'Core OWL 5.0', 'Ted Neward', '1997', "Core OWL 5.0 dives under the surface and into the OWL source code itself. You'll see what new capabilities OWL 5.0 offers the OWL programmer. You'll gain a deeper understanding of what OWL does on your behalf such as the OWL messaging system and its message maps."], ['1884777465', 'Advanced OWL 5.0', 'Ted Neward', '1998', "Advanced OWL 5.0 covers advanced ways to make the OWL library do those tricky things you thought weren't possible. You'll get a long, exhaustive look at the new features introduced by the OWL 5.0 code. You'll find detailed explanations of how to extend the OWL objects themselves in new directions."], ['1884777716', 'Server-Based Java Programming', 'Ted Neward', '2000', 'Fly difference another structure. Professional play mention only indeed drop black friend. Despite let trouble director professor.'], ['1935182048', 'SQL Server MVP Deep Dives', 'Contributions from 53 SQL Server MVPs', '2009', "SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance."], ['9781935182047', 'SQL Server MVP Deep Dives', 'Contributions from 53 SQL Server MVPs; Edited by Paul Nielsen', '2009', "SQL Server MVP Deep Dives is organized into five parts: Design and Architecture, Development, Administration, Performance Tuning and Optimization, and Business Intelligence. In each, you'll find concise, brilliantly clear chapters that take on key topics like mobile data strategies, Dynamic Management Views, or query performance."], ['9781935182047', 'SQL Server MVP Deep Dives', 'Paul Nielsen', '2009', 'Break store ok painting dog whose bad idea. Chair whether address decide walk. Future something pretty theory lot.'], ['1935182269', 'PostGIS in Action', 'Regina O. Obe', '2011', 'PostGIS in Action is the first book devoted entirely to PostGIS. It will help both new and experienced users write spatial queries to solve real-world problems. For those with experience in more traditional relational databases, this book provides a background in vector-based GIS so you can quickly move to analyzing, viewing, and mapping data.'], ['1930110855', 'Programming Mac OS X', "Kevin O'Malley", '2003', '"...an effective guide for Unix developers who want accurate information specifically on getting up to speed with Mac OS X and its software development environment, without having to sort through the morass of online information overload. ...If you\'ve been a little skittish about Interface Builder, forget your worries now because the tutorial in the book is very good. ...The projects and examples are thorough and should provide even the most jaded intermediate programmer with a real taste of ho'], ['1933988274', 'The Art of Unit Testing', 'Roy Osherove', '2009', 'Turn teach letter town. Significant full control power quite represent. Billion music drive him now more fly. Fish create interest who establish.'], ['1935182684', 'Mahout in Action', 'Sean Owen', '2011', 'Tree two of serve serve service. West democratic leave approach. Analysis case then develop billion mention.'], ['1933988622', 'ASP.NET MVC in Action', 'Jeffrey Palermo', '2009', 'ASP.NET MVC in Action is a guide to pragmatic MVC-based web development. After a thorough overview, it dives into issues of architecture and maintainability. The book assumes basic knowledge of ASP.NET (v. 3.5) and expands your expertise.'], ['193518279X', 'ASP.NET MVC 2 in Action', 'Jeffrey Palermo', '2010', "ASP.NET MVC 2 in Action is a fast-paced tutorial designed to introduce the MVC model to ASP.NET developers and show how to apply it effectively. After a high-speed ramp up, the book presents over 25 concise chapters exploring key topics like validation, routing, and data access. Each topic is illustrated with its own example so it's easy to dip into the book without reading in sequence. This book covers some high-value, high-end techniques you won't find anywhere else!"], ['1617290416', 'ASP.NET MVC 4 in Action', 'Jeffrey Palermo', '2012', "SP.NET MVC 3 in Action is a fast-paced tutorial designed to introduce ASP.NET MVC to .NET developers and show how to apply it effectively. After a high-speed ramp up, the book explores key topics like validation, routing, and data access. Each topic is illustrated with its own example so it's easy to dip into the book without reading in sequence. This book also covers some high-value, high-end techniques you won't find anywhere else!"], ['1933988347', 'EJB 3 in Action', 'Debu Panda', '2007', 'Fear medical improve suggest actually beyond. War candidate son. Drop fish oil teach. Daughter myself project wind month hospital. Area leader shake. Begin much after participant pattern.'], ['1935182994', 'EJB 3 in Action, Second Edition', 'Debu Panda', '2014', 'Building on the bestselling first edition, EJB 3 in Action, Second Edition tackles EJB 3.1 head-on, through numerous code samples, real-life scenarios, and illustrations. This book is a fast-paced tutorial for Java EE 6 business component development using EJB 3.1, JPA 2 and CDI. Besides covering the basics of EJB 3.1, this book includes in-depth EJB 3.1 internal implementation details, best practices, design patterns, and performance tuning tips. The book also discusses using open source frame'], ['1932394206', "Explorer's Guide to the Semantic Web", 'Thomas B. Passin', '2004', '"A thorough look at one vision of the Web\'s future ...particularly well written...Highly recommended." -- Choice Magazine'], ['1884777767', 'Practical LotusScript', 'Anthony Patton', '1999', 'Thousand water low peace blood strong them. Training create go exactly impact key include. Social would foreign door.'], ['1930110049', 'Domino Development with Java', 'Anthony Patton', '2000', 'Long land raise prepare provide financial nearly. Civil others director stage history effort but. Training discover short agree short task. Always region write put. Company teacher safe leave debate.'], ['1932394907', 'Windows PowerShell in Action', 'Bruce Payette', '2007', "   If all it had going for it was the authoratative pedigree of the writer, it might be worth it, but it's also well-written, well-organized, and thorough, which I think makes it invaluable as both a learning tool and a reference.       Slashdot.org"], ['1935182137', 'Windows PowerShell in Action, Second Edition', 'Bruce Payette', '2011', 'Windows PowerShell in Action, Second Edition is a completely revised edition of the best selling book on PowerShell, written by Bruce Payette, one of the founding members of the Windows PowerShell team, co-designer of the PowerShell language, and the principal author of the PowerShell language implementation.    This new edition preserves the crystal-clear introduction to PowerShell, showing sysadmins and developers how to build scripts and utilities to automate system tasks or create powerful '], ['1935182374', 'Silverlight 4 in Action, Revised Edition', 'Pete Brown', '2010', "Silverlight in Action, Revised Edition is a comprehensive guide to Silverlight, taking you from Hello World through the techniques you'll need to build sophisticated rich web apps. This new edition covers all the new features added in the latest versions of Silverlight, Visual Studio, and Expression Blend, along with the best practices emerging in the Silverlight community. With more than 50% new content, you'll take a mind-expanding trip through the technology, features, and techniques require"], ['1617290319', 'Silverlight 5 in Action', 'Pete Brown', '2012', 'Enjoy crime card physical approach language local. Capital recent enter risk technology dark down. But each message. Level current clear share meet site. Building every deep piece.'], ['1932394419', 'Hibernate Quickly', 'Patrick Peak', '2005', '"If you want to learn Hibernate quickly, this book shows you step by step." - Sang Shin, Java Technology Architect, Sun Microsystems'], ['1935182625', 'Generative Art', 'Matt Pearson', '2011', 'Local quickly hot although stop. Sense change share test. Imagine leader commercial top week choice.'], ['1617290092', 'Windows Phone 7 in Action', 'Timothy Binkley-Jones', '2012', "Windows Phone 7 in Action is a hands-on guide to building mobile applications for WP7 using Silverlight, C#, and XNA. Written for developers who already know their way around Visual Studio, this book zips through the basics, such as writing code to dial the phone, writing emails, and sending text messages, and moves on to the nuts and bolts of building great phone apps. By working through the numerous examples and tutorials, you'll master the APIs used to work with a phone's sensors and hardwar"], ['1935182803', 'Lift in Action', 'Timothy Perrett', '2011', 'Set participant wrong writer item. Recently imagine eat challenge deep. Ahead anyone into morning. Friend instead subject. Save investment off together down true. Late computer role police behavior.'], ['1930110065', 'Web Development with Apache and Perl', 'Theo Petersen', '2002', 'Performance actually success most reach our. Accept must sometimes despite appear. Administration energy effect actually.'], ['1933988924', 'Real-World Functional Programming', 'Tomas Petricek with Jon Skeet', '2009', "This book teaches the ideas and techniques of functional programming applied to real-world problems. You'll see how the functional way of thinking changes the game for .NET developers. Then, you'll tackle common issues using a functional approach. The book will also teach you the basics of the F# language and extend your C# skills into the functional domain. No prior experience with functional programming or F# is required."], ['1617290181', 'Machine Learning in Action', 'Peter Harrington', '2012', "Machine Learning in Action is a unique book that blends the foundational theories of machine learning with the practical realities of building tools for everyday data analysis. In it, you'll use the flexible Python programming language to build programs that implement algorithms for data classification, forecasting, recommendations, and higher-level features like summarization and simplification."], ['193398855X', 'Dependency Injection', 'Dhanji R. Prasanna', '2009', '   If you do large scale java apps, you probably want to have someone on the team have this book.       Michael Neale'], ['1932394591', 'Understanding Enterprise SOA', 'Eric Pulier and Hugh Taylor', '2005', '"SOA is real ... Pulier is uniquely qualified to make [it] accessible to the general business audience." - Paul Gaffney, Staples, Inc., From the Foreword'], ['1933988215', 'Open-Source ESBs in Action', 'Tijs Rademakers', '2008', 'Heavy himself listen real decision meet box. Return trade us answer fight PM administration. Yourself like after course foot these.'], ['1617290122', 'Activiti in Action', 'Tijs Rademakers', '2012', 'Accept here responsibility store class. Like tough ok exist response. Rich chance vote dark. Event lot shoulder face suffer true get.'], ['1933988606', 'DSLs in Boo: Domain-Specific Languages in .NET', 'Oren Eini writing as Ayende Rahien', '2010', "DSLs in Boo shows you how to design, extend, and evolve DSLs for .NET by focusing on approaches and patterns. You learn to define an app in terms that match the domain, and to use Boo to build DSLs that generate efficient executables. And you won't deal with the awkward XML-laden syntax many DSLs require. The book concentrates on writing internal (textual) DSLs that allow easy extensibility of the application and framework. And if you don't know Boo, don't worry   you'll learn right here all th"], ['1932394230', 'JUnit Recipes', 'J. B. Rainsberger with contributions by Scott Stirling', '2004', 'Upon attorney after interesting unit animal. Result option since here manage TV. Necessary image set recognize away charge.'], ['1932394621', 'wxPython in Action', 'Noel Rappin', '2006', '"The book is easy to read and provides an approach to a very practical contemporary topic. The authors have organized their material well." -- Melissa Strange, Walden University, www.reviews.com'], ['1935182595', 'Clojure in Action', 'Amit Rathore', '2011', 'Clojure in Action is a hands-on tutorial for the working programmer who has written code in a language like Java or Ruby, but has no prior experience with Lisp. It teaches Clojure from the basics to advanced topics using practical, real-world application examples. Blow through the theory and dive into practical matters like unit-testing, environment set up, all the way through building a scalable web-application using domain-specific languages, Hadoop, HBase, and RabbitMQ.'], ['1935182757', 'Scala in Action', 'Nilanjan Raychaudhuri', '2013', 'Character ready listen produce try family opportunity hope. Enter like alone throw. Experience allow know from open.'], ['134529308', 'Working with Objects', 'Trygve Reenskaug', '1995', '"The first method that deals realistically with reuse, and one of the few that comes close to describing what I do when I design." --Ralph Johnson, University of Illinois'], ['1932394753', 'PHP in Action', 'Dagfinn Reiersøl with Marcus Baker', '2007', '"If there was ever a textbook for software development in PHP, this would be it."    Cal Evans, Podcast Review, Zend Developer Network'], ['193398869X', 'Secrets of the JavaScript Ninja', 'John Resig', '2012', '   Secrets of the Javascript Ninja is definitely a book for anyone looking to significantly improve their Javascript knowledge and skills.       Ryan Doherty, Web Development Engineer, Mozilla'], ['132623129', 'Microsoft Office Essentials', 'Ronny Richardson', '1996', 'Microsoft Office Essentials simply covers the things you really want to know and skips over all those esoteric features that 99 out of 100 readers never use.'], ['1884777848', 'Swing', 'Matthew Robinson', '1999', 'Successful fire crime source candidate. Sister director song son. Offer series western black. Hour recently memory law.'], ['1884777562', 'The Awesome Power of Java Beans', 'Lawrence H. Rodrigues', '1998', 'True many within try wait rise those. Beautiful same future serious. Include something radio create myself various including. Sure manage health prevent same others.'], ['013268327X', 'Personal Videoconferencing', 'Evan Rosen', '1996', '"Personal Videoconferencing is having an enormous impact on business. Evan Rosen has quantified that impact with examples of real world implementations and provided a primer on how businesses can achieve this competitive advantage for themselves."  --Frank Gill, Executive Vice President, Internet and Communications Group, Intel    "The book is very good: it is clear and the examples of user applications are excellent"  --Ralph Ungermann, CEO, First Virtual Corporation '], ['1935182528', 'The Cloud at Your Service', 'Jothy Rosenberg', '2010', 'Stand scene bed grow yard. Take among dark future. Civil age board experience staff. Cost drive top sea position responsibility. Federal day physical such year and boy.'], ['1884777694', 'Implementing Elliptic Curve Cryptography', 'Michael Rosing', '1998', '"The book provides all the theory and working programs needed to create real applications based on the latest IEEE P1363 standard."  --Reviewed in Cryptologia'], ['1933988266', 'SOA Patterns', 'Arnon Rotem-Gal-Oz', '2012', 'In SOA Patterns, author Arnon Rotem-Gal-Oz provides detailed, technology-neutral solutions to these challenges, and many others. This book provides architectural guidance through patterns and anti-patterns. It shows you how to build real SOA services that feature flexibility, availability, and scalability.'], ['1933988495', 'Hello World!', 'Warren D. Sande', '2009', 'Hello World! provides a gentle but thorough introduction to the world of computer programming.'], ['1932394400', 'SCBCD Exam Study Kit', 'Paul Sanghera', '2005', 'Expert seven right rise democratic. Wrong at however. Green picture believe senior. Car forward him trade. Respond mission above along pretty.'], ['1935182544', 'Portlets in Action', 'Ashish Sarin', '2011', 'Portlets in Action is a comprehensive guide for Java developers with minimal or no experience working with portlets. Fully exploring the Portlet 2.0 API and using widely adopted frameworks like Spring 3.0 Portlet MVC, Hibernate, and DWR, it teaches you portal and portlet development by walking you through a Book Catalog portlet and Book Portal examples.'], ['1932394273', 'SWT/JFace in Action', 'Matthew Scarpino', '2004', 'Guides you through the process of developing Eclipse-based GUIs and shows how to build applications with features your users will love. Packed with examples and no fluff.'], ['1617290173', 'OpenCL in Action', 'Matthew Scarpino', '2011', 'Beyond population half customer hour behind look. Sense send age bad. Republican common professor lawyer arm difference read. News us eye how hit. Current ago future everything study citizen.'], ['138892709', 'Multiprotocol over ATM', 'Andrew Schmidt', '1998', 'With the detailed coverage of the entire set of protocols in Multiprotocol over ATM, you can be equal to the task.'], ['1935182501', 'Dependency Injection in .NET', 'Mark Seemann', '2011', 'Dependency Injection in .NET is a comprehensive guide than introduces DI and provides an in-depth look at applying DI practices to .NET apps. In it, you will also learn to integrate DI together with such technologies as Windows Communication Foundation, ASP.NET MVC, Windows Presentation Foundation and other core .NET components.'], ['1930110359', 'Java 3D Programming', 'Daniel Selman', '2002', 'Right return business military they. Around within protect energy quickly. Movie just deal themselves.'], ['193518282X', 'Liferay in Action', 'Richard Sezov', '2011', 'Until opportunity what increase rock send. Woman order mother human eat friend. Identify fish process field north during. Ahead expert whatever.'], ['193011009X', 'JSP Tag Libraries', 'Gal Shachor', '2001', 'Throw seven be together model. Kind shoulder kitchen yes left. Degree moment too. Market someone ask movie experience activity different. Black from room half.'], ['1930110464', 'Instant Messaging in Java', 'Iain Shigeoka', '2002', 'This intermediate Java programming book provides Java programmers with the information and tools needed to create your own IM client and server software.'], ['1884777392', 'Java Applets and Channels Without Programming', 'Ronny Richardson', '1999', 'Java Applets and Channels Without Programming collects almost 100 applets on a CD with detailed instructions on how to use each applet. In addition, style issues are discussed in detail; not only will you learn how to use each applet, you will learn when and where it is appropriate to use each applet. The book also introduces the new concept of channels and shows how these can be used on your web site as well.  '], ['1935182005', 'PowerShell in Practice', 'Richard Siddaway', '2010', "PowerShell in Practice is a hands-on, cookbook-style reference intended for administrators wanting to learn and use PowerShell. Written from an administrator's perspective, it concentrates on using PowerShell for practical tasks and automation. The book starts with an introduction that includes a rapid tutorial and a review of the key areas in which you'll use PowerShell."], ['1617290114', 'PowerShell and WMI', 'Richard Siddaway', '2012', 'Live direction most beat customer form. Policy home rich me. Enjoy Democrat weight toward coach military rather. Create appear enjoy usually.'], ['132632942', 'Making Sense of Java', 'Bruce Simpson', '1996', 'Making Sense of Java clearly and concisely explains the concepts, features, benefits, potential, and limitations of Java.'], ['1932394818', 'C++/CLI in Action', 'Nishant Sivakumar', '2007', '   ... a great resource, an outstanding job, a must-read...        Ayman B. Shoukry, VC++ Team, Microsoft Corporation'], ['1933988363', 'C# in Depth', 'Jon Skeet', '2008', 'Material amount investment ago herself. Decade determine listen matter land. Yard under company figure decade her cell moment.'], ['1935182471', 'C# in Depth, Second Edition', 'Jon Skeet', 2017, "C# in Depth, Second Edition concentrates on the high-value features that make C# such a powerful and flexible development tool. Rather than re-hashing the core of C# that's essentially unchanged since it hit the scene nearly a decade ago, this book brings you up to speed with the features and practices that have changed with C# from version 2.0 onwards."], ['1884777589', 'Magical A-Life Avatars', 'Peter Small', '2000', '"Distinctive book explaining how to get intelligent software agents to work." --Clipcode.com'], ['1933988258', 'Becoming Agile', 'Greg Smith', '2009', "   Becoming Agile is not another book to be classified in the existing ones handling agile practices, it's one of the rare writings which will go with you in the adoption and setup/migration to an agile process...This real must-have agilist's bedside book reads very well and will accompany you in your migration agile practices...       Eric Siber, Developpez.com"], ['1933988940', 'ActiveMQ in Action', 'Bruce Snyder', '2011', 'ActiveMQ is implemented in Java, but it supports client applications written in many other programming languages including C/C++, .NET, Ruby, Perl, PHP, Python, and more. It can be integrated with other open source frameworks including Tomcat, ServiceMix, JBoss, and can easily bridge to other JMS providers.  '], ['138411808', 'Implementing PeopleSoft Financials', 'Early Stephens', '1997', 'Implementing PeopleSoft Financials discusses the issues that arise and the pitfalls to avoid. Every member of the implementation team--from entry-level accounting clerk through MIS staff to executive sponsors--will benefit from reading this book.'], ['1935182730', 'SQL Server DMVs in Action', 'Ian W. Stirk', '2011', "SQL Server DMVs in Action shows you how to obtain, interpret, and act on the information captured by DMVs to keep your system in top shape. The over 100 code examples help you master DMVs and give you an instantly reusable SQL library. You'll also learn to use Dynamic Management Functions (DMFs), which provide further details that enable you to improve your system's performance and health."], ['1935182706', 'Scala in Depth', 'Joshua D. Suereth', '2012', 'Scala in Depth is a unique new book designed to help you integrate Scala effectively into your development process. By presenting the emerging best practices and designs from the Scala community, it guides you though dozens of powerful techniques example by example. There\'s no heavy-handed theory here-just lots of crisp, practical guides for coding in Scala.    For example:        * Discover the "sweet spots" where object-oriented and functional programming intersect.      * Master advanced OO '], ['1930110561', 'JMX in Action', 'Benjamin G. Sullins', '2002', 'Six forward our understand fight sense. Wide home rock national apply. Town everything majority blood only respond bank model.'], ['1930110944', 'EJB Cookbook', 'Benjamin G. Sullins', '2003', '"This book provides a great reference for the average EJB developer. It provides recipes for most common tasks that an EJB developer would need." -- Computing Reviews, Nov. 2003'], ['1935182846', 'GWT in Action, Second Edition', 'Adam Tacy', '2013', 'They food make enter. Finish tax which per only know sing. Draw seat stop from. Myself energy protect happy team. Crime claim certain myself.'], ['1935182021', 'JUnit in Action, Second Edition', 'Petar Tahchiev', '2010', 'JUnit in Action, Second Edition is an up-to-date guide to unit testing Java applications (including Java EE applications) using the JUnit framework and its extensions. This book provides techniques for solving real-world problems such as testing AJAX applications, using mocks to achieve testing isolation, in-container testing for Java EE and database applications, and test automation.'], ['193011043X', 'Bitter Java', 'Bruce A. Tate', '2002', 'Particularly meet personal action tough to. Allow hour little base your amount beautiful. Page fund discover suffer nice and involve minute. Direction despite maintain model any step performance.'], ['1930110952', 'Bitter EJB', 'Bruce Tate', '2003', '"The book\'s informal tone offers a refreshing change from the ubiquitous preachiness of other EJB tomes. It\'s pragmatic and doesn\'t tap dance around the fact that EJBs are often used incorrectly in enterprise development... it\'s an effective way to avoid the potholes that have forced developers off track in the past." -- Software Development Magazine'], ['1935182951', 'Spring Batch in Action', 'Arnaud Cogoluegnes', '2011', 'Have treat born range old. Always if after hope appear light. Office born identify pay study why mother kid. Right drug usually. Avoid exactly office. Few score throughout organization.'], ['1930110456', 'JDK 1.4 Tutorial', 'Gregory M. Travis', '2002', 'Main positive police since fund argue of. Attorney pick customer. Scene why religious central. Question myself official compare thousand. Treatment policy threat them although.'], ['1935182587', 'iPhone and iPad in Action', 'Brandon Trebitowski', '2010', "Using many examples, the book covers core features like accelerometers, GPS, the Address Book, and much more. Along the way, you'll learn to leverage your iPhone skills to build attractive iPad apps. This is a revised and expanded edition of the original iPhone in Action."], ['1932394761', 'SQL Server 2005 Reporting Services in Action', 'Bret Updegraff', '2006', 'Prepare prepare so leg girl. Similar family difference participant. Wear traditional here trade suffer maybe everyone. International tough hotel country.'], ['1935182129', 'Ten Years of UserFriendly.Org', 'JD "Illiad" Frazer', '2008', "This unique collector's volume includes every daily strip from November 17, 1997 to November 16, 2007. Many of the cartoons are annotated with comments from UserFriendly artist and creator JD    Illiad    Frazer."], ['1930110022', 'Graphics Programming with Perl', 'Martien Verbruggen', '2002', 'Main special again nation role. Hair almost long. Become fly character technology own generation training line. Defense mention lay treatment main.'], ['1935182978', 'RabbitMQ in Action', 'Alvaro Videla', '2012', 'Already seem evidence whom. Others specific include pick example ten. See long sister tough. Unit main into cup social analysis particularly. Affect do her soon. Prove you probably election baby.'], ['1932394052', 'XDoclet in Action', 'Craig Walls', '2003', 'Huge air deep operation. High staff movement outside remember long along. We realize couple ok. Buy senior region maybe among movement another. Five too store bank during defense out.'], ['1932394354', 'Spring in Action', 'Craig Walls', '2005', 'Spring in Action introduces you to the ideas behind Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications. You will see how to solve persistence problems using the leading open-source tools, and also how to integrate your application with the most popular web frameworks. You will learn how to use Spring to manage the bulk o'], ['1933988134', 'Spring in Action, Second Edition', 'Craig Walls with Ryan Breidenbach', '2007', 'Face good situation something billion course window. Clearly clear pull. Receive speak it sister position west. Anything boy direction fly her rest force.'], ['1935182358', 'Spring in Action, Third Edition', 'Craig Walls', '2011', 'Spring in Action, Third Edition has been completely revised to reflect the latest features, tools, practices Spring offers to java developers. It begins by introducing the core concepts of Spring and then quickly launches into a hands-on exploration of the framework. Combining short code snippets and an ongoing example developed throughout the book, it shows you how to build simple and efficient J2EE applications.'], ['1935182056', 'Spring in Practice', 'Willie Wheeler with Joshua White', '2013', "Spring in Practice diverges from other cookbooks because it presents the background you need to understand the domain in which a solution applies before it offers the specific steps to solve the problem. You're never left with the feeling that you understand the answer, but find the question irrelevant. You can put the book to immediate use even if you don't have deep knowledge of every part of Spring Framework."], ['1930110332', 'Java 2 Micro Edition', 'James P. White', '2002', 'Big else tell than study. Environment sign wall price piece. Risk marriage hospital soon stage finally various. Difficult money ready become speak game kitchen. Performance actually attention entire.'], ['1935182714', 'SharePoint 2010 Workflows in Action', 'Phil Wicklund', '2011', 'SharePoint 2010 Workflows in Action is a hands-on guide for workflow application development in SharePoint. Power users are introduced to the simplicity of building and integrating workflows using SharePoint Designer, Visio, InfoPath, and Office. Developers will learn to build custom processes and use external data sources. They will learn about state machine workflows, ASP.NET forms, event handlers, and much more. This book requires no previous experience with workflow app development. '], ['1935182773', 'SharePoint 2010 Web Parts in Action', 'Wictor Wilén', '2011', "SharePoint 2010 Web Parts in Action is a comprehensive guide to deploying, customizing, and creating Web Parts. Countless examples walk you through everything from design, to development, deployment, troubleshooting, and upgrading. Because Web Parts are ASP.NET controls, you'll learn to use Visual Studio 2010 to extend existing Web Parts and to build custom components from scratch. "], ['1933988770', 'C++ Concurrency in Action', 'Anthony Williams', '2012', 'C++ Concurrency in Action is the first book to show you how to take advantage of the new C++ Standard and TR2 to write robust multi-threaded applications in C++.'], ['188477766X', 'Java Servlets by Example', 'Alan R. Williamson', '2002', 'Figure main figure expert. Growth hold none. Suddenly crime particular land behind type. Officer understand happy color education several. Of a inside follow tax within.'], ['1884777872', 'XML Programming with VB and ASP', 'Mark Wilson', '1999', 'Sell manager record reach. Hour air product national.'], ['1884777783', 'Oracle8i Database Administration', 'Noel Yuhanna', '1999', 'Herself exactly like wear. Choose well agent factor all he sport. Little seem lose week movie none.'], ['9781935182078', 'The Engaging Web', 'Gabe Zichermann', 2002, "The Engaging Web: How Fun and Games Improve Your Site shows web developers how to incorporate games into websites. This book will help you decode the possibilities and provide a series of proven and tangible strategies that any web developer, producer, or product manager can use to implement games in their website. Whether you're looking to make games the centerpiece of your site, an added-value feature, or you just want to engage and excite your users, The Engaging Web will help you develop a "], ['1617290130', 'Enterprise OSGi In Action', 'Holly Cummins', 2007, 'Event late majority line with age seem direction. Smile likely hour mean sister. Near any letter without skin movement or project.'], ['1617290327', 'Ext JS in Action, Second Edition', 'Jesus Garcia', '2014', 'Quickly easy organization finish. Heart usually TV structure magazine set scene. Water also method walk pressure establish.'], ['1617290505', 'Android in Action, Third Edition', 'W. Frank Ableson', '2011', 'Help mean relate away he civil to trial. Couple local hair sea require dream. Section page reflect business establish business site.'], ['1617290246', 'Arduino in Action', 'Martin Evans', '2013', 'Arduino in Action is a hands-on guide to prototyping and building electronics using the Arduino platform. Suitable for beginners and advanced users, this easy to follow book begins with the basics and systematically guides you through projects ranging from your first blinking LED through connecting Arduino to devices like game controllers or your iPhone.'], ['1617290572', 'Node.js in Action', 'Mike Cantelon', '2013', "Node.js in Action is an example-driven tutorial that starts at square one and guides you through all the features, techniques, and concepts you'll need to build production-quality Node applications. You'll start by learning how to set up your Node development environment, including loading the community-created extensions. Next, you'll run several simple demonstration programs where you'll learn the basics of a few common types of Node applications. Then you'll dive into asynchronous programmin"], ['1617290548', 'Third-Party JavaScript ', 'Ben Vinegar', '2013', 'About former buy significant three point. Who magazine from first data. Inside under teach improve music read. Enjoy wish easy example. Indicate meeting notice theory. Law man police experience.'], ['020152029X', 'Multimedia Computing', 'Matthew E. Hodges', '1993', 'System doctor order off soon long. Identify knowledge value than some like treatment. Activity against modern begin hot.'], ['1884777996', 'Web Development with JavaServer Pages', 'Duane K. Fields', '2000', 'Fall arm other size again course. Cost focus attack throughout spring beautiful. Car maintain enter success. After control power collection. Summer sense too pull.'], ['1884777643', 'Up to Speed with Swing', 'Steven J. Gutz', '1998', 'Become stop word claim PM young. Push especially for mean find again. Hand public range quality. Pass management once once. Politics wife hundred.'], ['193239429X', "Manager's Guide to Open Source", 'Maria Winslow', '2004', 'Safe big mouth worker hour TV. Technology provide direction six. Ten environmental bring nothing. Include even here future often. Man middle kid win. Wide time sister maybe drive.'], ['1930110421', 'Programming Web Services with Java', 'Ajamu A. Wesley', '2002', 'Across program threat about trip human law. Scene yes week right now. Join wish theory prevent care sense.'], ['132612496', 'TCP/IP Programming for OS/2', 'Steven J. Gutz', '1996', 'Ask could quality various step. Later try human good mouth scene. Sing research establish race girl nearly.'], ['1930110596', 'SCWCD Exam Study Kit', 'Hanumant Deshmukh', '2002', 'Claim significant day check let once indeed. Describe his new from structure option program.'], ['1617290386', 'Unit Testing in C++', 'Bruce Trask', 2011, 'During garden natural carry agreement. Never building short early oil administration. Eight personal society listen song.'], ['1617290343', 'Big Data', 'Nathan Marz', 2001, 'System nearly wear win let able. Set player amount special likely. New stop write follow. Nor who end happen create. Forget avoid something center action. Shoulder tree prepare morning president.'], ['1617290629', 'CoffeeScript in Action', 'Patrick Lee', '2014', 'Improve career baby small mission nearly it. May true admit feel course seven. Girl theory image their campaign science. South man small meet. Identify husband it total majority.'], ['1617290475', 'SQL Server MVP Deep Dives, Volume 2', 'Kalen Delaney', '2011', 'Everybody long six direction have environment he. Arrive eye word. Cut simple usually rise. Mr money very carry the campaign. Often music war dream discussion. Letter gun cost Mr American.'], ['1617290491', 'HTML5 in Action', 'Rob Crowther', '2014', "HTML5 In Action provides a complete introduction to web development using HTML5. You'll explore every aspect of the HTML5 specification through real-world examples and code samples. It's much more than just a specification reference, though. It lives up to the name HTML5 in Action by giving you the practical, hands-on guidance you'll need to use key features."], ['1617290459', 'Java Persistence with Hibernate, Second Edition', 'Christian Bauer', 2011, 'Store pattern mouth fish be more. Begin face already generation. Hope number left director thank can from.'], ['1617290238', 'Hadoop in Practice', 'Alex Holmes', '2012', 'Maybe me protect listen pressure activity. Within test allow grow. Human worry particularly worker themselves herself forward person. Choose form director.'], ['1617290521', 'HBase in Action', 'Nicholas Dimiduk', '2012', 'Per before star. Accept woman all peace apply adult. Finish hotel institution country discover shake whether. Strong cup great best before image similar.'], ['1617290610', 'Flex Mobile in Action', 'Jonathan Campos', '2012', 'Many science then. Some policy teach raise property Congress. Possible table market front history as parent. Forget cost we sort.'], ['1617290432', 'HTML5 for .NET Developers', 'Jim Jackson', '2012', 'Food firm born well might. Leader seem address edge true. Minute art feeling leg. Learn during manager interview kitchen dinner leg.'], ['1617290564', '50 Android Hacks', 'Carlos M. Sessa', '2013', 'Suggest product learn generation put. Determine since hit perhaps officer party. Hold popular remember. Media age subject always third ask three.'], ['1617290556', 'PowerShell in Depth', 'Don Jones', '2013', 'Least sit nothing environmental other care play. Anyone during seven voice purpose ten others. Identify yard letter increase. Fund happen attack admit business.'], ['1617290165', 'Augmented Reality Revealed', 'Robert A. Rice Jr.', 2007, 'Country nothing rock fight red beautiful occur. Week fast school necessary through arrive billion. Trouble occur success yourself. Through test method modern truth.'], ['1617290599', 'Building Well-Structured JavaScript Applications', 'Julio C. Ody', 1996, 'Everyone buy yes never drug current. Control good campaign example dog. Offer room easy thought free tell build purpose. School five likely north try then. College drive year.'], ['1617290394', 'Linked Data', 'David Wood', '2013', 'Activity fire serious it. Personal class that Republican three up see throughout. Establish art build attention.'], ['1617290823', 'Mule in Action, Second Edition', 'David Dossot', '2014', 'Nation kid buy environmental fear. Keep simple rest later between. Design which power rather close drive baby.'], ['1617290750', 'Single Page Web Applications', 'Michael S. Mikowski', '2013', 'Agent enjoy something purpose now law write. Unit far be surface popular wall such true. Whether dog collection themselves. Few environment gas. Natural property become lose light both image.'], ['1617290890', 'The Art of Unit Testing, Second Edition', 'Roy Osherove', '2013', 'Half alone fight would first. Region raise second sing almost may imagine. Positive admit task tax deep general interesting.'], ['1617290904', 'Play for Java', 'Nicolas Leroux', '2014', 'Guy note off tonight network task. Single south do. Thus around over customer success safe. Class indicate institution air end common may.'], ['1617290920', 'Hello World! Second Edition', 'Warren Sande', '2013', 'Apply resource listen live stock lay poor. Hour home surface. Model black maintain may edge avoid. Rise able explain wrong detail physical. Resource activity light.'], ['1617290866', 'Dart in Action', 'Chris Buckett', '2012', 'Nation line with. Money two only summer series.'], ['1617290858', 'Redis in Action', 'Josiah Carlson', '2013', 'Become might watch life office great safe. Develop strong loss technology tell summer. Challenge focus add effect modern. Bad safe staff establish hit.'], ['161729084X', 'Using the TI-83 Plus/TI-84 Plus', 'Christopher R. Mitchell', '2013', 'Truth major special. Door sport lay though during several yard. Test either never purpose discuss.'], ['1617290769', 'Neo4j in Action', 'Jonas Partner', 2006, 'Lawyer chance page several order because work garden. Young discover public positive. Study artist choice method west.'], ['1617290777', 'Programming the TI-83 Plus/TI-84 Plus', 'Christopher R. Mitchell', '2012', 'Eat perhaps they. Reason dark since somebody affect show. Paper build among great involve. So research keep buy. Large begin daughter property senior forget.'], ['1617290653', 'Functional Programming in Scala', 'Paul Chiusano', 2011, 'Security plan hear mission. Test note today crime middle real suffer simply. Director remain race three ever art somebody.'], ['1617290793', 'Play for Scala', 'Peter Hilton', '2013', 'Will show head maybe. Fund indeed although walk low hit best. Hold plant race detail.'], ['1617290939', 'Node.js in Practice', 'Alex Young', 2001, 'Nearly story become out much sea line. Happy reason economic audience baby. Drop present sister among training many player.'], ['1617290955', 'SonarQube in Action', 'G. Ann Campbell', '2013', 'Player tonight record organization box tonight interesting. Run option score white across political add. Happen thank kid hold book student rest.'], ['1617290947', 'Windows Store App Development: C# and XAML', 'Peter M. Brown', '2013', 'Society try story clear skin toward. Meeting certain bring later pretty each. Assume including morning party old.'], ['1617290971', 'Learn Windows IIS in a Month of Lunches', 'Jason C. Helmick', '2013', 'Alone eye action view reality others analysis. Owner surface safe son quite television course. Or development again themselves approach ago arrive. Yard party factor treatment.'], ['161729098X', 'Mondrian in Action', 'William Back', 2000, 'Organization meeting black main identify. Receive describe vote team. Detail while thought leg. Receive start smile kitchen behind. Able glass stop single note claim main.'], ['1617291005', 'RabbitMQ in Depth', 'Gavin M. Roy', 1998, 'Around talk very their. Truth door than per. My popular moment office man. Morning particularly note number serve note dinner. Water prevent up wall commercial. Safe side establish.'], ['1617291013', 'Akka in Action', 'Raymond Roestenburg', 2004, 'Line fine case concern industry start long. Ahead window show. Deep international those give standard. Sit half approach at. Method student eye. Picture nation report final heart market.'], ['161729103X', 'Extending jQuery', 'Keith B. Wood', '2013', 'Rest yeah individual find order. Ago game fine apply. Second time blue probably center character. Open right use instead them.'], ['1617291048', 'OCA Java SE 7 Programmer I Certification Guide', 'Mala Gupta', '2013', 'Room list family seek project out. Heart article production. List consumer responsibility heart.'], ['1617291056', 'Kanban in Action', 'Marcus Hammarberg', '2014', 'Start look edge follow risk mean pay. General instead pay history show push. Building response task of focus. Pressure mother different themselves.'], ['1617291021', 'Solr in Action', 'Trey Grainger', '2014', 'Three use program other table purpose door even. Space age treatment unit ten computer. Expert significant avoid. Organization board language despite.'], ['1617291072', 'Making Sense of NoSQL', 'Daniel G. McCreary', '2013', 'Quality happy issue nothing. Fine probably attorney glass. Piece team real. Ball option kitchen huge remain box. Break wish month agent ability. Despite court tree remain.'], ['1884777864', 'Jaguar Development with PowerBuilder 7', 'MIchael Barlotta', '1999', 'Or anyone recently pick. Beat pull Congress dream table full resource.'], ['1617290963', 'Grails in Action, Second Edition', 'Glen Smith', 2010, 'Month likely however difficult step. Can position listen around. Subject table culture black. Ten stock either much law they few. Particularly memory according late skill water poor.'], ['1617291099', 'Rails 4 in Action', 'Ryan Bigg', 2003, 'Look happy around election day. Goal loss everybody cause choice such. Anyone leg course. Home sound under fund question glass during various. Ever degree decade trip. But between turn fill.'], ['1617291080', 'Learn Windows PowerShell in a Month of Lunches, Second Edition', 'Don Jones', '2012', 'Say artist race term. Partner best low player author recognize. Stay general baby hot quickly.'], ['1617291145', 'AOP in .NET', 'Matthew D. Groves', '2013', 'There moment usually seat player could. These type region end. Rock government those thing.'], ['1617291161', 'Learn PowerShell Toolmaking in a Month of Lunches', 'Don Jones', '2012', 'To really power might hour. Speech occur above window drive seem manage. In leg former region occur career. Resource reach ahead tell. Upon trial suddenly all baby.'], ['1617291153', 'CMIS and Apache Chemistry in Action', 'Florian Müller', 2004, 'List wish next others. Success reveal strategy indeed. Fear exist later explain change.'], ['1930110324', 'Action Guide (aka VB .NET)', 'Paul Messick', 2016, 'Night word security suggest various bad body live. General then every around attention very. Religious push alone have. Anything recognize again.'], ['1617291196', 'Learn Active Directory Management in a Month of Lunches', 'Richard Siddaway', 2021, 'Race southern member. Consumer he opportunity shoulder class third. Mind worker also tree. North rate lawyer marriage. Value field anyone fire relationship ago.'], ['161729120X', 'Spring in Action, Fourth Edition', 'Craig Walls', 2005, 'Head half anyone reflect involve protect. Hit get analysis left conference listen site. Back record form opportunity.'], ['1617291218', 'The Mikado Method', 'Ola Ellnestam', '2014', 'Everything ok feeling adult help. Town page election member while finish senior. Successful social worry follow administration. Skin person man western process it represent. Teach plant on team of.'], ['1617291242', 'The Responsive Web', 'Matthew Carver', 2013, 'Challenge system morning land tax huge student style. Result door test sit already. Unit store training about camera.'], ['1617291250', 'Fast ASP.NET Websites', 'Dean Alan Hume', '2013', 'Long which begin head owner. Able bad article scientist trade throw. Material doctor former. Article on receive build gas increase design. Author catch table itself general especially.'], ['1617291277', 'SBT in Action', 'Joshua Suereth', 2020, 'Billion ever modern if. Church man stand economic hour grow. Get material note oil. Compare doctor main interview bring to animal sport. Drop financial use science alone design decision teacher.'], ['1617291315', 'PowerShell Deep Dives', 'Edited by Jeffery Hicks', 2003, 'Loss other natural camera bank. Save maintain true choose cut ever stuff. Knowledge threat without second.'], ['1617291307', 'Gradle in Action', 'Benjamin Muschko', '2014', 'There involve tonight foreign. Many just race different management. They red off positive still. Avoid process market east road center no.'], ['1617291293', 'Scalatra in Action', 'Ivan Porto Carrero', 2005, 'Still during line produce responsibility nature. Thus side American short husband moment west. Writer these sense interview news. Never cause ground eight.'], ['1617291331', 'AngularJS in Action', 'Brian Ford', 2017, 'Child father throw course prevent the. Bill weight would view become. Culture total value health weight specific edge. Development continue night society give this. Usually land college movie.'], ['1617291358', 'Software Development Metrics', 'David Nicolette', 2008, 'Red small rule look final. Military evening site dog strong door adult. Which receive language authority PM compare.'], ['1617291323', 'F# Deep Dives', 'Tomas Petricek', 2010, 'Unit say apply build bill economy. Stage heavy kid paper pick building.'], ['161729134X', 'C# in Depth, Third Edition', 'Jon Skeet', '2013', 'Phone may pull. Threat camera bad song surface research young. Strategy call kid together Republican grow form.'], ['1617291390', 'PostGIS in Action, Second Edition', 'Regina Obe', 2003, 'Add there rich treatment sure also. Than sister with visit require.'], ['1617291382', 'R in Action, Second Edition', 'Robert Kabacoff', 2014, 'Task wear bed look hand school early minute. Box large soldier method. Music floor relate home back. Real once research approach strong history do. Difficult report draw score exactly rise.'], ['1617291412', 'The Joy of Clojure, Second Edition', 'Michael Fogus', '2014', 'My build value scene it wide police. Go officer leave organization.'], ['1617291420', 'iOS 7 in Action', 'Brendan G. Lim', '2014', 'Scene site various stage near. Camera support determine remember easy. Commercial someone term may.'], ['1617291439', 'Hello App Inventor!', 'Paula Beer', 2008, 'Read throughout meeting. Within laugh science level. Rule a down capital hit. Along yes beyond free event argue. Each not man cold use charge.'], ['1617291455', 'Ember.js in Action', 'Joachim Haagen Skeie', '2014', 'Beyond serve south best risk near share. Region opportunity language memory. Continue fall think leg safe. Key trip these possible Democrat left material.'], ['1617291471', 'Netty in Action', 'Norman Maurer', 2001, 'These learn summer woman security. Your research whole main mother lead from. Cup Congress military science human. Later front place according whom action most nation.'], ['1617291501', 'RavenDB in Action', 'Itamar Syn-Hershko', 2013, 'Article then rate. Edge toward source not yeah. Be back pattern contain stuff culture forward firm. Believe car science parent. Training myself foreign prevent free. Want state role enter rich stock.'], ['161729148X', 'OCP Java SE 7 Programmer II Certification Guide', 'Mala Gupta', 1998, 'Watch food concern catch pay. Culture raise similar detail physical out. Available event arrive guess land recent. North step matter city out.'], ['1617291536', 'Backbone.js in Action', 'Samuel M. Breed', 1998, 'Condition leave range this country. Any road air take. Bring fund major major resource born. Inside involve one share every south ahead. Black me among his education. Half note management difficult.'], ['1617291528', 'Clojure in Action, Second Edition', 'Amit Rathore', 2010, 'Foot recognize sister far growth current season board.'], ['1617291560', 'Practical Data Science with R', 'Nina Zumel', '2014', 'Consumer kitchen card church policy. Approach garden remain hair religious should chance. Without teacher threat media own I in. Person including under back. Play yard herself work population.'], ['1617291617', 'ArcGIS Web Development', 'Rene Rubalcava', 2007, 'Figure bill entire fly. Blue chance kid. Race hour daughter case eat. Anything manage science food consider home. Dark rise yet event something later.'], ['1617291625', 'Elasticsearch in Action', 'Radu Gheorghe', 1996, 'Bit particularly guy course because responsibility. Seem analysis president. Idea star across recently young. Eat answer score effect station card. Husband four sit.'], ['1617291684', 'Learn SCCM 2012 in a Month of Lunches', 'James Bannan', 1997, 'Win idea to fish parent. Itself indicate never fill have voice sport. Letter grow water mother.'], ['1617291706', 'Programming for Musicians and Digital Artists', 'Ajay Kapur', 2009, 'Article provide just cause guess why assume. Receive book both join walk. Concern many generation appear. Everything set southern table every.'], ['161729165X', 'BDD in Action', 'John F. Smart', 2012, 'Nearly analysis crime safe project water. Response off than news. Sound memory determine event. Dream support station answer ok others collection. Alone he company police.'], ['1617291374', 'Windows Phone 8 in Action', 'Timothy Binkley-Jones', '2013', 'Fight check agency wish. Rest whole bank huge sense wear. Painting letter practice say face rich article. Newspaper inside letter job school floor. How respond per TV.'], ['1617291749', 'Titanium Alloy in Action', 'Ricardo Alcocer', 2008, 'Political somebody offer discuss. Resource popular attack. Property however something Republican new music soon. Sport share play a. History back computer whose. Miss area trip friend quite body.'], ['1617291757', 'Giraph in Action', 'Claudio Martella', 2000, 'Night recently international executive during glass side. Note throw policy. Author situation practice let contain true than. Try bill people. Others newspaper effort always.'], ['1617291692', 'The Well-Grounded Rubyist, Second Edition', 'David A. Black', '2014', 'Thousand prevent player mother our now. Shake save finish attack positive. Put real beautiful research citizen whose.'], ['1617291781', 'Go in Action', 'Brian Ketelsen', 2015, 'Treat head camera program fight. Last before although just money continue oil. Of economic third nature leader risk my. No need yeah line.'], ['1617291811', "The Programmer's Guide to Apache Thrift ", 'Randy Abernethy', 2006, 'Seven city age end American possible. Like hospital past sort person son man. Relate good president production life remember.'], ['1617291838', 'Grokking Functional Programming', 'Aslam Khan', 2002, 'Able fish soldier song accept young talk western. Claim chair environment race network artist should. Wish far skin hospital consumer skill fall. Field strong reach somebody board week trade.'], ['161729182X', 'CORS in Action', 'Monsur Hossain', 2021, 'Among movement people degree. Agent leg capital social lawyer maintain once. Recently bad fly draw.'], ['1617291803', 'Reactive Design Patterns', 'Roland Kuhn', 2008, 'Continue member city prove protect raise reflect. Order season several green.'], ['1617291897', 'Storm Applied', 'Sean Allen', 2015, 'Until create interesting crime thank major. Would politics ten.'], ['1617291927', 'Real-World Machine Learning', 'Henrik Brink', 2021, 'Kind official leader defense or seek hour. Wrong range off industry figure. Though computer mission admit test. Company manager east strategy. Part yard pattern although debate child eat.'], ['1617291935', 'jQuery UI in Action', 'Theodore J. (T.J.) VanToll III', 2007, 'Detail finally current near. Beat spend program happy save. Program stand business. Reason him as civil seven. Product already my pretty remember only.'], ['1617291943', 'Web Components in Action', 'Chris Buckett', 2016, 'Reveal lawyer vote writer. Expect appear building. Concern reach write. How increase reveal. Nothing party enough none. Operation sister TV certainly knowledge. Wall detail somebody cell should that.'], ['1617291951', 'JavaScript Application Design', 'Nicolas G. Bevacqua', 2013, 'Side voice region whatever. Director appear as military. Forward keep hundred behavior much. Herself team anything wife interview level student. Health memory hold whole shoulder rise agent.'], ['1617291978', 'Git in Practice', 'Mike McQuaid', 2001, 'Build discuss our southern. So power pattern by action they. Card school eight. Never party doctor local. Serve process weight Mrs especially into degree.'], ['1617291986', 'Impala in Action', 'Richard L. Saltzer', 2004, 'Factor change live drop area. Election pull respond special yet response TV. Rest and scene any down us about. Whether answer high marriage fly speech cultural to.'], ['1617291994', 'Java 8 in Action', 'Raoul-Gabriel Urma', 1995, 'Into key point arrive buy high. Fund point daughter affect trade public.'], ['161729201X', 'Elixir in Action', 'Saša Juric´', 1998, 'Save million central understand. Drug every former member. Fast character wear level physical especially. Serious member employee. Wall happen such hundred give deal. Soon large clearly minute.'], ['1617291609', 'MongoDB in Action, Second Edition', 'Kyle Banker', 2004, 'Democratic race conference only. Myself nation soldier commercial draw individual mouth. It game society.'], ['1617292036', 'Getting MEAN with Mongo, Express, Angular, and Node', 'Simon Holmes', 2003, 'Federal term citizen close from. Second trial detail people old public. Who point hear early reach the. Billion per difference night paper. End agreement our. Spend garden debate leave.'], ['1617292079', 'jQuery in Action, Third Edition', 'Bear Bibeault', 2013, 'Song see difficult represent decide. Either remember charge else citizen radio. Tax moment later produce production cell.'], ['1617292117', 'D3.js in Action', 'Elijah Meeks', 2015, 'Within use different cut left say today. Here window growth think race scientist. Candidate recently these middle knowledge responsibility final.'], ['1617292133', 'Learn SQL Server Administration in a Month of Lunches', 'Don Jones', '2014', 'Big address edge cold. Next imagine nature remember though writer remain. Position federal method us cut realize report. Require position over base.'], ['1617292141', 'Geoprocessing with Python', 'Chris Garrard', 2015, 'Forward score reason reduce find staff life prove. Half himself role attention. Speak tell others heavy long always. Defense large family glass factor information effort force.'], ['161729215X', 'Barcodes with iOS', 'Oliver Drobnik', 2003, 'Why very accept PM company glass move management. Possible hair outside hear.'], ['1617292214', 'Chef in Action', 'Dimitri Aivaliotis', 1997, 'Indicate important likely chance player often. Whole hope tend success. Suddenly mind ground recent fact huge. Ground person great today scene. Move worry let receive election.'], ['1617292222', 'Hadoop in Practice, Second Edition', 'Alex Holmes', 2011, 'Man market fine now. Whole raise body significant right road. Government may can body also race top. Organization air off financial trial rule. Everything show in last life represent.'], ['1617292192', 'Oculus Rift in Action', 'Bradley Austin Davis', 2003, 'Wish draw family program study western assume. Focus heart down like century focus better. Boy method husband deal affect. Alone area wide word time right Mr.'], ['1617292168', 'OpenStack in Action', 'Cody Bumgardner', 1996, 'Point recognize forward create. Dinner move worry. Turn impact never size type nearly. Color along yes. Provide lead number evidence beyond range.'], ['1617292184', 'PowerShell in Depth, Second Edition', 'Don Jones', 2021, 'Party tough half course. Many most improve sea. Fall American nearly recently. Dinner bit reflect. Probably former drug gas then home wrong. Whether yes audience new. Kid hard number country child.'], ['1617292338', 'Practical Probabilistic Programming', 'Avi Pfeffer', 1998, 'Claim service science his particular data. Adult exist hundred together too enjoy girl theory. A book two visit particular day who network.'], ['161729232X', 'Unity in Action', 'Joseph Hocking', 2015, 'No realize impact identify change order. Than short energy add consider get. Relationship early threat police. Property bit coach not still.'], ['1617292427', 'Express.js in Action', 'Evan M. Hahn', 2014, 'Ago news seven fund even say despite. Style change clear however lawyer leader. Nice large American age.'], ['1617292419', 'Learn Git in a Month of Lunches', 'Rick Umali', 2012, 'Involve human open miss might different. Building pull catch consumer item fly view. In power create avoid word. President garden this so red pick. Employee better huge until cultural tough ability.'], ['1617292435', 'Understanding SPAs', 'Emmit A. Scott', 2011, 'Full stop wife. Financial imagine and region its husband. Natural hear raise. Real situation heart foot sort research best late. Public she simple perform soon. Pass phone should place impact.']]
