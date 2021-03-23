@@ -41,8 +41,7 @@ b {
 }
 
 #cadre {
-	border-style: dashed;
+	border-style: solid;
 	border-color: red;
-	background-color: yellow;
-	text-transform: uppercase;
+	text-align: center;
 }

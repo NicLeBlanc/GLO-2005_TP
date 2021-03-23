@@ -39,3 +39,10 @@ cursor.execute(request_db_livres)
 # Insérer les livres dans la base de données
 request_livres = """INSERT INTO Livres (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
 cursor.executemany(request_livres, books)
+
+
+def select_books():
+    request = "SELECT * FROM Livres ORDER BY annee_publication DESC LIMIT 0,10;"
+    cursor.execute(request)
+    books = [entry[0] for entry in cursor.fetchall()]
+    return books

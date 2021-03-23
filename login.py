@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import pymysql, pymysql.cursors
+from database import select_books
 
 app = Flask(__name__)
 ProfileUtilisateur = {}
@@ -39,7 +40,18 @@ def login():
         ProfileUtilisateur["nom"]=info[3]
         return render_template('bienvenu.html', profile=ProfileUtilisateur)
 
-    return render_template('login.html', message="Informations invalides!")
+    return render_template('login.html', message="Les informations entrées ne sont pas valides, veuillez ré-essayer")
+
+
+def recent_books():
+    top10_books = recent_books()
+
+    response = {
+        "status": 200,
+        "top10_books": top10_books
+    }
+
+    return jsonify(response)
     
 
 if __name__ == "__main__":

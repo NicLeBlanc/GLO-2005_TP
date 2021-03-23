@@ -8,6 +8,11 @@ SELECT * FROM Clients;
 
 CREATE TABLE Livres(isbn varchar(20), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500));
 
+SELECT *
+FROM Livres
+ORDER BY annee_publication DESC
+limit 0,10;
+
 -- CREATE DATABASE testdb;
 -- USE testdb;
 -- CREATE TABLE Utilisateurs(courriel varchar(50), motpasse varchar(12), nom varchar(20), avatar varchar(40));
