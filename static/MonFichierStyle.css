@@ -1,17 +1,43 @@
 body {
-	background-color:#0025AA
+	background-color:#cccccc;
+}
+
+header {
+	font-family: "Bookman Old Style";
+	color: black;
+	margin-left: 80px;
+	font-weight: bold;
+	font-size: 40px;
 }
 
 p {
-	font-family: "Times New Roman";
+	font-family: "Arial";
 	color: black;
 	margin-left: 80px;
-	font-weight: bold;	
+	font-size: 20px;
 }
 
-.centre {
+b {
+	font-family: "Arial";
+	color: black;
+	font-size: 20px;
+}
+
+.centre_titre {
 	text-align: center;
-	color: red;
+	color: black;
+}
+
+.centre_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+
+.centre_texte {
+	text-align: center;
+	color: black;
 }
 
 #cadre {

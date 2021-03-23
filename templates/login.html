@@ -6,12 +6,18 @@
 </head>
 <body onload="SupprimerContenu()"> 
 
-<p class="centre">Page d'authentification</p>
+<header class="centre_titre">Livres en Vrac </header>
+<br>
+<p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
+<br>
+<p class="centre_texte">
+Bienvenue sur Livres en Vrac, veuillez entrer vos informations afin d'acc&eacuteder &agrave la meilleure librairie en ligne
+</p>
 <form action="login" method="post">
-<p>Entrer votre courriel: <input type="text" name="courriel"><br>
-Entrer votre mot de passe: <input type="password" name="motpasse">
-</p><br>
-<input type="submit" value="Identification" name="Soumettre">
+<p class="centre_texte">Courriel: <input type="text" name="courriel"><br>
+Mot de passe: <input type="password" name="motpasse">
+<br>
+<input type="submit" value="Identification" name="Soumettre"></p>
 </form>
 
 {% if message %}
