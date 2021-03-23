@@ -1,5 +1,5 @@
 from faker import Faker
-from main import insert_into_clients
+from database import insert_into_clients
 
 fake_data = Faker()
 
