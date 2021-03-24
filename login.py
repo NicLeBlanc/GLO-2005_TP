@@ -34,7 +34,7 @@ def login():
         info = cur.fetchone()
 
         global ProfileUtilisateur
-        ProfileUtilisateur["courriel"]=courriel
+        ProfileUtilisateur["courriel"]=info[0]
         ProfileUtilisateur["prenom"]=info[2]
         ProfileUtilisateur["nom"]=info[3]
         return render_template('bienvenu.html', profile=ProfileUtilisateur)
