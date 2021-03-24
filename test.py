@@ -20,4 +20,7 @@ cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 0,10;'
 cur = conn.cursor()
 cur.execute(cmd)
 top10_books = cur.fetchall()
+# global livres
+# livres["titre"] = info[1]
+# livres["auteur"] = info[0]
 print(top10_books)
