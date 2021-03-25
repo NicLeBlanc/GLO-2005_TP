@@ -1,6 +1,7 @@
 import pymysql.cursors
 from data import fake_profiles
 from data import books
+from data import fake_seller
 
 connection = pymysql.connect(
     host="127.0.0.1",
@@ -76,8 +77,8 @@ request_clients = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_d
 cursor.executemany(request_clients, fake_profiles)
 
 # Insérer les vendeurs dans la base de données *** fake_vendeur
-request_vendeur = """INSERT INTO Vendeur (ID, prenom, nom, adresse, pays_origin, courriel_vendeur, cote_global) VALUES(%s, %s, %s, %s, %s)"""
-cursor.executemany(request_vendeur, fake_vendeurs)
+request_vendeur = """INSERT INTO Vendeur (ID, prenom, nom, adresse, pays_origine, courriel_vendeur, cote_global) VALUES(%s, %s, %s, %s, %s)"""
+cursor.executemany(request_vendeur, fake_seller)
 
 # Insérer les livres dans la base de données
 request_livre = """INSERT INTO Livre (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
