@@ -69,15 +69,58 @@ cursor.execute(request_contient)
 #* Insertion dans les tables
 #*/
 
+# Les tables avec un *** dans la description sont à rajouter à la database - LCC
+
 # Insérer tout les clients dans la base de données
 request_clients = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES (%s, %s, %s, %s, %s)"""
 cursor.executemany(request_clients, fake_profiles)
+
+# Insérer les vendeurs dans la base de données *** fake_vendeur
+request_vendeur = """INSERT INTO Vendeur (ID, prenom, nom, adresse, pays_origin, courriel_vendeur, cote_global) VALUES(%s, %s, %s, %s, %s)"""
+cursor.executemany(request_vendeur, fake_vendeurs)
 
 # Insérer les livres dans la base de données
 request_livre = """INSERT INTO Livre (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
 cursor.executemany(request_livre, books)
 
 
+# Insérer les genres dans la base de données *** genre
+request_genre = """INSERT INTO Genre (type) VALUES(%s)"""
+cursor.executemany(request_genre, genre)
+
+# Insérer les commandes dans la base de données *** fake_commande
+request_commande = """INSERT INTO Commande (ID, niveau_satisfaction, prix_total, date_expedition, date_commande) VALUES (%s, %s, %s, %s, %s)"""
+cursor.executemany(request_commande, fake_commande)
+
+# Insérer la relation Securise dans la base de données *** securise
+
+request_securise = """INSERT INTO Securise (password, courriel) VALUES (%s, %s)"""
+cursor.executemany(request_securise, securise)
+
+# Insérer la relation prefere dans la base de données *** prefere
+
+request_prefere = """INSERT INTO Prefere(courriel, courriel, genre) VALUES (%s, %s, %s)"""
+cursor.executemany(request_prefere, prefere)
+
+# Insérer la relation evalue dans la base de données *** evalue
+
+request_evalue = """INSERT INTO Evalue(courriel, ID, cote) VALUES (%s, %s, %s)"""
+cursor.executemany(request_evalue, evalue)
+
+# Insérer la relation vend dans la base de données *** vend
+
+request_vend = """INSERT INTO Vend(ID, isbn, nbr_exemplaire, prix) VALUES (%s,%s,%s,%s)"""
+cursor.executemany(request_vend, vend)
+
+# Insérer la relation classer dans la base de données *** classer
+
+request_classer = """INSERT INTO Classer(isbn, type, livre, Genre) VALUES (%s, %s, %s, %s)""" #type est en orange, j'ignore pourquoi LCC
+cursor.executemany(request_classer, classer)
+
+# Insérer la relation contient dans la base de données *** contient
+
+request_contient = """INSERT INTO Contient(ID, isbn, nbr_exemplaire)"""
+cursor.executemany(request_contient, contient)
 
 def select_books():
     request = "SELECT * FROM Livre ORDER BY annee_publication DESC LIMIT 0,10;"
