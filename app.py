@@ -20,8 +20,6 @@ def main():
 
     return render_template('login.html', livres=info)
 
-# ProfileUtilisateur["nom"] = info[3]
-
 @app.route("/login", methods=['POST'])
 def login():
     courriel = '"' + request.form.get('courriel') + '"'
@@ -76,9 +74,10 @@ def formulaire_inscription():
 
 # @app.route("/inscription_complete", methods=['POST', 'GET'])
 # def inscription():
+#     courriel = '"' + request.form.get('courriel') + '"'
+#     return render_template("inscription_complete.html")
 
-#
-# return render_template('inscription.html', message="Cette adresse courriel est d&eacutej&agrave utilis&eacutee")
+    # return render_template('inscription.html', message="Cette adresse courriel est d&eacutej&agrave utilis&eacutee ou des information entr&eacutees ne sont pas conformes")
 
 if __name__ == "__main__":
     app.run()

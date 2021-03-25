@@ -10,28 +10,27 @@
 <br>
 <p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
 <br>
-
+<hr>
 <p class="centre_texte">
 Bienvenue sur Livres en Vrac, veuillez entrer vos informations afin d'acc&eacuteder &agrave la meilleure librairie en ligne :
-<hr>
 <form action="login" method="post">
 <p class="centre_texte">Courriel: <input type="text" name="courriel"><br>
 Mot de passe: <input type="password" name="motpasse">
 <br>
-<input type="submit" value="Identification" name="Soumettre"></p>
+<input type="submit" value="Identification" name="Soumettre" class="centre_button"></p>
 </form>
 
 {% if message %}
 <div id="cadre">{{ message }}</div>
 {% endif %}
-
+<hr>
 <p class="centre_texte">
 Si vous ne poss&eacuteder pas de compte, veuillez vous inscrire :
-<hr>
 </p>
 <form action="http://127.0.0.1:5000/inscription">
-    <input type="submit" value="S'inscrire" class="centre_button"/>
+    <input type="submit" value="S'inscrire" name="Inscription" class="centre_button"/>
 </form>
+<hr>
 <br>
 <br>
 <p class="centre_texte">
@@ -41,12 +40,14 @@ Voici une s&eacutelection de livres publi&eacutes r&eacutecemment :
     <table style="width:100%">
   <tr>
     <th>Titre</th>
+    <th>ISBN</th>
     <th>Auteur</th>
     <th>Ann&eacutee de publication</th>
   </tr>
     {% for item in livres %}
   <tr>
     <td>{{item[1]}}</td>
+    <td>{{item[0]}}</td>
     <td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
   </tr>
