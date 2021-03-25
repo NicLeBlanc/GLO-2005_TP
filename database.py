@@ -2,6 +2,7 @@ import pymysql.cursors
 from data import fake_profiles
 from data import books
 from data import fake_seller
+from data import securise
 
 connection = pymysql.connect(
     host="127.0.0.1",
@@ -32,38 +33,38 @@ cursor.execute(request_use_bd)
 request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
 cursor.execute(request_db_clients)
 
-request_db_vendeurs = "CREATE TABLE Vendeur(ID varchar(20),PRIMARY KEY(ID), prenom char(20), nom char(20), adresse varchar(200), pays_origine char(20), courriel_vendeur varchar(50), cote_global integer(1))"
+request_db_vendeurs = "CREATE TABLE Vendeurs(ID varchar(20),PRIMARY KEY(ID), prenom char(20), nom char(20), adresse varchar(200), pays_origine char(20), courriel_vendeur varchar(50), cote_global integer(1))"
 cursor.execute(request_db_vendeurs)
 
-request_db_livres = "CREATE TABLE Livre(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500))"
+request_db_livres = "CREATE TABLE Livres(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500))"
 cursor.execute(request_db_livres)
 
-request_db_genre = "CREATE TABLE Genre(type varchar(20), PRIMARY KEY(type))"
+request_db_genre = "CREATE TABLE Genres(type varchar(20), PRIMARY KEY(type))"
 cursor.execute(request_db_genre)
 
-request_db_commande = "CREATE TABLE Commande(ID varchar(20), PRIMARY KEY(ID), niveau_satisfaction integer(1), prix_total float(12), date_expedition nvarchar(50), date_commande nvarchar(50))"
+request_db_commande = "CREATE TABLE Commandes(ID varchar(20), PRIMARY KEY(ID), niveau_satisfaction integer(1), prix_total float(12), date_expedition nvarchar(50), date_commande nvarchar(50))"
 cursor.execute(request_db_commande)
 
 #/*
 #* Création des tables relations
 #*/
 
-request_securise = "CREATE TABLE Securise(password varchar(50), courriel varchar(50), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_securise = "CREATE TABLE Securise(courriel varchar(50), password varchar(50), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_securise)
 
-request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genre(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_prefere)
 
-request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID varchar(20), cote integer(1), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID) REFERENCES Vendeur(ID) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID varchar(20), cote integer(1), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_evalue)
 
-request_vend = "CREATE TABLE Vend(ID varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), PRIMARY KEY (ID), FOREIGN KEY (ID) REFERENCES Vendeur(ID) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livre(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_vend = "CREATE TABLE Vend(ID varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), PRIMARY KEY (ID), FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_vend)
 
-request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) REFERENCES Livre(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genre(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_classer)
 
-request_contient = "CREATE TABLE Contient(ID varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID), FOREIGN KEY (ID) REFERENCES Vendeur(ID) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livre(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_contient = "CREATE TABLE Contient(ID varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID), FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_contient)
 
 #/*
@@ -81,9 +82,8 @@ cursor.executemany(request_clients, fake_profiles)
 # cursor.executemany(request_vendeur, fake_seller)
 
 # Insérer les livres dans la base de données
-request_livre = """INSERT INTO Livre (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
+request_livre = """INSERT INTO Livres (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
 cursor.executemany(request_livre, books)
-
 
 # # Insérer les genres dans la base de données *** genre
 # request_genre = """INSERT INTO Genre (type) VALUES(%s)"""
@@ -93,10 +93,10 @@ cursor.executemany(request_livre, books)
 # request_commande = """INSERT INTO Commande (ID, niveau_satisfaction, prix_total, date_expedition, date_commande) VALUES (%s, %s, %s, %s, %s)"""
 # cursor.executemany(request_commande, fake_commande)
 #
-# # Insérer la relation Securise dans la base de données *** securise
-#
-# request_securise = """INSERT INTO Securise (password, courriel) VALUES (%s, %s)"""
-# cursor.executemany(request_securise, securise)
+# Insérer la relation Securise dans la base de données *** securise
+
+request_securise = """INSERT INTO Securise (courriel, password) VALUES (%s, %s)"""
+cursor.executemany(request_securise, securise)
 #
 # # Insérer la relation prefere dans la base de données *** prefere
 #

@@ -21,8 +21,8 @@ for full_name in fake_full_name:
 fake_email = []
 for i in range(1000):
     fake_email.append(fake_data.email())
-#print(fake_email)
-#print("\n")
+print(fake_email)
+print("\n")
 
 # List of fake password
 #fake_password = []

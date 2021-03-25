@@ -4,11 +4,23 @@ import pymysql, pymysql.cursors
 app = Flask(__name__)
 ProfileUtilisateur = {}
 
-
-@app.route("/")
+@app.route("/", methods=['POST', 'GET'])
 def main():
-    return render_template('login.html')
 
+    conn = pymysql.connect(
+        host="127.0.0.1",
+        user="root123",
+        password="123",
+        db="livres_en_vrac")
+
+    cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;'
+    cur = conn.cursor()
+    cur.execute(cmd)
+    info = cur.fetchall()
+
+    return render_template('login.html', livres=info)
+
+# ProfileUtilisateur["nom"] = info[3]
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -21,7 +33,7 @@ def login():
         password="123",
         db="livres_en_vrac")
 
-    cmd = 'SELECT password FROM Clients WHERE courriel=' + courriel + ';'
+    cmd = 'SELECT password FROM Securise WHERE courriel=' + courriel + ';'
     cur = conn.cursor()
     cur.execute(cmd)
     passeVrai = cur.fetchone()
@@ -34,8 +46,9 @@ def login():
 
         global ProfileUtilisateur
         ProfileUtilisateur["courriel"] = info[0]
-        ProfileUtilisateur["prenom"] = info[2]
-        ProfileUtilisateur["nom"] = info[3]
+        ProfileUtilisateur["prenom"] = info[1]
+        ProfileUtilisateur["nom"] = info[2]
+
         return render_template('bienvenu.html', profile=ProfileUtilisateur)
 
     return render_template('login.html', message="Les informations entrées ne sont pas valides, veuillez ré-essayer")
@@ -49,18 +62,23 @@ def recent_books():
         password="123",
         db="livres_en_vrac")
 
-    cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 0,2;'
-    cur = conn.cursor()
-    cur.execute(cmd)
-    info = cur.fetchone()
+    # cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 1;'
+    # cur = conn.cursor()
+    # cur.execute(cmd)
+    # info = cur.fetchone()
+    #
+    # return render_template('bienvenu.html', livres=info)
 
-    global livres
-    livres["titre"] = info[2]
-    livres["auteur"] = info[3]
-    # ProfileUtilisateur["nom"] = info[3]
 
-    return render_template('bienvenu.html', livres=livres)
+@app.route("/inscription", methods=['POST', 'GET'])
+def formulaire_inscription():
+    return render_template('inscription.html')
 
+# @app.route("/inscription_complete", methods=['POST', 'GET'])
+# def inscription():
+
+#
+# return render_template('inscription.html', message="Cette adresse courriel est d&eacutej&agrave utilis&eacutee")
 
 if __name__ == "__main__":
     app.run()

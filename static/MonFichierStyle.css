@@ -10,6 +10,18 @@ header {
 	font-size: 40px;
 }
 
+table {
+  border-spacing: 1px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  text-align: left;
+}
+
 p {
 	font-family: "Arial";
 	color: black;
@@ -35,6 +47,13 @@ b {
   width: 20%;
 }
 
+.centre_button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5%;
+}
+
 .centre_texte {
 	text-align: center;
 	color: black;
@@ -44,4 +63,11 @@ b {
 	border-style: solid;
 	border-color: red;
 	text-align: center;
+}
+
+.centre_texte_boite {
+	text-align: center;
+	color: black;
+	border-style: solid;
+	border-color: black;
 }

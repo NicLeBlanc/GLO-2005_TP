@@ -10,9 +10,10 @@
 <br>
 <p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
 <br>
+
 <p class="centre_texte">
-Bienvenue sur Livres en Vrac, veuillez entrer vos informations afin d'acc&eacuteder &agrave la meilleure librairie en ligne
-</p>
+Bienvenue sur Livres en Vrac, veuillez entrer vos informations afin d'acc&eacuteder &agrave la meilleure librairie en ligne :
+<hr>
 <form action="login" method="post">
 <p class="centre_texte">Courriel: <input type="text" name="courriel"><br>
 Mot de passe: <input type="password" name="motpasse">
@@ -24,5 +25,32 @@ Mot de passe: <input type="password" name="motpasse">
 <div id="cadre">{{ message }}</div>
 {% endif %}
 
+<p class="centre_texte">
+Si vous ne poss&eacuteder pas de compte, veuillez vous inscrire :
+<hr>
+</p>
+<form action="http://127.0.0.1:5000/inscription">
+    <input type="submit" value="S'inscrire" class="centre_button"/>
+</form>
+<br>
+<br>
+<p class="centre_texte">
+Voici une s&eacutelection de livres publi&eacutes r&eacutecemment :
+</p>
+<p>
+    <table style="width:100%">
+  <tr>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Ann&eacutee de publication</th>
+  </tr>
+    {% for item in livres %}
+  <tr>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+  </tr>
+    {% endfor %}
+</table>
 </body>
 </html>
