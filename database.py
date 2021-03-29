@@ -61,7 +61,7 @@ cursor.execute(request_vend)
 request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_classer)
 
-request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID_commande), FOREIGN KEY (ID_commande) REFERENCES Vendeurs(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), FOREIGN KEY (ID_commande) REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_contient)
 
 #/*
