@@ -1,5 +1,4 @@
 import pymysql.cursors
-import os
 import hashlib
 from data import fake_profiles, books, fake_seller, securise, vend, securise_hash
 
@@ -117,7 +116,7 @@ def encrypt_pass(courriel, password):
     salt = str.encode(courriel)
     mot_de_passe = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 10)
     alpha = ""
-    for character in mot_de_passe:
+    for character in str(mot_de_passe):
         if character.isalnum():
             alpha += character
     return alpha

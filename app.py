@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import pymysql, pymysql.cursors
-from database import select_books_recent
+from database import *
 
 app = Flask(__name__)
 ProfileUtilisateur = {}
@@ -18,8 +18,6 @@ def main():
     cur = conn.cursor()
     cur.execute(cmd)
     info = cur.fetchall()
-    print(info)
-    print(select_books_recent())
     return render_template('login.html', livres=info)
 
 @app.route("/login", methods=['POST'])
@@ -37,9 +35,10 @@ def login():
     cur = conn.cursor()
     cur.execute(cmd)
     passeVrai = cur.fetchone()
-
-    if (passeVrai != None) and (passe == passeVrai[0]):
-        cmd = 'SELECT * FROM Clients WHERE courriel=' + courriel + ';'
+    crypted_pass = encrypt_pass(courriel, passe)
+    crypted_pass2 = encrypt_pass(courriel, passe)
+    if (passeVrai != None) and (crypted_pass == passeVrai[0]):
+        cmd = 'SELECT * FROM Clients WHERE courriel =' + courriel + ';'
         cur = conn.cursor()
         cur.execute(cmd)
         info = cur.fetchone()
