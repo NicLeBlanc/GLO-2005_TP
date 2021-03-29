@@ -1,7 +1,7 @@
 import pymysql.cursors
 import os
 import hashlib
-from data import fake_profiles, books, fake_seller, securise, vend, securise_hash
+from data import fake_profiles, books, fake_seller, securise, vend, securise_hash, prefere, genres
 
 connection = pymysql.connect(
     host="127.0.0.1",
@@ -82,8 +82,8 @@ cursor.executemany(request_livre, books)
 # request_commande = """INSERT INTO Commande (ID_commande, mode_paiement, prix_total, date_expedition, date_commande) VALUES (%s, %s, %s, %s, %s)"""
 # cursor.executemany(request_commande, fake_commande)
 
-# request_genre = """INSERT INTO Genre (type) VALUES(%s)"""
-# cursor.executemany(request_genre, genre)
+request_genre = """INSERT INTO Genres (type) VALUES(%s)"""
+cursor.executemany(request_genre, genres)
 
 # /*
 # * Insertion dans les tables Relations
@@ -99,8 +99,8 @@ cursor.executemany(request_vend, vend)
 # request_contient = """INSERT INTO Contient(ID_commande, isbn, nbr_exemplaire)"""
 # cursor.executemany(request_contient, contient)
 
-# request_prefere = """INSERT INTO Prefere(courriel, courriel, genre) VALUES (%s, %s, %s)"""
-# cursor.executemany(request_prefere, prefere)
+request_prefere = """INSERT INTO Prefere(courriel, type) VALUES (%s, %s)"""
+cursor.executemany(request_prefere, prefere)
 
 # request_evalue = """INSERT INTO Evalue(courriel, ID_vendeur, cote_vendeur) VALUES (%s, %s, %s)"""
 # cursor.executemany(request_evalue, evalue)
