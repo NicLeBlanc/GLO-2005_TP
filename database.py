@@ -89,8 +89,8 @@ cursor.executemany(request_livre, books)
 # * Insertion dans les tables Relations
 # */
 
-#request_securise = """INSERT INTO Securise (courriel, mot_de_passe) VALUES (%s, %s)"""
-#cursor.executemany(request_securise, securise_hash)
+request_securise = """INSERT INTO Securise (courriel, mot_de_passe) VALUES (%s, %s)"""
+cursor.executemany(request_securise, securise_hash)
 
 request_vend = """INSERT INTO Vend(ID_vendeur, isbn, nbr_exemplaire, prix) VALUES (%s,%s,%s,%s)"""
 cursor.executemany(request_vend, vend)
