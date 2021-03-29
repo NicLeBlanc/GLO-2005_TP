@@ -48,7 +48,7 @@ cursor.execute(request_db_commande)
 # * Création des tables relations
 # */
 
-request_securise = "CREATE TABLE Securise(courriel varchar(50), mot_de_passe varchar(50), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_securise = "CREATE TABLE Securise(courriel varchar(50), mot_de_passe nvarchar(150), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_securise)
 
 request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
@@ -89,8 +89,8 @@ cursor.executemany(request_livre, books)
 # * Insertion dans les tables Relations
 # */
 
-request_securise = """INSERT INTO Securise (courriel, mot_de_passe) VALUES (%s, %s)"""
-cursor.executemany(request_securise, securise)
+#request_securise = """INSERT INTO Securise (courriel, mot_de_passe) VALUES (%s, %s)"""
+#cursor.executemany(request_securise, securise_hash)
 
 request_vend = """INSERT INTO Vend(ID_vendeur, isbn, nbr_exemplaire, prix) VALUES (%s,%s,%s,%s)"""
 cursor.executemany(request_vend, vend)
@@ -115,8 +115,12 @@ cursor.executemany(request_vend, vend)
 
 def encrypt_pass(courriel, password):
     salt = str.encode(courriel)
-    mot_de_passe = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
-    return str(mot_de_passe)
+    mot_de_passe = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 10)
+    alpha = ""
+    for character in mot_de_passe:
+        if character.isalnum():
+            alpha += character
+    return alpha
 
 
 # /*
