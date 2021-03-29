@@ -52,7 +52,7 @@ cursor.execute(request_securise)
 request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_prefere)
 
-request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote_vendeur integer(1), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote_vendeur integer(1), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_evalue)
 
 request_vend = "CREATE TABLE Vend(ID_vendeur varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
@@ -61,7 +61,7 @@ cursor.execute(request_vend)
 request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_classer)
 
-request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID_commande), FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID_commande), FOREIGN KEY (ID_commande) REFERENCES Vendeurs(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_contient)
 
 #/*
@@ -73,7 +73,7 @@ request_clients = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_d
 cursor.executemany(request_clients, fake_profiles)
 
 # Insérer les Vendeurs dans la base de données
-request_vendeur = """INSERT INTO Vendeurs (ID, nom, courriel_vendeur, adresse, pays_origine) VALUES(%s, %s, %s, %s, %s)"""
+request_vendeur = """INSERT INTO Vendeurs (ID_vendeur, nom, courriel_vendeur, adresse, pays_origine) VALUES(%s, %s, %s, %s, %s)"""
 cursor.executemany(request_vendeur, fake_seller)
 
 # Insérer les Livres dans la base de données
