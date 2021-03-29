@@ -1,8 +1,5 @@
 import pymysql.cursors
-from data import fake_profiles
-from data import books
-from data import fake_seller
-from data import securise
+from data import fake_profiles, books, fake_seller, securise, vend
 
 connection = pymysql.connect(
     host="127.0.0.1",
@@ -33,7 +30,7 @@ cursor.execute(request_use_bd)
 request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
 cursor.execute(request_db_clients)
 
-request_db_vendeurs = "CREATE TABLE Vendeurs(ID varchar(20),PRIMARY KEY(ID), prenom char(20), nom char(20), adresse varchar(200), pays_origine char(20), courriel_vendeur varchar(50), cote_global integer(1))"
+request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40),courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(30))"
 cursor.execute(request_db_vendeurs)
 
 request_db_livres = "CREATE TABLE Livres(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500))"
@@ -42,7 +39,7 @@ cursor.execute(request_db_livres)
 request_db_genre = "CREATE TABLE Genres(type varchar(20), PRIMARY KEY(type))"
 cursor.execute(request_db_genre)
 
-request_db_commande = "CREATE TABLE Commandes(ID varchar(20), PRIMARY KEY(ID), niveau_satisfaction integer(1), prix_total float(12), date_expedition nvarchar(50), date_commande nvarchar(50))"
+request_db_commande = "CREATE TABLE Commandes(ID_commande varchar(20), PRIMARY KEY(ID_commande), niveau_satisfaction integer(1), prix_total float(12), date_expedition nvarchar(50), date_commande nvarchar(50))"
 cursor.execute(request_db_commande)
 
 #/*
@@ -55,31 +52,29 @@ cursor.execute(request_securise)
 request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_prefere)
 
-request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID varchar(20), cote integer(1), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote integer(1), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_evalue)
 
-request_vend = "CREATE TABLE Vend(ID varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), PRIMARY KEY (ID), FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_vend = "CREATE TABLE Vend(ID_vendeur varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_vend)
 
 request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_classer)
 
-request_contient = "CREATE TABLE Contient(ID varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID), FOREIGN KEY (ID) REFERENCES Vendeurs(ID) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID_commande), FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_contient)
 
 #/*
 #* Insertion dans les tables
 #*/
 
-# Les tables avec un *** dans la description sont à rajouter à la database - LCC
-
 # Insérer tout les clients dans la base de données
 request_clients = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES (%s, %s, %s, %s, %s)"""
 cursor.executemany(request_clients, fake_profiles)
 
-# # Insérer les vendeurs dans la base de données *** fake_vendeur
-# request_vendeur = """INSERT INTO Vendeur (ID, nom, courriel_vendeur, adresse, pays_origine) VALUES(%s, %s, %s, %s, %s)"""
-# cursor.executemany(request_vendeur, fake_seller)
+# Insérer les vendeurs dans la base de données
+request_vendeur = """INSERT INTO Vendeurs (ID, nom, courriel_vendeur, adresse, pays_origine) VALUES(%s, %s, %s, %s, %s)"""
+cursor.executemany(request_vendeur, fake_seller)
 
 # Insérer les livres dans la base de données
 request_livre = """INSERT INTO Livres (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
@@ -90,37 +85,31 @@ cursor.executemany(request_livre, books)
 # cursor.executemany(request_genre, genre)
 #
 # # Insérer les commandes dans la base de données *** fake_commande
-# request_commande = """INSERT INTO Commande (ID, niveau_satisfaction, prix_total, date_expedition, date_commande) VALUES (%s, %s, %s, %s, %s)"""
+# request_commande = """INSERT INTO Commande (ID_commande, niveau_satisfaction, prix_total, date_expedition, date_commande) VALUES (%s, %s, %s, %s, %s)"""
 # cursor.executemany(request_commande, fake_commande)
 #
-# Insérer la relation Securise dans la base de données *** securise
-
+# Insérer la relation Securise dans la base de données
 request_securise = """INSERT INTO Securise (courriel, password) VALUES (%s, %s)"""
 cursor.executemany(request_securise, securise)
 #
 # # Insérer la relation prefere dans la base de données *** prefere
-#
 # request_prefere = """INSERT INTO Prefere(courriel, courriel, genre) VALUES (%s, %s, %s)"""
 # cursor.executemany(request_prefere, prefere)
-#
+
 # # Insérer la relation evalue dans la base de données *** evalue
-#
-# request_evalue = """INSERT INTO Evalue(courriel, ID, cote) VALUES (%s, %s, %s)"""
+# request_evalue = """INSERT INTO Evalue(courriel, ID_vendeur, cote) VALUES (%s, %s, %s)"""
 # cursor.executemany(request_evalue, evalue)
 #
-# # Insérer la relation vend dans la base de données *** vend
-#
-# request_vend = """INSERT INTO Vend(ID, isbn, nbr_exemplaire, prix) VALUES (%s,%s,%s,%s)"""
-# cursor.executemany(request_vend, vend)
-#
+# Insérer la relation vend dans la base de données
+request_vend = """INSERT INTO Vend(ID_vendeur, isbn, nbr_exemplaire, prix) VALUES (%s,%s,%s,%s)"""
+cursor.executemany(request_vend, vend)
+
 # # Insérer la relation classer dans la base de données *** classer
-#
 # request_classer = """INSERT INTO Classer(isbn, type, livre, Genre) VALUES (%s, %s, %s, %s)""" #type est en orange, j'ignore pourquoi LCC
 # cursor.executemany(request_classer, classer)
 #
 # # Insérer la relation contient dans la base de données *** contient
-#
-# request_contient = """INSERT INTO Contient(ID, isbn, nbr_exemplaire)"""
+# request_contient = """INSERT INTO Contient(ID_commande, isbn, nbr_exemplaire)"""
 # cursor.executemany(request_contient, contient)
 
 def select_books():
