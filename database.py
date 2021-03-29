@@ -116,15 +116,15 @@ cursor.executemany(request_vend, vend)
 def encrypt_pass(courriel, password):
     salt = str.encode(courriel)
     mot_de_passe = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
-    return mot_de_passe
+    return str(mot_de_passe)
 
 
 # /*
 # Fonctions
 # */
 
-def select_books():
-    request = "SELECT * FROM Livre ORDER BY annee_publication DESC LIMIT 0,10;"
+def select_books_recent():
+    request = "SELECT * FROM Livres ORDER BY annee_publication DESC LIMIT 0,10;"
     cursor.execute(request)
     books = [entry[0] for entry in cursor.fetchall()]
     return books
