@@ -1,7 +1,7 @@
 import pymysql.cursors
 import os
 import hashlib
-from data import fake_profiles, books, fake_seller, securise, vend
+from data import fake_profiles, books, fake_seller, securise, vend, securise_hash
 
 connection = pymysql.connect(
     host="127.0.0.1",
