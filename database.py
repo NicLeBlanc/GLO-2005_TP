@@ -2,6 +2,10 @@ import pymysql.cursors
 import hashlib
 from data import fake_profiles, books, fake_seller, securise, vend, securise_hash, prefere, genres
 
+# /**************************************************
+# Connection à la database
+# */*************************************************
+
 connection = pymysql.connect(
     host="127.0.0.1",
     user="root123",
@@ -24,9 +28,9 @@ cursor.execute(request_create_db)
 request_use_bd = "USE livres_en_vrac"
 cursor.execute(request_use_bd)
 
-# /*
-# * Création des tables entités
-# */
+# /**************************************************
+# Création des tables entités
+# */*************************************************
 
 request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
 cursor.execute(request_db_clients)
@@ -43,9 +47,10 @@ cursor.execute(request_db_genre)
 request_db_commande = "CREATE TABLE Commandes(ID_commande varchar(20), PRIMARY KEY(ID_commande), mode_paiement varchar(20), prix_total float(12), date_expedition nvarchar(50), date_commande nvarchar(50))"
 cursor.execute(request_db_commande)
 
-# /*
-# * Création des tables relations
-# */
+
+# /**************************************************
+# Création des tables relations
+# */*************************************************
 
 request_securise = "CREATE TABLE Securise(courriel varchar(50), mot_de_passe nvarchar(150), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_securise)
@@ -65,9 +70,9 @@ cursor.execute(request_classer)
 request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), PRIMARY KEY (ID_commande), FOREIGN KEY (ID_commande) REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
 cursor.execute(request_contient)
 
-# /*
-# * Insertion dans les tables Entités
-# */
+# /**************************************************
+# Insertion dans les tables Entités
+# */*************************************************
 
 request_clients = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES (%s, %s, %s, %s, %s)"""
 cursor.executemany(request_clients, fake_profiles)
@@ -84,9 +89,10 @@ cursor.executemany(request_livre, books)
 request_genre = """INSERT INTO Genres (type) VALUES(%s)"""
 cursor.executemany(request_genre, genres)
 
-# /*
-# * Insertion dans les tables Relations
-# */
+
+# /**************************************************
+# Insertion dans les tables Relations
+# */*************************************************
 
 request_securise = """INSERT INTO Securise (courriel, mot_de_passe) VALUES (%s, %s)"""
 cursor.executemany(request_securise, securise_hash)
@@ -107,9 +113,24 @@ cursor.executemany(request_prefere, prefere)
 # request_classer = """INSERT INTO Classer(isbn, type, livre, Genre) VALUES (%s, %s, %s, %s)""" #type est en orange, j'ignore pourquoi LCC
 # cursor.executemany(request_classer, classer)
 
+
+
+# /**************************************************
+# Fonctions
+# */*************************************************
+
 # /*
-# Hashage de password
-# Utilise la technique Salt and hash
+# @Affichage des 10 livres les plus récents
+# */
+
+def select_books_recent():
+    request = "SELECT * FROM Livres ORDER BY annee_publication DESC LIMIT 0,10;"
+    cursor.execute(request)
+    books = [entry[0] for entry in cursor.fetchall()]
+    return books
+
+# /*
+# @Hashage de password
 # */
 
 def encrypt_pass(courriel, password):
@@ -122,12 +143,4 @@ def encrypt_pass(courriel, password):
     return alpha
 
 
-# /*
-# Fonctions
-# */
 
-def select_books_recent():
-    request = "SELECT * FROM Livres ORDER BY annee_publication DESC LIMIT 0,10;"
-    cursor.execute(request)
-    books = [entry[0] for entry in cursor.fetchall()]
-    return books

@@ -1,5 +1,7 @@
+import pymysql
+import pymysql.cursors
 from flask import Flask, render_template, request
-import pymysql, pymysql.cursors
+
 from database import *
 
 app = Flask(__name__)
