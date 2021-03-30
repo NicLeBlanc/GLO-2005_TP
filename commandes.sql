@@ -12,7 +12,7 @@ SELECT Password from Securise WHERE courriel = 'aaron11@lucas.com'
 
 SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
 
-SELECT * FROM prefere
+SELECT * FROM Commandes
 
 SELECT *
 FROM Livres
