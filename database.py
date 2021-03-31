@@ -125,27 +125,21 @@ def init_Database():
 # *                 Triggers                        *
 # ***************************************************
 
- DELIMITER //
- CREATE TRIGGER UpdateCoteGlobaleInsert
-     AFTER INSERT ON Evalue
-     FOR EACH ROW
-     BEGIN
-         UPDATE Vendeur
-             SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID = Evalue.ID)
-             where vendeur.ID = new.ID;
-     end //
- DELIMITER ;
+    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end ;"""
+    cursor.execute(request_trigger_Insert_Cote)
 
- DELIMITER //
- CREATE TRIGGER UpdateCoteGlobaleUpdate
-     AFTER UPDATE ON Evalue
-     FOR EACH ROW
-     BEGIN
-         UPDATE Vendeur
-             SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID = Evalue.ID)
-             where vendeur.ID = new.ID;
-    end //
-DELIMITER ;
+
+#
+#  DELIMITER //
+#  CREATE TRIGGER UpdateCoteGlobaleUpdate
+#      AFTER UPDATE ON Evalue
+#      FOR EACH ROW
+#      BEGIN
+#          UPDATE Vendeur
+#              SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID = Evalue.ID)
+#              where vendeur.ID = new.ID;
+#     end //
+# DELIMITER ;
 
 
 
@@ -190,3 +184,10 @@ def encrypt_pass(courriel, password):
 def insert_inscription(courriel, prenom, nom, adresse, date_de_naissance):
     request = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES ("{}","{}","{}","{}","{}");""".format(courriel, prenom, nom, adresse, date_de_naissance)
     cursor.execute(request)
+
+    #insert: evaule
+    #insert: commande
+    #insert: passer
+    #insert: prefere
+    #insert: contient
+    #insert: securise
