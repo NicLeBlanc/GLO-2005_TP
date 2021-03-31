@@ -1,11 +1,10 @@
-import pymysql
 import pymysql.cursors
-from flask import Flask, render_template, request
-
+from flask import Flask, render_template, request, jsonify
 from database import *
 
 app = Flask(__name__)
 ProfileUtilisateur = {}
+init_Database()
 
 @app.route("/", methods=['POST', 'GET'])
 def main():
@@ -38,7 +37,7 @@ def login():
     cur.execute(cmd)
     passeVrai = cur.fetchone()
     crypted_pass = encrypt_pass(courriel, passe)
-    crypted_pass2 = encrypt_pass(courriel, passe)
+
     if (passeVrai != None) and (crypted_pass == passeVrai[0]):
         cmd = 'SELECT * FROM Clients WHERE courriel =' + courriel + ';'
         cur = conn.cursor()
@@ -71,9 +70,16 @@ def recent_books():
     # return render_template('bienvenu.html', livres=info)
 
 
-@app.route("/inscription", methods=['POST', 'GET'])
-def formulaire_inscription():
-    return render_template('inscription.html')
+@app.route("/inscription/", methods=['GET','POST'])
+def inscription():
+    if request.method == "GET":
+        pass
+    if request.method == "POST":
+        data = request.json
+        insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
+        return render_template('inscription_complete.html')
+    else:
+        return render_template('inscription.html')
 
 # @app.route("/inscription_complete", methods=['POST', 'GET'])
 # def inscription():
