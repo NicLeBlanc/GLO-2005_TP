@@ -31,7 +31,7 @@ function onButtonClickInscription() {
 	adresse = document.getElementsByName("adresse");
 	date_de_naissance = document.getElementsByName("date_de_naissance");
     var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance};
-    postInscription(inputClient.values())
+    postInscription(inputClient)
 }
 
 function postInscription(courriel, prenom, nom, adresse, date_de_naissance) {

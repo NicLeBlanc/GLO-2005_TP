@@ -70,15 +70,16 @@ def recent_books():
     # return render_template('bienvenu.html', livres=info)
 
 
-@app.route("/inscription")
+@app.route("/inscription/", methods=['GET','POST'])
 def inscription():
-    return render_template('inscription.html')
-
-@app.route("/inscription", methods=['POST'])
-def inscription_post():
-    data = request.json
-    insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
-    return render_template('inscription_complete.html')
+    if request.method == "GET":
+        pass
+    if request.method == "POST":
+        data = request.json
+        insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
+        return render_template('inscription_complete.html')
+    else:
+        return render_template('inscription.html')
 
 # @app.route("/inscription_complete", methods=['POST', 'GET'])
 # def inscription():
