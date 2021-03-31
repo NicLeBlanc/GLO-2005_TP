@@ -25,26 +25,23 @@ function SupprimerContenu()
 }
 
 function onButtonClickInscription() {
-	courriel = document.getElementsByName("courriel");
-	prenom = document.getElementsByName("prenom");
-	nom = document.getElementsByName("nom");
-	adresse = document.getElementsByName("adresse");
-	date_de_naissance = document.getElementsByName("date_de_naissance");
+	courriel = document.getElementById("courriel").value;
+	prenom = document.getElementById("prenom").value;
+	nom = document.getElementById("nom").value;
+	adresse = document.getElementById("adresse").value;
+	date_de_naissance = document.getElementById("date_de_naissance").value;
     var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance};
     postInscription(inputClient)
 }
 
-function postInscription(courriel, prenom, nom, adresse, date_de_naissance) {
-    postUrl = "inscription"
-
+function postInscription(signupObject) {
+    postUrl = "http://127.0.0.1:5000/inscription/"
     fetch(postUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance
-        })
+        body: JSON.stringify(signupObject)
     }).then(function(response) {
         return response.json()
     }).then(function(data) {

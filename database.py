@@ -168,5 +168,5 @@ def encrypt_pass(courriel, password):
     return alpha
 
 def insert_inscription(courriel, prenom, nom, adresse, date_de_naissance):
-    request = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES ("{}","{}","{}","{}","{}");""".format(email, prenom, nom, adresse, date_de_naissance)
+    request = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES ("{}","{}","{}","{}","{}");""".format(courriel, prenom, nom, adresse, date_de_naissance)
     cursor.execute(request)

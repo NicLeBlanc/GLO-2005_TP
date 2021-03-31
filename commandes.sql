@@ -8,11 +8,11 @@ SELECT * FROM Clients;
 
 CREATE TABLE Livres(isbn varchar(20), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500));
 
-SELECT Password from Securise WHERE courriel = 'aaron11@lucas.com'
+SELECT * from Securise WHERE courriel = 'aaron11@lucas.com'
 
 SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
 
-SELECT * FROM Clients where courriel = 'test'
+SELECT * FROM Clients
 
 SELECT *
 FROM Livres

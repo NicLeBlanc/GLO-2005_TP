@@ -78,6 +78,7 @@ def inscription():
         data = request.json
         insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
         return render_template('inscription_complete.html')
+    # Ajouter conditions : si email existe deja -> retourner vers page de login, si mot de passes match pas -> recommencer
     else:
         return render_template('inscription.html')
 
@@ -85,8 +86,7 @@ def inscription():
 # def inscription():
 #     courriel = '"' + request.form.get('courriel') + '"'
 #     return render_template("inscription_complete.html")
-
-    # return render_template('inscription.html', message="Cette adresse courriel est d&eacutej&agrave utilis&eacutee ou des information entr&eacutees ne sont pas conformes")
+# return render_template('inscription.html', message="Cette adresse courriel est d&eacutej&agrave utilis&eacutee ou des information entr&eacutees ne sont pas conformes")
 
 if __name__ == "__main__":
     app.run()
