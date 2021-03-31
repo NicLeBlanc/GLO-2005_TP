@@ -135,6 +135,15 @@ def init_Database():
 # *                 Fonctions                       *
 # ***************************************************
 
+connection = pymysql.connect(
+        host="127.0.0.1",
+        user="root123",
+        password="123",
+        db="livres_en_vrac",
+        autocommit=True)
+
+cursor = connection.cursor()
+
 # /*
 # @Affichage des 10 livres les plus récents
 # */
@@ -158,5 +167,6 @@ def encrypt_pass(courriel, password):
             alpha += character
     return alpha
 
-
-
+def insert_inscription(courriel, prenom, nom, adresse, date_de_naissance):
+    request = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES ("{}","{}","{}","{}","{}");""".format(email, prenom, nom, adresse, date_de_naissance)
+    cursor.execute(request)

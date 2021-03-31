@@ -23,3 +23,31 @@ function SupprimerContenu()
 	document.getElementsByName("courriel")[0].value="";
 	document.getElementsByName("motpasse")[0].value="";
 }
+
+function onButtonClickInscription() {
+	courriel = document.getElementsByName("courriel");
+	prenom = document.getElementsByName("prenom");
+	nom = document.getElementsByName("nom");
+	adresse = document.getElementsByName("adresse");
+	date_de_naissance = document.getElementsByName("date_de_naissance");
+    var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance};
+    postInscription(inputClient.values())
+}
+
+function postInscription(courriel, prenom, nom, adresse, date_de_naissance) {
+    postUrl = "inscription"
+
+    fetch(postUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance
+        })
+    }).then(function(response) {
+        return response.json()
+    }).then(function(data) {
+        console.log("worked")
+    })
+}

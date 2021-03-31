@@ -1,5 +1,5 @@
 import pymysql.cursors
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from database import *
 
 app = Flask(__name__)
@@ -70,9 +70,15 @@ def recent_books():
     # return render_template('bienvenu.html', livres=info)
 
 
-@app.route("/inscription", methods=['POST', 'GET'])
-def formulaire_inscription():
+@app.route("/inscription")
+def inscription():
     return render_template('inscription.html')
+
+@app.route("/inscription", methods=['POST'])
+def inscription_post():
+    data = request.json
+    insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
+    return render_template('inscription_complete.html')
 
 # @app.route("/inscription_complete", methods=['POST', 'GET'])
 # def inscription():
