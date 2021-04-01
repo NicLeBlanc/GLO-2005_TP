@@ -125,9 +125,13 @@ def init_Database():
 # *                 Triggers                        *
 # ***************************************************
 
+    # request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue
+    # FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote)
+    # from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end ;"""
+    # cursor.execute(request_trigger_Insert_Cote)
+
     request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end ;"""
     cursor.execute(request_trigger_Insert_Cote)
-
 
 #
 #  DELIMITER //
