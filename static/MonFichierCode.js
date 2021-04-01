@@ -30,7 +30,10 @@ function onButtonClickInscription() {
 	nom = document.getElementById("nom").value;
 	adresse = document.getElementById("adresse").value;
 	date_de_naissance = document.getElementById("date_de_naissance").value;
-    var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance};
+	mot_passe = document.getElementById("password").value;
+	mot_passe_r = document.getElementById("passsword_repeat").value;
+    var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance,
+		mot_passe:mot_passe, mot_passe_r:mot_passe_r};
     postInscription(inputClient)
 }
 
