@@ -7,9 +7,47 @@
 
 <p> Bonjour {{profile.prenom}} {{profile.nom}} ! Bienvenu sur votre page perso!</p>
 
-<p> Voici l'historique de vos commandes</p>
+<p> Voici l'historique de vos  : </p>
 
-<p> Voici les livres recommand&eacute selon vos gouts</p>
+ <table style="width:100%">
+  <tr>
+    <th>ID de commande</th>
+    <th>Mode de paiement</th>
+    <th>Prix total</th>
+    <th>Date de commande</th>
+      <th>Date d'expedition</th>
+  </tr>
+    {% for item in commandes %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+      <td>{{item[4]}}</td>
+  </tr>
+    {% endfor %}
+</table>
+
+<p> Voici les livres recommand&eacute selon vos gouts, {% for item in pref %} {{item[0]}} {% endfor %}: </p>
+
+<table style="width:100%">
+  <tr>
+    <th>ISBN</th>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Date de publication</th>
+      <th>Co&ucirc;t</th>
+  </tr>
+    {% for item in recommande %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+      <td>{{item[4]}}</td>
+  </tr>
+    {% endfor %}
+</table>
 
 </body>
 </html>

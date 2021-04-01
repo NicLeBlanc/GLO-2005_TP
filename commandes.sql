@@ -14,7 +14,15 @@ SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
 
 SELECT * FROM Vend
 
-SELECT * FROM Evalue
+SELECT * FROM Clients where courriel = 'test'
+SELECT * FROM Securise where courriel = 'test'
+
+
+SELECT * FROM Commandes join Passer on Commandes.ID_commande = Passer.ID_commande WHERE courriel = 'aaron84@yahoo.com'
+
+SELECT type FROM prefere WHERE courriel = 'aaron84@yahoo.com'
+
+SELECT COUNT(*) FROM Clients WHERE courriel = "catherinegonzalez@jackson-petersen.org";
 
 SELECT *
 FROM Livres
