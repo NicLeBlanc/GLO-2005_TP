@@ -130,3 +130,19 @@ def init_Database():
 
     request_trigger_Update_Cote = """ CREATE TRIGGER UpdateCoteGlobaleUpdate AFTER UPDATE ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
     cursor.execute(request_trigger_Update_Cote)
+
+# ***************************************************
+# *                 Index                           *
+# ***************************************************
+
+    request_index_clients = """CREATE INDEX hash_client ON clients (courriel) USING HASH"""
+    cursor.execute(request_index_clients)
+
+    request_index_securise = """CREATE INDEX hash_securise ON securise (courriel) USING HASH"""
+    cursor.execute(request_index_securise)
+
+    request_index_livre_BTREE = """CREATE INDEX btree_livres ON livres (annee_publication) USING BTREE"""
+    cursor.execute(request_index_livre_BTREE)
+
+    #request_index_livre_HASH = """CREATE INDEX hash_livres ON livres (annee_publication) USING HASH"""
+    #cursor.execute(request_index_livre_HASH)
