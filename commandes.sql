@@ -12,7 +12,9 @@ SELECT * from Securise WHERE courriel = 'aaron11@lucas.com'
 
 SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
 
-SELECT * FROM Clients
+SELECT * FROM Vend
+
+SELECT * FROM Evalue
 
 SELECT *
 FROM Livres

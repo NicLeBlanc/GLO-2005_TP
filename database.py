@@ -1,6 +1,7 @@
 import hashlib
 import pymysql as pymysql
-from data import fake_profiles, books, fake_seller, vend, securise_hash, prefere, genres, classer, fake_commandes, passer, contient
+from data import fake_profiles, books, fake_seller, vend, securise_hash, prefere, genres, classer, fake_commandes, \
+    passer, contient, evaluation
 
 
 def init_Database():
@@ -47,7 +48,7 @@ def init_Database():
     request_db_genre = "CREATE TABLE Genres(type varchar(20), PRIMARY KEY(type))"
     cursor.execute(request_db_genre)
 
-    request_db_commande = "CREATE TABLE Commandes(ID_commande varchar(20), PRIMARY KEY(ID_commande), mode_paiement varchar(20), prix_total float(12), date_commande nvarchar(50), date_expedition nvarchar(50), cote_commande int(1))"
+    request_db_commande = "CREATE TABLE Commandes(ID_commande varchar(20), PRIMARY KEY(ID_commande), mode_paiement varchar(20), prix_total float(12), date_commande nvarchar(50), date_expedition nvarchar(50))"
     cursor.execute(request_db_commande)
 
 
@@ -61,7 +62,7 @@ def init_Database():
     request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_prefere)
 
-    request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote_vendeur integer(1), PRIMARY KEY (ID_vendeur), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote_vendeur integer(1), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_evalue)
 
     request_vend = "CREATE TABLE Vend(ID_vendeur varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
@@ -89,7 +90,7 @@ def init_Database():
     request_livre = """INSERT INTO Livres (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
     cursor.executemany(request_livre, books)
 
-    request_commande = """INSERT INTO Commandes (ID_commande, mode_paiement, prix_total, date_commande, date_expedition, cote_commande) VALUES (%s, %s, %s, %s, %s, %s)"""
+    request_commande = """INSERT INTO Commandes (ID_commande, mode_paiement, prix_total, date_commande, date_expedition) VALUES (%s, %s, %s, %s, %s)"""
     cursor.executemany(request_commande, fake_commandes)
 
     request_genre = """INSERT INTO Genres (type) VALUES(%s)"""
@@ -112,8 +113,8 @@ def init_Database():
     request_prefere = """INSERT INTO Prefere(courriel, type) VALUES (%s, %s)"""
     cursor.executemany(request_prefere, prefere)
 
-    #request_evalue = """INSERT INTO Evalue(courriel, ID_vendeur, cote_vendeur) VALUES (%s, %s, %s)"""
-    #cursor.executemany(request_evalue, evaluation)
+    request_evalue = """INSERT INTO Evalue(courriel, ID_vendeur, cote_vendeur) VALUES (%s, %s, %s)"""
+    cursor.executemany(request_evalue, evaluation)
 
     request_classer = """INSERT INTO Classer(isbn, type) VALUES (%s, %s)"""
     cursor.executemany(request_classer, classer)
@@ -125,29 +126,11 @@ def init_Database():
 # *                 Triggers                        *
 # ***************************************************
 
-    # request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue
-    # FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote)
-    # from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end ;"""
-    # cursor.execute(request_trigger_Insert_Cote)
-
-    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end ;"""
+    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
     cursor.execute(request_trigger_Insert_Cote)
 
-#
-#  DELIMITER //
-#  CREATE TRIGGER UpdateCoteGlobaleUpdate
-#      AFTER UPDATE ON Evalue
-#      FOR EACH ROW
-#      BEGIN
-#          UPDATE Vendeur
-#              SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID = Evalue.ID)
-#              where vendeur.ID = new.ID;
-#     end //
-# DELIMITER ;
-
-
-
-
+    request_trigger_Update_Cote = """ CREATE TRIGGER UpdateCoteGlobaleUpdate AFTER UPDATE ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
+    cursor.execute(request_trigger_Update_Cote)
 
 # ***************************************************
 # *                 Fonctions                       *
@@ -185,13 +168,10 @@ def encrypt_pass(courriel, password):
             alpha += character
     return alpha
 
+# /*
+# @Insertion de nouvelle inscription
+# */
+
 def insert_inscription(courriel, prenom, nom, adresse, date_de_naissance):
     request = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES ("{}","{}","{}","{}","{}");""".format(courriel, prenom, nom, adresse, date_de_naissance)
     cursor.execute(request)
-
-    #insert: evaule
-    #insert: commande
-    #insert: passer
-    #insert: prefere
-    #insert: contient
-    #insert: securise
