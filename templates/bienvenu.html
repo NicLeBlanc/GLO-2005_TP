@@ -3,13 +3,18 @@
 <title>Bonjour!</title>
 <link rel="stylesheet" type="text/css" href="../static/MonFichierStyle.css">
 </head>
-<body> 
+<body>
 
-<p> Bonjour {{profile.prenom}} {{profile.nom}} ! Bienvenu sur votre page perso!</p>
+<header class="centre_titre">Livres en Vrac </header>
+<br>
+<p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
+<br>
+<hr>
+<p class="centre_texte"> Bonjour {{profile.prenom}} {{profile.nom}} ! Bienvenu sur votre page perso!</p>
 
-<p> Voici l'historique de vos  : </p>
+<p class="centre_texte"> Voici l'historique de vos commandes : </p>
 
- <table style="width:100%">
+ <table class="a">
   <tr>
     <th>ID de commande</th>
     <th>Mode de paiement</th>
@@ -27,10 +32,10 @@
   </tr>
     {% endfor %}
 </table>
+<hr>
+<p class="centre_texte"> Voici certains livres recommand&eacutes selon vos go&ucirc;ts pour : {% for item in pref %} {{item[0]}} {% endfor %}: </p>
 
-<p> Voici les livres recommand&eacute selon vos gouts, {% for item in pref %} {{item[0]}} {% endfor %}: </p>
-
-<table style="width:100%">
+<table class="a">
   <tr>
     <th>ISBN</th>
     <th>Titre</th>
@@ -44,7 +49,7 @@
     <td>{{item[1]}}</td>
     <td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
-      <td>{{item[4]}}</td>
+      <td>{{item[4]}} $</td>
   </tr>
     {% endfor %}
 </table>

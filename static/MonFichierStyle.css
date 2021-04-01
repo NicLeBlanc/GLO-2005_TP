@@ -10,12 +10,17 @@ header {
 	font-size: 40px;
 }
 
-table {
-  border-spacing: 1px;
+th, td {
+  border: 1px solid black;
+	border-spacing: 1px;
+	align-content: center;
 }
 
-table, th, td {
-  border: 1px solid black;
+table.a {
+  table-layout: auto;
+  width: 1500px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 th {

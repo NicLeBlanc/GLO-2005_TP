@@ -1,5 +1,6 @@
-import pymysql.cursors
+import pymysql as pymysql
 from flask import Flask, render_template, request, jsonify, redirect, url_for
+from function import *
 from database import *
 
 app = Flask(__name__)
@@ -82,9 +83,17 @@ def inscription():
     else:
         return render_template('inscription.html')
 
+
 @app.route("/inscription_complete", methods=['POST', 'GET'])
 def inscription_complete():
     return render_template('inscription_complete.html')
+
+
+@app.route("/recherche", methods=['POST', 'GET'])
+def search_books():
+    return render_template('recherche.html')
+
+
 
 
 if __name__ == "__main__":

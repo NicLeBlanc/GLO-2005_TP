@@ -20,6 +20,8 @@ SELECT * FROM Securise where courriel = 'test'
 
 SELECT * FROM Commandes join Passer on Commandes.ID_commande = Passer.ID_commande WHERE courriel = 'aaron84@yahoo.com'
 
+SELECT * FROM Vendeurs
+
 SELECT type FROM prefere WHERE courriel = 'aaron84@yahoo.com'
 
 SELECT COUNT(*) FROM Clients WHERE courriel = "catherinegonzalez@jackson-petersen.org";
