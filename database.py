@@ -1,3 +1,4 @@
+import hashlib
 import pymysql as pymysql
 from data import fake_profiles, books, fake_seller, vend, securise_hash, prefere, genres, classer, fake_commandes, \
     passer, contient, evaluation
