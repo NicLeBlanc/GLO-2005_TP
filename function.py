@@ -52,6 +52,45 @@ def insert_securise(courriel, mot_de_passe):
     mot_de_passe_encrypt = encrypt_pass(courriel, mot_de_passe)
     request = """INSERT INTO Securise (courriel, mot_de_passe) VALUES ("{}","{}")""".format(courriel, mot_de_passe_encrypt)
     cursor.execute(request)
+# /*
+# @Insertion de contient lcc
+# */
+
+def insert_contient(ID_commande,isbn, nbr_exemplaire):
+    request = """INSERT INTO Contient(ID_commande,isbn,nbr_exemplaire) VALUES ("{}","{}","{}");""".format(ID_commande,isbn,nbr_exemplaire)
+    cursor.execute(request)
+
+# /*
+# @Insertion de l'evaluation dans evalue lcc
+# */
+
+def insert_evalue(courriel, ID_vendeur, cote_vendeur):
+    request = """INSERT INTO Evalue(courriel, ID_vendeur, cote_vendeur) VALUES ("{}","{}","{}");""".format(courriel, ID_vendeur, cote_vendeur)
+    cursor.execute(request)
+
+# /*
+# @Insertion de passer lcc
+# */
+
+def insert_passer(ID_commande, courriel):
+    request = """INSERT INTO Passer(ID_commande, courriel) VALUES ("{}","{}");""".format(ID_commande, courriel)
+    cursor.execute(request)
+
+# /*
+# @Insertion de commande lcc
+# */
+
+def insert_commande(ID_commande, mode_paiement, prix_total, date_commande, date_expedition):
+    request = """INSERT INTO Commande(ID_commande, mode_paiement, prix_total, date_commande, date_expedition) VALUES ("{}","{}","{}""{}","{}");""".format(ID_commande, mode_paiement, prix_total, date_commande, date_expedition)
+    cursor.execute(request)
+
+# /*
+# @Insertion de prefere lcc
+# */
+
+def insert_prefere(courriel, type):
+    request = """INSERT INTO Prefere(courriel, type) VALUES ("{}","{}");""".format(courriel, type)
+    cursor.execute(request)
 
 # /*
 # @Courriel existant
@@ -91,4 +130,4 @@ def get_preferences(courriel):
 def get_pref(courriel):
     request = """SELECT type FROM prefere WHERE courriel = "{}";""".format(courriel)
     cursor.execute(request)
-    return cursor.fetchall()
+    return cursor.fetchall()#

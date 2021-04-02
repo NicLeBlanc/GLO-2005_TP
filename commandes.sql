@@ -9,14 +9,16 @@ SHOW TABLES
 CREATE TABLE Livres(isbn varchar(20), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500));
 
 SELECT * from Securise WHERE courriel = 'aaron11@lucas.com'
+SELECT * FROM passer
 
 SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
-
+SELECT * FROM contient
 SELECT * FROM Vend
 SELECT * FROM livres
 SELECT * FROM Clients where courriel = 'test'
 SELECT * FROM Securise where courriel = 'test'
-
+SHOW TRIGGERS
+SELECT * FROM Evalue
 
 SELECT * FROM Commandes join Passer on Commandes.ID_commande = Passer.ID_commande WHERE courriel = 'aaron84@yahoo.com'
 
