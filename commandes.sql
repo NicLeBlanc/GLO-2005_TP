@@ -19,7 +19,8 @@ SELECT * FROM Securise where courriel = 'test'
 
 
 SELECT * FROM Commandes join Passer on Commandes.ID_commande = Passer.ID_commande WHERE courriel = 'aaron84@yahoo.com'
-
+SHOW TRIGGERS
+SHOW INDEXES
 SELECT * FROM Vendeurs
 
 SELECT type FROM prefere WHERE courriel = 'aaron84@yahoo.com'
