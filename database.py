@@ -136,14 +136,17 @@ def init_Database():
 # *                 Index                           *
 # ***************************************************
 
-    request_index_clients = """CREATE INDEX hash_client ON clients (courriel) USING HASH"""
-    cursor.execute(request_index_clients)
+    request_index_clients_hash = """CREATE INDEX hash_client ON Clients (courriel) USING HASH"""
+    cursor.execute(request_index_clients_hash)
 
-    request_index_securise = """CREATE INDEX hash_securise ON securise (courriel) USING HASH"""
-    cursor.execute(request_index_securise)
+    request_index_securise_hash = """CREATE INDEX hash_securise ON Securise (courriel) USING HASH"""
+    cursor.execute(request_index_securise_hash)
 
-    request_index_livre_BTREE = """CREATE INDEX btree_livres ON livres (annee_publication) USING BTREE"""
-    cursor.execute(request_index_livre_BTREE)
+    request_index_livre_btree = """CREATE INDEX btree_livres ON Livres (annee_publication) USING BTREE"""
+    cursor.execute(request_index_livre_btree)
 
-    #request_index_livre_HASH = """CREATE INDEX hash_livres ON livres (annee_publication) USING HASH"""
-    #cursor.execute(request_index_livre_HASH)
+    request_index_livre_hash = """CREATE INDEX hash_livres ON Livres (Auteur) USING HASH"""
+    cursor.execute(request_index_livre_hash)
+
+    request_index_commande_hash = """CREATE INDEX hash_commandes ON Commandes (ID_commande) USING HASH"""
+    cursor.execute(request_index_commande_hash)
