@@ -14,6 +14,9 @@ CREATE TABLE Livres(isbn varchar(20), titre varchar(100), auteur char(100), anne
 SELECT * from Securise WHERE courriel = 'aaron11@lucas.com'
 SELECT * FROM passer
 
+EXPLAIN ANALYZE SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
+ALTER TABLE Livres DROP INDEX btree_livres
+
 SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;
 SELECT * FROM contient
 SELECT * FROM Vend
