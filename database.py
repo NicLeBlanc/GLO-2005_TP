@@ -39,7 +39,7 @@ def init_Database():
     request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
     cursor.execute(request_db_clients)
 
-    request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40),courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(30))"
+    request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40),courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(50), cote_globale int(1))"
     cursor.execute(request_db_vendeurs)
 
     request_db_livres = "CREATE TABLE Livres(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500))"
@@ -84,7 +84,7 @@ def init_Database():
     request_clients = """INSERT INTO Clients (courriel, prenom, nom, adresse, date_de_naissance) VALUES (%s, %s, %s, %s, %s)"""
     cursor.executemany(request_clients, fake_profiles)
 
-    request_vendeur = """INSERT INTO Vendeurs (ID_vendeur, nom, courriel_vendeur, adresse, pays_origine) VALUES(%s, %s, %s, %s, %s)"""
+    request_vendeur = """INSERT INTO Vendeurs (ID_vendeur, nom, courriel_vendeur, adresse, pays_origine, cote_globale) VALUES(%s, %s, %s, %s, %s, %s)"""
     cursor.executemany(request_vendeur, fake_seller)
 
     request_livre = """INSERT INTO Livres (isbn, titre, auteur, annee_publication, preface) VALUES (%s, %s, %s, %s, %s)"""
@@ -126,10 +126,10 @@ def init_Database():
 # *                 Triggers                        *
 # ***************************************************
 
-    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
+    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeurs SET vendeurs.cote_globale = (SELECT AVG (cote_vendeur) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where Vendeurs.ID_vendeur = new.ID_vendeur; end"""
     cursor.execute(request_trigger_Insert_Cote)
 
-    request_trigger_Update_Cote = """ CREATE TRIGGER UpdateCoteGlobaleUpdate AFTER UPDATE ON Evalue FOR EACH ROW BEGIN UPDATE Vendeur SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
+    request_trigger_Update_Cote = """ CREATE TRIGGER UpdateCoteGlobaleUpdate AFTER UPDATE ON Evalue FOR EACH ROW BEGIN UPDATE Vendeurs SET vendeurs.cote_globale = (SELECT AVG (cote_vendeur) from Evalue where NEW.ID_vendeur = Evalue.ID_vendeur) where Vendeurs.ID_vendeur = new.ID_vendeur; end"""
     cursor.execute(request_trigger_Update_Cote)
 
 # ***************************************************

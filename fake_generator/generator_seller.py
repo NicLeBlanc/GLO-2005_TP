@@ -29,9 +29,16 @@ for i in range(50):
     fake_seller_id.append(x + 100000)
     x += 1
 
+# List of seller cote
+fake_seller_cote = []
+x = 0
+for i in range(50):
+    fake_seller_cote.append(x)
+
+
 # List of fake seller
 fake_seller = []
-fake_list = [fake_seller_id, fake_company, fake_email, fake_adress, fake_country]
+fake_list = [fake_seller_id, fake_company, fake_email, fake_adress, fake_country, fake_seller_cote]
 for x in range(len(fake_email)):
     fake_seller.append([item[x] for item in fake_list])
 print(fake_seller)
