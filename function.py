@@ -130,4 +130,18 @@ def get_preferences(courriel):
 def get_pref(courriel):
     request = """SELECT type FROM prefere WHERE courriel = "{}";""".format(courriel)
     cursor.execute(request)
-    return cursor.fetchall()#
+    return cursor.fetchall()
+
+# /*
+# @Recherche de livres
+# */
+def select_books(query=None):
+    request = "SELECT * from Livres"
+
+    if query:
+        request += """ WHERE titre LIKE '%{}%';""".format(query)
+
+    cursor.execute(request)
+    books = [entry[0] for entry in cursor.fetchall()]
+    return books
+

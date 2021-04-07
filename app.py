@@ -62,13 +62,28 @@ def recent_books():
     #
     # return render_template('bienvenu.html', livres=info)
 
+
+@app.route("/inscription_complete", methods=['GET'])
+def inscription_complete():
+    return render_template('inscription_complete.html')
+
+
 @app.route("/inscription/", methods=['GET','POST'])
 def inscription():
     if request.method == "GET":
-        pass
+        return render_template('inscription.html')
 
-    if request.method == "POST":
+    elif request.method == "POST":
         data = request.json
+        courriel = (data["courriel"])
+        mot_passe = (data["mot_passe"])
+        mot_passe_r = (data["mot_passe_r"])
+
+        if courriel_existant(courriel) is False and mot_passe == mot_passe_r:
+            insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"],
+                               data["date_de_naissance"])
+            insert_securise(data["courriel"], data["mot_passe"])
+            return(redirect(url_for('inscription_complete')))
 
         if courriel_existant(data["courriel"]) is True:
             return render_template("inscription.html", message = "Ce courriel est déjà utilisé, veuillez recommencer")
@@ -77,23 +92,21 @@ def inscription():
             return render_template("inscription.html", message = "Les deux mots de passe entrés ne sont pas identiques, veuillez recommencer")
 
         else:
-            insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
-            insert_securise(data["courriel"], data["mot_passe"])
-            return render_template('inscription_complete.html')
-    else:
-        return render_template('inscription.html')
+            return render_template("inscription.html", message="Il y a eu un problème, veuillez recommencer")
 
 
-@app.route("/inscription_complete", methods=['POST', 'GET'])
-def inscription_complete():
-    return render_template('inscription_complete.html')
-
-
-@app.route("/recherche", methods=['POST', 'GET'])
+@app.route("/recherche/", methods=['POST', 'GET'])
 def search_books():
-    return render_template('recherche.html')
-
-
+    return render_template("recherche.html")
+    # query_books = request.args.get("query")
+    # books = select_books(query=query_books)
+    #
+    # response = {
+    #     "status": 200,
+    #     "books": books
+    # }
+    #
+    # return jsonify(response)
 
 
 if __name__ == "__main__":

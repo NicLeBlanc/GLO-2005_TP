@@ -1,27 +1,11 @@
-function Fonction1()
-{
-	document.getElementsByName("ligne1")[0].style.color="red"
-	document.getElementsByName("ligne1")[0].innerHTML="Ligne <i>mise &agrave; jour</i> par fonction JavaScript."
-}
-
-function Fonction2()
-{
-	document.getElementsByName("ligne1")[1].style.background="lightgreen"
-	document.getElementsByName("ligne1")[1].style.border="10px solid green"
-	document.getElementsByName("ligne1")[1].innerHTML="Ligne ind&eacute;pendante."
-}
-
-function Fonction3()
-{
-	document.getElementById("ligne2").style.color="blue";
-	document.getElementById("ligne2").innerHTML="Plus de contenu ici!";
-	document.getElementById("ligne2").align="right";
-}
-
-function SupprimerContenu()
-{
-	document.getElementsByName("courriel")[0].value="";
-	document.getElementsByName("motpasse")[0].value="";
+function onButtonClickCancel() {
+	courriel = document.getElementById("courriel").value="";
+	prenom = document.getElementById("prenom").value="";
+	nom = document.getElementById("nom").value="";
+	adresse = document.getElementById("adresse").value="";
+	date_de_naissance = document.getElementById("date_de_naissance").value="";
+	mot_passe = document.getElementById("password").value="";
+	mot_passe_r = document.getElementById("passsword_repeat").value="";
 }
 
 function onButtonClickInscription() {
@@ -50,4 +34,38 @@ function postInscription(signupObject) {
     }).then(function(data) {
         console.log("worked")
     })
+}
+
+function displaySearch(text) {
+    var booksContainer = document.getElementById("display-search")
+    var newBook = document.createElement("div");
+
+    newBook.innerHTML = text;
+
+    booksContainer.appendChild(newBook);
+}
+
+function fetchBooksWithQuery(query) {
+    getUrl = "livre?query=" + query
+
+    fetch(getUrl).then(function(response) {
+        return response.json()
+    }).then(function(data) {
+        books = data.books;
+
+        for(let book of books) {
+            displaySearch(book);
+        }
+    })
+}
+
+function onSearchClick() {
+    var inputElement = document.getElementById("search-field");
+    var searchContainer = document.getElementById("display-search");
+    searchContainer.innerHTML = ""
+
+    var search = inputElement.value;
+
+    fetchBooksWithQuery(search);
+    inputElement.value = "";
 }
