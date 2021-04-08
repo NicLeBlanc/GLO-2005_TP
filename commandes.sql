@@ -22,9 +22,16 @@ ALTER TABLE Livres DROP INDEX btree_livres
 SHOW TRIGGERS
 INSERT INTO Evalue(courriel, ID_vendeur, cote_vendeur) VALUES ("aaron11@lucas.com","100001",5);
 SELECT * FROM vendeurs
+SELECT * FROM Evalue ORDER BY ID_vendeur
+
+#Analyse trigger commande
+
+
+
+
 
 SELECT * FROM Clients
-SELECT * FROM Evalue ORDER BY ID_vendeur
+
 INSERT INTO vendeurs (ID_vendeur, nom, courriel_vendeur, adresse, pays_origine, cote_globale) VALUES(000001, "Tom", "tom@bob.com", "3232323 ddd", "Canada", 0)
 
 

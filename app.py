@@ -7,11 +7,7 @@ app = Flask(__name__)
 init_Database()
 ProfileUtilisateur = {}
 
-conn = pymysql.connect(
-        host="127.0.0.1",
-        user="root123",
-        password="123",
-        db="livres_en_vrac")
+conn = connection()
 
 @app.route("/", methods=['POST', 'GET'])
 def main():

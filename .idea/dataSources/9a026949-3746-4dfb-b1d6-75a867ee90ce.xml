@@ -1090,13 +1090,13 @@ SELECT|sys.sys_config
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
     <trigger id="333" parent="291" name="UpdateCoteGlobaleInsert">
-      <SourceTextLength>166</SourceTextLength>
+      <SourceTextLength>178</SourceTextLength>
       <Definer>root123@%</Definer>
       <Turn>after-row</Turn>
       <Events>I</Events>
     </trigger>
     <trigger id="334" parent="291" name="UpdateCoteGlobaleUpdate">
-      <SourceTextLength>166</SourceTextLength>
+      <SourceTextLength>178</SourceTextLength>
       <Definer>root123@%</Definer>
       <Turn>after-row</Turn>
       <Events>U</Events>
@@ -1279,9 +1279,13 @@ SELECT|sys.sys_config
     </column>
     <column id="373" parent="298" name="pays_origine">
       <Position>5</Position>
-      <DataType>char(30)|0s</DataType>
+      <DataType>char(50)|0s</DataType>
     </column>
-    <key id="374" parent="298" name="PRIMARY">
+    <column id="374" parent="298" name="cote_globale">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <key id="375" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID_vendeur</ColNames>
       <Primary>1</Primary>
