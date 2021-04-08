@@ -31,6 +31,20 @@
     <label for="date_de_naissance">Date de naissance :</label>
     <input type="date" placeholder="Entrer la date de naissance" id="date_de_naissance" required>
     <br>
+     <label for="preference">Choisissez votre pr&eacutef&eacuterence:</label>
+  <select id="preference">
+      <option value="roman">Roman</option>
+      <option value="biographie">Biographie</option>
+      <option value="conte">Conte</option>
+      <option value="nouvelle">Nouvelle</option>
+      <option value="science-fiction">Science-fiction</option>
+      <option value="aventure">Aventure</option>
+      <option value="jeunesse">Jeunesse</option>
+      <option value="politique">Politique</option>
+      <option value="policier">Policier</option>
+      <option value="classique">Classique</option>
+  </select>
+    <br>
     <label for="psw">Mot de passe :</label>
     <input type="password" placeholder="Entrer mot de passe" id="password" required>
     <br>
@@ -39,7 +53,7 @@
 
     <div class="clearfix">
       <button onclick="onButtonClickCancel()" type="button" class="cancelbtn">Cancel</button>
-      <button onclick="onButtonClickInscription()" class="signupbtn">Inscription</button>
+      <button type="submit" onclick="onButtonClickInscription()" class="signupbtn">Inscription</button>
       <br>
       {% if message %}
       <div id="cadre">{{ message }}</div>

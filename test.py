@@ -1,4 +1,5 @@
 from database import *
+from function import *
 
 conn = pymysql.connect(
         host="127.0.0.1",
@@ -32,8 +33,12 @@ cursor = connection.cursor()
 # insert_inscription("test","test","test","test","test")
 # insert_securise("test","1234")
 
-bonne = "bxe0xb6xa5x9ft6Yxfdkxb2Jx0fxb3xdchzPxecx87x91xdcxcbx9fxefx99pxbfx08x13xf4xff"
-mauvaise = "bxe0xb6xa5x9ft6Yxfdkxb2Jx0fxb3xdchzPxecx87x91xdcxcbx9fxefx99pxbfx08x13xf4xff"
+# bonne = "bxe0xb6xa5x9ft6Yxfdkxb2Jx0fxb3xdchzPxecx87x91xdcxcbx9fxefx99pxbfx08x13xf4xff"
+# mauvaise = "bxe0xb6xa5x9ft6Yxfdkxb2Jx0fxb3xdchzPxecx87x91xdcxcbx9fxefx99pxbfx08x13xf4xff"
+#
+# print(set(bonne)-set(mauvaise))
+# print(encrypt_pass("test", "test"))
 
-print(set(bonne)-set(mauvaise))
-print(encrypt_pass("test", "test"))
+print(select_books("python"))
+
+print(courriel_existant("catherinegonzalez@jackson-petersen.org"))

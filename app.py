@@ -1,5 +1,5 @@
 import pymysql as pymysql
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session, Response
 from function import *
 from database import *
 
@@ -59,11 +59,6 @@ def recent_books():
     # return render_template('bienvenu.html', livres=info)
 
 
-@app.route("/inscription_complete", methods=['GET'])
-def inscription_complete():
-    return render_template('inscription_complete.html')
-
-
 @app.route("/inscription/", methods=['GET','POST'])
 def inscription():
     if request.method == "GET":
@@ -76,34 +71,43 @@ def inscription():
         mot_passe_r = (data["mot_passe_r"])
 
         if courriel_existant(courriel) is False and mot_passe == mot_passe_r:
-            insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"],
-                               data["date_de_naissance"])
+            insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
             insert_securise(data["courriel"], data["mot_passe"])
-            return(redirect(url_for('inscription_complete')))
+            insert_prefere(data["courriel"], data["preference"])
+            flash("Votre inscription a fonctionné !")
+            return redirect("/inscription_complete")
 
-        if courriel_existant(data["courriel"]) is True:
-            return render_template("inscription.html", message = "Ce courriel est déjà utilisé, veuillez recommencer")
+        if courriel_existant(data["courriel"]):
+            flash("Le courriel existe déjà, veuillez réessayer")
+            return redirect("/inscription_complete")
 
         if data["mot_passe"] != data["mot_passe_r"]:
-            return render_template("inscription.html", message = "Les deux mots de passe entrés ne sont pas identiques, veuillez recommencer")
-
-        else:
-            return render_template("inscription.html", message="Il y a eu un problème, veuillez recommencer")
+            flash("Les mots de passe ne correspondent pas, veuillez réessayer")
+            return redirect("/inscription_complete")
 
 
-@app.route("/recherche/", methods=['POST', 'GET'])
+@app.route("/inscription_complete", methods=['GET'])
+def inscription_complete():
+    return render_template('inscription_complete.html')
+
+
+@app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
+    if request.method == "POST":
+        search_query = request.args.get("query")
+        books = select_books(search_query)
+
+        response = {
+            "status": 200,
+            "books": books
+        }
+
+        books_json = jsonify(response)
+        return render_template("recherche.html", books=books_json)
+
     return render_template("recherche.html")
-    # query_books = request.args.get("query")
-    # books = select_books(query=query_books)
-    #
-    # response = {
-    #     "status": 200,
-    #     "books": books
-    # }
-    #
-    # return jsonify(response)
 
 
 if __name__ == "__main__":
+    app.secret_key = 'super secret key'
     app.run()

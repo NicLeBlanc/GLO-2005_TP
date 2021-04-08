@@ -14,9 +14,10 @@ function onButtonClickInscription() {
 	nom = document.getElementById("nom").value;
 	adresse = document.getElementById("adresse").value;
 	date_de_naissance = document.getElementById("date_de_naissance").value;
+	preference = document.getElementById("preference").value;
 	mot_passe = document.getElementById("password").value;
 	mot_passe_r = document.getElementById("passsword_repeat").value;
-    var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance,
+    var inputClient = {courriel:courriel, prenom:prenom, nom:nom, adresse:adresse, date_de_naissance:date_de_naissance, preference:preference,
 		mot_passe:mot_passe, mot_passe_r:mot_passe_r};
     postInscription(inputClient)
 }
@@ -34,6 +35,7 @@ function postInscription(signupObject) {
     }).then(function(data) {
         console.log("worked")
     })
+    window.location = "/inscription_complete"
 }
 
 function displaySearch(text) {
@@ -61,8 +63,8 @@ function fetchBooksWithQuery(query) {
 
 function onSearchClick() {
     var inputElement = document.getElementById("search-field");
-    var searchContainer = document.getElementById("display-search");
-    searchContainer.innerHTML = ""
+    var booksContainer = document.getElementById("display-search");
+    booksContainer.innerHTML = ""
 
     var search = inputElement.value;
 
