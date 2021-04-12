@@ -7,7 +7,11 @@ CREATE TABLE Clients(courriel varchar(50), password varchar(20), prenom char(20)
 SELECT * FROM prefere where courriel = 'test'
 SHOW TABLES
 
-SELECT COUNT(*) FROM Clients WHERE courriel = "test";
+SELECT * FROM Clients WHERE courriel = "test";
+SLEC
+select * from securise WHERE courriel = "test";
+SELECT * FROM commandes;
+
 
 SHOW INDEXES FROM Livres
 SHOW INDEXES FROM Securise

@@ -51,7 +51,8 @@ def insert_inscription(courriel, prenom, nom, adresse, date_de_naissance):
 # */
 
 def insert_securise(courriel, mot_de_passe):
-    mot_de_passe_encrypt = encrypt_pass(courriel, mot_de_passe)
+    courriel_str = '"' + courriel + '"'
+    mot_de_passe_encrypt = encrypt_pass(courriel_str, mot_de_passe)
     request = """INSERT INTO Securise (courriel, mot_de_passe) VALUES ("{}","{}")""".format(courriel, mot_de_passe_encrypt)
     cursor.execute(request)
 # /*
