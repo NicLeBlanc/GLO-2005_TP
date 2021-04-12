@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<title>Resultats</title>
+<link rel="stylesheet" type="text/css" href="/static/MonFichierStyle.css">
+<script type="text/javascript" src="/static/MonFichierCode.js"></script>
 </head>
 <body>
+
+<header class="centre_titre">Livres en Vrac </header>
+<br>
+<p><img src="/static/test123.png" alt="Image acceuil" class="centre_image"></p>
+</body>
 <table class="a">
   <tr>
-    <th>ISBN</th>
     <th>Titre</th>
+    <th>ISBN</th>
     <th>Auteur</th>
-    <th>Date de publication</th>
-      <th>Co&ucirc;t</th>
+    <th>Ann&eacutee de publication</th>
   </tr>
     {% for item in results %}
   <tr>
-    <td>{{item[0]}}</td>
     <td>{{item[1]}}</td>
+    <td>{{item[0]}}</td>
     <td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
-      <td>{{item[4]}} $</td>
   </tr>
     {% endfor %}
 </table>

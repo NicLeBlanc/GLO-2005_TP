@@ -91,9 +91,9 @@ def inscription_complete():
 
 @app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
-    return render_template("recherche2.html")
+    return render_template("recherche.html")
 
-@app.route("/recherche/resultats_recherche2/", methods=['POST'])
+@app.route("/recherche/resultats_recherche/", methods=['POST','GET'])
 def results():
     recherche = request.form.get('recherche_titre')
     results = select_books(recherche)
