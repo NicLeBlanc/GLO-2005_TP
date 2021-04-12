@@ -4,10 +4,10 @@ CREATE DATABASE livres_en_vrac;
 USE livres_en_vrac;
 
 CREATE TABLE Clients(courriel varchar(50), password varchar(20), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50));
-SELECT * FROM prefere where courriel = 'aaaa'
+SELECT * FROM prefere where courriel = 'test'
 SHOW TABLES
 
-SELECT COUNT(*) FROM Clients WHERE courriel = "te";
+SELECT COUNT(*) FROM Clients WHERE courriel = "test";
 
 SHOW INDEXES FROM Livres
 SHOW INDEXES FROM Securise

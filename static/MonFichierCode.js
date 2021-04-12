@@ -35,7 +35,6 @@ function postInscription(signupObject) {
     }).then(function(data) {
         console.log("worked")
     })
-    window.location = "/inscription_complete"
 }
 
 function displaySearch(text) {
@@ -43,8 +42,7 @@ function displaySearch(text) {
     var newBook = document.createElement("div");
 
     newBook.innerHTML = text;
-
-    booksContainer.appendChild(newBook);
+    booksContainer.append(newBook);
 }
 
 function fetchBooksWithQuery(query) {

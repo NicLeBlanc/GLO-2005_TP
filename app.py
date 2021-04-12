@@ -74,16 +74,13 @@ def inscription():
             insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
             insert_securise(data["courriel"], data["mot_passe"])
             insert_prefere(data["courriel"], data["preference"])
-            flash("Votre inscription a fonctionné !")
-            return redirect("/inscription_complete")
+            return render_template('inscription.html', message="Votre inscription a fonctionné !")
 
-        if courriel_existant(data["courriel"]):
-            flash("Le courriel existe déjà, veuillez réessayer")
-            return redirect("/inscription_complete")
+        elif courriel_existant(data["courriel"]):
+            return render_template('inscription.html', message="Le courriel existe déjà, veuillez réessayer")
 
-        if data["mot_passe"] != data["mot_passe_r"]:
-            flash("Les mots de passe ne correspondent pas, veuillez réessayer")
-            return redirect("/inscription_complete")
+        elif data["mot_passe"] != data["mot_passe_r"]:
+            return render_template('inscription.html', message="Les mots de passe ne correspondent pas, veuillez réessayer")
 
 
 @app.route("/inscription_complete", methods=['GET'])
@@ -93,8 +90,11 @@ def inscription_complete():
 
 @app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
-    if request.method == "POST":
-        search_query = request.args.get("query")
+    search_query = request.args.get("query")
+    if search_query is None:
+        return render_template("recherche.html")
+
+    else:
         books = select_books(search_query)
 
         response = {
@@ -104,8 +104,6 @@ def search_books():
 
         books_json = jsonify(response)
         return render_template("recherche.html", books=books_json)
-
-    return render_template("recherche.html")
 
 
 if __name__ == "__main__":

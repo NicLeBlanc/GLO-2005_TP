@@ -137,10 +137,11 @@ def get_pref(courriel):
 # /*
 # @Recherche de livres
 # */
-def select_books(query):
-    books = {}
+def select_books(query=None):
     request = "SELECT * from Livres"
-    request += """ WHERE titre LIKE '%{}%';""".format(query)
+    if request:
+        request += """ WHERE titre LIKE '%{}%'""".format(query)
+    request += ';'
     cursor.execute(request)
     books = cursor.fetchall()
     return books

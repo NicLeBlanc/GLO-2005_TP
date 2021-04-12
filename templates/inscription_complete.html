@@ -7,7 +7,9 @@
 
 Bonjour
 
-{% extends "layout.html" %}
+{% if message %}
+      {{ message }}
+{% endif %}
 
 </body>
 </html>
