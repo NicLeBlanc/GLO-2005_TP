@@ -31,11 +31,11 @@ SELECT * FROM vendeurs
 SELECT * FROM Evalue ORDER BY ID_vendeur
 
 #Analyse trigger commande
-
 SHOW TRIGGERS
 INSERT INTO contient(ID_commande, isbn, nbr_exemplaire) VALUES ("1","193398807X", 10);
 SELECT * FROM commandes
 SELECT * FROM contient
+SELECT * FROM Vendeurs
 SELECT DISTINCT ID_commande FROM contient
 SELECT * FROM commandes
 SELECT * FROM vend WHERE ID_vendeur!=vend.ID_vendeur AND I
