@@ -77,6 +77,43 @@ def init_Database():
     request_passer = "CREATE TABLE Passer(ID_commande varchar(20), courriel varchar(50), FOREIGN KEY (ID_commande) REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_passer)
 
+
+    # ***************************************************
+    # *                 Triggers Pre Insert             *
+    # ***************************************************
+
+    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeurs SET vendeurs.cote_globale = (SELECT AVG (cote_vendeur) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where Vendeurs.ID_vendeur = new.ID_vendeur; end"""
+    cursor.execute(request_trigger_Insert_Cote)
+
+
+    request_trigger_Update_Cote = """ CREATE TRIGGER UpdateCoteGlobaleUpdate 
+    AFTER UPDATE ON Evalue 
+    FOR EACH ROW 
+    BEGIN UPDATE Vendeur 
+    SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
+    cursor.execute(request_trigger_Update_Cote)
+
+
+    request_trigger_Insert_prix_total = """CREATE TRIGGER UpdatePrixTotalInsert
+    AFTER INSERT ON contient
+    FOR EACH ROW
+    BEGIN
+    UPDATE commandes
+    SET commandes.prix_total = (SELECT SUM(c.nbr_exemplaire*v.prix) FROM contient c, Vend v WHERE (c.ID_commande = NEW.ID_commande) AND (c.isbn = v.isbn))
+    WHERE NEW.ID_commande = commandes.ID_commande ;END"""
+    cursor.execute(request_trigger_Insert_prix_total)
+
+
+    request_trigger_Update_prix_total = """CREATE TRIGGER UpdatePrixTotalUpdate
+    AFTER UPDATE ON contient
+    FOR EACH ROW
+    BEGIN
+    UPDATE commandes
+    SET commandes.prix_total = (SELECT SUM(c.nbr_exemplaire*v.prix) FROM contient c, Vend v WHERE (c.ID_commande = NEW.ID_commande) AND (c.isbn = v.isbn))
+    WHERE NEW.ID_commande = commandes.ID_commande ;END"""
+    cursor.execute(request_trigger_Update_prix_total)
+
+
     # ***************************************************
     # *       Insertion dans les tables Entités         *
     # ***************************************************
@@ -122,40 +159,9 @@ def init_Database():
     request_passer = """INSERT INTO Passer(ID_commande, courriel) VALUES (%s, %s)"""
     cursor.executemany(request_passer, passer)
 
-# ***************************************************
-# *                 Triggers                        *
-# ***************************************************
-
-    request_trigger_Insert_Cote = """ CREATE TRIGGER UpdateCoteGlobaleInsert AFTER INSERT ON Evalue FOR EACH ROW BEGIN UPDATE Vendeurs SET vendeurs.cote_globale = (SELECT AVG (cote_vendeur) from Evalue where new.ID_vendeur = Evalue.ID_vendeur) where Vendeurs.ID_vendeur = new.ID_vendeur; end"""
-    cursor.execute(request_trigger_Insert_Cote)
-
-
-    request_trigger_Update_Cote = """ CREATE TRIGGER UpdateCoteGlobaleUpdate 
-    AFTER UPDATE ON Evalue 
-    FOR EACH ROW 
-    BEGIN UPDATE Vendeur 
-    SET vendeur.cote_global = (SELECT AVG (cote) from Evalue where NEW.ID_vendeur = Evalue.ID_vendeur) where vendeur.ID_vendeur = new.ID_vendeur; end"""
-    cursor.execute(request_trigger_Update_Cote)
-
-
-    request_trigger_Insert_prix_total = """CREATE TRIGGER UpdatePrixTotalInsert
-    AFTER INSERT ON contient
-    FOR EACH ROW
-    BEGIN
-    UPDATE commandes
-    SET commandes.prix_total = (SELECT SUM(c.nbr_exemplaire*v.prix) FROM contient c, Vend v WHERE (c.ID_commande = NEW.ID_commande) AND (c.isbn = v.isbn))
-    WHERE NEW.ID_commande = commandes.ID_commande ;END"""
-    cursor.execute(request_trigger_Insert_prix_total)
-
-
-    request_trigger_Update_prix_total = """CREATE TRIGGER UpdatePrixTotalUpdate
-    AFTER UPDATE ON contient
-    FOR EACH ROW
-    BEGIN
-    UPDATE commandes
-    SET commandes.prix_total = (SELECT SUM(c.nbr_exemplaire*v.prix) FROM contient c, Vend v WHERE (c.ID_commande = NEW.ID_commande) AND (c.isbn = v.isbn))
-    WHERE NEW.ID_commande = commandes.ID_commande ;END"""
-    cursor.execute(request_trigger_Update_prix_total)
+    # ***************************************************
+    # *                 Triggers Post Insert            *
+    # ***************************************************
 
     request_trigger_changement_commande = """CREATE TRIGGER BeforeInsertCommande
     BEFORE INSERT ON contient
@@ -181,11 +187,9 @@ def init_Database():
     END """
     cursor.execute(request_trigger_changement_commande_update)
 
-
-
-# ***************************************************
-# *                 Index                           *
-# ***************************************************
+    # ***************************************************
+    # *                 Index                           *
+    # ***************************************************
 
     request_index_clients_hash = """CREATE INDEX hash_client ON Clients (courriel) USING HASH"""
     cursor.execute(request_index_clients_hash)
