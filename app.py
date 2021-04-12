@@ -58,7 +58,7 @@ def recent_books():
     # return render_template('bienvenu.html', livres=info)
 
 
-@app.route("/inscription/", methods=['GET','POST'])
+@app.route("/inscription/", methods=['GET', 'POST'])
 def inscription():
     if request.method == "GET":
         return render_template('inscription.html')
@@ -76,9 +76,11 @@ def inscription():
             return render_template('inscription.html', message="Votre inscription a fonctionné !")
 
         elif courriel_existant(data["courriel"]):
+            flash("Le courriel existe déjà, veuillez réessayer")
             return render_template('inscription.html', message="Le courriel existe déjà, veuillez réessayer")
 
         elif data["mot_passe"] != data["mot_passe_r"]:
+            flash("Les mots de passe ne correspondent pas, veuillez réessayer")
             return render_template('inscription.html', message="Les mots de passe ne correspondent pas, veuillez réessayer")
 
 
@@ -89,20 +91,36 @@ def inscription_complete():
 
 @app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
-    search_query = request.args.get("query")
-    if search_query is None:
-        return render_template("recherche.html")
+    return render_template("recherche2.html")
 
-    else:
-        books = select_books(search_query)
+@app.route("/recherche/resultats_recherche2/", methods=['POST'])
+def results():
+    recherche = request.form.get('recherche_titre')
+    results = select_books(recherche)
+    return render_template("results.html", results=results)
 
-        response = {
-            "status": 200,
-            "books": books
-        }
 
-        books_json = jsonify(response)
-        return render_template("recherche.html", books=books_json)
+# @app.route("/recherche/", methods=['GET', 'POST'])
+# def search_books():
+#     search_query = request.args.get("query")
+#     if search_query is None:
+#         return render_template("recherche.html")
+#
+#     else:
+#         books = select_books(search_query)
+#
+#         response = {
+#             "status": 200,
+#             "books": books
+#         }
+#
+#         books_json = jsonify(response)
+#         return render_template("results.html", books=books_json)
+#
+#
+# @app.route("/recherche/livres/", methods=['GET', 'POST'])
+# def display_search():
+#     return render_template("results.html")
 
 
 if __name__ == "__main__":

@@ -46,16 +46,12 @@ function displaySearch(text) {
 }
 
 function fetchBooksWithQuery(query) {
-    getUrl = "livre?query=" + query
+    getUrl = "livres?query=" + query
 
     fetch(getUrl).then(function(response) {
         return response.json()
     }).then(function(data) {
-        books = data.books;
-
-        for(let book of books) {
-            displaySearch(book);
-        }
+       var books = data.books;
     })
 }
 

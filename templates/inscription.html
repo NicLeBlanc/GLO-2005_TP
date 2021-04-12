@@ -2,7 +2,7 @@
 <head>
 <title>Inscription</title>
 <link rel="stylesheet" type="text/css" href="../static/MonFichierStyle.css">
-  <script src="../static/MonFichierCode.js"></script>
+<script type="text/javascript" src="../static/MonFichierCode.js"></script>
 </head>
 <body>
 
@@ -10,7 +10,6 @@
 <br>
 <p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
 <br>
-
   <div class="centre_texte">
     <title>Sign Up</title>
     <p>Entrer les informations afin de cr&eacuteer votre compte</p>
@@ -55,9 +54,10 @@
       <button type="submit" onclick="onButtonClickInscription()" class="signupbtn">Inscription</button>
       <br>
     </div>
-  </div>
-    {% if message %}
+          {% if message %}
     <div id="cadre">{{ message }}</div>
     {% endif %}
+
+  </div>
 </body>
 </html>
