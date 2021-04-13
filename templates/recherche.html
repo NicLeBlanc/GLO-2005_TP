@@ -10,14 +10,25 @@
 <header class="centre_titre">Livres en Vrac </header>
 <br>
 <p><img src="/static/test123.png" alt="Image acceuil" class="centre_image"></p>
+<hr>
 <body>
 <div class="centre_texte">
     <p>
-        Utilisez cette barre afin de faire une recherche sur le titre des livres
+        Utilisez cette barre afin de faire une recherche sur les livres
   <form action="resultats_recherche" method="post">
 <p class="centre_texte">
-  <input type="text" name="recherche_titre" class = "box" id="search-field" type="text" placeholder="Rechercher des livres par leur titre"><br>
+  <input type="text" name="recherche_titre" class = "box" id="search-field" type="text" placeholder="Rechercher des livres selon l'attribut sélectionné"><br>
+<p class="centre_texte"> Choisissez l'attribut sur lequel effecuter la recherche
 <br>
+    <select name="type_recherche">
+      <option value="titre">Titre</option>
+      <option value="isbn">Code ISBN</option>
+      <option value="auteur">Auteur</option>
+      <option value="anne_publication">Ann&eacutee de publication</option>
+      <option value="preface">Pr&eacuteface</option>
+  </select>
+    <br>
+    <br>
 <input type="submit" value="Recherche" name="Soumettre" class="centre_button"></p>
 </form>
 </body>

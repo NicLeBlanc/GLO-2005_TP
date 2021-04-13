@@ -138,12 +138,8 @@ def get_pref(courriel):
 # /*
 # @Recherche de livres
 # */
-def select_books(query=None):
-    request = "SELECT * from Livres"
-    if request:
-        request += """ WHERE titre LIKE '%{}%'""".format(query)
-    request += ';'
+def select_books(type_recherche, recherche):
+    request = """ SELECT * from Livres JOIN Vend on Livres.isbn = Vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur WHERE Livres.{} LIKE "%{}%";""".format(type_recherche, recherche)
     cursor.execute(request)
     books = cursor.fetchall()
     return books
-

@@ -41,7 +41,7 @@ def login():
         getCommandes = get_commandes(ProfileUtilisateur["courriel"])
         getPreference = get_preferences(ProfileUtilisateur["courriel"])
         getPref = get_pref(ProfileUtilisateur["courriel"])
-        return render_template('bienvenu.html', profile=ProfileUtilisateur, commandes=getCommandes, recommande = getPreference, pref = getPref)
+        return render_template('bienvenu.html', profile=ProfileUtilisateur, commandes=getCommandes, recommande=getPreference, pref=getPref)
 
     return render_template('login.html', message="Les informations entrées ne sont pas valides, veuillez ré-essayer")
 
@@ -96,8 +96,9 @@ def search_books():
 @app.route("/recherche/resultats_recherche/", methods=['POST','GET'])
 def results():
     recherche = request.form.get('recherche_titre')
-    results = select_books(recherche)
-    return render_template("results.html", results=results)
+    type_recherche = request.form.get('type_recherche')
+    results = select_books(type_recherche, recherche)
+    return render_template("results.html", results=results, recherche=recherche, type_recherche=type_recherche)
 
 
 # @app.route("/recherche/", methods=['GET', 'POST'])

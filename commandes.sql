@@ -9,8 +9,10 @@ SHOW TABLES
 
 SELECT * FROM Clients WHERE courriel = "test";
 SLEC
-select * from securise WHERE courriel = "test";
+select * from livres join vend on livres.isbn = vend.isbn join vendeurs on vend.ID_vendeur = vendeurs.ID_vendeur where titre like "%python%"
 SELECT * FROM commandes;
+
+SELECT * from Livres JOIN Vend on Livres.isbn = Vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur WHERE titre like "%jav%"
 
 
 SHOW INDEXES FROM Livres

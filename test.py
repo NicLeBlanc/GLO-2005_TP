@@ -33,15 +33,14 @@ cursor = connection.cursor()
 # insert_inscription("test","test","test","test","test")
 # insert_securise("test","1234")
 
-print(encrypt_pass("test", "123"))
-
-actuelle = "bx17xd6x8dx8bxc2xdaXnx0exa5xxxf2xeax0exf3x97Hx03vRxe56x86x8e"
-voulue = "bx8d4x00Px80x9ax04xb6xabx94xxd0x16xf8xffbxe0x88xbexd9x99xafxd0xd3x9dkxbb"
+# print(select_books('titre', 'python'))
 
 
 # print(set(bonne)-set(mauvaise))
 # print(encrypt_pass("test", "test"))
 
-print(select_books("python"))
+# print(select_books("python"))
 
 print(courriel_existant("catherinegonzalez@jackson-petersen.org"))
+
+print("""Livres.{} LIKE "%{}%";""".format('test', 'test'))
