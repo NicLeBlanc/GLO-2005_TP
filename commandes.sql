@@ -8,12 +8,21 @@ SELECT * FROM prefere where courriel = 'test'
 SHOW TABLES
 
 SELECT * FROM Clients WHERE courriel = "test";
-SLEC
+
 select * from livres join vend on livres.isbn = vend.isbn join vendeurs on vend.ID_vendeur = vendeurs.ID_vendeur where titre like "%python%"
 SELECT * FROM commandes;
 
+SELECT MAX(ID_commande) FROM commandes;
+
 SELECT * from Livres JOIN Vend on Livres.isbn = Vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur WHERE titre like "%jav%"
 
+SELECT l.isbn, l.titre, l.auteur, l.annee_publication, d.nbr_exemplaire, v.prix
+    FROM Commandes c
+    LEFT JOIN Passer p on c.ID_commande = p.ID_commande
+    LEFT JOIN Contient d on c.ID_commande = d.ID_commande
+    LEFT JOIN Livres l on d.isbn = l.isbn
+    LEFT JOIN Vend v on l.isbn = v.isbn
+    WHERE courriel = "catherinegonzalez@jackson-petersen.org"
 
 SHOW INDEXES FROM Livres
 SHOW INDEXES FROM Securise
@@ -49,15 +58,18 @@ SELECT DISTINCT isbn FROM vend;
 SHOW TABLES;
 SELECT isbn, COUNT (DISTINCT)
 
+select * from contient;
+select * from clients;
+
 ALTER TABLE contient(ID_commande, isbn, nbr_exemplaire) VALUES (1,"1933988606", 1300);
 
 INSERT INTO contient(ID_commande, isbn, nbr_exemplaire) VALUES (1, "1933988606", 1300);
 
 SELECT distinct b.nbr_exemplaire FROM (contient a, vend b) WHERE (a.isbn = b.isbn)
 
-
+SELECT * FROM contient c, Vend v WHERE (c.nbr_exemplaire > v.nbr_exemplaire)
 SELECT * FROM contient c, Vend v WHERE (c.ID_commande = 1) AND (c.isbn = v.isbn)
-
+SELECT * FROM vendeurs
 SELECT * FROM Clients
 SELECT * FROM Securise
 INSERT INTO contient (ID_commande, isbn, nbr_exemplaire) VALUES ("1","193398807X", 12);
@@ -140,3 +152,26 @@ limit 0,10;
 
 
 
+    request_trigger_changement_commande = """CREATE TRIGGER BeforeInsertCommande
+    BEFORE INSERT ON contient
+    FOR EACH ROW
+    BEGIN
+    if (SELECT DISTINCT b.nbr_exemplaire FROM (contient a, vend b) WHERE (a.isbn = b.isbn) AND (a.isbn = NEW.isbn)) < NEW.nbr_exemplaire
+    THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Vous tentez de commander plus de livres que ce que le stock peut offrir.';
+    END IF;
+    END """
+    cursor.execute(request_trigger_changement_commande)
+
+    request_trigger_changement_commande_update = """CREATE TRIGGER BeforeUpdateCommande
+    BEFORE UPDATE ON contient
+    FOR EACH ROW
+    BEGIN
+    if (SELECT DISTINCT b.nbr_exemplaire FROM (contient a, vend b) WHERE (a.isbn = b.isbn) AND (a.isbn = NEW.isbn)) < NEW.nbr_exemplaire
+    THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Vous tentez de commander plus de livres que ce que le stock peut offrir.';
+    END IF;
+    END """
+    cursor.execute(request_trigger_changement_commande_update)

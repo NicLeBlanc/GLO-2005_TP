@@ -57,6 +57,21 @@ def recent_books():
     #
     # return render_template('bienvenu.html', livres=info)
 
+@app.route("/commande/", methods=['GET', 'POST'])
+def recent_commande():
+    result = get_commandeCourante(ProfileUtilisateur["courriel"])
+    contenu = get_commandeContenu(ProfileUtilisateur["courriel"])
+    return render_template('commande.html', result=result, contenu=contenu, profile=ProfileUtilisateur)
+
+    #return render_template('commande.html')
+
+    # cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 1;'
+    # cur = conn.cursor()
+    # cur.execute(cmd)
+    # info = cur.fetchone()
+    #
+    # return render_template('bienvenu.html', livres=info)
+
 
 @app.route("/inscription/", methods=['GET', 'POST'])
 def inscription():
@@ -88,40 +103,18 @@ def inscription():
 def inscription_complete():
     return render_template('inscription_complete.html')
 
-
 @app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
-    return render_template("recherche.html")
+    return render_template('recherche.html')
 
 @app.route("/recherche/resultats_recherche/", methods=['POST','GET'])
 def results():
     recherche = request.form.get('recherche_titre')
     type_recherche = request.form.get('type_recherche')
     results = select_books(type_recherche, recherche)
-    return render_template("results.html", results=results, recherche=recherche, type_recherche=type_recherche)
+    return render_template('results.html', results=results, recherche=recherche, type_recherche=type_recherche)
 
 
-# @app.route("/recherche/", methods=['GET', 'POST'])
-# def search_books():
-#     search_query = request.args.get("query")
-#     if search_query is None:
-#         return render_template("recherche.html")
-#
-#     else:
-#         books = select_books(search_query)
-#
-#         response = {
-#             "status": 200,
-#             "books": books
-#         }
-#
-#         books_json = jsonify(response)
-#         return render_template("results.html", books=books_json)
-#
-#
-# @app.route("/recherche/livres/", methods=['GET', 'POST'])
-# def display_search():
-#     return render_template("results.html")
 
 
 if __name__ == "__main__":

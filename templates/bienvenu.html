@@ -7,17 +7,24 @@
 
 <header class="centre_titre">Livres en Vrac </header>
 <br>
-<p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
+<p><img src="..\static\test123.png" alt="Image accueil" class="centre_image"></p>
 <br>
+
 <hr>
 <p class="centre_texte"> Bonjour {{profile.prenom}} {{profile.nom}}, bienvenue sur votre page personnelle !</p>
 <hr>
-<p class="centre_texte">
-Faire une recherche sur les livres :
-</p>
+
+<p class="centre_texte"> Faire une recherche sur les livres :</p>
 <form action="http://127.0.0.1:5000/recherche">
     <input type="submit" value="Recherche" name="Inscription" class="centre_button"/>
 </form>
+
+<hr>
+<p class="centre_texte"> Acceder a ma commande : </p>
+<form action="http://127.0.0.1:5000/commande">
+    <input type="submit" value="Commande" name="Commande" class="centre_button"/>
+</form>
+
 <hr>
 <p class="centre_texte"> Voici l'historique de vos commandes : </p>
 
@@ -27,7 +34,7 @@ Faire une recherche sur les livres :
     <th>Mode de paiement</th>
     <th>Prix total</th>
     <th>Date de commande</th>
-      <th>Date d'expedition</th>
+    <th>Date d'expedition</th>
   </tr>
     {% for item in commandes %}
   <tr>
@@ -35,7 +42,7 @@ Faire une recherche sur les livres :
     <td>{{item[1]}}</td>
     <td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
-      <td>{{item[4]}}</td>
+    <td>{{item[4]}}</td>
   </tr>
     {% endfor %}
 </table>

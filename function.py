@@ -1,5 +1,6 @@
 import pymysql
 import hashlib
+
 # ***************************************************
 # *                 Fonctions                       *
 # ***************************************************
@@ -117,6 +118,26 @@ def get_commandes(courriel):
     request = """SELECT * FROM Commandes join Passer on Commandes.ID_commande = Passer.ID_commande WHERE courriel = "{}";""".format(courriel)
     cursor.execute(request)
     return cursor.fetchall()
+
+def get_commandeCourante(courriel):
+    request = """SELECT DISTINCT c.ID_commande, c.mode_paiement, c.prix_total, c.date_expedition, c.date_commande
+    FROM Commandes c
+    left join Passer on c.ID_commande = Passer.ID_commande
+    WHERE courriel = "{}";""".format(courriel)
+    cursor.execute(request)
+    return cursor.fetchall()
+
+def get_commandeContenu(courriel):
+    request = """SELECT l.isbn, l.titre, l.auteur, l.annee_publication, d.nbr_exemplaire, v.prix
+    FROM Commandes c
+    LEFT JOIN Passer p on c.ID_commande = p.ID_commande
+    LEFT JOIN Contient d on c.ID_commande = d.ID_commande
+    LEFT JOIN Livres l on d.isbn = l.isbn
+    LEFT JOIN Vend v on l.isbn = v.isbn
+    WHERE courriel = "{}";""".format(courriel)
+    cursor.execute(request)
+    return cursor.fetchall()
+
 
 # /*
 # @Livres recommandés selon les goûts

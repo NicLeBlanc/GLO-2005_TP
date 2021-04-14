@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Commande</title>
+<link rel="stylesheet" type="text/css" href="../static/MonFichierStyle.css">
+</head>
+<body>
+
+<header class="centre_titre">Livres en Vrac </header>
+<br>
+<p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
+<br>
+
+<hr>
+<p class="centre_texte"> Bonjour {{profile.prenom}} {{profile.nom}} {{profile.courriel}} {{result.result}}, voici le contenu de votre commande :</p>
+<hr>
+
+<p class="centre_texte">
+Faire une recherche sur les commandes :
+</p>
+<form action="http://127.0.0.1:5000/commande" method="post">
+    <input type="submit" value="Commande" name="commande" class="centre_button"/>
+</form>
+<hr>
+<p class="centre_texte"> Voici le r&eacutesum&eacute de votre commande : </p>
+
+ <table class="a">
+  <tr>
+    <th>ID de commande</th>
+    <th>Mode de paiement</th>
+    <th>Prix total</th>
+    <th>Date de commande</th>
+    <th>Date d'exp&eacutedition</th>
+  </tr>
+    {% for item in result %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+    <td>{{item[4]}}</td>
+  </tr>
+    {% endfor %}
+</table>
+<hr>
+<p class="centre_texte"> Voici le contenu de votre commande : </p>
+
+<table class="a">
+  <tr>
+    <th>ISBN</th>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Date de publication</th>
+      <th> Quantit&eacute </th>
+      <th>Co&ucirc;t</th>
+  </tr>
+    {% for item in contenu %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+    <td>{{item[4]}}</td>
+    <td>{{item[5]}}</td>
+
+  </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
