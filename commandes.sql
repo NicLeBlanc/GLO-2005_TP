@@ -11,7 +11,8 @@ SELECT * FROM Clients WHERE courriel = "test";
 SELECT * FROM contient WHERE ID_commande = 2001
 SELECT * FROM commandes WHERE ID_commande = 2001
 SELECT * FROM commandes
-
+SELECT * FROM livres
+SHO
 SELECT nbr_exemplaire from vend WHERE isbn = 1617291781
 SELECT nbr_exemplaire from vend WHERE isbn = 1617291781
 SELECT * from commandes WHERE ID_commande = 2001
