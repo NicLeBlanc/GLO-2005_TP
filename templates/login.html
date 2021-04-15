@@ -37,15 +37,15 @@ Voici une s&eacutelection de livres publi&eacutes r&eacutecemment :
 <p>
     <table class="a">
   <tr>
-    <th>Titre</th>
     <th>ISBN</th>
+    <th>Titre</th>
     <th>Auteur</th>
     <th>Ann&eacutee de publication</th>
   </tr>
     {% for item in livres %}
   <tr>
-    <td>{{item[1]}}</td>
     <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
     <td>{{item[2]}}</td>
     <td>{{item[3]}}</td>
   </tr>

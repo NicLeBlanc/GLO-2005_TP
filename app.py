@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session, Response
+import datetime
+from datetime import date
 from function import *
 from database import *
 
@@ -46,24 +48,9 @@ def login():
     return render_template('login.html', message="Les informations entrées ne sont pas valides, veuillez ré-essayer")
 
 
-@app.route("/bienvenu", methods=['POST', 'GET'])
+@app.route("/bienvenu/", methods=['POST', 'GET'])
 def recent_books():
     pass
-
-    # cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 1;'
-    # cur = conn.cursor()
-    # cur.execute(cmd)
-    # info = cur.fetchone()
-    #
-    # return render_template('bienvenu.html', livres=info)
-
-@app.route("/commande/", methods=['GET', 'POST'])
-def recent_commande():
-    result = get_commandeCourante(ProfileUtilisateur["courriel"])
-    contenu = get_commandeContenu(ProfileUtilisateur["courriel"])
-    return render_template('commande.html', result=result, contenu=contenu, profile=ProfileUtilisateur)
-
-    #return render_template('commande.html')
 
     # cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 1;'
     # cur = conn.cursor()
@@ -91,21 +78,16 @@ def inscription():
             return render_template('inscription.html', message="Votre inscription a fonctionné !")
 
         elif courriel_existant(data["courriel"]):
-            flash("Le courriel existe déjà, veuillez réessayer")
             return render_template('inscription.html', message="Le courriel existe déjà, veuillez réessayer")
 
         elif data["mot_passe"] != data["mot_passe_r"]:
-            flash("Les mots de passe ne correspondent pas, veuillez réessayer")
             return render_template('inscription.html', message="Les mots de passe ne correspondent pas, veuillez réessayer")
 
-
-@app.route("/inscription_complete", methods=['GET'])
-def inscription_complete():
-    return render_template('inscription_complete.html')
 
 @app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
     return render_template('recherche.html')
+
 
 @app.route("/recherche/resultats_recherche/", methods=['POST','GET'])
 def results():
@@ -115,6 +97,55 @@ def results():
     return render_template('results.html', results=results, recherche=recherche, type_recherche=type_recherche)
 
 
+@app.route("/commande/", methods=['GET', 'POST'])
+def recent_commande():
+    result = get_commandeCourante(ProfileUtilisateur["courriel"])
+    contenu = get_commandeContenu(ProfileUtilisateur["courriel"])
+    return render_template('commande.html', result=result, contenu=contenu, profile=ProfileUtilisateur)
+
+
+@app.route("/nouvelle_commande", methods=['GET', 'POST'])
+def nouvelle_commande():
+    ajouter_commande = request.form.get('ajout_commande')
+    last_order_num = int(last_order()) - 1
+    if not ajouter_commande:
+        new_order = last_order()
+        create_new_odrder(ProfileUtilisateur["courriel"], new_order)
+    else:
+        nbr_exemplaire = int(request.form.get('nbr_exemplaire'))
+        if livre_existant(ajouter_commande):
+            if quantite_suffisante(ajouter_commande, nbr_exemplaire):
+                livre_isbn = int(request.form.get('ajout_commande'))
+                ajout_commande(last_order_num, livre_isbn, nbr_exemplaire)
+            else:
+                message = '''La quantité commandée est supérieur à celle disponible'''
+                return render_template('nouvelle_commande.html', message=message)
+        else:
+            message='''Le livre n'existe pas'''
+            return render_template('nouvelle_commande.html', message=message)
+
+    commande = commande_actuelle(ProfileUtilisateur["courriel"], last_order_num)
+    cout_total = total_cost(last_order_num)
+    return render_template('nouvelle_commande.html', commande=commande, cout_total=cout_total)
+
+
+@app.route("/payer_commande", methods=['GET', 'POST'])
+def payer_commande():
+    mode_paiement = request.form.get('mode_paiement')
+    if mode_paiement:
+        today = date.today()
+        date_commande = today.strftime('%Y-%m-%d')
+        time_change = datetime.timedelta(days=7)
+        date_exp = today + time_change
+        date_expedition = date_exp.strftime('%Y-%m-%d')
+        id_commande_cours = commande_en_cours(ProfileUtilisateur["courriel"])
+        prenom = ProfileUtilisateur["prenom"]
+        nom = ProfileUtilisateur["nom"]
+        cout_total = total_cost(id_commande_cours)
+        paiement_commande(date_expedition, date_commande, mode_paiement, id_commande_cours)
+        return render_template('paiement_complet.html', date_commande = date_commande, date_expedition=date_expedition, mode_paiement=mode_paiement, montant_total=cout_total, nom=nom, prenom=prenom)
+
+    return render_template('paiement.html')
 
 
 if __name__ == "__main__":

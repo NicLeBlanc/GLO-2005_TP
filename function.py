@@ -1,6 +1,7 @@
 import pymysql
 import hashlib
 
+
 # ***************************************************
 # *                 Fonctions                       *
 # ***************************************************
@@ -164,3 +165,92 @@ def select_books(type_recherche, recherche):
     cursor.execute(request)
     books = cursor.fetchall()
     return books
+
+# /*
+# @Trouver la dernière commande passée
+# */
+def last_order():
+    request_get_last_order = "SELECT ID_commande FROM Commandes ORDER BY CAST(ID_commande as DECIMAL) DESC LIMIT 1;"
+    cursor.execute(request_get_last_order)
+    last_order_num_raw = cursor.fetchone()
+    last_order_num_filter = int(last_order_num_raw[0])
+    last_order_num = last_order_num_filter + 1
+    return str(last_order_num)
+
+# /*
+# @Créer une nouvelle commande
+# */
+def create_new_odrder(email, id_commande):
+    request_insert_commande = "INSERT INTO Commandes (ID_commande, mode_paiement, prix_total, date_commande, date_expedition) VALUES ({}, null, 0, null, null);".format(id_commande)
+    cursor.execute(request_insert_commande)
+    request_insert_passer = """INSERT INTO Passer (ID_commande, courriel) VALUES ({}, "{}");""".format(id_commande, email)
+    cursor.execute(request_insert_passer)
+
+# /*
+# @Trouver la dernière commande d'un client
+# */
+def commande_actuelle(email, id_commande):
+    request = """SELECT l.isbn, l.titre, l.auteur, l.annee_publication, d.nbr_exemplaire, v.prix FROM Commandes c LEFT JOIN Passer p on c.ID_commande = p.ID_commande LEFT JOIN Contient d on c.ID_commande = d.ID_commande LEFT JOIN Livres l on d.isbn = l.isbn LEFT JOIN Vend v on l.isbn = v.isbn WHERE courriel = "{}" AND c.ID_commande = {}""".format(email, id_commande)
+    cursor.execute(request)
+    result = cursor.fetchall()
+    return result
+
+# /*
+# @Ajouter de livres à une commande
+# */
+def ajout_commande(id_commande, isbn, nbr_exemplaire):
+    request = """INSERT INTO Contient (ID_commande, isbn, nbr_exemplaire) VALUES ({}, {}, {});""".format(id_commande, isbn, nbr_exemplaire)
+    cursor.execute(request)
+
+# /*
+# @Chercher si le livres est dans la DB
+# */
+def livre_existant(isbn):
+    request = """SELECT COUNT(*) FROM Livres WHERE isbn = "{}";""".format(isbn)
+    cursor.execute(request)
+    fetch = cursor.fetchall()
+    result = (fetch[0][0])
+    if result > 0:
+        return True
+    else:
+        return False
+
+# /*
+# @Vérifie si la quantité voulue est supérieur à la quantité en stock
+# */
+def quantite_suffisante(isbn, nbr_exemplaire):
+    request = """SELECT nbr_exemplaire from Vend WHERE isbn = "{}";""".format(isbn)
+    cursor.execute(request)
+    fetch = cursor.fetchone()
+    result = fetch[0]
+    if result >= nbr_exemplaire:
+        return True
+    else:
+        return False
+
+# /*
+# @Retourne le coût total d'une commande
+# */
+def total_cost(id_commande):
+    request = "SELECT prix_total from commandes WHERE ID_commande = {}".format(id_commande)
+    cursor.execute(request)
+    fetch = cursor.fetchone()
+    total = fetch[0]
+    return total
+
+# /*
+# @Payer une commande
+# */
+def paiement_commande(date_expedition, date_commande, mode_paiement, id_commande):
+    request = """UPDATE commandes SET date_expedition = "{}", date_commande = "{}", mode_paiement = "{}" WHERE ID_commande = {};""".format(date_expedition, date_commande, mode_paiement, id_commande)
+    cursor.execute(request)
+
+# /*
+# @Trouver la dernière commande d'un client
+# */
+def commande_en_cours(email):
+    request = """SELECT * FROM Commandes LEFT JOIN passer on commandes.ID_commande = passer.ID_commande WHERE date_commande is null AND passer.courriel = "{}";""".format(email)
+    cursor.execute(request)
+    result = cursor.fetchone()
+    result_2 = result[0]
+    return result_2

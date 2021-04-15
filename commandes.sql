@@ -8,11 +8,34 @@ SELECT * FROM prefere where courriel = 'test'
 SHOW TABLES
 
 SELECT * FROM Clients WHERE courriel = "test";
+SELECT * FROM contient WHERE ID_commande = 2001
+SELECT * FROM commandes WHERE ID_commande = 2001
+SELECT * FROM commandes
+
+SELECT nbr_exemplaire from vend WHERE isbn = 1617291781
+SELECT nbr_exemplaire from vend WHERE isbn = 1617291781
+SELECT * from commandes WHERE ID_commande = 2001
+UPDATE commandes SET date_expedition = 'test123', date_commande = 'test', mode_paiement = 'test' WHERE ID_commande = 123
 
 select * from livres join vend on livres.isbn = vend.isbn join vendeurs on vend.ID_vendeur = vendeurs.ID_vendeur where titre like "%python%"
 SELECT * FROM commandes;
 
-SELECT MAX(ID_commande) FROM commandes;
+UPDATE commandes SET date_expedition = 'test', date_commande = 'test' WHERE ID_commande = '123'
+
+
+INSERT INTO passer (ID_commande, courriel) VALUES ('2001', 'taylormichael@baker-smith.org')
+
+SELECT l.isbn, l.titre, l.auteur, l.annee_publication, d.nbr_exemplaire, v.prix
+    FROM Commandes c
+    LEFT JOIN Passer p on c.ID_commande = p.ID_commande
+    LEFT JOIN Contient d on c.ID_commande = d.ID_commande
+    LEFT JOIN Livres l on d.isbn = l.isbn
+    LEFT JOIN Vend v on l.isbn = v.isbn
+    WHERE courriel = courriel AND c.ID_commande = id_commande
+
+INSERT INTO passer (ID_commande, courriel) VALUES ('2342', 'taylormichael@baker-smith.org')
+INSERT INTO commandes (ID_commande, mode_paiement, prix_total, date_commande, date_expedition) VALUES ('2342', 'Master', 0, 'today', 'today')
+
 
 SELECT * from Livres JOIN Vend on Livres.isbn = Vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur WHERE titre like "%jav%"
 

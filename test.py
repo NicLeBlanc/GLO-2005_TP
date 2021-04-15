@@ -1,5 +1,6 @@
 from database import *
 from function import *
+import datetime
 
 conn = pymysql.connect(
         host="127.0.0.1",
@@ -41,6 +42,34 @@ cursor = connection.cursor()
 
 # print(select_books("python"))
 
-print(courriel_existant("catherinegonzalez@jackson-petersen.org"))
+# print(courriel_existant("catherinegonzalez@jackson-petersen.org"))
 
-print("""Livres.{} LIKE "%{}%";""".format('test', 'test'))
+# print("""Livres.{} LIKE "%{}%";""".format('test', 'test'))
+#
+# create_new_odrder('taylormichael@baker-smith.org')
+
+# def ajout_commande(id_commande, isbn, nbr_exemplaire):
+#     request = """INSERT INTO Contient (ID_commande, isbn, nbr_exemplaire) VALUES ({}, {}, {});""".format(id_commande, isbn, nbr_exemplaire)
+#     cursor.execute(request)
+#
+# ajout_commande(2000, 1617291781, 4)
+#
+# # commande_actuelle()
+#
+# test = last_order()
+# print(test)
+#
+# print(livre_existant(161729181))
+#
+# print(quantite_suffisante(1617291781,252))
+#
+# request = """SELECT nbr_exemplaire from Vend WHERE isbn = 1617291781;"""
+# cursor.execute(request)
+# fetch = cursor.fetchone()
+# result = fetch[0]
+# print(result)
+
+# print(commande_actuelle("catherinegonzalez@jackson-petersen.org"))
+
+
+paiement_commande('test','penis','test',123)

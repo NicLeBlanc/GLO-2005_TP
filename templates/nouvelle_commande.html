@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Nouvelle commande</title>
+<link rel="stylesheet" type="text/css" href="/static/MonFichierStyle.css">
+<script type="text/javascript" src="/static/MonFichierCode.js"></script>
+</head>
+<body>
+
+<header class="centre_titre">Livres en Vrac </header>
+<br>
+<p><img src="/static/test123.png" alt="Image accueil" class="centre_image"></p>
+<hr>
+<body>
+<div class="centre_texte">
+    <p>
+        Entrer le ISBN d'un livre pour l'ajouter &agrave la commande :
+  <form action="nouvelle_commande" method="post">
+<p class="centre_texte">
+  <input type="text" name="ajout_commande" class = "box" id="search-field" type="text" placeholder="ISBN du livre voulut"><br>
+  Indiquer la quanti&eacute voulue :
+    <input type="text" name="nbr_exemplaire" class = "mini_box" id="search-field" type="text" placeholder="Nombre d'exemplaires voulus"><br>
+<input type="submit" value="Ajouter" name="Soumettre" class="centre_button"></p>
+  </form>
+  {% if message %}
+<div id="cadre">{{ message }}</div>
+{% endif %}
+<hr>
+  <p class="centre_texte"> Voici le contenu de votre commande : </p>
+
+<table class="a">
+  <tr>
+    <th>ISBN</th>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Date de publication</th>
+    <th>Quantit&eacute </th>
+    <th>Co&ucirc;t</th>
+  </tr>
+    {% for item in commande %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+    <td>{{item[4]}}</td>
+    <td>{{item[5]}}</td>
+
+  </tr>
+    {% endfor %}
+</table>
+  <div class="centre_texte">
+    <p>
+        Le coût total de la commande est de {{cout_total}} $
+
+    <hr>
+<p class="centre_texte"> Paiement de la commande : </p>
+<form action="http://127.0.0.1:5000/payer_commande">
+    <input type="submit" value="Payer" name="Payer" class="centre_button"/>
+</form>
+</body>
+</html>

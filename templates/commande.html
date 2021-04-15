@@ -11,14 +11,12 @@
 <br>
 
 <hr>
-<p class="centre_texte"> Bonjour {{profile.prenom}} {{profile.nom}} {{profile.courriel}} {{result.result}}, voici le contenu de votre commande :</p>
-<hr>
 
 <p class="centre_texte">
-Faire une recherche sur les commandes :
+Pour créer une nouvelle commande :
 </p>
-<form action="http://127.0.0.1:5000/commande" method="post">
-    <input type="submit" value="Commande" name="commande" class="centre_button"/>
+<form action="http://127.0.0.1:5000/commande/nouvelle_commande" method="post">
+    <input type="submit" value="Nouvelle commande" name="nouvelle_commande" class="centre_button"/>
 </form>
 <hr>
 <p class="centre_texte"> Voici le r&eacutesum&eacute de votre commande : </p>
@@ -50,8 +48,9 @@ Faire une recherche sur les commandes :
     <th>Titre</th>
     <th>Auteur</th>
     <th>Date de publication</th>
-      <th> Quantit&eacute </th>
-      <th>Co&ucirc;t</th>
+    <th> Quantit&eacute </th>
+    <th>Co&ucirc;t</th>
+    <th>Quantit&eacute</th>
   </tr>
     {% for item in contenu %}
   <tr>
@@ -61,7 +60,7 @@ Faire une recherche sur les commandes :
     <td>{{item[3]}}</td>
     <td>{{item[4]}}</td>
     <td>{{item[5]}}</td>
-
+    <td>{{item[6]}}</td>
   </tr>
     {% endfor %}
 </table>

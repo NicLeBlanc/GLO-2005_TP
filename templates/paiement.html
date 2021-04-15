@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recherche</title>
+<link rel="stylesheet" type="text/css" href="/static/MonFichierStyle.css">
+<script type="text/javascript" src="../static/MonFichierCode.js"></script>
+</head>
+<body>
+
+<header class="centre_titre">Livres en Vrac </header>
+<br>
+<p><img src="/static/test123.png" alt="Image accueil" class="centre_image"></p>
+<hr>
+<body>
+
+  <form action="payer_commande" method="post">
+<p class="centre_texte"> Choisissez votre mode de paiement :
+<br>
+    <select name="mode_paiement">
+      <option value="Visa">Visa</option>
+      <option value="Mastercard">Mastercard</option>
+      <option value="American Express">American Express</option>
+      <option value="Carte cadeau">Carte cadeau</option>
+  </select>
+  <p class="centre_texte">
+  Entrer votre num&eacutero de carte de cr&eacutedit :
+  <input type="text" name="recherche_titre" class = "box" id="num_carte" type="text" placeholder="Numéro de la carte"><br>
+    Entrer la date d'expiration de la carte :
+  <input type="text" name="recherche_titre" class = "box" id="expi_carte" type="text" placeholder="Expiration de la carte"><br>
+    Entrer le CCV de la carte :
+  <input type="text" name="recherche_titre" class = "box" id="CCV_carte" type="text" placeholder="CCV de la carte"><br>
+<input type="submit" value="Payer" name="Payer" class="centre_button"></p>
+</form>

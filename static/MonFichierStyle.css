@@ -18,7 +18,7 @@ th, td {
 
 table.a {
   table-layout: auto;
-  width: 1200px;
+  width: 1500px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -79,6 +79,12 @@ b {
 
 .box{
     width: 600px;
+    text-align:center;
+	margin: auto;
+}
+
+.mini_box{
+    width: 100px;
     text-align:center;
 	margin: auto;
 }
