@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Bonjour!</title>
+<title>Page d'acceuil</title>
 <link rel="stylesheet" type="text/css" href="../static/MonFichierStyle.css">
 </head>
 <body>
@@ -46,12 +46,11 @@
   </tr>
     {% endfor %}
 </table>
+<p class="centre_texte"> Faire une &eacutevaluation des vos commandes récentes :</p>
+<form action="http://127.0.0.1:5000/evaluation">
+    <input type="submit" value="Evaluation" name="Evaluation" class="centre_button"/>
+</form>
 <hr>
-<p class="centre_texte"> Choisissez l'ID de la commande avec les vendeurs que vous souhaitez &eacutevaluer :
-<br>
-  <h2>&Eacutevaluation des vendeurs d'une commande</h2>
-  <select id="select-menu" onchange="OnSelectChange()"></select>
-  <div id_commande="select-result-container"></div>
 <p class="centre_texte"> Voici certains livres recommand&eacutes selon vos go&ucirc;ts pour le genre {% for item in pref %} {{item[0]}} {% endfor %}: </p>
 
 <table class="a">

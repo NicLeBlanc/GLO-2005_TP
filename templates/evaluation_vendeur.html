@@ -11,10 +11,52 @@
 <p><img src="/static/test123.png" alt="Image accueil" class="centre_image"></p>
 <hr>
 <body>
-<p class="centre_texte"> Choisissez l'ID de la commande avec les vendeurs que vous souhaitez &eacutevaluer :
+<p class="centre_texte"> Voici vos livres achet&eacutes r&eacutecemment :
 <br>
-  <h2>Dropdown menu</h2>
-  <select id="select-menu" onchange="OnSelectChange()"></select>
-  <div id_commande="select-result-container"></div>
+ <table class="a">
+  <tr>
+    <th>ID de commande</th>
+    <th>Titre</th>
+    <th>Prix</th>
+    <th>Vendeur</th>
+    <th>ID du vendeur</th>
+    <th>Cote actuelle du vendeur</th>
+    <th>Date de commande</th>
+    <th>Date d'expedition</th>
+  </tr>
+    {% for item in commandes %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td>{{item[3]}}</td>
+    <td>{{item[4]}}</td>
+    <td>{{item[5]}}</td>
+    <td>{{item[6]}}</td>
+    <td>{{item[7]}}</td>
+  </tr>
+    {% endfor %}
+</table>
+<hr>
+<p class="centre_texte"> Entrer l'ID du vendeur que vous d&eacutesirez &eacutevaluer :
+  <form action="evaluation" method="post">
+<p class="centre_texte">
+  <input type="text" name="ID_vendeur" class = "box" id="test" type="text" placeholder="ID du vendeur" required><br>
+  Indiquer la cote donn&eacutee pour le service allant de 0 &agrave 5
+    <select name="cote">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+  </select>
+
+<input type="submit" value="Évaluer" name="Évaluer" class="centre_button"></p>
+</form>
+
+{% if message %}
+<div id="cadre">{{ message }}</div>
+{% endif %}
 </body>
 </html>

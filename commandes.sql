@@ -12,7 +12,25 @@ SELECT * FROM contient WHERE ID_commande = 2001
 SELECT * FROM commandes WHERE ID_commande = 2001
 SELECT * FROM commandes
 SELECT * FROM livres
-SHO
+
+SELECT * from Vendeurs JOIN Vend ON Vend.ID_vendeur = Vendeurs.ID_vendeur JOIN Contient on Contient.ISBN = Vend.ISBN JOIN Contient.ID_commande on Passer.ID_commande JOIN Clients ON Clients.courriel = Passer.courriel
+
+SELECT Vendeurs.ID_vendeur, COUNT(*) FROM Vendeurs JOIN Vend ON Vend.ID_vendeur = Vendeurs.ID_vendeur JOIN Contient on Contient.ISBN = Vend.ISBN JOIN Passer ON Contient.ID_commande = Passer.ID_commande JOIN Clients ON Clients.courriel = Passer.courriel WHERE Clients.courriel = 'catherinegonzalez@jackson-petersen.org' GROUP BY Passer.ID_commande, Vendeurs.ID_vendeur
+
+SELECT courriel, ID_vendeur, COUNT(*) FROM evalue GROUP BY ID_vendeur, courriel;
+
+SELECT Commandes.ID_commande, Livres.titre, vend.prix, Vendeurs.nom, Commandes.date_commande, Commandes.date_expedition FROM Commandes JOIN Contient on Contient.ID_commande = Commandes.ID_commande JOIN Livres on Contient.isbn = Livres.isbn JOIN Vend ON Livres.isbn = vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur JOIN Passer on Passer.ID_commande = Commandes.ID_commande WHERE Passer.courriel = 'catherinegonzalez@jackson-petersen.org'
+
+SELECT * FROM evalue WHERE courriel = 'catherinegonzalez@jackson-petersen.org'
+
+SELECT courriel, ID_vendeur, COUNT(*) FROM evalue WHERE courriel = 'catherinegonzalez@jackson-petersen.org' AND ID_vendeur = 100043 GROUP BY ID_vendeur, courriel;
+
+INSERT INTO Evalue (courriel, ID_vendeur, cote) VALUES ();
+
+SELECT * FROM Vend
+
+SELECT * FROM Vendeurs
+
 SELECT nbr_exemplaire from vend WHERE isbn = 1617291781
 SELECT nbr_exemplaire from vend WHERE isbn = 1617291781
 SELECT * from commandes WHERE ID_commande = 2001

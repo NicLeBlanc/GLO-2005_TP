@@ -12,10 +12,7 @@ conn = connection()
 
 @app.route("/", methods=['POST', 'GET'])
 def main():
-    cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 10;'
-    cur = conn.cursor()
-    cur.execute(cmd)
-    info = cur.fetchall()
+    info = select_books_recent()
     return render_template('login.html', livres=info)
 
 @app.route("/login", methods=['POST'])
@@ -147,6 +144,22 @@ def payer_commande():
 
     return render_template('paiement.html')
 
+@app.route("/evaluation", methods=['GET', 'POST'])
+def evaluation():
+    commandes = ligne_commande(ProfileUtilisateur["courriel"])
+    id_vendeur = request.form.get('ID_vendeur')
+    if id_vendeur:
+        cote = request.form.get('cote')
+        commande_vendeur = commande_par_vendeur(ProfileUtilisateur["courriel"],id_vendeur)
+        eval_vendeur = eval_par_vendeur(ProfileUtilisateur["courriel"],id_vendeur)
+        if commande_vendeur > eval_vendeur:
+            insert_review(ProfileUtilisateur["courriel"],id_vendeur,cote)
+            message = "Merci pour votre évaluation !"
+            return render_template('evaluation_vendeur.html', commandes=commandes, message=message)
+        else:
+            message = "Vous avez déjà évalué ce vendeur"
+            return render_template('evaluation_vendeur.html', commandes=commandes, message=message)
+    return render_template('evaluation_vendeur.html', commandes=commandes)
 
 if __name__ == "__main__":
     app.secret_key = 'super secret key'

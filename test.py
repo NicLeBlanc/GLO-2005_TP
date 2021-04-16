@@ -72,4 +72,6 @@ cursor = connection.cursor()
 # print(commande_actuelle("catherinegonzalez@jackson-petersen.org"))
 
 
-paiement_commande('test','penis','test',123)
+print(commande_par_vendeur('catherinegonzalez@jackson-petersen.org', 100043))
+print(eval_par_vendeur("watkinsheather@yahoo.com", 100029))
+print(ligne_commande('catherinegonzalez@jackson-petersen.org'))

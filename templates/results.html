@@ -21,6 +21,7 @@
     <th>Pr&eacuteface</th>
     <th>Co&ucirc;t</th>
     <th>Vendeur</th>
+    <th>Cote du vendeur</th>
   </tr>
     {% for item in results %}
   <tr>
@@ -31,6 +32,7 @@
     <td>{{item[4]}}</td>
     <td>{{item[8]}} $</td>
     <td>{{item[10]}}</td>
+    <td>{{item[14]}}</td>
   </tr>
     {% endfor %}
 </table>

@@ -18,14 +18,14 @@ def connection():
 cursor = connection().cursor()
 
 # /*
-# @Affichage des 10 livres les plus récents
+# @Affichage des 25 livres les plus récents
 # */
 
 def select_books_recent():
-    request = "SELECT * FROM Livres ORDER BY annee_publication DESC LIMIT 0,10;"
-    cursor.execute(request)
-    books = [entry[0] for entry in cursor.fetchall()]
-    return books
+    cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 25;'
+    cursor.execute(cmd)
+    info = cursor.fetchall()
+    return info
 
 # /*
 # @Hashage de password
@@ -196,7 +196,7 @@ def commande_actuelle(email, id_commande):
     return result
 
 # /*
-# @Ajouter de livres à une commande
+# @Ajouter des livres à une commande
 # */
 def ajout_commande(id_commande, isbn, nbr_exemplaire):
     request = """INSERT INTO Contient (ID_commande, isbn, nbr_exemplaire) VALUES ({}, {}, {});""".format(id_commande, isbn, nbr_exemplaire)
@@ -256,24 +256,57 @@ def commande_en_cours(email):
     return result_2
 
 # /*
+# @Le nombre de commandes par un client avec un vendeur
+# */
+def commande_par_vendeur(email, ID_vendeur):
+    request = """SELECT Vendeurs.ID_vendeur, COUNT(*) FROM Vendeurs JOIN Vend ON Vend.ID_vendeur = Vendeurs.ID_vendeur JOIN Contient on Contient.ISBN = Vend.ISBN JOIN Passer ON Contient.ID_commande = Passer.ID_commande JOIN Clients ON Clients.courriel = Passer.courriel WHERE Clients.courriel = '{}' AND Vendeurs.ID_vendeur = {} GROUP BY Passer.ID_commande, Vendeurs.ID_vendeur""".format(email, ID_vendeur)
+    cursor.execute(request)
+    result = cursor.fetchall()
+    result_nb = result[0][1]
+    return result_nb
+
+# /*
+# @Le nombre d'évaluation par vendeur
+# *
+def eval_par_vendeur(email, ID_vendeur):
+    request = """SELECT courriel, ID_vendeur, COUNT(*) FROM evalue WHERE courriel = "{}" AND ID_vendeur = {} GROUP BY ID_vendeur, courriel;""".format(email, ID_vendeur)
+    cursor.execute(request)
+    result = cursor.fetchall()
+    if not result:
+        return 0
+    else:
+        result_nb = result[0][2]
+        return result_nb
+
+# /*
+# @Afficher les lignes de commandes
+# *
+def ligne_commande(email):
+    request = """SELECT Commandes.ID_commande, Livres.titre, vend.prix, Vendeurs.nom, Vendeurs.ID_vendeur, Vendeurs.cote_globale, Commandes.date_commande, Commandes.date_expedition FROM Commandes JOIN Contient on Contient.ID_commande = Commandes.ID_commande JOIN Livres on Contient.isbn = Livres.isbn JOIN Vend ON Livres.isbn = vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur JOIN Passer on Passer.ID_commande = Commandes.ID_commande WHERE Passer.courriel = '{}'""".format(email)
+    cursor.execute(request)
+    result = cursor.fetchall()
+    return result
+
+# /*
+# @Dropbox pour ID_Commande
+# */
+def insert_review(email, ID_vendeur, cote):
+    request = """INSERT INTO Evalue (courriel, ID_vendeur, cote_vendeur) VALUES ("{}",{},{});""".format(email, ID_vendeur, cote)
+    cursor.execute(request)
+
+# /*
 # @Dropbox pour ID_Commande
 # */
 def select_id_commande():
     request = """SELECT ID_commande FROM Passer WHERE courriel = "catherinegonzalez@jackson-petersen.org";"""
-
     cursor.execute(request)
-
     ids = [entry[0] for entry in cursor.fetchall()]
-
     return ids
 
 # /*
 # @Basé sur le labo
 # */
-
 def select_todo_by_id_commande(id_commande):
     request = "SELECT ID_commande FROM Passer WHERE id_commande = {}".format(id_commande)
-
     cursor.execute(request)
-
     return cursor.fetchone()[0]
