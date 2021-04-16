@@ -161,9 +161,9 @@ SHOW INDEXES
 SELECT * FROM Vendeurs
 
 SELECT type FROM prefere WHERE courriel = 'aaron84@yahoo.com'
-
+SHOW TABLES
 SELECT COUNT(*) FROM Clients WHERE courriel = "catherinegonzalez@jackson-petersen.org";
-
+SELECT * FROM evalue
 SELECT *
 FROM Livres
 ORDER BY annee_publication DESC
@@ -199,3 +199,39 @@ limit 0,10;
     END IF;
     END """
     cursor.execute(request_trigger_changement_commande_update)
+
+
+select * from Evalue where courriel = "catherinegonzalez@jackson-petersen.org"
+select * from passer where courriel = "catherinegonzalez@jackson-petersen.org"
+UPDATE evalue SET ID_Vendeur = 100043 WHERE courriel = "catherinegonzalez@jackson-petersen.org" AND ID_vendeur = 100023;
+select * from passer p, commandes where
+select * from commandes
+select distinct d.nom, d.ID_vendeur, a.ID_commande, e.cote_vendeur
+from passer a
+     left join contient b on b.ID_commande = a.ID_commande
+     left join vend c on c.isbn = b.isbn
+     left join vendeurs d on d.ID_vendeur = c.ID_vendeur
+     right join evalue e on e.courriel = a.courriel
+where a.courriel = "catherinegonzalez@jackson-petersen.org" AND e.ID_vendeur = d.ID_vendeur ;
+
+SELECT ID_commande FROM Passer WHERE courriel = "catherinegonzalez@jackson-petersen.org"
+SHOW TABLES
+select * from vendeurs
+
+AND e.ID_vendeur = d.ID_vendeur
+
+select distinct f.nom, f.ID_vendeur, c.ID_commande
+from passer p, contient c, vend v, vendeurs f
+     where p.ID_commande = c.ID_commande
+    AND c.isbn = v.isbn
+       and v.id_vendeur = f.id_vendeur
+AND p.courriel = "catherinegonzalez@jackson-petersen.org";
+
+select distinct f.nom, f.ID_vendeur, c.ID_commande, e.cote_vendeur
+from passer p, contient c, vend v, vendeurs f,evalue e
+     where p.ID_commande = c.ID_commande
+    AND c.isbn = v.isbn
+       and v.id_vendeur = f.id_vendeur
+AND p.courriel = "catherinegonzalez@jackson-petersen.org"
+     AND (e.courriel = p.courriel)
+and e.ID_vendeur = f.ID_vendeur;

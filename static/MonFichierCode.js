@@ -65,3 +65,44 @@ function onSearchClick() {
     fetchBooksWithQuery(search);
     inputElement.value = "";
 }
+
+
+
+/*tentatives de code pour évaluation commandes*/
+
+function fetchcommandes()
+{
+    getUrl = "bienvenu/"
+    fetch(getUrl).then(function(response){
+        return response.json()
+}).then(function(data){
+    commandes = data.commandes;
+    ids = data.ids
+})
+}
+
+function fillSelect(id_commande)
+{
+    let selectContainer = document.getElementById("select-menu")
+
+    for (let id_commande of ids) {
+        let selectionOptionElement = document.createElement("option")
+        selectionOptionElement.setAttribute("value", id_commande)
+        selectionOptionElement.innerText=id_commande
+
+        selectContainerappendChild(selectionOptionElement)
+    }
+}
+function onSelectChange()
+{
+    let newValue = document.getElementById("select-menu").value
+
+    let resultContainer = document.getElementById("select-result-container")
+
+    const getUrl = "todos/" + newValue
+    fetch(getUrl).then(function(response) {
+        return response.json()
+    }).then(function(data) {
+        resultContainer.innerHTML = commandes.ID_commande
+    })
+}

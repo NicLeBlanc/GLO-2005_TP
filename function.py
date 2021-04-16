@@ -254,3 +254,26 @@ def commande_en_cours(email):
     result = cursor.fetchone()
     result_2 = result[0]
     return result_2
+
+# /*
+# @Dropbox pour ID_Commande
+# */
+def select_id_commande():
+    request = """SELECT ID_commande FROM Passer WHERE courriel = "catherinegonzalez@jackson-petersen.org";"""
+
+    cursor.execute(request)
+
+    ids = [entry[0] for entry in cursor.fetchall()]
+
+    return ids
+
+# /*
+# @Basé sur le labo
+# */
+
+def select_todo_by_id_commande(id_commande):
+    request = "SELECT ID_commande FROM Passer WHERE id_commande = {}".format(id_commande)
+
+    cursor.execute(request)
+
+    return cursor.fetchone()[0]
