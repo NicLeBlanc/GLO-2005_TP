@@ -56,29 +56,57 @@ def recent_books():
     #
     # return render_template('bienvenu.html', livres=info)
 
-
 @app.route("/inscription/", methods=['GET', 'POST'])
 def inscription():
-    if request.method == "GET":
-        return render_template('inscription.html')
-
-    elif request.method == "POST":
-        data = request.json
-        courriel = (data["courriel"])
-        mot_passe = (data["mot_passe"])
-        mot_passe_r = (data["mot_passe_r"])
+    courriel = request.form.get('courriel')
+    if courriel:
+        mot_passe = request.form.get('password')
+        mot_passe_r = request.form.get("password_repeat")
+        prenom = request.form.get('prenom')
+        nom = request.form.get('nom')
+        adresse = request.form.get('adresse')
+        date_de_naissance = request.form.get('date_de_naissance')
+        preference = request.form.get('preference')
 
         if courriel_existant(courriel) is False and mot_passe == mot_passe_r:
-            insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
-            insert_securise(data["courriel"], data["mot_passe"])
-            insert_prefere(data["courriel"], data["preference"])
+            insert_inscription(courriel, prenom, nom, adresse, date_de_naissance)
+            insert_securise(courriel, mot_passe)
+            insert_prefere(courriel, preference)
             return render_template('inscription.html', message="Votre inscription a fonctionné !")
 
-        elif courriel_existant(data["courriel"]):
+        elif is_email(courriel) is False:
+            return render_template('inscription.html', message="Le courriel n'est pas valide, il ne contient pas de @")
+
+        elif courriel_existant(courriel):
             return render_template('inscription.html', message="Le courriel existe déjà, veuillez réessayer")
 
-        elif data["mot_passe"] != data["mot_passe_r"]:
+        elif mot_passe != mot_passe_r:
             return render_template('inscription.html', message="Les mots de passe ne correspondent pas, veuillez réessayer")
+
+    return render_template("inscription.html")
+
+# @app.route("/inscription/", methods=['GET', 'POST'])
+# def inscription():
+#     if request.method == "GET":
+#         return render_template('inscription.html')
+#
+#     elif request.method == "POST":
+#         data = request.json
+#         courriel = (data["courriel"])
+#         mot_passe = (data["mot_passe"])
+#         mot_passe_r = (data["mot_passe_r"])
+#
+#         if courriel_existant(courriel) is False and mot_passe == mot_passe_r:
+#             insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
+#             insert_securise(data["courriel"], data["mot_passe"])
+#             insert_prefere(data["courriel"], data["preference"])
+#             return render_template('inscription.html', message="Votre inscription a fonctionné !")
+#
+#         elif courriel_existant(data["courriel"]):
+#             return render_template('inscription.html', message="Le courriel existe déjà, veuillez réessayer")
+#
+#         elif data["mot_passe"] != data["mot_passe_r"]:
+#             return render_template('inscription.html', message="Les mots de passe ne correspondent pas, veuillez réessayer")
 
 
 @app.route("/recherche/", methods=['GET', 'POST'])

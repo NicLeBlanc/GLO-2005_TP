@@ -288,6 +288,16 @@ def ligne_commande(email):
     return result
 
 # /*
+# @Regarde si cela contient un "@"
+# *
+def is_email(email):
+    string = '@'
+    if string in email:
+        return True
+    else:
+        return False
+
+# /*
 # @Dropbox pour ID_Commande
 # */
 def insert_review(email, ID_vendeur, cote):

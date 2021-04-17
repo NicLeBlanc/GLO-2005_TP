@@ -10,27 +10,28 @@
 <br>
 <p><img src="..\static\test123.png" alt="Image acceuil" class="centre_image"></p>
 <br>
+  <form method="post">
   <div class="centre_texte">
     <title>Sign Up</title>
     <p>Entrer les informations afin de cr&eacuteer votre compte</p>
     <hr>
     <label for="courriel">Email :</label>
-    <input type="text" placeholder="Entrer votre courriel" id="courriel" required>
+    <input type="text" placeholder="Entrer votre courriel" name="courriel" id="courriel" required>
     <br>
     <label for="prenom">Pr&eacutenom :</label>
-    <input type="text" placeholder="Entrer votre prenom" id="prenom" required>
+    <input type="text" placeholder="Entrer votre prenom" name="prenom" id="prenom" required>
     <br>
     <label for="nom">Nom :</label>
-    <input type="text" placeholder="Entrer votre nom" id="nom" required>
+    <input type="text" placeholder="Entrer votre nom" name="nom" id="nom" required>
     <br>
     <label for="adresse">Adresse :</label>
-    <input type="text" placeholder="Entrer votre adresse" id="adresse" required>
+    <input type="text" placeholder="Entrer votre adresse" name="adresse" id="adresse" required>
     <br>
     <label for="date_de_naissance">Date de naissance :</label>
-    <input type="date" placeholder="Entrer la date de naissance" id="date_de_naissance" required>
+    <input type="date" placeholder="Entrer la date de naissance" name="date_de_naissance" id="date_de_naissance" required>
     <br>
      <label for="preference">Choisissez votre pr&eacutef&eacuterence:</label>
-  <select id="preference">
+  <select name="preference" id="preference">
       <option value="Roman">Roman</option>
       <option value="Biographie">Biographie</option>
       <option value="Conte">Conte</option>
@@ -42,16 +43,18 @@
       <option value="Policier">Policier</option>
       <option value="Classique">Classique</option>
   </select>
+  </form>
     <br>
-    <label for="psw">Mot de passe :</label>
-    <input type="password" placeholder="Entrer mot de passe" id="password" required>
+    <label for="password">Mot de passe :</label>
+    <input type="password" placeholder="Entrer mot de passe" id="password" name="password" required>
     <br>
-    <label for="psw-repeat">R&eacutepeter votre mot de passe : </label>
-    <input type="password" placeholder="Repeter mot de passe" id="passsword_repeat" required>
+    <label for="password_repeat">R&eacutepeter votre mot de passe : </label>
+    <input type="password" placeholder="Repeter mot de passe" id="password_repeat" name="password_repeat" required>
 
     <div class="clearfix">
-      <button onclick="onButtonClickCancel()" type="button" class="cancelbtn">Recommencer</button>
-      <button type="submit" onclick="onButtonClickInscription()" class="signupbtn">Inscription</button>
+        <input type="submit" value="S'inscrire" name="S'inscrire'" class="centre_button">
+        <button onclick="onButtonClickCancel()" type="button" class="centre_button">
+        Recommencer</button>
       <br>
     </div>
           {% if message %}
