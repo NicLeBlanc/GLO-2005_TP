@@ -49,6 +49,16 @@ def insert_inscription(courriel, prenom, nom, adresse, date_de_naissance):
     cursor.execute(request)
 
 # /*
+# @Recherche de livres
+# */
+def select_books(type_recherche, recherche):
+    request = """ SELECT * from Livres JOIN Vend on Livres.isbn = Vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur 
+    WHERE Livres.{} LIKE "%{}%";""".format(type_recherche, recherche)
+    cursor.execute(request)
+    books = cursor.fetchall()
+    return books
+
+# /*
 # @Insertion de mot de passe encryptés
 # */
 
@@ -57,6 +67,7 @@ def insert_securise(courriel, mot_de_passe):
     mot_de_passe_encrypt = encrypt_pass(courriel_str, mot_de_passe)
     request = """INSERT INTO Securise (courriel, mot_de_passe) VALUES ("{}","{}")""".format(courriel, mot_de_passe_encrypt)
     cursor.execute(request)
+
 # /*
 # @Insertion de contient lcc
 # */
@@ -145,7 +156,8 @@ def get_commandeContenu(courriel):
 # */
 
 def get_preferences(courriel):
-    request = """SELECT livres.isbn, titre, auteur, annee_publication, vend.prix FROM Livres JOIN Classer on Classer.isbn = Livres.isbn JOIN Prefere on Classer.type = Prefere.type JOIN Vend on Livres.isbn = Vend.isbn WHERE Prefere.courriel = "{}";""".format(courriel)
+    request = """SELECT livres.isbn, titre, auteur, annee_publication, vend.prix FROM Livres JOIN Classer on Classer.isbn = Livres.isbn 
+    JOIN Prefere on Classer.type = Prefere.type JOIN Vend on Livres.isbn = Vend.isbn WHERE Prefere.courriel = "{}";""".format(courriel)
     cursor.execute(request)
     return cursor.fetchall()
 
@@ -156,15 +168,6 @@ def get_pref(courriel):
     request = """SELECT type FROM prefere WHERE courriel = "{}";""".format(courriel)
     cursor.execute(request)
     return cursor.fetchall()
-
-# /*
-# @Recherche de livres
-# */
-def select_books(type_recherche, recherche):
-    request = """ SELECT * from Livres JOIN Vend on Livres.isbn = Vend.isbn JOIN Vendeurs on Vend.ID_vendeur = Vendeurs.ID_vendeur WHERE Livres.{} LIKE "%{}%";""".format(type_recherche, recherche)
-    cursor.execute(request)
-    books = cursor.fetchall()
-    return books
 
 # /*
 # @Trouver la dernière commande passée

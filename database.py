@@ -35,19 +35,23 @@ def init_Database():
     # *         Création des tables entités             *
     # ***************************************************
 
-    request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
+    request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), " \
+                         "nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
     cursor.execute(request_db_clients)
 
-    request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40),courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(50), cote_globale Float(2))"
+    request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40)," \
+                          "courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(50), cote_globale Float(2))"
     cursor.execute(request_db_vendeurs)
 
-    request_db_livres = "CREATE TABLE Livres(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500))"
+    request_db_livres = "CREATE TABLE Livres(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), " \
+                        "annee_publication int(4), preface varchar(500))"
     cursor.execute(request_db_livres)
 
     request_db_genre = "CREATE TABLE Genres(type varchar(20), PRIMARY KEY(type))"
     cursor.execute(request_db_genre)
 
-    request_db_commande = "CREATE TABLE Commandes(ID_commande varchar(20), PRIMARY KEY(ID_commande), mode_paiement varchar(20), prix_total float(12), date_commande nvarchar(50), date_expedition nvarchar(50))"
+    request_db_commande = "CREATE TABLE Commandes(ID_commande varchar(20), PRIMARY KEY(ID_commande), mode_paiement varchar(20), " \
+                          "prix_total float(12), date_commande nvarchar(50), date_expedition nvarchar(50))"
     cursor.execute(request_db_commande)
 
 
@@ -55,25 +59,37 @@ def init_Database():
     # *          Création des tables relations          *
     # ***************************************************
 
-    request_securise = "CREATE TABLE Securise(courriel varchar(50), mot_de_passe nvarchar(150), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_securise = "CREATE TABLE Securise(courriel varchar(50), mot_de_passe nvarchar(150), PRIMARY KEY (courriel), " \
+                       "FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_securise)
 
-    request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_prefere = "CREATE TABLE Prefere(courriel varchar(50), type varchar(20), PRIMARY KEY (courriel), " \
+                      "FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) " \
+                      "REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_prefere)
 
-    request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote_vendeur integer(1), FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_evalue = "CREATE TABLE Evalue(courriel varchar(50), ID_vendeur varchar(20), cote_vendeur integer(1), " \
+                     "FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (ID_vendeur) " \
+                     "REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_evalue)
 
-    request_vend = "CREATE TABLE Vend(ID_vendeur varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_vend = "CREATE TABLE Vend(ID_vendeur varchar(20), isbn varchar(20), nbr_exemplaire integer(4), prix float(8), " \
+                   "FOREIGN KEY (ID_vendeur) REFERENCES Vendeurs(ID_vendeur) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) " \
+                   "REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_vend)
 
-    request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_classer = "CREATE TABLE Classer(isbn varchar(20), type varchar(20), PRIMARY KEY (isbn), FOREIGN KEY (isbn) " \
+                      "REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (type) REFERENCES Genres(type) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_classer)
 
-    request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), FOREIGN KEY (ID_commande) REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_contient = "CREATE TABLE Contient(ID_commande varchar(20), isbn varchar(20), nbr_exemplaire integer(4), " \
+                       "FOREIGN KEY (ID_commande) REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, " \
+                       "FOREIGN KEY (isbn) REFERENCES Livres(isbn) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_contient)
 
-    request_passer = "CREATE TABLE Passer(ID_commande varchar(20), courriel varchar(50), FOREIGN KEY (ID_commande) REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (courriel) REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
+    request_passer = "CREATE TABLE Passer(ID_commande varchar(20), courriel varchar(50), FOREIGN KEY (ID_commande) " \
+                     "REFERENCES Commandes(ID_commande) ON UPDATE CASCADE ON DELETE RESTRICT, FOREIGN KEY (courriel) " \
+                     "REFERENCES Clients(courriel) ON UPDATE CASCADE ON DELETE RESTRICT)"
     cursor.execute(request_passer)
 
 
