@@ -7,7 +7,7 @@ CREATE TABLE Clients(courriel varchar(50), password varchar(20), prenom char(20)
 SELECT * FROM prefere where courriel = 'test'
 SHOW TABLES
 
-SELECT * FROM Clients WHERE courriel = "test";
+SELECT * FROM Clients WHERE courriel = "test@";
 SELECT * FROM contient WHERE ID_commande = 2001
 SELECT * FROM commandes WHERE ID_commande = 2001
 SELECT * FROM commandes

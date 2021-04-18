@@ -6,9 +6,8 @@ from database import *
 
 app = Flask(__name__)
 init_Database()
-ProfileUtilisateur = {}
-
 conn = connection()
+ProfileUtilisateur = {}
 
 @app.route("/", methods=['POST', 'GET'])
 def main():
@@ -45,17 +44,6 @@ def login():
     return render_template('login.html', message="Les informations entrées ne sont pas valides, veuillez ré-essayer")
 
 
-@app.route("/bienvenu/", methods=['POST', 'GET'])
-def recent_books():
-    pass
-
-    # cmd = 'SELECT * FROM Livres ORDER BY annee_publication DESC limit 1;'
-    # cur = conn.cursor()
-    # cur.execute(cmd)
-    # info = cur.fetchone()
-    #
-    # return render_template('bienvenu.html', livres=info)
-
 @app.route("/inscription/", methods=['GET', 'POST'])
 def inscription():
     courriel = request.form.get('courriel')
@@ -85,29 +73,6 @@ def inscription():
 
     return render_template("inscription.html")
 
-# @app.route("/inscription/", methods=['GET', 'POST'])
-# def inscription():
-#     if request.method == "GET":
-#         return render_template('inscription.html')
-#
-#     elif request.method == "POST":
-#         data = request.json
-#         courriel = (data["courriel"])
-#         mot_passe = (data["mot_passe"])
-#         mot_passe_r = (data["mot_passe_r"])
-#
-#         if courriel_existant(courriel) is False and mot_passe == mot_passe_r:
-#             insert_inscription(data["courriel"], data["prenom"], data["nom"], data["adresse"], data["date_de_naissance"])
-#             insert_securise(data["courriel"], data["mot_passe"])
-#             insert_prefere(data["courriel"], data["preference"])
-#             return render_template('inscription.html', message="Votre inscription a fonctionné !")
-#
-#         elif courriel_existant(data["courriel"]):
-#             return render_template('inscription.html', message="Le courriel existe déjà, veuillez réessayer")
-#
-#         elif data["mot_passe"] != data["mot_passe_r"]:
-#             return render_template('inscription.html', message="Les mots de passe ne correspondent pas, veuillez réessayer")
-
 
 @app.route("/recherche/", methods=['GET', 'POST'])
 def search_books():
@@ -120,13 +85,6 @@ def results():
     type_recherche = request.form.get('type_recherche')
     results = select_books(type_recherche, recherche)
     return render_template('results.html', results=results, recherche=recherche, type_recherche=type_recherche)
-
-
-@app.route("/commande/", methods=['GET', 'POST'])
-def recent_commande():
-    result = get_commandeCourante(ProfileUtilisateur["courriel"])
-    contenu = get_commandeContenu(ProfileUtilisateur["courriel"])
-    return render_template('commande.html', result=result, contenu=contenu, profile=ProfileUtilisateur)
 
 
 @app.route("/nouvelle_commande", methods=['GET', 'POST'])
