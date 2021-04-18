@@ -1,6 +1,5 @@
-import hashlib
 import pymysql as pymysql
-from data import fake_profiles, books, fake_seller, vend, securise_hash, prefere, genres, classer, fake_commandes, \
+from fake_generator.data import fake_profiles, books, fake_seller, vend, securise_hash, prefere, genres, classer, fake_commandes, \
     passer, contient, evaluation
 
 
@@ -39,7 +38,7 @@ def init_Database():
     request_db_clients = "CREATE TABLE Clients(courriel varchar(50), PRIMARY KEY(courriel), prenom char(20), nom char(20), adresse varchar(200), date_de_naissance nvarchar(50))"
     cursor.execute(request_db_clients)
 
-    request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40),courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(50), cote_globale int(1))"
+    request_db_vendeurs = "CREATE TABLE Vendeurs(ID_vendeur varchar(20),PRIMARY KEY(ID_vendeur), nom char(40),courriel_vendeur varchar(50), adresse varchar(200), pays_origine char(50), cote_globale Float(2))"
     cursor.execute(request_db_vendeurs)
 
     request_db_livres = "CREATE TABLE Livres(isbn varchar(20), PRIMARY KEY(isbn), titre varchar(100), auteur char(100), annee_publication int(4), preface varchar(500))"

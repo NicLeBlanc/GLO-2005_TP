@@ -1,4 +1,4 @@
-from data import books_raw
+from fake_generator.data import books_raw
 import random
 from faker import Faker
 
